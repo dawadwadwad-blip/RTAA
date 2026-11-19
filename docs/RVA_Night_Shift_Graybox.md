@@ -28,6 +28,12 @@ The defaults retain checkpoints in the session. Enable `Persist Checkpoint` for 
 - The graybox Line-Striper credits an authored, end-to-end roadway pass using the work-order input. The general civic tools continue to operate through their existing inputs and effects. The closure light and signs stand in for the authored scene, radio and VFX.
 - The flat rig makes the route and checkpoint checks repeatable. Vehicle feel, street placement, timing and presentation still need the target editor and a Church Hill block. Recovery should be tested with the actual vehicle pawn and its collision setup.
 
+## Campaign ledger handoff
+
+The shared `UCivicWorkOrderSubsystem` is in [draft PR #5](https://github.com/dawadwadwad-blip/RTAA/pull/5). When the branches are brought together, map the local order NS-01 to campaign mission `M01`, verb `Stripe`. Begin the campaign order at briefing and resolve it through `OnDebriefCompleted` with the authored outcome. Check the subsystem's completion flag for `M01` before recording the result. The actor continues to own vehicle placement, route progress and evidence.
+
+For a combined test, leave disk persistence off until the shared campaign ledger can be restored with the mission checkpoint. Treat `OnProgressChanged` as a UI update, since retry and restore can emit it. Keep lasting rewards and saved campaign totals tied to the shared completion flag.
+
 ## Acceptance in the target editor
 
 Run the normal exit once and the alternate exit once, starting one run with segment B. Try arming a segment from outside its work area, stepping out halfway, driving back over a completed line, reaching the yard before taking a detour, and pressing **E** while moving through the finished yard. Retry from one completed line and after debrief. Check that the two evidence IDs and recorded exit data remain identical after a retry. Run a final fresh PIE session with disk persistence enabled and confirm that the scene restores without replaying closure VFX or completion callbacks.
