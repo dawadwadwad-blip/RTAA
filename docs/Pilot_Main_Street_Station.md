@@ -16,6 +16,8 @@ The archived FBX uses east, north and up relative to the original vehicle start.
 
 The preview anchors the clock-tower base to the current DEM. The detailed headhouse follows the archived building frontage and uses a placement matrix equivalent to the Blender scene's saved position, rotation and scale. The documented overlap applies to the audited footprint outlines. The render path checks the Blender-imported extents against the published local frame, verifies that both exports use the same terrain and footprint hashes, and removes the duplicate mass.
 
+The tower's draft shaft is 6.51 m wide, 15% narrower than the preceding mesh. The finial is 34.45 m above the model's local zero, up from 31.58 m. The southwest foundation corner and the height of the stone-to-brick course are fixed. The headhouse cornices meet the revised shaft and the clock dials stay circular. These are model dimensions chosen for the visual proportions in the reference photos.
+
 ## Build the preview
 
 First build the [combined mesh](Pilot_Mesh_Preview.md) from the same checkout. Put the audited `Richmond_Unreal_First_Drive.zip` in `inputs/`.

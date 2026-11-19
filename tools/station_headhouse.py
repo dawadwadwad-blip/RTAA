@@ -22,6 +22,16 @@ BAY = (ARCADE[-1] - ARCADE[0]) / (len(ARCADE) - 1)
 ARCADE_LEFT = ARCADE[0] - BAY / 2
 ARCADE_RIGHT = ARCADE[-1] + BAY / 2
 STAIR_LEFT, STAIR_RIGHT = 5.95, 25.49
+TOWER_CENTER_X, TOWER_CENTER_Y = 2.99, 3.84
+TOWER_BASE_RADIUS = 3.86
+TOWER_SHAFT_RADIUS = 3.83
+TOWER_BASE_COURSE = 4.23
+TOWER_PLAN_SCALE = 0.85
+TOWER_HEIGHT_SCALE = 1.105
+TOWER_WEST = TOWER_CENTER_X - TOWER_BASE_RADIUS
+TOWER_SOUTH = TOWER_CENTER_Y - TOWER_BASE_RADIUS
+TOWER_SHAFT_EAST = TOWER_WEST + (TOWER_BASE_RADIUS + TOWER_SHAFT_RADIUS) * TOWER_PLAN_SCALE
+TOWER_SHAFT_NORTH = TOWER_SOUTH + (TOWER_BASE_RADIUS + TOWER_SHAFT_RADIUS) * TOWER_PLAN_SCALE
 
 
 def station_frame(legacy):
@@ -260,7 +270,8 @@ def headhouse(group):
         group.box(x - 0.34, x + 0.34, -0.17, 0.16, 0.20, 0.67, "highlight")
         group.box(x - 0.39, x + 0.39, -0.20, 0.13, 0.61, 0.73, "highlight")
     loggia(group)
-    for x in (2.72, 27.72):
+    tower_bay = TOWER_WEST + (2.72 - TOWER_WEST) * TOWER_PLAN_SCALE
+    for x in (tower_bay, 27.72):
         facade = -0.14 if x > 10 else -0.30
         rectangular_sash(group, x, facade - 0.10, 4.82, 1.28, 2.28)
         pediment(group, x, facade - 0.16, 7.30, 1.82, 0.54)
@@ -284,8 +295,9 @@ def headhouse(group):
         if z < 5:
             group.box(-projection, WIDTH + projection, -projection, DEPTH + projection, z, z + height, surface)
         else:
-            group.box(6.77, WIDTH + projection, -projection, DEPTH + projection, z, z + height, surface)
-            group.box(-projection, 6.77, 7.85, DEPTH + projection, z, z + height, surface)
+            joint = TOWER_SHAFT_EAST - 0.05
+            group.box(joint, WIDTH + projection, -projection, DEPTH + projection, z, z + height, surface)
+            group.box(-projection, joint, TOWER_SHAFT_NORTH - 0.05, DEPTH + projection, z, z + height, surface)
     for x in (6.52 + k * 0.45 for k in range(51)):
         group.box(x, x + 0.17, -0.55, -0.11, 12.52, 12.87, "trim")
     rail(group, 6.66, WIDTH - 0.26, -0.33, 13.35, 0.66)
@@ -376,8 +388,10 @@ def clock_dial(group, front, center):
 
 
 def clock_tower(group):
-    x, y = 2.99, 3.84
-    for z0, z1, radius, surface in ((-0.45, 4.23, 3.86, "stone"), (4.23, 20.22, 3.83, "brick"),
+    x, y = TOWER_CENTER_X, TOWER_CENTER_Y
+    start_tower = len(group.vertices)
+    for z0, z1, radius, surface in ((-0.45, TOWER_BASE_COURSE, TOWER_BASE_RADIUS, "stone"),
+                                     (TOWER_BASE_COURSE, 20.22, TOWER_SHAFT_RADIUS, "brick"),
                                      (20.22, 26.25, 3.55, "brick")):
         group.box(x - radius, x + radius, y - radius, y + radius, z0, z1, surface)
     for z, height, radius, surface in (
@@ -400,7 +414,13 @@ def clock_tower(group):
             group.box(centers[0] - 0.50, centers[-1] + 0.50, -4.10, -3.79, z - 0.11, z, "trim")
             for dx in centers:
                 rectangular_sash(group, dx, -4.00, z, 0.81, height)
-        clock_dial(group, -3.57, 23.04)
+        dial_height = 23.04
+        dial_start = len(group.vertices)
+        clock_dial(group, -3.57, dial_height)
+        # The dial moves with the shaft but its face remains circular.
+        for i in range(dial_start, len(group.vertices)):
+            px, py, pz = group.vertices[i]
+            group.vertices[i] = (px, py, dial_height + (pz - dial_height) * TOWER_PLAN_SCALE / TOWER_HEIGHT_SCALE)
         pediment(group, 0, -3.69, 24.84, 3.08, 0.57)
         group.transform(Matrix.Translation((x, y, 0)) @ Matrix.Rotation(side * pi / 2, 4, "Z"), start)
 
@@ -413,6 +433,16 @@ def clock_tower(group):
                       for a in (i * tau / 44 for i in range(44))])
     group.loft(rings, "clay")
     finial(group, x, y, 29.77, 1.81)
+
+    # Keep the exterior's southwest base corner and stone-to-brick course tied
+    # to the headhouse. Stretch above that course, leaving entry heights fixed.
+    for i in range(start_tower, len(group.vertices)):
+        px, py, pz = group.vertices[i]
+        if pz > TOWER_BASE_COURSE:
+            pz = TOWER_BASE_COURSE + (pz - TOWER_BASE_COURSE) * TOWER_HEIGHT_SCALE
+        group.vertices[i] = (TOWER_WEST + (px - TOWER_WEST) * TOWER_PLAN_SCALE,
+                             TOWER_SOUTH + (py - TOWER_SOUTH) * TOWER_PLAN_SCALE,
+                             pz)
 
 
 def forecourt(group):

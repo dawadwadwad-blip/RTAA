@@ -57,6 +57,8 @@
 - `20261119T123054501148Z-5026db92` · S1-07 · **PASS** · 2026-11-19T12:30:54+00:00 → 2026-11-19T12:30:57+00:00 · [run evidence](reports/runs/20261119T123054501148Z-5026db92.json)
 - `20261119T123349317631Z-7fe591ca` · S1-07 · **PASS** · 2026-11-19T12:33:49+00:00 → 2026-11-19T12:33:58+00:00 · [run evidence](reports/runs/20261119T123349317631Z-7fe591ca.json)
 - `20261119T123533862509Z-d92bc39b` · S1-07 · **PASS** · 2026-11-19T12:35:33+00:00 → 2026-11-19T12:35:44+00:00 · [run evidence](reports/runs/20261119T123533862509Z-d92bc39b.json)
+- `20261119T124638090059Z-92fe029c` · S1-07 · **PASS** · 2026-11-19T12:46:38+00:00 → 2026-11-19T12:46:45+00:00 · [run evidence](reports/runs/20261119T124638090059Z-92fe029c.json)
+- `20261119T124834037629Z-ff7b7d46` · S1-07 · **PASS** · 2026-11-19T12:48:34+00:00 → 2026-11-19T12:48:40+00:00 · [run evidence](reports/runs/20261119T124834037629Z-ff7b7d46.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -140,6 +142,7 @@
 ## S1-07 · Main Street Station street detail
 
 - **Built** the continuous coffered upper loggia and lowered the entrance vaults to flatter arches, widened the stairs, and revised the paired tower windows, corbels, blue clock dials, clay dome, dormers and chimney. The rebuilt shed has translucent panels over steel trusses and roof monitors.
+- **Proportions** narrowed the tower shaft by 15% to 6.51 m and raised the finial from 31.58 m to 34.45 m above local zero. Preserved the southwest foundation tie-in and adjusted the adjoining cornices.
 - **Verification** street, entrance and rail-side views cover the photo-visible elevations. Blender verifies the open passage and wide stair geometry, the clay dome, shared placement, embedded maps and translucent glazing in the GLB. The uploaded photos guide original geometry and surfaces. The road and neighboring buildings remain blockouts.
 - **Next** check the actual I-95 and rail deck heights, dress the immediate approach, and set up collision and distance LODs in the target Unreal project.
 

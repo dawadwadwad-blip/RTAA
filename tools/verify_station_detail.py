@@ -10,7 +10,9 @@ from mathutils import Vector
 from mathutils.bvhtree import BVHTree
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from station_headhouse import ARCADE, BAY, EAVE, STAIR_LEFT, STAIR_RIGHT, WIDTH
+from station_headhouse import (
+    ARCADE, BAY, EAVE, STAIR_LEFT, STAIR_RIGHT, TOWER_SOUTH, TOWER_WEST, WIDTH,
+)
 
 
 def require(condition, message):
@@ -55,14 +57,35 @@ def verify(glb):
         step = stair_tree.ray_cast(Vector((x, -9.32, 2.0)), Vector((0, 0, -1)))[0]
         require(step is not None and -2.20 < step.z < -1.80, "Missing wide entrance step.")
     tower = collection.objects["MSS Clock tower"]
-    roof = BVHTree.FromObject(tower, depsgraph).ray_cast(Vector((4.0, 4.4, 33)), Vector((0, 0, -1)))
-    require(roof[0] is not None and roof[0].z > 28
+    tower_tree = BVHTree.FromObject(tower, depsgraph)
+    peak = max(vertex.co.z for vertex in tower.data.vertices)
+    west = tower_tree.ray_cast(Vector((-3.0, 3.1, 6.5)), Vector((1, 0, 0)))[0]
+    east = tower_tree.ray_cast(Vector((7.0, 3.1, 6.5)), Vector((-1, 0, 0)))[0]
+    base_front = tower_tree.ray_cast(Vector((3.0, -2.0, 0.5)), Vector((0, 1, 0)))[0]
+    base_west = tower_tree.ray_cast(Vector((-3.0, 3.1, 0.5)), Vector((1, 0, 0)))[0]
+    require(west is not None and east is not None and 6.40 < east.x - west.x < 6.65 and 34.3 < peak < 34.6,
+            "The tower must have the revised shaft width and finial height.")
+    require(base_front is not None and base_west is not None and abs(base_front.y - TOWER_SOUTH) < 0.01
+            and abs(base_west.x - TOWER_WEST) < 0.01,
+            "The tower's southwest foundation tie-in moved.")
+    dial = [
+        tower.data.vertices[index].co for polygon in tower.data.polygons
+        if tower.data.materials[polygon.material_index].name == "MSS Opal blue clock glass"
+        for index in polygon.vertices if tower.data.vertices[index].co.y < 1.0
+    ]
+    require(bool(dial), "The south clock dial is missing.")
+    diameters = [max(vertex[axis] for vertex in dial) - min(vertex[axis] for vertex in dial) for axis in (0, 2)]
+    require(abs(diameters[0] - diameters[1]) < 0.015, "The tower adjustment distorted the clock dial.")
+    roof = tower_tree.ray_cast(Vector((3.6, 3.95, 35)), Vector((0, 0, -1)))
+    require(roof[0] is not None and roof[0].z > 30
             and tower.data.materials[tower.data.polygons[roof[2]].material_index].name == "MSS Red clay roof tile",
             "Expected a clay-tiled dome over the tower.")
     roof_tree = BVHTree.FromObject(collection.objects["MSS Red clay hip and dormers"], depsgraph)
     eave = roof_tree.ray_cast(Vector((3.0, -2.0, EAVE + 0.02)), Vector((0, 1, 0)), 2.0)[0]
     require(eave is None, "The headhouse roof protrudes across the face of the clock tower.")
-    print("PASS: Recessed arcades, continuous 3 m loggia, wide stairs, and a clay dome above an unobstructed tower.")
+    print("PASS: Recessed arcades, continuous 3 m loggia, wide stairs, and an unobstructed clay dome.")
+    print(f"PASS: Tower shaft is {east.x - west.x:.2f} m wide and the finial reaches {peak:.2f} m above local zero.")
+    print("PASS: The resized tower retains a circular clock dial.")
 
     data = read_glb(glb)
     record = json.loads(glb.with_suffix(".json").read_text(encoding="utf-8"))
