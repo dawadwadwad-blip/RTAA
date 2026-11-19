@@ -1,0 +1,22 @@
+{
+  "blocker": "BLOCKED: Supply a valid Unreal Editor executable (--editor) and the target Unreal project file (--project).",
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T211053107724Z-31a37c40.json",
+    "reports/runs/20261119T211053107724Z-31a37c40.log"
+  ],
+  "checks": [],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "tools/verify_station_smoke.py"
+  ],
+  "exit_code": 3,
+  "finished_at": "2026-11-19T21:10:53+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T211053107724Z-31a37c40.log",
+  "next_action": "Review reports/runs/20261119T211053107724Z-31a37c40.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_station_smoke.py.",
+  "run_id": "20261119T211053107724Z-31a37c40",
+  "started_at": "2026-11-19T21:10:53+00:00",
+  "status": "BLOCKED",
+  "task": "S1-10"
+}

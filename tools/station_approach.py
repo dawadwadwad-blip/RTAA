@@ -14,7 +14,9 @@ CURB_WIDTH = 0.18
 STAIR_LEFT, STAIR_RIGHT = 5.95, 25.49
 STAIR_Y, STAIR_Z = -10.365, -2.575
 ROAD_WAYS = (120374950, 1366154365, 699605461)
-CROSSINGS = (1306729451, 1306729447)
+CROSSINGS = (1306729451, 1306729447, 1257934912)
+CROSSING_LABELS = ("station_crosswalk", "fifteenth_crosswalk", "fifteenth_west_crosswalk")
+WEST_JOIN_X, EAST_JOIN_X = -79, 64
 WALK_WAYS = (1306729434, 1306729452, 1494471794, 1494471795)
 DRIVEWAY = 1148449849
 EAST_STATION_WALK = 1306729456
@@ -142,12 +144,22 @@ class StationApproach:
             return np.interp(x, xs, ys)
 
         # Widen only at the authored approach and meet the old road at each end.
-        road_x = sorted({-76, -65, -64, 51, 64, *(x for x, _ in centerline.coords if -76 < x < 64)})
+        road_x = sorted({WEST_JOIN_X, -65, -64, 51, EAST_JOIN_X,
+                         *(x for x, _ in centerline.coords if WEST_JOIN_X < x < EAST_JOIN_X)})
         center_y = ordinates(centerline, road_x)
+        self.road_joins = []
+        for name, x, inward in (("west", WEST_JOIN_X, 1), ("east", EAST_JOIN_X, -1)):
+            for side, delta in (("inside", inward * 0.25), ("outside", -inward * 0.25)):
+                y = float(ordinates(centerline, x + delta))
+                point = self.world(shapely.Point(x + delta, y))
+                en = list(point.coords[0])
+                self.road_joins.append({"name": f"{name}_join_{side}", "local_en_m": en,
+                                        "z_m": float(surface.height(*en) + 0.12),
+                                        "object": "East_Main_Approach_Road" if side == "inside" else "Roads_and_paths"})
         mid_y = float(ordinates(centerline, ends[1][0]))
         road_north = ends[1][1] - mid_y
         road_south = mid_y - ends[0][1]
-        taper = np.interp(road_x, [-76, -65, 51, 64], [0, 1, 1, 0])
+        taper = np.interp(road_x, [WEST_JOIN_X, -65, 51, EAST_JOIN_X], [0, 1, 1, 0])
         self.x = road_x
         self.north = center_y + 4 + (road_north - 4) * taper
         self.south = center_y - 4 - (road_south - 4) * taper
@@ -225,7 +237,7 @@ class StationApproach:
         a, b = self.to_local[:2]
         x, y = a[0] * east + a[1] * north + a[3], b[0] * east + b[1] * north + b[3]
         # The previous road and driveway surfaces use a 0.12 m ground offset.
-        join = max(np.clip((-72 - x) / 4, 0, 1), np.clip((x - 60) / 4, 0, 1),
+        join = max(np.clip((WEST_JOIN_X + 4 - x) / 4, 0, 1), np.clip((x - EAST_JOIN_X + 4) / 4, 0, 1),
                    np.clip((self.drive_end_y + 1.5 - y) / 1.5, 0, 1))
         return ASPHALT + join * (0.12 - ASPHALT)
 
@@ -272,7 +284,7 @@ class StationApproach:
             witnesses.append({"name": name, "object": group, "local_en_m": [e, n],
                               "z_m": float(self.surface.height(e, n) + height(e, n))})
 
-        for label, line in zip(("station_crosswalk", "fifteenth_crosswalk"), self.crossings):
+        for label, line in zip(CROSSING_LABELS, self.crossings):
             witness(label, "East_Main_Approach_Road", line.intersection(self.center).coords[0], self.asphalt_height)
         for x in (6.15, 13.77, 21.17, 25.29):
             witness(f"bottom_stair_{x}", "East_Main_Approach_North_Walk", (x, STAIR_Y - 0.002),
@@ -287,4 +299,5 @@ class StationApproach:
                 "road_triangles": road_triangles, "walk_and_curb_triangles": drape.triangles - road_triangles,
                 "max_road_interpolation_error_m": round(road_error, 6),
                 "max_walk_interpolation_error_m": round(drape.max_interpolation_error, 6),
-                "min_authored_vertex_clearance_m": round(drape.min_clearance, 6), "witnesses": witnesses}
+                "min_authored_vertex_clearance_m": round(drape.min_clearance, 6), "witnesses": witnesses,
+                "road_joins": self.road_joins}

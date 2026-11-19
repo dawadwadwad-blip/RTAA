@@ -12,7 +12,7 @@
 - **S0-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
-- **S0-11 · BLOCKED** — Review reports/runs/20261119T041024625270Z-e682a4ef.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
+- **S0-11 · BLOCKED** — Review reports/runs/20261119T211053248769Z-669a560b.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
 - **S1-01 · FAILED** — Review reports/runs/20261119T043130111175Z-c9683b1a.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/terrain_first_pair.py --reference-dem ../architect/S1-01/reference/USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif.
 - **S1-02 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
@@ -22,6 +22,7 @@
 - **S1-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-10 · BLOCKED** — Review reports/runs/20261119T211053107724Z-31a37c40.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_station_smoke.py.
 
 ## Run history
 
@@ -70,6 +71,11 @@
 - `20261119T180957995362Z-13520876` · S1-09 · **PASS** · 2026-11-19T18:09:57+00:00 → 2026-11-19T18:10:23+00:00 · [run evidence](reports/runs/20261119T180957995362Z-13520876.json)
 - `20261119T181156761975Z-90523919` · S1-09 · **PASS** · 2026-11-19T18:11:56+00:00 → 2026-11-19T18:12:39+00:00 · [run evidence](reports/runs/20261119T181156761975Z-90523919.json)
 - `20261119T181324580248Z-69f71f65` · S1-09 · **PASS** · 2026-11-19T18:13:24+00:00 → 2026-11-19T18:14:02+00:00 · [run evidence](reports/runs/20261119T181324580248Z-69f71f65.json)
+- `20261119T210432038534Z-70299fd2` · S1-10 · **PASS** · 2026-11-19T21:04:32+00:00 → 2026-11-19T21:04:38+00:00 · [run evidence](reports/runs/20261119T210432038534Z-70299fd2.json)
+- `20261119T210605745957Z-0da65e11` · S1-10 · **PASS** · 2026-11-19T21:06:05+00:00 → 2026-11-19T21:06:15+00:00 · [run evidence](reports/runs/20261119T210605745957Z-0da65e11.json)
+- `20261119T211029797627Z-b69f6287` · S1-10 · **PASS** · 2026-11-19T21:10:29+00:00 → 2026-11-19T21:10:36+00:00 · [run evidence](reports/runs/20261119T211029797627Z-b69f6287.json)
+- `20261119T211053107724Z-31a37c40` · S1-10 · **BLOCKED** · 2026-11-19T21:10:53+00:00 → 2026-11-19T21:10:53+00:00 · [run evidence](reports/runs/20261119T211053107724Z-31a37c40.json)
+- `20261119T211053248769Z-669a560b` · S0-11 · **BLOCKED** · 2026-11-19T21:10:53+00:00 → 2026-11-19T21:10:53+00:00 · [run evidence](reports/runs/20261119T211053248769Z-669a560b.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -169,6 +175,13 @@
 - **Verified** all 52 local tests and the base mesh hash. Blender checked both crossing centers, the curb samples and the bottom stair across four points. The largest difference at those stair samples was 0.1 mm. The separate rail and three I-95 crossing heights also passed their import checks. [Street preview](reports/Main_Street_Station_East_Main.webp) · [Build instructions](docs/Station_Approach_Preview.md)
 - **Bottlenecks to check** validate collision at both roadway transitions and the bottom tread using the actual pawn and vehicle. The visual widths, markings and ramp slopes are draft values. Native Unreal import, collision, LODs, World Partition streaming and the Church Hill smoke tests remain open.
 
+## S1-10 · Main Street Station Unreal import and collision fixture
+
+- **Built** a portable geometry package with 16 separate station, street, terrain and elevated meshes. The Unreal script creates a fresh test level, imports centimeter geometry at the pilot origin, saves and reopens it, and checks the Pawn collision height at each probe. Uses gray materials and static per-triangle collision for the fixture.
+- **Fixed** a roughly 6 cm lip caused by the west road join passing through a legacy crossing ribbon. The join now sits west of that crossing and the approach includes its painted boundaries. Across a 50 cm sample, the two joins change height by 1.95 cm west and 0.32 cm east.
+- **Verified locally** 55 tests passed. Blender checked the saved station frame against the GLB sidecar and reproduced 46 collision points after conversion, including all 15 stair treads and the four elevated crossings. A second export matched the package byte for byte. [Build and playtest instructions](docs/Station_Unreal_Smoke.md) · [Package evidence](reports/station_smoke_package.json)
+- **Native gates** the station import and RVACivic Church Hill suites both reported blocked because the editor and `.uproject` are unavailable. Vehicle and pedestrian play checks, material transfer, LOD transitions, and World Partition streaming still need the target project.
+
 ### Next usage window prompt
 
-> Prepare a station import and collision smoke test for the UE5 pilot. Use docs/Station_Approach_Preview.md and the station GLB sidecar to preserve the shared frame and keep ground, I-95 and rail separate. Verify axis and scale portability against the saved Blender scene. When a target editor and project are available, import into an isolated map, drive the two approach joins, walk the stair, check LOD transitions and streaming, and run the RVACivic Church Hill native smoke tests. Record each checked or blocked gate in the task runner.
+> When the UE 5.6 editor and built pilot .uproject are available, run tools/verify_station_smoke.py against the package described in docs/Station_Unreal_Smoke.md. Validate both road joins with the vehicle and all stair treads with a pedestrian pawn. Run tools/verify_church_hill.py and record the evidence. Then verify materials, LOD behavior and streaming in the pilot's World Partition map before advancing the drive toward Church Hill.
