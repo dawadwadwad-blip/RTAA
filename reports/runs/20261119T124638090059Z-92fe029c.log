@@ -1,0 +1,16 @@
+PASS: Recessed arcades, continuous 3 m loggia, wide stairs, and an unobstructed clay dome.
+PASS: Tower shaft is 6.51 m wide and the finial reaches 34.45 m above local zero.
+PASS: glTF embeds eight original maps and textured surfaces have UVs and tangents.
+07:46:43 | INFO: Data are loaded, start creating Blender stuff
+07:46:43 | INFO: Blender create Mesh node MSS Headhouse
+07:46:44 | INFO: Blender create Mesh node MSS Red clay hip and dormers
+07:46:44 | INFO: Blender create Mesh node MSS Clock tower
+07:46:44 | INFO: Blender create Mesh node MSS Main Street forecourt
+07:46:44 | INFO: Blender create Mesh node MSS Restored train shed
+07:46:44 | INFO: Blender create Mesh node Main Street Station lettering
+07:46:44 | INFO: glTF import finished in 0.68s
+PASS: GLB round-tripped through Blender with 6 meshes and 75,748 triangles.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-slender/RVA_Main_Street_Station.blend"
+
+Blender quit

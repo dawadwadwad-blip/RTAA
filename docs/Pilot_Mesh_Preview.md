@@ -13,6 +13,8 @@ python tools/run_task.py S1-05 -- python tools/build_pilot_mesh_preview.py
 blender -b --factory-startup --python-exit-code 1 --python tools/render_pilot_blender.py -- outputs/pilot-mesh-preview/RVA_Pilot.obj outputs/pilot-mesh-preview/RVA_Pilot.png
 ```
 
-Open the OBJ with its adjacent MTL to inspect individual buildings in Blender. Use **−Y Forward**, **Z Up**, and a scale of **1**. The scene uses local meters with X east and Y north. Keep the [pilot axis and origin contract](Pilot_Data_Contract.md) when converting it to Unreal centimeters. Blender 4.3.2 imported and rendered the reference mesh. [Blender OBJ import options](https://docs.blender.org/api/current/bpy.ops.wm.html#bpy.ops.wm.obj_import)
+Open the OBJ with its adjacent MTL to inspect individual buildings in Blender. Use **Y Forward**, **Z Up**, and a scale of **1**. The scene uses local meters with X east and Y north. Keep the [pilot axis and origin contract](Pilot_Data_Contract.md) when converting it to Unreal centimeters. Blender 4.3.2 imported and rendered the reference mesh. [Blender OBJ import options](https://docs.blender.org/api/current/bpy.ops.wm.html#bpy.ops.wm.obj_import)
 
 The terrain surface uses a two-meter mesh for inspection. The one-meter R16 tiles remain the source for Unreal Landscape. Road widths are initial class-based assumptions and the roads follow the visible terrain triangles. Production work still needs bridge decks, collision checks, and the first authored façades and landmarks.
+
+The [Main Street Station view](Pilot_Main_Street_Station.md) reuses the detailed first-drive landmark in the same frame.

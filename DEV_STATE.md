@@ -18,6 +18,8 @@
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -47,6 +49,16 @@
 - `20261119T043711604223Z-85fdf6e0` · S1-05 · **PASS** · 2026-11-19T04:37:11+00:00 → 2026-11-19T04:37:15+00:00 · [run evidence](reports/runs/20261119T043711604223Z-85fdf6e0.json)
 - `20261119T043715547788Z-43a8323d` · S1-05 · **PASS** · 2026-11-19T04:37:15+00:00 → 2026-11-19T04:37:16+00:00 · [run evidence](reports/runs/20261119T043715547788Z-43a8323d.json)
 - `20261119T043716420090Z-e5f937a1` · S1-05 · **PASS** · 2026-11-19T04:37:16+00:00 → 2026-11-19T04:37:22+00:00 · [run evidence](reports/runs/20261119T043716420090Z-e5f937a1.json)
+- `20261119T044424844345Z-7be003f1` · S1-06 · **PASS** · 2026-11-19T04:44:24+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044424844345Z-7be003f1.json)
+- `20261119T044428484695Z-089c4659` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044428484695Z-089c4659.json)
+- `20261119T044428798792Z-3c3d9eee` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:39+00:00 · [run evidence](reports/runs/20261119T044428798792Z-3c3d9eee.json)
+- `20261119T115954413506Z-28323fc4` · S1-07 · **FAILED** · 2026-11-19T11:59:54+00:00 → 2026-11-19T12:00:02+00:00 · [run evidence](reports/runs/20261119T115954413506Z-28323fc4.json)
+- `20261119T120145502898Z-fdc284fd` · S1-07 · **PASS** · 2026-11-19T12:01:45+00:00 → 2026-11-19T12:01:51+00:00 · [run evidence](reports/runs/20261119T120145502898Z-fdc284fd.json)
+- `20261119T123054501148Z-5026db92` · S1-07 · **PASS** · 2026-11-19T12:30:54+00:00 → 2026-11-19T12:30:57+00:00 · [run evidence](reports/runs/20261119T123054501148Z-5026db92.json)
+- `20261119T123349317631Z-7fe591ca` · S1-07 · **PASS** · 2026-11-19T12:33:49+00:00 → 2026-11-19T12:33:58+00:00 · [run evidence](reports/runs/20261119T123349317631Z-7fe591ca.json)
+- `20261119T123533862509Z-d92bc39b` · S1-07 · **PASS** · 2026-11-19T12:35:33+00:00 → 2026-11-19T12:35:44+00:00 · [run evidence](reports/runs/20261119T123533862509Z-d92bc39b.json)
+- `20261119T124638090059Z-92fe029c` · S1-07 · **PASS** · 2026-11-19T12:46:38+00:00 → 2026-11-19T12:46:45+00:00 · [run evidence](reports/runs/20261119T124638090059Z-92fe029c.json)
+- `20261119T124834037629Z-ff7b7d46` · S1-07 · **PASS** · 2026-11-19T12:48:34+00:00 → 2026-11-19T12:48:40+00:00 · [run evidence](reports/runs/20261119T124834037629Z-ff7b7d46.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -121,6 +133,19 @@
 - **Verification** the geometry references the same source frame and OSM snapshot. The two-meter terrain lattice shares one continuous mesh edge. Blender 4.3.2 imported and rendered 282 mesh objects. Confirm the prepared Unreal Landscape, collision and actual drives in the editor.
 - **Authoring scope** the preview is for placement and scale. It uses class-based road widths and simple building massing.
 
+## S1-06 · Main Street Station landmark
+
+- **Built** a reproducible fit for the audited drive bundle's existing station FBX. A Blender run validates the east/north frame, reprojects the old placement, anchors the clock tower to the current DEM and replaces the generic mass.
+- **Evidence** the two outlines overlap at 99.8462% intersection over union. The affine approximation has a 2.3 mm maximum residual against the direct reprojection at the archived outline vertices. An assembled Blender scene and a street view were generated.
+- **Fixed** the OBJ import used a forward-axis setting that rotated the scene by 180°. The corrected importer validates all four terrain bounds before framing the render.
+
+## S1-07 · Main Street Station street detail
+
+- **Built** the continuous coffered upper loggia and lowered the entrance vaults to flatter arches, widened the stairs, and revised the paired tower windows, corbels, blue clock dials, clay dome, dormers and chimney. The rebuilt shed has translucent panels over steel trusses and roof monitors.
+- **Proportions** narrowed the tower shaft by 15% to 6.51 m and raised the finial from 31.58 m to 34.45 m above local zero. Preserved the southwest foundation tie-in and adjusted the adjoining cornices.
+- **Verification** street, entrance and rail-side views cover the photo-visible elevations. Blender verifies the open passage and wide stair geometry, the clay dome, shared placement, embedded maps and translucent glazing in the GLB. The uploaded photos guide original geometry and surfaces. The road and neighboring buildings remain blockouts.
+- **Next** check the actual I-95 and rail deck heights, dress the immediate approach, and set up collision and distance LODs in the target Unreal project.
+
 ### Next usage window prompt
 
-> Use docs/Pilot_Mesh_Preview.md and the locked terrain and footprint guides to author the first recognizable Shockoe Bottom block. Add reviewed façades and Main Street Station silhouette details. Verify the pilot terrain import, routing and Church Hill vehicle slice in the target Unreal project when the editor is available.
+> Import the Main Street Station exterior and the DEM-only pair using docs/Pilot_Main_Street_Station.md. Use a reference survey to tie in the nearby freeway and rail decks, and test the station stairs on foot and the approach from a moving car. Check collision, material scale, LOD transitions and the terrain seam. Run the RVACivic smoke test in docs/RVA_Church_Hill_Playtest.md before expanding map coverage.
