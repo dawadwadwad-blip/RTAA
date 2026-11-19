@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "task_id": "S0-01",
+  "sprint": 0,
+  "title": "Bootstrap run tracking and inventory the first-drive baseline",
+  "owner": "ChatGPT Sol",
+  "depends_on": [],
+  "goal": "Prove Sol can rerun a task, record every outcome, and identify the exact Richmond bundle used for comparison.",
+  "inputs": [
+    {
+      "ref": "Richmond_Unreal_First_Drive.zip",
+      "required": true,
+      "rights": "User-supplied baseline. Preserve the bundled source and attribution notices."
+    },
+    {
+      "ref": "Richmond_Driving_Test.html",
+      "required": false,
+      "rights": "User-supplied comparison build. Read-only."
+    }
+  ],
+  "deliverables": [
+    {
+      "path": "tools/run_task.py",
+      "purpose": "Standard-library entry point; record start, finalize status and recover an interrupted run."
+    },
+    {
+      "path": "tools/baseline_inventory.py",
+      "purpose": "Read-only ZIP and optional HTML inventory."
+    },
+    {
+      "path": "reports/baseline.json",
+      "purpose": "Actual input hashes, archive contents, route and match statistics."
+    },
+    {
+      "path": "reports/runs/",
+      "purpose": "Per-run evidence including exit status."
+    },
+    {
+      "path": "tests/test_bootstrap.py",
+      "purpose": "Offline fixtures exercising the runner and inventory."
+    },
+    {
+      "path": "DEV_STATE.md",
+      "purpose": "Current task status, chronological history, evidence and next action."
+    }
+  ],
+  "out_of_scope": [
+    "Changing the input artifacts, downloading GIS, installing Unreal or building gameplay."
+  ],
+  "steps": [
+    "Inspect inputs and existing project conventions.",
+    "Implement the runner and inventory, and exercise success, failure, interruption recovery and retries in isolated fixtures.",
+    "Run the actual audit through the runner and inspect its evidence."
+  ],
+  "acceptance": [
+    {
+      "id": "A1",
+      "method": "automated",
+      "procedure": "Test valid fixture twice and compare inventory digests.",
+      "pass_if": "Two distinct run records; unchanged deterministic inventory; no input mutation.",
+      "evidence": "tests/test_bootstrap.py and reports/runs/<run_id>.json"
+    },
+    {
+      "id": "A2",
+      "method": "automated",
+      "procedure": "Exercise missing ZIP, damaged ZIP and an interrupted run using an isolated temporary project.",
+      "pass_if": "Missing input is BLOCKED, damaged input is FAILED, stale RUNNING is recovered exactly once; each outcome has evidence; preserve observed exit codes and use null for an unknown interrupted exit.",
+      "evidence": "tests/test_bootstrap.py and captured test output"
+    },
+    {
+      "id": "A3",
+      "method": "automated",
+      "procedure": "Run the actual baseline through the entry point; cross-check inventory against the ZIP and perform the placeholder scan.",
+      "pass_if": "Hashes and counts are computed, discrepancies are recorded, Markdown history contains the run, and changed implementation contains no placeholders.",
+      "evidence": "reports/baseline.json, DEV_STATE.md and reports/runs/<run_id>.json"
+    }
+  ],
+  "on_blocked": "Finish and test independent work; record the exact missing input, evidence and smallest resumption command.",
+  "retry": "Same inputs reproduce baseline.json. A retry adds exactly one run record and preserves earlier history.",
+  "constraints": {
+    "max_new_spend_usd": 0,
+    "paid_services": false,
+    "placeholder_stubs": false
+  },
+  "state": {
+    "path": "DEV_STATE.md",
+    "entrypoint": "tools/run_task.py",
+    "on_every_run": true,
+    "atomic": true,
+    "recover_interrupted": true
+  }
+}

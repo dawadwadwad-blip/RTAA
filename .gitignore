@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+/.task-run.lock
+/inputs/
+/Richmond_Unreal_First_Drive.zip
+/Richmond_Driving_Test.html

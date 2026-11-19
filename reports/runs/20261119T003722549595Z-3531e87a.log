@@ -1,0 +1,12 @@
+fbx=12
+png=28
+footprints=4494
+lidar_matches=4075
+height_records=4494
+malformed_height_records=0
+route_vertices=85
+route_length_m=2058.072
+PASS: height rows equal footprint count
+PASS: present height triples are finite and ordered
+PASS: count matches reported LiDAR total
+PASS: final chainage agrees with site metadata

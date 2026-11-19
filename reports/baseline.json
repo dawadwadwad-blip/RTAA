@@ -1,0 +1,86 @@
+{
+  "bundle": {
+    "members": [
+      "Richmond_Unreal_First_Drive/Import_Richmond.py",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Bridges.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Buildings.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Facade_Details.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Libby_Hill_Park.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Main_Street_Station.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Markings.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Roads.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Rowhouse_Details.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_St_Johns_Church.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Street_Objects.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Terrain.fbx",
+      "Richmond_Unreal_First_Drive/Meshes/RVA_Tree_Details.fbx",
+      "Richmond_Unreal_First_Drive/Richmond_2025_Roof_Heights.json",
+      "Richmond_Unreal_First_Drive/Richmond_OpenStreetMap_ODbL.json",
+      "Richmond_Unreal_First_Drive/Richmond_USGS_3DEP.json",
+      "Richmond_Unreal_First_Drive/Route_Centerline.csv",
+      "Richmond_Unreal_First_Drive/START_HERE.md",
+      "Richmond_Unreal_First_Drive/Site_Reference.json",
+      "Richmond_Unreal_First_Drive/Surface_Importer.py",
+      "Richmond_Unreal_First_Drive/Surface_Materials.json",
+      "Richmond_Unreal_First_Drive/Textures/T_Asphalt_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Asphalt_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Brick_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Brick_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Clapboard_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Clapboard_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Glass_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Glass_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Grass_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Grass_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Leaf_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Leaf_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Metal_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Metal_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Paint_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Paint_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Pavers_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Pavers_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Sett_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Sett_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Slate_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Slate_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Stone_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Stone_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Water_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Water_Normal.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Wood_Albedo.png",
+      "Richmond_Unreal_First_Drive/Textures/T_Wood_Normal.png"
+    ],
+    "name": "Richmond_Unreal_First_Drive.zip",
+    "sha256": "cbb7f8614cca769ceedab61c218d71941b9493de3fe0e3009be4ebe8516d71bc"
+  },
+  "checks": {
+    "count matches reported LiDAR total": true,
+    "final chainage agrees with site metadata": true,
+    "height rows equal footprint count": true,
+    "present height triples are finite and ordered": true
+  },
+  "counts": {
+    "fbx": 12,
+    "footprints": 4494,
+    "height_records": 4494,
+    "lidar_matches": 4075,
+    "malformed_height_records": 0,
+    "png": 28,
+    "route_vertices": 85
+  },
+  "html": {
+    "name": "Richmond_Driving_Test.html",
+    "sha256": "4164028e870f8fa651e70beefa01decb2080a37c509a6bbeaa31d291ddbe707f"
+  },
+  "reference_comparison": {
+    "metric_drift": {},
+    "reference_sha256": "cbb7f8614cca769ceedab61c218d71941b9493de3fe0e3009be4ebe8516d71bc",
+    "same_bundle": true
+  },
+  "route_length_m": 2058.072,
+  "source_notices": {
+    "footprints": "OpenStreetMap data \u00a9 OpenStreetMap contributors, available under ODbL 1.0. https://www.openstreetmap.org/copyright",
+    "lidar": "https://www.fisheries.noaa.gov/inport/item/80312"
+  }
+}

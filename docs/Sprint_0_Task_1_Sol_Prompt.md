@@ -1,0 +1,19 @@
+# Sprint 0 Task 1 · Paste into Sol
+
+Act as the implementation engineer for a $0 Unreal driving sandbox set in Richmond, Virginia. Execute **S0-01 only**. Your deliverable is a working local task runner and a verified inventory of the existing first-drive prototype. Use the supplied workspace, the existing Python 3 standard library, and local Git if present. The task works offline. Keep the source ZIP and HTML read-only. Leave Unreal installation, GIS downloads and game changes for later cards.
+
+1. Inspect existing project conventions and preserve user changes. Locate the supplied `Richmond_Unreal_First_Drive.zip` and optional `Richmond_Driving_Test.html` within the project or use supplied paths. If the required ZIP is missing, still finish the runner and its offline tests. End the actual audit as BLOCKED and give the precise rerun command.
+
+2. Implement `tools/run_task.py`, `tools/baseline_inventory.py` and `tests/test_bootstrap.py`. Use this interface from the project root:
+   ```text
+   python tools/run_task.py S0-01 -- python tools/baseline_inventory.py --bundle "Richmond_Unreal_First_Drive.zip"
+   ```
+   Support `--html PATH` on the inventory command. Use the current interpreter for child Python commands where needed. Record the first live bootstrap with this runner, and use it for every later card run. Fixture tests must use temporary projects.
+
+3. Update `DEV_STATE.md` **automatically on every run**, including retries, blocked inputs, test failures and child exceptions. Write RUNNING before starting the child. Finalize to PASS (0), BLOCKED (3, a specific missing prerequisite) or FAILED (other nonzero). Allocate a unique run ID, retain prior history and unrelated notes, and record UTC start/end, task, actual command, inputs or hashes, changed files, checks, evidence path, blocker and next action. Write per-run evidence to `reports/runs/<run_id>.json`. Use atomic replacement and coordinate writers. Handle normal interruption when possible. After a hard stop, the next invocation must reconcile the stale run to INTERRUPTED exactly once, without mistaking a live run for a dead one. An unknown child exit code stays null. Persist the initial bootstrap attempt or any unrecoverable pre-run error in the same ledger as soon as the workspace is writable.
+
+4. Read the ZIP without executing its scripts. Generate deterministic `reports/baseline.json` from the actual bytes. Report SHA-256, archive member names, mesh/texture counts, route length from final CSV chainage, footprint count and count of valid LiDAR matches recomputed from the height records. Cross-check counts and route length with the bundled metadata, flag any discrepancy, and distinguish unavailable fields from measured zero. Include the optional HTML hash if present. Preserve the last successful report on failure and point failed runs to their own evidence. Reference values from the inspected bundle are 12 FBX, 28 PNG, 4,494 footprints, 4,075 matches and 2,058.072 m. Identify a different version by hash and report drift; never substitute the reference values for observed results.
+
+5. Run offline tests for two successful runs, a missing ZIP, a corrupt ZIP, interrupted-run recovery, and preservation of prior state and input bytes. Exercise the actual audit through the runner. Scan new or changed implementation and tests for unfinished work. Ship zero `// TODO`, TODO/FIXME comments, stub bodies, dummy success paths or unimplemented branches. A real blocker belongs in `DEV_STATE.md`. Record the commands and observed results. On the initial run, capture test results in its evidence or run the tests as an additional explicitly recorded invocation. A fixture pass alone cannot mark the real audit PASS.
+
+Return the actual task status, exact paths, observed counts, test results, evidence and one next action. Stop after S0-01. Do not claim an editor import, playtest, or benchmark from this audit.

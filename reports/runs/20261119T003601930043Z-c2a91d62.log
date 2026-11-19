@@ -1,0 +1,11 @@
+test_child_launch_failure_still_writes_evidence (test_bootstrap.BootstrapTest.test_child_launch_failure_still_writes_evidence) ... ok
+test_corrupt_zip_preserves_last_good_inventory (test_bootstrap.BootstrapTest.test_corrupt_zip_preserves_last_good_inventory) ... ok
+test_interrupted_run_is_reconciled_once (test_bootstrap.BootstrapTest.test_interrupted_run_is_reconciled_once) ... ok
+test_metadata_mismatch_is_reported (test_bootstrap.BootstrapTest.test_metadata_mismatch_is_reported) ... ok
+test_missing_required_input_is_blocked (test_bootstrap.BootstrapTest.test_missing_required_input_is_blocked) ... ok
+test_retry_report_is_stable_and_preserves_input_and_notes (test_bootstrap.BootstrapTest.test_retry_report_is_stable_and_preserves_input_and_notes) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.799s
+
+OK

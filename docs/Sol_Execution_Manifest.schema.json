@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Richmond • Sol Execution Manifest, version 1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "sprint",
+    "title",
+    "owner",
+    "depends_on",
+    "goal",
+    "inputs",
+    "deliverables",
+    "out_of_scope",
+    "steps",
+    "acceptance",
+    "on_blocked",
+    "retry",
+    "constraints",
+    "state"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^S[0-4]-(0[1-9]|[1-9][0-9])$"
+    },
+    "sprint": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "owner": {
+      "const": "ChatGPT Sol"
+    },
+    "depends_on": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^S[0-4]-(0[1-9]|[1-9][0-9])$"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "goal": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ref",
+          "required",
+          "rights"
+        ],
+        "properties": {
+          "ref": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "rights": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "deliverables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "purpose"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "out_of_scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\S"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "acceptance": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "method",
+          "procedure",
+          "pass_if",
+          "evidence"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^A[1-9][0-9]*$"
+          },
+          "method": {
+            "enum": [
+              "automated",
+              "manual"
+            ]
+          },
+          "procedure": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "pass_if": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "\\S"
+          }
+        }
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "on_blocked": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "retry": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_new_spend_usd",
+        "paid_services",
+        "placeholder_stubs"
+      ],
+      "properties": {
+        "max_new_spend_usd": {
+          "const": 0
+        },
+        "paid_services": {
+          "const": false
+        },
+        "placeholder_stubs": {
+          "const": false
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "entrypoint",
+        "on_every_run",
+        "atomic",
+        "recover_interrupted"
+      ],
+      "properties": {
+        "path": {
+          "const": "DEV_STATE.md"
+        },
+        "entrypoint": {
+          "const": "tools/run_task.py"
+        },
+        "on_every_run": {
+          "const": true
+        },
+        "atomic": {
+          "const": true
+        },
+        "recover_interrupted": {
+          "const": true
+        }
+      }
+    }
+  }
+}
