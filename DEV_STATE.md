@@ -25,6 +25,7 @@
 - **S1-10 · BLOCKED** — Review reports/runs/20261119T211053107724Z-31a37c40.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_station_smoke.py.
 - **S1-11 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-12 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-13 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -86,6 +87,11 @@
 - `20261119T214648605063Z-5c2a868d` · S1-12 · **PASS** · 2026-11-19T21:46:48+00:00 → 2026-11-19T21:46:57+00:00 · [run evidence](reports/runs/20261119T214648605063Z-5c2a868d.json)
 - `20261119T214805612012Z-e214eedf` · S1-12 · **PASS** · 2026-11-19T21:48:05+00:00 → 2026-11-19T21:48:34+00:00 · [run evidence](reports/runs/20261119T214805612012Z-e214eedf.json)
 - `20261119T214925464299Z-65222a30` · S1-12 · **PASS** · 2026-11-19T21:49:25+00:00 → 2026-11-19T21:49:55+00:00 · [run evidence](reports/runs/20261119T214925464299Z-65222a30.json)
+- `20261119T215743570819Z-fcb05351` · S1-13 · **PASS** · 2026-11-19T21:57:43+00:00 → 2026-11-19T21:58:06+00:00 · [run evidence](reports/runs/20261119T215743570819Z-fcb05351.json)
+- `20261119T220121582661Z-9244b906` · S1-13 · **PASS** · 2026-11-19T22:01:21+00:00 → 2026-11-19T22:01:31+00:00 · [run evidence](reports/runs/20261119T220121582661Z-9244b906.json)
+- `20261119T220205958909Z-8ac330f4` · S1-13 · **PASS** · 2026-11-19T22:02:05+00:00 → 2026-11-19T22:02:08+00:00 · [run evidence](reports/runs/20261119T220205958909Z-8ac330f4.json)
+- `20261119T220228368106Z-1e1e95e4` · S1-13 · **PASS** · 2026-11-19T22:02:28+00:00 → 2026-11-19T22:02:47+00:00 · [run evidence](reports/runs/20261119T220228368106Z-1e1e95e4.json)
+- `20261119T220438380552Z-4dab293d` · S1-13 · **PASS** · 2026-11-19T22:04:38+00:00 → 2026-11-19T22:05:10+00:00 · [run evidence](reports/runs/20261119T220438380552Z-4dab293d.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -204,6 +210,12 @@
 - Added a small parking-side apron and trees fitted to the pilot terrain. `C` cycles through both reference angles and back to driving. [Godot views](docs/Godot_Station_Trial.md)
 - Verified the six-mesh Blender/GLB round trip, surveyed approach checks, and the Godot camera and striping playthrough. The revised Windows executable exported and the Linux executable launched locally. The parking-side details are visual approximations. Target-device performance remains open.
 
+## S1-13 · Westbound East Main Street
+
+- Extended the Godot drive from east of 21st Street to the station using the mapped centerline through five intersections. Continued the prior DEM across its seam and processed 12 additional building footprints on the eastern blocks. Eleven met the relative LiDAR height checks and one remains unresolved.
+- Added crosswalks, lane stripes, original masonry façades and storefronts, street trees, utility lines, signal poles, curbside vehicles and a south-side bus stop. The visual details interpret the user-supplied street and aerial views. The cross streets are short stubs and traffic props are parked.
+- Verified road raycasts every six meters on the extension, the complete westbound drive to the station job, and a 22 m striping pass. Captured the running Godot scene at 21st and near 17th Street. The revised Windows build exported and the Linux build ran here. [Corridor build notes](docs/Godot_Station_Trial.md)
+
 ### Next usage window prompt
 
-> Play the Godot East Main trial at 720p on the weakest intended device. Record FPS in standard and Low modes plus a short assessment of steering and the station from the driver camera. If the trial meets the agreed visual and 30 FPS goal, complete Night Shift on this block. If it misses, compare the existing browser prototype for the first mission before expanding the map.
+> Play the expanded Godot East Main route from 21st Street to Main Street Station at 720p on the weakest intended device. Compare standard and Low FPS and note the steering and the station's visibility near 17th Street. If the trial meets the agreed visual and 30 FPS goal, complete the Night Shift work order on this corridor.
