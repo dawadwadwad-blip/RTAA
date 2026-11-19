@@ -1,0 +1,372 @@
+{
+  "schema_version": 2,
+  "title": "RVA: Aggressive Altruism",
+  "status": "design_data_not_playable_content",
+  "source": "Project Plan & Design Handoff (v2), Nov 18 2026",
+  "disclaimer": "Metadata not asserted by the source is intentionally omitted. These are not implemented UE missions.",
+  "gameplay": {
+    "work_order_verbs": [
+      "stripe",
+      "patch",
+      "tow",
+      "deliver",
+      "swap",
+      "block",
+      "tail"
+    ],
+    "method_dial": [
+      "Kind",
+      "Pointed",
+      "Hard"
+    ],
+    "road_segment_states": [
+      "normal",
+      "bike_lane",
+      "closed",
+      "reversed"
+    ],
+    "strain_min": 0,
+    "strain_max": 3,
+    "net_good_fields": [
+      "helped_households",
+      "harmed_households"
+    ],
+    "endings": [
+      "Built",
+      "Frozen",
+      "Third Alignment",
+      "The Fixer"
+    ]
+  },
+  "groups": [
+    {
+      "code": "albanico",
+      "name": "The Albanico Association",
+      "believer": "Review Board",
+      "means": "Mortar Circle",
+      "hq": "Church Hill (Means)",
+      "secondary": "The Fan (Believers)"
+    },
+    {
+      "code": "pod",
+      "name": "The Pod",
+      "believer": "Prime Builders",
+      "means": "Closers",
+      "hq": "Scott's Addition",
+      "secondary": "Manchester (contested)"
+    },
+    {
+      "code": "transit",
+      "name": "Transit & Cargo-Bike Militia",
+      "believer": "Dispatch",
+      "means": "Spoke Cell",
+      "hq": "VCU/Broad Street",
+      "secondary": "Shockoe riverfront trail"
+    },
+    {
+      "code": "asphalt",
+      "name": "Asphalt & Truck-Nutz Coalition",
+      "believer": "Asphalt Samaritans",
+      "means": "The Hitch",
+      "hq": "Southside: Hull St / Midlothian Turnpike",
+      "secondary": "Chippenham/Chesterfield"
+    },
+    {
+      "code": "independents",
+      "name": "Small Independents",
+      "believer": "Shopkeepers",
+      "means": "Landlord Club",
+      "hq": null,
+      "secondary": "Carytown / Shockoe Bottom"
+    }
+  ],
+  "pressure_systems": [
+    "Outside Corporate Capital (Pod patronage)",
+    "Compliance (Lenora Pike)",
+    "City–county enforcement jurisdiction"
+  ],
+  "story_layer": "The Standing Committee",
+  "acts": [
+    {
+      "id": "I",
+      "name": "Work Orders",
+      "mission_count": 6
+    },
+    {
+      "id": "II",
+      "name": "Clients",
+      "mission_count": 8
+    },
+    {
+      "id": "III",
+      "name": "Escalation",
+      "mission_count": 9
+    },
+    {
+      "id": "IV",
+      "name": "Richmond's Future",
+      "mission_count": 7
+    }
+  ],
+  "missions": [
+    {
+      "id": 1,
+      "act": "I",
+      "title": "Night Shift",
+      "district": "Church Hill",
+      "beat": "forged_order_fire",
+      "mechanics": [
+        "line_striper",
+        "hi_vis"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 2,
+      "act": "I",
+      "title": "Cold Patch",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 3,
+      "act": "I",
+      "title": "Notice of Public Interest",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 4,
+      "act": "I",
+      "title": "Survey Stakes",
+      "district": "Church Hill",
+      "factions": [
+        "albanico"
+      ],
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 5,
+      "act": "I",
+      "title": "Density Bonus",
+      "district": "Scott's Addition",
+      "factions": [
+        "pod"
+      ],
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 6,
+      "act": "I",
+      "title": "Overtime",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 7,
+      "act": "II",
+      "title": "Bike Lane",
+      "district": "VCU/Broad Street",
+      "factions": [
+        "transit"
+      ],
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 8,
+      "act": "II",
+      "title": "Parking Minimum",
+      "district": "Southside",
+      "factions": [
+        "asphalt"
+      ],
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 9,
+      "act": "II",
+      "title": "Closing Time",
+      "district": "Carytown / Shockoe Bottom",
+      "factions": [
+        "independents"
+      ],
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 10,
+      "act": "II",
+      "title": "Paper Trail",
+      "district": "Downtown",
+      "beat": "records_heist",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 11,
+      "act": "II",
+      "title": "First Skeleton",
+      "district": "The Fan",
+      "beat": "committee_first_contact",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 12,
+      "act": "II",
+      "title": "Double Booked",
+      "district": "The Fan",
+      "factions": [
+        "albanico",
+        "pod"
+      ],
+      "mechanics": [
+        "hi_vis",
+        "work_order_swap"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 13,
+      "act": "II",
+      "title": "Hill Climb",
+      "district": "Scott's Addition → Church Hill",
+      "mechanics": [
+        "cargo_grip",
+        "brake_fade",
+        "line_striper"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 14,
+      "act": "II",
+      "title": "The Listening Tour",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 15,
+      "act": "III",
+      "title": "Ghost Project",
+      "beat": "ghost_project_reveal",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 16,
+      "act": "III",
+      "title": "Dead Weight",
+      "beat": "dell_betrayal",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 17,
+      "act": "III",
+      "title": "Bridge Count",
+      "district": "Downtown James River crossings",
+      "factions": [
+        "transit",
+        "asphalt"
+      ],
+      "mechanics": [
+        "line_striper",
+        "bridge_closure"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 18,
+      "act": "III",
+      "title": "Annexation Day",
+      "district": "City-county boundary",
+      "mechanics": [
+        "county_handoff"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 19,
+      "act": "III",
+      "title": "Public Comment",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 20,
+      "act": "III",
+      "title": "Freight Delay",
+      "district": "Shockoe Bottom / Manchester",
+      "mechanics": [
+        "rail_crossing",
+        "crane"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 21,
+      "act": "III",
+      "title": "Skeleton Crew",
+      "district": "The Fan",
+      "beat": "committee_parcel_plat",
+      "mechanics": [
+        "committee_vote"
+      ],
+      "design_maturity": "anchor"
+    },
+    {
+      "id": 22,
+      "act": "III",
+      "title": "Closing Costs",
+      "beat": "cal_sells_share",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 23,
+      "act": "III",
+      "title": "Rock Bottom",
+      "district": "Church Hill",
+      "beat": "house_fire_or_auction",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 24,
+      "act": "IV",
+      "title": "Coalition of the Unwilling",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 25,
+      "act": "IV",
+      "title": "Motion to Adjourn",
+      "district": "Downtown",
+      "beat": "committee_freeze_procedure",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 26,
+      "act": "IV",
+      "title": "Gridlock",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 27,
+      "act": "IV",
+      "title": "Dell's Last Shift",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 28,
+      "act": "IV",
+      "title": "River Days",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 29,
+      "act": "IV",
+      "title": "Groundbreaking",
+      "district": "Riverfront",
+      "beat": "night_shift_log_podium_choice",
+      "design_maturity": "title_or_story_beat"
+    },
+    {
+      "id": 30,
+      "act": "IV",
+      "title": "Open House",
+      "district": "Church Hill",
+      "beat": "porch_epilogue",
+      "design_maturity": "title_or_story_beat"
+    }
+  ]
+}

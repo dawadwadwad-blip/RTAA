@@ -1,3 +1,9 @@
+# RVA: Aggressive Altruism — v2 design direction
+
+The creator's [verbatim Nov 18, 2026 v2 plan](docs/RVA_Project_Plan_and_Design_Handoff_v2.md) is the **current design baseline**. See also the [implementation migration handoff](docs/RVA_V2_MIGRATION.md). Read [Story & World](docs/RVA_V2_STORY.md), [Gameplay & Production](docs/RVA_V2_GAMEPLAY.md), and the machine-readable [30-mission catalog](design/v2_campaign.json). The historical Unreal civic prototype is not yet a playable implementation of the new campaign. The first target is a Church Hill → Shockoe Bottom → downtown vertical slice proving heavy-vehicle grades, Work Orders, Method Dial, Hi-Vis, route-state Line-Striper, Compliance and Net Good. Keep the GIS foundation and local UE5 validation gates.
+
+---
+
 # Richmond Open World
 
 RVA: Aggressive Altruism is an offline Unreal civic sandbox set in Richmond. The [architecture manifest](ARCHITECTURE_MANIFEST.md) defines its factions, civic tools and street gameplay. The [architecture](docs/Richmond_Open_World_Architecture.md) tracks scope, GIS sources, façade rules and the five-sprint plan. [DEV_STATE.md](DEV_STATE.md) records the work completed and links to the checks from each run.
