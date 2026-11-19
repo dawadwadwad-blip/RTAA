@@ -26,3 +26,6 @@ class CivicPolicyTest(unittest.TestCase):
 
     def test_standing_committee_progress(self):
         self.compile_and_run("standing_committee_progress_test", "Public")
+
+    def test_night_shift_progress(self):
+        self.compile_and_run("night_shift_progress_test", "Public")

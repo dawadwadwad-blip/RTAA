@@ -205,7 +205,7 @@ Authored Method Dial alternatives are budgeted for missions 04, 05, 07, 08, 09, 
 
 ## Night Shift first build
 
-Build one walkable Church Hill block, an uphill vehicle approach, two striping segments, a fallback exit and a yard return marker. Use the approved pilot heights and existing vehicle setup when available. A graybox scene can test the flow before the streamed city is ready. Reuse the Standing Committee actor on the block as an optional free-roam stop.
+The [Night Shift graybox](RVA_Night_Shift_Graybox.md) implements the work order, striping and checkpoint flow. Build one walkable Church Hill block around it with an uphill vehicle approach, two striping segments, a fallback exit and a yard return marker. Use the approved pilot heights and existing vehicle setup when available. A graybox scene can test the flow before the streamed city is ready. Reuse the Standing Committee actor on the block as an optional free-roam stop.
 
 | Beat | Player input and world feedback | Complete when |
 | --- | --- | --- |
