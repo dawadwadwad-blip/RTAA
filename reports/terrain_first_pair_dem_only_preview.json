@@ -1,0 +1,108 @@
+{
+  "ground_comparison": {
+    "count": 182,
+    "maximum_absolute_m": 1.5244,
+    "median_absolute_m": 1.3337,
+    "median_signed_m": -1.3337,
+    "outliers_over_one_m": 182,
+    "p95_absolute_m": 1.4072,
+    "within_0_30_m_median_and_1_m_max": false
+  },
+  "heightmap_scale_xyz": [
+    100,
+    100,
+    100
+  ],
+  "horizontal_operations": {
+    "EPSG:2925": "proj=pipeline step proj=unitconvert xy_in=us-ft xy_out=m step inv proj=lcc lat_0=36.3333333333333 lon_0=-78.5 lat_1=37.9666666666667 lat_2=36.7666666666667 x_0=3500000.0001016 y_0=999999.9998984 ellps=GRS80 step inv proj=gridshift grids=us_noaa_nadcon5_nad83_1986_nad83_harn_conus.tif step proj=utm zone=18 ellps=GRS80",
+    "EPSG:3748": "proj=pipeline step inv proj=utm zone=18 ellps=GRS80 step inv proj=gridshift grids=us_noaa_nadcon5_nad83_1986_nad83_harn_conus.tif step proj=utm zone=18 ellps=GRS80"
+  },
+  "image_row_zero": "north",
+  "lidar_dem_registration_verified": false,
+  "max_seam_code_difference": 0,
+  "mode": "dem_only_preview",
+  "nodata_samples": 0,
+  "pair_grid_bounds_m": [
+    285028.805939,
+    4156591.390745,
+    286036.805939,
+    4157095.390745
+  ],
+  "reference_comparison": {
+    "asset": "USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif",
+    "candidate_samples": 182,
+    "noaa_dem_minus_usgs_dem": {
+      "count": 130,
+      "maximum_absolute_m": 0.3594,
+      "median_absolute_m": 0.07,
+      "median_signed_m": -0.0695,
+      "outliers_over_one_m": 0,
+      "p95_absolute_m": 0.1565,
+      "within_0_30_m_median_and_1_m_max": true
+    },
+    "noaa_laz_minus_usgs_dem": {
+      "count": 130,
+      "maximum_absolute_m": 1.5739,
+      "median_absolute_m": 1.4015,
+      "median_signed_m": -1.4015,
+      "outliers_over_one_m": 129,
+      "p95_absolute_m": 1.5077,
+      "within_0_30_m_median_and_1_m_max": false
+    },
+    "retained_samples": 130,
+    "sample_span_en_m": [
+      952.6,
+      456.9
+    ],
+    "sha256": "57ea0e11d72b8fe7e48ba7d85df6d29711e7c47f45eda0e8a71868eaefd345f8",
+    "vertical_reference": "NAVD88 metres (USGS 3DEP product convention, absent from this TIFF header)"
+  },
+  "seam_vertices": 505,
+  "source_asset_counts": {
+    "dem": 12,
+    "laz": 12
+  },
+  "source_crs": {
+    "dem": {
+      "horizontal_epsg": 2925,
+      "vertical_epsg": 6360
+    },
+    "laz": {
+      "horizontal_epsg": 3748,
+      "vertical_epsg": 5703
+    }
+  },
+  "source_lock_sha256": "5405ac419c51282b7e7093d00dcb582e3f10699ba0889ed7828e1d8ccbc26c72",
+  "tiles": [
+    {
+      "elevation_range_m": [
+        -0.051,
+        19.632
+      ],
+      "geotiff": "Richmond_Pilot_x0_y0.tif",
+      "geotiff_sha256": "cb5fb09f693f0e2c07fb35937b6378eea88f71708ea8f5ccb71031e1b3a8ec4a",
+      "heightmap": "Richmond_Pilot_x0_y0.r16",
+      "heightmap_sha256": "fd772f6b74a73a3eac3230adbedf403b35e88532d20fb6d9db76fbb0d27ca49a"
+    },
+    {
+      "elevation_range_m": [
+        6.317,
+        47.227
+      ],
+      "geotiff": "Richmond_Pilot_x1_y0.tif",
+      "geotiff_sha256": "c186b806e2296c9a352480192c1b193c284833bac83fad2f372b83ca21e49f8d",
+      "heightmap": "Richmond_Pilot_x1_y0.r16",
+      "heightmap_sha256": "c23f4396b9cb02b618d3a30c144a8a500b993a2379b5e2f7fbd417c3df10569c"
+    }
+  ],
+  "tool_versions": {
+    "gdal": "3.10.3",
+    "laspy": "2.6.1",
+    "numpy": "2.2.6",
+    "proj": "9.5.1",
+    "pyproj": "3.7.2",
+    "rasterio": "1.4.4"
+  },
+  "unique_vertices": 509545,
+  "vertices_per_side": 505
+}

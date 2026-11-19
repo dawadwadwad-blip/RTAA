@@ -39,3 +39,5 @@ The [source catalog](../data/catalog.json) locks product choices, download URLs,
 The [street graph](Pilot_Street_Graph.md) uses the locked capture and three controls for a first horizontal export. It keeps bridge and tunnel geometry separate from the elevation review.
 
 The [first-pair building export](Pilot_Building_Heights.md) measures relative roof height from the locked ground and roof points in the same LiDAR delivery. Foundation elevation remains gated by the terrain comparison.
+
+The [first-pair terrain preview](Pilot_Terrain_Preview.md) uses the 2025 DEM with an independent USGS raster comparison. The strict combined DEM and LAZ registration gate remains open.

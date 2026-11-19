@@ -1,0 +1,24 @@
+{
+  "blocker": "Terrain build failed: LAZ and DEM disagree. Median signed residual -1.3337 m. See reports/terrain_datum_comparison.json before mixing sources.",
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T043130111175Z-c9683b1a.json",
+    "reports/runs/20261119T043130111175Z-c9683b1a.log"
+  ],
+  "checks": [],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "tools/terrain_first_pair.py",
+    "--reference-dem",
+    "../architect/S1-01/reference/USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif"
+  ],
+  "exit_code": 1,
+  "finished_at": "2026-11-19T04:31:38+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T043130111175Z-c9683b1a.log",
+  "next_action": "Review reports/runs/20261119T043130111175Z-c9683b1a.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/terrain_first_pair.py --reference-dem ../architect/S1-01/reference/USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif.",
+  "run_id": "20261119T043130111175Z-c9683b1a",
+  "started_at": "2026-11-19T04:31:30+00:00",
+  "status": "FAILED",
+  "task": "S1-01"
+}
