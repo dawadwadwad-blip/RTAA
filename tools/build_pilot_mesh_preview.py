@@ -88,8 +88,8 @@ def load_surface(directory, grid, manifest):
 
 
 class Obj:
-    def __init__(self):
-        self.lines = ["# RVA pilot overview in meters. X east, Y north, Z up.", "mtllib RVA_Pilot.mtl"]
+    def __init__(self, material_library="RVA_Pilot.mtl"):
+        self.lines = ["# RVA pilot overview in meters. X east, Y north, Z up.", "mtllib " + material_library]
         self.vertices = 0
         self.faces = 0
 

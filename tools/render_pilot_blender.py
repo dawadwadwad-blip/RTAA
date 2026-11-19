@@ -10,6 +10,7 @@ from zipfile import ZipFile
 
 import bpy
 from mathutils import Matrix, Vector
+from mathutils.bvhtree import BVHTree
 
 
 def export_station(objects, frame, output):
@@ -84,8 +85,41 @@ def insert_station(scene, bundle, alignment, mesh_report):
     return plan, station
 
 
+def insert_decks(directory, mesh_report):
+    report = json.loads((directory / "station_decks.json").read_text(encoding="utf-8"))
+    if (report.get("schema_version") != 1 or report.get("mode") != "local_lidar_to_dem_visual_preview"
+            or report["terrain_report_sha256"] != mesh_report["terrain_report_sha256"]):
+        raise ValueError("The station deck preview uses a different terrain export.")
+    geometry = report["geometry"]
+    if geometry["mesh"] != "RVA_Station_Decks.obj" or geometry["material"] != "RVA_Station_Decks.mtl":
+        raise ValueError("Unexpected viaduct package filenames.")
+    for name, sha in ((geometry["mesh"], geometry["sha256"]), (geometry["material"], geometry["material_sha256"])):
+        with (directory / name).open("rb") as asset:
+            if hashlib.file_digest(asset, "sha256").hexdigest() != sha:
+                raise ValueError(f"Station deck file {name} differs from its report.")
+    before = set(bpy.context.scene.objects)
+    bpy.ops.wm.obj_import(filepath=str(directory / geometry["mesh"]), forward_axis="Y", up_axis="Z")
+    imported = {obj.name for obj in bpy.context.scene.objects if obj not in before}
+    expected = {profile["name"] + "_Surface" for profile in report["profiles"]}
+    if not expected.issubset(imported):
+        raise ValueError("Blender did not import every station deck surface.")
+    depsgraph = bpy.context.evaluated_depsgraph_get()
+    for profile in report["profiles"]:
+        obj = bpy.context.scene.objects[profile["name"] + "_Surface"]
+        crossing = profile["east_main"]
+        x, y = crossing["local_en_m"]
+        origin = obj.matrix_world.inverted() @ Vector((x, y, crossing["deck_z_m_in_preview"] + 3))
+        direction = obj.matrix_world.inverted().to_3x3() @ Vector((0, 0, -1))
+        hit = BVHTree.FromObject(obj, depsgraph).ray_cast(origin, direction)[0]
+        # A railhead may be present in a slanted center-ray at a curved crossing.
+        limit = 0.16 if profile["kind"] == "rail" else 0.065
+        if hit is None or abs((obj.matrix_world @ hit).z - crossing["deck_z_m_in_preview"]) > limit:
+            raise ValueError(f"Imported crossing height differs from the profile for {profile['name']}.")
+    print(f"PASS: Imported {len(expected)} elevated surfaces and checked their East Main Street crossing heights.")
+
+
 def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
-              station_view=None, station_glb=None, samples=32, resolution=100, build_only=False):
+              station_view=None, station_glb=None, station_decks=None, samples=32, resolution=100, build_only=False):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
@@ -94,6 +128,8 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
         if hashlib.file_digest(mesh, "sha256").hexdigest() != mesh_report["mesh_sha256"]:
             raise ValueError("The preview OBJ differs from its report.")
     bpy.ops.wm.obj_import(filepath=str(mesh_path), forward_axis="Y", up_axis="Z")
+    if station_decks:
+        insert_decks(station_decks, mesh_report)
 
     plan, station = insert_station(scene, bundle, alignment, mesh_report) if bundle else (None, None)
     if station_view:
@@ -118,9 +154,12 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
         "street": ((26, -54, -0.87), (14.9, 0.25, 13.3), 38),
         "entrance": ((25.3, -13.6, -0.88), (14.35, 0.4, 6.75), 25),
         "rail": ((-67, 64, 1.20), (1.2, 31.4, 13.6), 32),
+        "decks": ((130, -34, 63), (-12.0, 38.0, 4.2), 32),
     }
     if station_view:
         station_eye, station_target, lens = station_cameras[station_view]
+        if station_decks and station_view == "street":
+            station_eye = (38, -54, -0.87)
         eye = station_frame @ Vector(station_eye)
         target = station_frame @ Vector(station_target)
     elif plan:
@@ -183,7 +222,7 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
     scene.cycles.samples = samples
     scene.cycles.use_denoising = False
     scene.render.resolution_x = 1600 if station_view else 1400
-    scene.render.resolution_y = (1000 if station_view == "rail" else 1300) if station_view else 820
+    scene.render.resolution_y = (1000 if station_view in {"rail", "decks"} else 1300) if station_view else 820
     scene.render.resolution_percentage = resolution
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(output)
@@ -201,8 +240,9 @@ def main():
     parser.add_argument("--station-bundle", type=Path)
     parser.add_argument("--station-alignment", type=Path)
     parser.add_argument("--save-blend", type=Path)
-    parser.add_argument("--station-view", choices=("street", "entrance", "rail"))
+    parser.add_argument("--station-view", choices=("street", "entrance", "rail", "decks"))
     parser.add_argument("--station-glb", type=Path)
+    parser.add_argument("--station-decks", type=Path, help="Include a built station deck preview directory.")
     parser.add_argument("--samples", type=int, default=32)
     parser.add_argument("--resolution", type=int, default=100, help="Render resolution percentage.")
     parser.add_argument("--build-only", action="store_true", help="Build the requested scene or GLB without rendering.")
@@ -216,6 +256,8 @@ def main():
         parser.error("Use a .blend path with --save-blend.")
     if options.station_view and not options.station_bundle:
         parser.error("--station-view requires --station-bundle and --station-alignment.")
+    if options.station_view == "decks" and not options.station_decks:
+        parser.error("The decks view requires --station-decks.")
     if options.station_glb and (not options.station_view or options.station_glb.suffix.lower() != ".glb"):
         parser.error("--station-glb requires a .glb path and --station-view.")
     if options.samples < 1 or not 1 <= options.resolution <= 100:
@@ -226,6 +268,7 @@ def main():
     make_view(options.mesh.resolve(), options.output.resolve(), options.station_bundle, options.station_alignment,
               options.save_blend.resolve() if options.save_blend else None, station_view=options.station_view,
               station_glb=options.station_glb.resolve() if options.station_glb else None,
+              station_decks=options.station_decks.resolve() if options.station_decks else None,
               samples=options.samples, resolution=options.resolution, build_only=options.build_only)
 
 

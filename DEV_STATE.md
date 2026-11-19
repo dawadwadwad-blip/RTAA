@@ -20,6 +20,7 @@
 - **S1-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -59,6 +60,9 @@
 - `20261119T123533862509Z-d92bc39b` · S1-07 · **PASS** · 2026-11-19T12:35:33+00:00 → 2026-11-19T12:35:44+00:00 · [run evidence](reports/runs/20261119T123533862509Z-d92bc39b.json)
 - `20261119T124638090059Z-92fe029c` · S1-07 · **PASS** · 2026-11-19T12:46:38+00:00 → 2026-11-19T12:46:45+00:00 · [run evidence](reports/runs/20261119T124638090059Z-92fe029c.json)
 - `20261119T124834037629Z-ff7b7d46` · S1-07 · **PASS** · 2026-11-19T12:48:34+00:00 → 2026-11-19T12:48:40+00:00 · [run evidence](reports/runs/20261119T124834037629Z-ff7b7d46.json)
+- `20261119T131733906865Z-489e48a0` · S1-08 · **PASS** · 2026-11-19T13:17:33+00:00 → 2026-11-19T13:17:37+00:00 · [run evidence](reports/runs/20261119T131733906865Z-489e48a0.json)
+- `20261119T131804764771Z-ea269b51` · S1-08 · **PASS** · 2026-11-19T13:18:04+00:00 → 2026-11-19T13:18:09+00:00 · [run evidence](reports/runs/20261119T131804764771Z-ea269b51.json)
+- `20261119T132005803369Z-64d8f81d` · S1-08 · **PASS** · 2026-11-19T13:20:05+00:00 → 2026-11-19T13:20:07+00:00 · [run evidence](reports/runs/20261119T132005803369Z-64d8f81d.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -144,8 +148,14 @@
 - **Built** the continuous coffered upper loggia and lowered the entrance vaults to flatter arches, widened the stairs, and revised the paired tower windows, corbels, blue clock dials, clay dome, dormers and chimney. The rebuilt shed has translucent panels over steel trusses and roof monitors.
 - **Proportions** narrowed the tower shaft by 15% to 6.51 m and raised the finial from 31.58 m to 34.45 m above local zero. Preserved the southwest foundation tie-in and adjusted the adjoining cornices.
 - **Verification** street, entrance and rail-side views cover the photo-visible elevations. Blender verifies the open passage and wide stair geometry, the clay dome, shared placement, embedded maps and translucent glazing in the GLB. The uploaded photos guide original geometry and surfaces. The road and neighboring buildings remain blockouts.
-- **Next** check the actual I-95 and rail deck heights, dress the immediate approach, and set up collision and distance LODs in the target Unreal project.
+- **Next** dress the immediate approach and set up collision and distance LODs in the target Unreal project.
+
+## S1-08 · Station viaduct preview
+
+- **Built** separate I-95 and lower rail meshes over East Main Street from the locked OSM geometry and 2025 NOAA class-17 returns. The two carriageways and the ramp are observed at all 42 sample stations apiece. The rail has 18 observed stations and an explicitly interpolated 67.83 m gap.
+- **Verification** the station-only DEM alignment used 212 ground points and gave 0.080 m 95th-percentile absolute residual across 210 held-out points. Blender checks the imported crossing heights. The underlying source data and regional datum gate are unchanged.
+- **Limits** roadway widths, barriers and pier placement are illustrative. Connect and validate the deck ends, resolve the hidden rail span before relying on its elevation, and test collision in the target editor before enabling vehicle travel.
 
 ### Next usage window prompt
 
-> Import the Main Street Station exterior and the DEM-only pair using docs/Pilot_Main_Street_Station.md. Use a reference survey to tie in the nearby freeway and rail decks, and test the station stairs on foot and the approach from a moving car. Check collision, material scale, LOD transitions and the terrain seam. Run the RVACivic smoke test in docs/RVA_Church_Hill_Playtest.md before expanding map coverage.
+> Dress the short East Main Street approach around Main Street Station. Fix the road ribbon and crosswalk terrain fit and add continuous curbs from the station stairs to the intersection. Use docs/Station_Viaduct_Preview.md to keep the freeway, rail and ground levels separate. When the target editor is available, import the station and test the approach, staircase collision, LOD transitions and the RVACivic Church Hill smoke tests.
