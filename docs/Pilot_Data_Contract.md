@@ -37,3 +37,5 @@ For the full evidence run, pass `--proj-grid-dir PATH` with the four exact files
 The [source catalog](../data/catalog.json) locks product choices, download URLs, roles, licenses and expected CRSs. The OSM control response and all four projection grids were downloaded and hash-checked this sprint. NOAA raster and LAZ indexes, the dated Geofabrik extract and VGIN service were verified through their published metadata. Sprint 1 records individual downloaded asset hashes, actual headers, source dates and missing tiles before cooking. Begin with the western adjacent pair to validate the seam and class-2 ground residual before processing all 12 tiles.
 
 The [street graph](Pilot_Street_Graph.md) uses the locked capture and three controls for a first horizontal export. It keeps bridge and tunnel geometry separate from the elevation review.
+
+The [first-pair building export](Pilot_Building_Heights.md) measures relative roof height from the locked ground and roof points in the same LiDAR delivery. Foundation elevation remains gated by the terrain comparison.

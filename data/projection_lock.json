@@ -56,6 +56,20 @@
         285261.36018750624,
         4156949.8532802537
       ]
+    },
+    {
+      "source_crs": "EPSG:3748",
+      "description": "Inverse of UTM zone 18N + Inverse of NAD83 to NAD83(HARN) (47) + UTM zone 18N",
+      "published_accuracy_m": 0.05,
+      "pipeline": "proj=pipeline step inv proj=utm zone=18 ellps=GRS80 step inv proj=gridshift grids=us_noaa_nadcon5_nad83_1986_nad83_harn_conus.tif step proj=utm zone=18 ellps=GRS80",
+      "fixture_source_xy": [
+        285261.76698563324,
+        4156949.649604463
+      ],
+      "fixture_target_en_m": [
+        285261.36018750624,
+        4156949.8532802537
+      ]
     }
   ]
 }

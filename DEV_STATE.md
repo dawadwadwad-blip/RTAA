@@ -13,6 +13,7 @@
 - **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-11 · BLOCKED** — Review reports/runs/20261119T041024625270Z-e682a4ef.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
+- **S1-02 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
@@ -35,6 +36,8 @@
 - `20261119T041024625270Z-e682a4ef` · S0-11 · **BLOCKED** · 2026-11-19T04:10:24+00:00 → 2026-11-19T04:10:24+00:00 · [run evidence](reports/runs/20261119T041024625270Z-e682a4ef.json)
 - `20261119T042102909982Z-c5567259` · S1-03 · **PASS** · 2026-11-19T04:21:02+00:00 → 2026-11-19T04:21:05+00:00 · [run evidence](reports/runs/20261119T042102909982Z-c5567259.json)
 - `20261119T042105797511Z-33fc6023` · S1-03 · **PASS** · 2026-11-19T04:21:05+00:00 → 2026-11-19T04:21:06+00:00 · [run evidence](reports/runs/20261119T042105797511Z-33fc6023.json)
+- `20261119T042638940061Z-4a06ccbf` · S1-02 · **PASS** · 2026-11-19T04:26:38+00:00 → 2026-11-19T04:26:42+00:00 · [run evidence](reports/runs/20261119T042638940061Z-4a06ccbf.json)
+- `20261119T042642119510Z-cce83362` · S1-02 · **PASS** · 2026-11-19T04:26:42+00:00 → 2026-11-19T04:27:01+00:00 · [run evidence](reports/runs/20261119T042642119510Z-cce83362.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -91,6 +94,12 @@
 - **Evidence** three control intersections match the projected pilot coordinates. The export confirms the North 17th Street one-way segment, six foot-only edges on the Richmond Slave Trail bridge, and separate turnpike and East Main Street connections.
 - **Verification** all 32 local tests passed. Repeated exports produce the same graph hash. Bridge deck heights, multisegment turn restrictions, traffic integration and the unresolved DEM-to-LiDAR comparison are open.
 
+## S1-02 · First-pair buildings
+
+- **Built** 311 complete OSM building footprints. The relative-height export derived 270 heights from the same LiDAR delivery, estimated 10 from mapped story counts, and flagged 31 as unresolved.
+- **Evidence** verified 12 LiDAR file hashes and CRS headers. The split sample across 30 roofs had a 0.038 m median difference. This comparison checks repeatability within the source.
+- **Verification** the 35-test local suite covers multipolygon holes, the shared vertical-offset cancellation, and fallbacks for sparse or uneven points. The export carries quality flags and omits foundation Z. Independent roof checks and in-engine import remain open.
+
 ### Next usage window prompt
 
-> Build RVACivic in the target UE5 Development Editor project, then run S0-11 using the native smoke test command in docs/RVA_Church_Hill_Playtest.md. Use the same guide to generate the practice map and drive all three jobs with the target vehicle. Record ramp clearance, a checkpoint retry, both Survey outcomes and the two native test results in DEV_STATE.md before authoring missions on streamed terrain.
+> Compare the first-pair NOAA DEM and LiDAR with an independent elevation reference. Check provenance, acquisition year and residuals before changing world Z. Preserve the Church Hill Unreal smoke and drive tasks for the target editor. For façades, start with stable IDs from docs/Pilot_Building_Heights.md and use reviewed roof and ground data for the first authored block.
