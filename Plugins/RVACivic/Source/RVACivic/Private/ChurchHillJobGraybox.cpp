@@ -273,7 +273,8 @@ void AHillClimbGraybox::UpdateJob(APawn* Pawn, float DeltaSeconds)
         RefreshSigns();
         return;
     }
-    if (!Pawn || CargoTruck.Get() != Pawn || Progress.GetPhase() != HillPhase::Hauling)
+    const HillPhase Phase = Progress.GetPhase();
+    if (!Pawn || CargoTruck.Get() != Pawn || (Phase != HillPhase::Hauling && Phase != HillPhase::StopToSecure))
     {
         return;
     }
