@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import sys
 from tempfile import TemporaryDirectory
@@ -118,12 +119,91 @@ def insert_decks(directory, mesh_report):
     print(f"PASS: Imported {len(expected)} elevated surfaces and checked their East Main Street crossing heights.")
 
 
+def check_approach(scene, frame, report):
+    if report.get("schema_version") != 1 or any(abs(a - b) > 0.001 for actual, expected in zip(
+            frame, report["station_frame"]) for a, b in zip(actual, expected)):
+        raise ValueError("The East Main Street mesh was fit to a different station placement.")
+    depsgraph = bpy.context.evaluated_depsgraph_get()
+    objects = {witness["object"] for witness in report["witnesses"]}
+    objects.update(("Terrain", "MSS Main Street forecourt"))
+    meshes = {name: BVHTree.FromObject(scene.objects[name], depsgraph) for name in objects}
+
+    def hit_z(name, x, y, z):
+        obj = scene.objects[name]
+        inverse = obj.matrix_world.inverted()
+        hit = meshes[name].ray_cast(inverse @ Vector((x, y, z + 0.1)), inverse.to_3x3() @ Vector((0, 0, -1)))[0]
+        if hit is None:
+            raise ValueError(f"The mesh {name} has no surface at {x:.3f}, {y:.3f}.")
+        return (obj.matrix_world @ hit).z
+
+    worst = 0.0
+    stair_gap = 0.0
+    for witness in report["witnesses"]:
+        x, y = witness["local_en_m"]
+        z = witness["z_m"]
+        hit = hit_z(witness["object"], x, y, z)
+        worst = max(worst, abs(hit - z))
+        if hit - hit_z("Terrain", x, y, z) < 0.03:
+            raise ValueError(f'Mesh clips the terrain at {witness["name"]}.')
+        if witness["name"].startswith("bottom_stair"):
+            along = (frame.inverted() @ Vector((x, y, hit))).x
+            step = frame @ Vector((along, -10.368, -2.575))
+            stair_gap = max(stair_gap, abs(hit_z("MSS Main Street forecourt", *step) - hit))
+    if worst > 0.035 or stair_gap > 0.012:
+        raise ValueError(f"Approach sample differs by {worst:.3f} m or stair seam by {stair_gap:.3f} m.")
+    print(f'PASS: Checked {len(report["witnesses"])} imported approach heights, with {worst * 1000:.1f} mm '
+          f'maximum deviation and {stair_gap * 1000:.1f} mm maximum height difference at the bottom stair.')
+
+
+def shade_approach(frame):
+    for name, scale, bump_distance in (("approach_asphalt", 58, 0.016), ("approach_brick", 31, 0.014),
+                                       ("approach_walk", 32, 0.011), ("approach_curb", 52, 0.009)):
+        material = bpy.data.materials[name]
+        material.use_nodes = True
+        nodes, links = material.node_tree.nodes, material.node_tree.links
+        surface = nodes.get("Principled BSDF")
+        base = tuple(surface.inputs["Base Color"].default_value[:3])
+        surface.inputs["Roughness"].default_value = 0.87
+        coordinates = nodes.new("ShaderNodeNewGeometry").outputs["Position"]
+        noise = nodes.new("ShaderNodeTexNoise")
+        noise.inputs["Scale"].default_value = scale
+        links.new(coordinates, noise.inputs["Vector"])
+        ramp = nodes.new("ShaderNodeValToRGB")
+        for stop, multiplier in zip(ramp.color_ramp.elements, (0.69, 1.18)):
+            stop.color = (*[min(1, channel * multiplier) for channel in base], 1)
+        links.new(noise.outputs["Fac"], ramp.inputs["Fac"])
+        color, height = ramp.outputs["Color"], noise.outputs["Fac"]
+        if name == "approach_brick":
+            rotation = nodes.new("ShaderNodeVectorRotate")
+            rotation.inputs["Angle"].default_value = math.atan2(-frame[1][0], frame[0][0])
+            links.new(coordinates, rotation.inputs["Vector"])
+            brick = nodes.new("ShaderNodeTexBrick")
+            links.new(rotation.outputs["Vector"], brick.inputs["Vector"])
+            links.new(color, brick.inputs["Color1"])
+            brick.inputs["Color2"].default_value = (0.29, 0.115, 0.075, 1)
+            brick.inputs["Mortar"].default_value = (0.16, 0.137, 0.12, 1)
+            brick.inputs["Scale"].default_value = 1
+            brick.inputs["Brick Width"].default_value = 0.21
+            brick.inputs["Row Height"].default_value = 0.10
+            brick.inputs["Mortar Size"].default_value = 0.005
+            color, height = brick.outputs["Color"], brick.outputs["Fac"]
+        bump = nodes.new("ShaderNodeBump")
+        bump.inputs["Distance"].default_value = bump_distance
+        bump.invert = name == "approach_brick"
+        links.new(height, bump.inputs["Height"])
+        links.new(color, surface.inputs["Base Color"])
+        links.new(bump.outputs["Normal"], surface.inputs["Normal"])
+
+
 def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
               station_view=None, station_glb=None, station_decks=None, samples=32, resolution=100, build_only=False):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
     mesh_report = json.loads((mesh_path.parent / "pilot_mesh_preview.json").read_text(encoding="utf-8"))
+    approach = mesh_report.get("station_approach")
+    if approach and (not station_view or station_glb):
+        raise ValueError("The approach requires an assembled station view. Export the standalone GLB from the base mesh.")
     with mesh_path.open("rb") as mesh:
         if hashlib.file_digest(mesh, "sha256").hexdigest() != mesh_report["mesh_sha256"]:
             raise ValueError("The preview OBJ differs from its report.")
@@ -136,7 +216,10 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         from station_headhouse import replace_station
 
-        station_frame, detail_objects = replace_station(scene, station)
+        station_frame, detail_objects = replace_station(scene, station, approach=bool(approach))
+        if approach:
+            check_approach(scene, station_frame, approach)
+            shade_approach(station_frame)
         if station_glb:
             export_station(detail_objects, station_frame, station_glb)
 
@@ -155,6 +238,7 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
         "entrance": ((25.3, -13.6, -0.88), (14.35, 0.4, 6.75), 25),
         "rail": ((-67, 64, 1.20), (1.2, 31.4, 13.6), 32),
         "decks": ((130, -34, 63), (-12.0, 38.0, 4.2), 32),
+        "approach": ((34, -38, 0.2), (14.0, -4.0, 10.0), 27),
     }
     if station_view:
         station_eye, station_target, lens = station_cameras[station_view]
@@ -240,7 +324,7 @@ def main():
     parser.add_argument("--station-bundle", type=Path)
     parser.add_argument("--station-alignment", type=Path)
     parser.add_argument("--save-blend", type=Path)
-    parser.add_argument("--station-view", choices=("street", "entrance", "rail", "decks"))
+    parser.add_argument("--station-view", choices=("street", "entrance", "rail", "decks", "approach"))
     parser.add_argument("--station-glb", type=Path)
     parser.add_argument("--station-decks", type=Path, help="Include a built station deck preview directory.")
     parser.add_argument("--samples", type=int, default=32)

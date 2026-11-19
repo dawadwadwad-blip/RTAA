@@ -1,0 +1,333 @@
+......................................./workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/workspace/scratch/f65ef44e3cab/richmond-facades/tools/terrain_first_pair.py:85: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  col, row = (~transform) * (x, y)
+..../workspace/scratch/f65ef44e3cab/richmond-facades/tools/terrain_first_pair.py:198: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  cols, rows = (~dataset.transform) * (x, y)
+/workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+.........
+----------------------------------------------------------------------
+Ran 52 tests in 2.820s
+
+OK
+PASS: Combined 162471 vertices and 280 building volumes.
+PASS: Combined 168095 vertices and 280 building volumes.
+PASS: Draped 2,499 road triangles and 1,657 sidewalk and curb triangles at East Main Street.
+Blender 4.3.2
+OBJ import of 'RVA_Pilot.obj' took 131.73 ms
+OBJ import of 'RVA_Station_Decks.obj' took 2.18 ms
+Fra:1 Mem:74.29M (Peak 74.29M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | MSS Headhouse
+Fra:1 Mem:74.30M (Peak 74.30M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_relation_11269673
+Fra:1 Mem:74.30M (Peak 74.30M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_1131774002
+Fra:1 Mem:76.12M (Peak 76.12M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_1497171534
+Fra:1 Mem:76.14M (Peak 76.14M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693026
+Fra:1 Mem:77.56M (Peak 77.56M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693027
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693028
+Fra:1 Mem:77.68M (Peak 77.68M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693029
+Fra:1 Mem:77.69M (Peak 77.69M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693030
+Fra:1 Mem:77.75M (Peak 77.75M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693031
+Fra:1 Mem:77.75M (Peak 77.75M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693034
+Fra:1 Mem:77.75M (Peak 77.75M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693035
+Fra:1 Mem:77.75M (Peak 77.75M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693036
+Fra:1 Mem:77.81M (Peak 77.81M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693037
+Fra:1 Mem:77.81M (Peak 77.81M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693038
+Fra:1 Mem:77.84M (Peak 77.84M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693039
+Fra:1 Mem:77.84M (Peak 77.84M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693040
+Fra:1 Mem:77.84M (Peak 77.84M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693041
+Fra:1 Mem:77.98M (Peak 77.98M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207693043
+Fra:1 Mem:77.95M (Peak 77.98M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696488
+Fra:1 Mem:78.44M (Peak 78.44M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696489
+Fra:1 Mem:78.80M (Peak 78.80M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696490
+Fra:1 Mem:78.80M (Peak 78.80M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696491
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696493
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696494
+Fra:1 Mem:78.81M (Peak 78.81M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696495
+Fra:1 Mem:78.88M (Peak 78.88M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696498
+Fra:1 Mem:79.01M (Peak 79.01M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696499
+Fra:1 Mem:79.09M (Peak 79.09M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696500
+Fra:1 Mem:79.10M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696501
+Fra:1 Mem:79.10M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696502
+Fra:1 Mem:79.10M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696504
+Fra:1 Mem:79.02M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696503
+Fra:1 Mem:79.02M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696505
+Fra:1 Mem:79.02M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696506
+Fra:1 Mem:79.06M (Peak 79.10M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696508
+Fra:1 Mem:79.14M (Peak 79.14M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696509
+Fra:1 Mem:79.15M (Peak 79.15M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696510
+Fra:1 Mem:79.15M (Peak 79.15M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696511
+Fra:1 Mem:79.68M (Peak 79.68M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696512
+Fra:1 Mem:79.61M (Peak 79.68M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696513
+Fra:1 Mem:79.95M (Peak 79.95M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | I95_West_Mainline_Surface
+Fra:1 Mem:80.67M (Peak 80.67M) | Time:00:00.01 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696515
+Fra:1 Mem:84.67M (Peak 84.67M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696517
+Fra:1 Mem:84.67M (Peak 84.67M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | I95_East_Ramp_Surface
+Fra:1 Mem:84.75M (Peak 84.75M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696522
+Fra:1 Mem:84.78M (Peak 84.78M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207696523
+Fra:1 Mem:84.78M (Peak 84.78M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703614
+Fra:1 Mem:84.78M (Peak 84.78M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703616
+Fra:1 Mem:84.86M (Peak 84.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703617
+Fra:1 Mem:84.86M (Peak 84.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703619
+Fra:1 Mem:84.86M (Peak 84.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703625
+Fra:1 Mem:84.86M (Peak 84.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703626
+Fra:1 Mem:84.86M (Peak 84.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703629
+Fra:1 Mem:84.94M (Peak 84.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703630
+Fra:1 Mem:84.94M (Peak 84.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703631
+Fra:1 Mem:84.94M (Peak 84.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703632
+Fra:1 Mem:84.95M (Peak 84.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703633
+Fra:1 Mem:84.95M (Peak 84.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | I95_East_Mainline_Surface
+Fra:1 Mem:85.13M (Peak 85.13M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703634
+Fra:1 Mem:85.16M (Peak 85.16M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703635
+Fra:1 Mem:85.19M (Peak 85.19M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703636
+Fra:1 Mem:85.19M (Peak 85.19M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703637
+Fra:1 Mem:85.20M (Peak 85.20M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703638
+Fra:1 Mem:85.79M (Peak 85.79M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703639
+Fra:1 Mem:85.79M (Peak 85.79M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703640
+Fra:1 Mem:85.79M (Peak 85.79M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703641
+Fra:1 Mem:85.81M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703642
+Fra:1 Mem:85.81M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703643
+Fra:1 Mem:85.62M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703644
+Fra:1 Mem:85.60M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | I95_East_Mainline_Illustrative_Supports
+Fra:1 Mem:85.60M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703645
+Fra:1 Mem:85.60M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703646
+Fra:1 Mem:85.61M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Bellwood_Rail_Trestle_Surface
+Fra:1 Mem:85.57M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703648
+Fra:1 Mem:85.58M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703651
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703652
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207703653
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706408
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706409
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706410
+Fra:1 Mem:85.59M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706411
+Fra:1 Mem:85.60M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706412
+Fra:1 Mem:85.61M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207706413
+Fra:1 Mem:85.61M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710031
+Fra:1 Mem:85.61M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710032
+Fra:1 Mem:85.61M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710033
+Fra:1 Mem:85.62M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710034
+Fra:1 Mem:85.63M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710038
+Fra:1 Mem:85.63M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710039
+Fra:1 Mem:85.63M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Bellwood_Rail_Trestle_Illustrative_Supports
+Fra:1 Mem:85.63M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207710041
+Fra:1 Mem:85.64M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Terrain
+Fra:1 Mem:85.64M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711420
+Fra:1 Mem:85.70M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711421
+Fra:1 Mem:85.79M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711424
+Fra:1 Mem:85.79M (Peak 85.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711425
+Fra:1 Mem:90.81M (Peak 90.81M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711428
+Fra:1 Mem:92.02M (Peak 92.02M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711431
+Fra:1 Mem:92.02M (Peak 92.02M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711433
+Fra:1 Mem:92.02M (Peak 92.02M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711434
+Fra:1 Mem:92.02M (Peak 92.02M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711436
+Fra:1 Mem:92.02M (Peak 92.02M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207711438
+Fra:1 Mem:92.03M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207715510
+Fra:1 Mem:92.03M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207718995
+Fra:1 Mem:91.80M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207718996
+Fra:1 Mem:91.95M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207718998
+Fra:1 Mem:91.87M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207718999
+Fra:1 Mem:91.87M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207719000
+Fra:1 Mem:91.87M (Peak 92.03M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771777
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771779
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771783
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771784
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771785
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771786
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771788
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771789
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771794
+Fra:1 Mem:93.83M (Peak 93.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771797
+Fra:1 Mem:93.84M (Peak 93.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771798
+Fra:1 Mem:93.84M (Peak 93.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771802
+Fra:1 Mem:93.84M (Peak 93.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771805
+Fra:1 Mem:93.84M (Peak 93.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771810
+Fra:1 Mem:93.84M (Peak 93.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_207771817
+Fra:1 Mem:93.85M (Peak 93.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225102315
+Fra:1 Mem:93.85M (Peak 93.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225102316
+Fra:1 Mem:93.85M (Peak 93.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225102317
+Fra:1 Mem:93.85M (Peak 93.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225102318
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225102319
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225274642
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225274643
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361967
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361968
+Fra:1 Mem:93.86M (Peak 93.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361969
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361970
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361972
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361973
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361974
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361976
+Fra:1 Mem:93.87M (Peak 93.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361977
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361978
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361980
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361983
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361986
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225361988
+Fra:1 Mem:93.88M (Peak 93.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586216
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586218
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586219
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586220
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586223
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586224
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586242
+Fra:1 Mem:93.89M (Peak 93.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586243
+Fra:1 Mem:93.90M (Peak 93.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_225586245
+Fra:1 Mem:93.90M (Peak 93.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_252837453
+Fra:1 Mem:93.90M (Peak 93.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266953826
+Fra:1 Mem:93.91M (Peak 93.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954796
+Fra:1 Mem:93.91M (Peak 93.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954805
+Fra:1 Mem:93.91M (Peak 93.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954806
+Fra:1 Mem:93.91M (Peak 93.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954807
+Fra:1 Mem:93.91M (Peak 93.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954808
+Fra:1 Mem:96.82M (Peak 96.82M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954809
+Fra:1 Mem:96.82M (Peak 96.82M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954813
+Fra:1 Mem:96.82M (Peak 96.82M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954814
+Fra:1 Mem:96.82M (Peak 96.82M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954815
+Fra:1 Mem:96.83M (Peak 96.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954816
+Fra:1 Mem:96.83M (Peak 96.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954817
+Fra:1 Mem:96.83M (Peak 96.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954818
+Fra:1 Mem:96.83M (Peak 96.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954819
+Fra:1 Mem:96.83M (Peak 96.83M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954821
+Fra:1 Mem:96.84M (Peak 96.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954822
+Fra:1 Mem:96.84M (Peak 96.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954825
+Fra:1 Mem:96.84M (Peak 96.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954826
+Fra:1 Mem:96.84M (Peak 96.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954827
+Fra:1 Mem:96.84M (Peak 96.84M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954828
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266954829
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266955699
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266955700
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_266955702
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615562
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615564
+Fra:1 Mem:96.85M (Peak 96.85M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615565
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615566
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615567
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615569
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615570
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615571
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615573
+Fra:1 Mem:96.86M (Peak 96.86M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615575
+Fra:1 Mem:96.87M (Peak 96.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615576
+Fra:1 Mem:96.87M (Peak 96.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615577
+Fra:1 Mem:96.87M (Peak 96.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615578
+Fra:1 Mem:96.87M (Peak 96.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615581
+Fra:1 Mem:96.87M (Peak 96.87M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615582
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615583
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615584
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365615610
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365930971
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365930973
+Fra:1 Mem:96.88M (Peak 96.88M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_365930974
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544500
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544501
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544502
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544503
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544505
+Fra:1 Mem:96.89M (Peak 96.89M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544506
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544507
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544510
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544511
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544514
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_371544520
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_426871717
+Fra:1 Mem:96.90M (Peak 96.90M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_426871720
+Fra:1 Mem:96.91M (Peak 96.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_499567536
+Fra:1 Mem:96.91M (Peak 96.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_499567537
+Fra:1 Mem:96.91M (Peak 96.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447567
+Fra:1 Mem:96.91M (Peak 96.91M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447571
+Fra:1 Mem:96.92M (Peak 96.92M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447595
+Fra:1 Mem:96.92M (Peak 96.92M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447622
+Fra:1 Mem:96.92M (Peak 96.92M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447637
+Fra:1 Mem:96.92M (Peak 96.92M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447658
+Fra:1 Mem:96.92M (Peak 96.92M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447685
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447686
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447703
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447704
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447709
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447724
+Fra:1 Mem:96.93M (Peak 96.93M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447727
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447728
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447755
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447766
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447778
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447785
+Fra:1 Mem:96.94M (Peak 96.94M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447819
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_746447870
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_762742652
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_762742685
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_762742697
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_762742702
+Fra:1 Mem:96.95M (Peak 96.95M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822691509
+Fra:1 Mem:96.96M (Peak 96.96M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822722116
+Fra:1 Mem:96.96M (Peak 96.96M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822722132
+Fra:1 Mem:96.97M (Peak 96.97M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822799797
+Fra:1 Mem:96.97M (Peak 96.97M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822799798
+Fra:1 Mem:96.97M (Peak 96.97M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822799799
+Fra:1 Mem:96.98M (Peak 96.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822799800
+Fra:1 Mem:96.98M (Peak 96.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_822799801
+Fra:1 Mem:96.98M (Peak 96.98M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_823768827
+Fra:1 Mem:96.99M (Peak 96.99M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Building_osm_way_823972543
+Fra:1 Mem:96.99M (Peak 96.99M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | East_Main_Approach_Road
+Fra:1 Mem:96.99M (Peak 96.99M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | East_Main_Approach_South_Walk
+Fra:1 Mem:97.48M (Peak 97.48M) | Time:00:00.02 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Synchronizing object | Roads_and_paths
+Fra:1 Mem:107.64M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Initializing
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Plaza brick Normal
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Rusticated foundation stone Base Color
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Rusticated foundation stone Normal
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Roman brick Normal
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Red clay roof tile Base Color
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Red clay roof tile Normal
+Fra:1 Mem:106.46M (Peak 109.59M) | Time:00:00.05 | Mem:0.00M, Peak:0.00M | Scene, ViewLayer | Updating Images | Loading MSS Plaza brick Base Color
+Fra:1 Mem:104.24M (Peak 118.47M) | Time:00:00.06 | Mem:8.00M, Peak:8.00M | Scene, ViewLayer | Waiting for render to start
+Fra:1 Mem:104.24M (Peak 118.47M) | Time:00:00.06 | Mem:8.00M, Peak:8.00M | Scene, ViewLayer | Loading render kernels (may take a few minutes the first time)
+Fra:1 Mem:104.24M (Peak 118.47M) | Time:00:00.06 | Mem:8.00M, Peak:8.00M | Scene, ViewLayer | Updating Scene
+Fra:1 Mem:104.24M (Peak 118.47M) | Time:00:00.06 | Mem:8.00M, Peak:8.00M | Scene, ViewLayer | Updating Shaders
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Procedurals
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Background
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Camera
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Meshes Flags
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Objects
+Fra:1 Mem:104.37M (Peak 118.47M) | Time:00:00.06 | Mem:8.05M, Peak:8.05M | Scene, ViewLayer | Updating Objects | Copying Transformations to device
+Fra:1 Mem:104.44M (Peak 118.47M) | Time:00:00.06 | Mem:8.12M, Peak:8.12M | Scene, ViewLayer | Updating Objects | Applying Static Transformations
+Fra:1 Mem:104.44M (Peak 118.47M) | Time:00:00.06 | Mem:8.12M, Peak:8.12M | Scene, ViewLayer | Updating Particle Systems
+Fra:1 Mem:104.44M (Peak 118.47M) | Time:00:00.06 | Mem:8.12M, Peak:8.12M | Scene, ViewLayer | Updating Particle Systems | Copying Particles to device
+Fra:1 Mem:104.44M (Peak 118.47M) | Time:00:00.06 | Mem:8.12M, Peak:8.12M | Scene, ViewLayer | Updating Meshes
+Fra:1 Mem:110.21M (Peak 118.47M) | Time:00:00.07 | Mem:8.12M, Peak:8.12M | Scene, ViewLayer | Updating Mesh | Computing attributes
+Fra:1 Mem:117.85M (Peak 118.47M) | Time:00:00.08 | Mem:8.14M, Peak:8.14M | Scene, ViewLayer | Updating Mesh | Copying Attributes to device
+Fra:1 Mem:117.80M (Peak 118.47M) | Time:00:00.08 | Mem:15.71M, Peak:15.71M | Scene, ViewLayer | Updating Scene BVH | Building
+Fra:1 Mem:117.81M (Peak 118.47M) | Time:00:00.08 | Mem:15.71M, Peak:15.71M | Scene, ViewLayer | Updating Scene BVH | Building BVH
+Fra:1 Mem:117.81M (Peak 118.47M) | Time:00:00.08 | Mem:27.25M, Peak:27.25M | Scene, ViewLayer | Updating Scene BVH | Building BVH 0%
+Fra:1 Mem:117.81M (Peak 118.47M) | Time:00:00.10 | Mem:39.79M, Peak:51.32M | Scene, ViewLayer | Updating Scene BVH | Copying BVH to device
+Fra:1 Mem:117.81M (Peak 118.47M) | Time:00:00.10 | Mem:39.79M, Peak:51.32M | Scene, ViewLayer | Updating Mesh | Computing normals
+Fra:1 Mem:131.74M (Peak 131.74M) | Time:00:00.11 | Mem:39.79M, Peak:51.32M | Scene, ViewLayer | Updating Mesh | Copying Mesh to device
+Fra:1 Mem:131.74M (Peak 131.74M) | Time:00:00.11 | Mem:53.72M, Peak:53.72M | Scene, ViewLayer | Updating Objects Flags
+Fra:1 Mem:131.74M (Peak 131.74M) | Time:00:00.11 | Mem:53.72M, Peak:53.72M | Scene, ViewLayer | Updating Primitive Offsets
+Fra:1 Mem:131.74M (Peak 131.74M) | Time:00:00.11 | Mem:53.73M, Peak:53.73M | Scene, ViewLayer | Updating Images
+Fra:1 Mem:131.74M (Peak 131.74M) | Time:00:00.11 | Mem:53.73M, Peak:53.73M | Scene, ViewLayer | Updating Images | Loading sky_nishita
+Fra:1 Mem:132.74M (Peak 132.74M) | Time:00:00.15 | Mem:54.73M, Peak:54.73M | Scene, ViewLayer | Updating Camera Volume
+Fra:1 Mem:132.74M (Peak 132.74M) | Time:00:00.15 | Mem:54.73M, Peak:54.73M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:132.74M (Peak 132.74M) | Time:00:00.15 | Mem:54.81M, Peak:54.81M | Scene, ViewLayer | Updating Lights
+Fra:1 Mem:132.74M (Peak 132.74M) | Time:00:00.15 | Mem:54.81M, Peak:54.81M | Scene, ViewLayer | Updating Lights | Importance map
+Fra:1 Mem:196.77M (Peak 484.74M) | Time:00:00.42 | Mem:118.85M, Peak:278.82M | Scene, ViewLayer | Updating Lights | Computing tree
+Fra:1 Mem:196.77M (Peak 484.74M) | Time:00:00.42 | Mem:118.85M, Peak:278.82M | Scene, ViewLayer | Updating Integrator
+Fra:1 Mem:196.77M (Peak 484.74M) | Time:00:00.42 | Mem:118.85M, Peak:278.82M | Scene, ViewLayer | Updating Film
+Fra:1 Mem:196.78M (Peak 484.74M) | Time:00:00.42 | Mem:118.77M, Peak:278.82M | Scene, ViewLayer | Updating Lookup Tables
+Fra:1 Mem:196.78M (Peak 484.74M) | Time:00:00.42 | Mem:118.86M, Peak:278.82M | Scene, ViewLayer | Updating Baking
+Fra:1 Mem:196.78M (Peak 484.74M) | Time:00:00.42 | Mem:118.86M, Peak:278.82M | Scene, ViewLayer | Updating Device | Writing constant memory
+Fra:1 Mem:196.78M (Peak 484.74M) | Time:00:00.42 | Mem:118.86M, Peak:278.82M | Scene, ViewLayer | Sample 0/44
+Fra:1 Mem:244.85M (Peak 484.74M) | Time:00:01.15 | Remaining:00:31.49 | Mem:166.87M, Peak:278.82M | Scene, ViewLayer | Sample 1/44
+Fra:1 Mem:244.85M (Peak 484.74M) | Time:00:22.79 | Remaining:00:07.45 | Mem:166.87M, Peak:278.82M | Scene, ViewLayer | Sample 33/44
+Fra:1 Mem:266.19M (Peak 484.74M) | Time:00:30.93 | Mem:166.87M, Peak:278.82M | Scene, ViewLayer | Sample 44/44
+Fra:1 Mem:266.19M (Peak 484.74M) | Time:00:30.93 | Mem:166.87M, Peak:278.82M | Scene, ViewLayer | Finished
+Saved: '/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-approach/East_Main.png'
+Time: 00:31.23 (Saving: 00:00.29)
+
+PASS: Imported 4 elevated surfaces and checked their East Main Street crossing heights.
+FBX version: 7400
+PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment 12.70 m.
+PASS: Checked 18 imported approach heights, with 5.3 mm maximum deviation and 0.1 mm maximum height difference at the bottom stair.
+Info: Saved "RVA_Station_Approach.blend"
+PASS: Rendered 299 mesh objects from RVA_Pilot.obj.
+
+Blender quit

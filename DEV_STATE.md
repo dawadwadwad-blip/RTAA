@@ -21,6 +21,7 @@
 - **S1-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -63,6 +64,12 @@
 - `20261119T131733906865Z-489e48a0` · S1-08 · **PASS** · 2026-11-19T13:17:33+00:00 → 2026-11-19T13:17:37+00:00 · [run evidence](reports/runs/20261119T131733906865Z-489e48a0.json)
 - `20261119T131804764771Z-ea269b51` · S1-08 · **PASS** · 2026-11-19T13:18:04+00:00 → 2026-11-19T13:18:09+00:00 · [run evidence](reports/runs/20261119T131804764771Z-ea269b51.json)
 - `20261119T132005803369Z-64d8f81d` · S1-08 · **PASS** · 2026-11-19T13:20:05+00:00 → 2026-11-19T13:20:07+00:00 · [run evidence](reports/runs/20261119T132005803369Z-64d8f81d.json)
+- `20261119T180816076090Z-d2d1919e` · S1-09 · **FAILED** · 2026-11-19T18:08:16+00:00 → 2026-11-19T18:08:17+00:00 · [run evidence](reports/runs/20261119T180816076090Z-d2d1919e.json)
+- `20261119T180932325966Z-a869eb9e` · S1-09 · **FAILED** · 2026-11-19T18:09:32+00:00 → 2026-11-19T18:09:33+00:00 · [run evidence](reports/runs/20261119T180932325966Z-a869eb9e.json)
+- `20261119T180944987107Z-941e5c8b` · S1-09 · **PASS** · 2026-11-19T18:09:44+00:00 → 2026-11-19T18:09:47+00:00 · [run evidence](reports/runs/20261119T180944987107Z-941e5c8b.json)
+- `20261119T180957995362Z-13520876` · S1-09 · **PASS** · 2026-11-19T18:09:57+00:00 → 2026-11-19T18:10:23+00:00 · [run evidence](reports/runs/20261119T180957995362Z-13520876.json)
+- `20261119T181156761975Z-90523919` · S1-09 · **PASS** · 2026-11-19T18:11:56+00:00 → 2026-11-19T18:12:39+00:00 · [run evidence](reports/runs/20261119T181156761975Z-90523919.json)
+- `20261119T181324580248Z-69f71f65` · S1-09 · **PASS** · 2026-11-19T18:13:24+00:00 → 2026-11-19T18:14:02+00:00 · [run evidence](reports/runs/20261119T181324580248Z-69f71f65.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -156,6 +163,12 @@
 - **Verification** the station-only DEM alignment used 212 ground points and gave 0.080 m 95th-percentile absolute residual across 210 held-out points. Blender checks the imported crossing heights. The underlying source data and regional datum gate are unchanged.
 - **Limits** roadway widths, barriers and pier placement are illustrative. Connect and validate the deck ends, resolve the hidden rail span before relying on its elevation, and test collision in the target editor before enabling vehicle travel.
 
+## S1-09 · East Main Street approach
+
+- **Built** about 140 m of terrain-fit asphalt, sidewalks and raised curbs beside Main Street Station. The two mapped crossings have curb ramps. The brick station crossing, service driveway and walk alongside the retaining wall use the same terrain surface as the stair landing. The approach is an opt-in mesh variant.
+- **Verified** all 52 local tests and the base mesh hash. Blender checked both crossing centers, the curb samples and the bottom stair across four points. The largest difference at those stair samples was 0.1 mm. The separate rail and three I-95 crossing heights also passed their import checks. [Street preview](reports/Main_Street_Station_East_Main.webp) · [Build instructions](docs/Station_Approach_Preview.md)
+- **Bottlenecks to check** validate collision at both roadway transitions and the bottom tread using the actual pawn and vehicle. The visual widths, markings and ramp slopes are draft values. Native Unreal import, collision, LODs, World Partition streaming and the Church Hill smoke tests remain open.
+
 ### Next usage window prompt
 
-> Dress the short East Main Street approach around Main Street Station. Fix the road ribbon and crosswalk terrain fit and add continuous curbs from the station stairs to the intersection. Use docs/Station_Viaduct_Preview.md to keep the freeway, rail and ground levels separate. When the target editor is available, import the station and test the approach, staircase collision, LOD transitions and the RVACivic Church Hill smoke tests.
+> Prepare a station import and collision smoke test for the UE5 pilot. Use docs/Station_Approach_Preview.md and the station GLB sidecar to preserve the shared frame and keep ground, I-95 and rail separate. Verify axis and scale portability against the saved Blender scene. When a target editor and project are available, import into an isolated map, drive the two approach joins, walk the stair, check LOD transitions and streaming, and run the RVACivic Church Hill native smoke tests. Record each checked or blocked gate in the task runner.

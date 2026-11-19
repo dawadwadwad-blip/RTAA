@@ -32,4 +32,4 @@ blender -b --factory-startup --python-exit-code 1 --python tools/render_pilot_bl
   --save-blend outputs/station-decks/RVA_Station_Viaducts.blend
 ```
 
-The separate OBJ and MTL use east, north and up in meters, matching the pilot mesh. Blender checks the imported deck heights at the East Main crossings. Before enabling vehicle travel in Unreal, extend the preview to verified approach ties, resolve the rail gap and regional source datum, and test collision, clearance and streaming. The temporary roadway surface around the headhouse also needs its detailed curb and grade pass.
+The separate OBJ and MTL use east, north and up in meters, matching the pilot mesh. Blender checks the imported deck heights at the East Main crossings. The [street approach](Station_Approach_Preview.md) adds the curb and grade fit around the headhouse. Before enabling vehicle travel in Unreal, extend the deck ends to verified approach ties, resolve the rail gap and regional source datum, and test collision, clearance and streaming.
