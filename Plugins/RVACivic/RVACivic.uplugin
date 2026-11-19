@@ -1,0 +1,16 @@
+{
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "0.1.0",
+  "FriendlyName": "RVA Civic Sandbox",
+  "Description": "World-scoped faction rules and Chaos-powered civic tools.",
+  "Category": "Gameplay",
+  "CanContainContent": false,
+  "Modules": [
+    {
+      "Name": "RVACivic",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ]
+}

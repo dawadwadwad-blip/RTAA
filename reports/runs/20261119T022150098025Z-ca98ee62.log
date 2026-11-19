@@ -1,0 +1,18 @@
+test_child_launch_failure_still_writes_evidence (test_bootstrap.BootstrapTest.test_child_launch_failure_still_writes_evidence) ... ok
+test_corrupt_zip_preserves_last_good_inventory (test_bootstrap.BootstrapTest.test_corrupt_zip_preserves_last_good_inventory) ... ok
+test_interrupted_run_is_reconciled_once (test_bootstrap.BootstrapTest.test_interrupted_run_is_reconciled_once) ... ok
+test_metadata_mismatch_is_reported (test_bootstrap.BootstrapTest.test_metadata_mismatch_is_reported) ... ok
+test_missing_required_input_is_blocked (test_bootstrap.BootstrapTest.test_missing_required_input_is_blocked) ... ok
+test_retry_report_is_stable_and_preserves_input_and_notes (test_bootstrap.BootstrapTest.test_retry_report_is_stable_and_preserves_input_and_notes) ... ok
+test_compiled_policy (test_civic_policy.CivicPolicyTest.test_compiled_policy) ... ok
+test_exports_match_inputs (test_pilot_contract.PilotContractTest.test_exports_match_inputs) ... ok
+test_landscape_height_quantization (test_pilot_contract.PilotContractTest.test_landscape_height_quantization) ... ok
+test_mismatching_raw_capture_is_rejected (test_pilot_contract.PilotContractTest.test_mismatching_raw_capture_is_rejected) ... ok
+test_origin_and_axes (test_pilot_contract.PilotContractTest.test_origin_and_axes) ... ok
+test_terrain_bounds_tile_seam_and_halo (test_pilot_contract.PilotContractTest.test_terrain_bounds_tile_seam_and_halo) ... ok
+test_versioned_controls_and_expected_offsets (test_pilot_contract.PilotContractTest.test_versioned_controls_and_expected_offsets) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.979s
+
+OK
