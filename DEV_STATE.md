@@ -24,6 +24,7 @@
 - **S1-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-10 · BLOCKED** — Review reports/runs/20261119T211053107724Z-31a37c40.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_station_smoke.py.
 - **S1-11 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-12 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -80,6 +81,11 @@
 - `20261119T212707842072Z-5980b9b0` · S1-11 · **PASS** · 2026-11-19T21:27:07+00:00 → 2026-11-19T21:27:10+00:00 · [run evidence](reports/runs/20261119T212707842072Z-5980b9b0.json)
 - `20261119T213231186382Z-edc431c4` · S1-11 · **PASS** · 2026-11-19T21:32:31+00:00 → 2026-11-19T21:32:44+00:00 · [run evidence](reports/runs/20261119T213231186382Z-edc431c4.json)
 - `20261119T213419381674Z-c8809527` · S1-11 · **PASS** · 2026-11-19T21:34:19+00:00 → 2026-11-19T21:34:44+00:00 · [run evidence](reports/runs/20261119T213419381674Z-c8809527.json)
+- `20261119T214441836913Z-e1238e45` · S1-12 · **PASS** · 2026-11-19T21:44:41+00:00 → 2026-11-19T21:44:52+00:00 · [run evidence](reports/runs/20261119T214441836913Z-e1238e45.json)
+- `20261119T214622541333Z-b1fe802a` · S1-12 · **PASS** · 2026-11-19T21:46:22+00:00 → 2026-11-19T21:46:37+00:00 · [run evidence](reports/runs/20261119T214622541333Z-b1fe802a.json)
+- `20261119T214648605063Z-5c2a868d` · S1-12 · **PASS** · 2026-11-19T21:46:48+00:00 → 2026-11-19T21:46:57+00:00 · [run evidence](reports/runs/20261119T214648605063Z-5c2a868d.json)
+- `20261119T214805612012Z-e214eedf` · S1-12 · **PASS** · 2026-11-19T21:48:05+00:00 → 2026-11-19T21:48:34+00:00 · [run evidence](reports/runs/20261119T214805612012Z-e214eedf.json)
+- `20261119T214925464299Z-65222a30` · S1-12 · **PASS** · 2026-11-19T21:49:25+00:00 → 2026-11-19T21:49:55+00:00 · [run evidence](reports/runs/20261119T214925464299Z-65222a30.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -191,6 +197,12 @@
 - Exported the textured station, a cropped terrain patch, East Main Street and the elevated spans from the assembled Blender scene. The trial uses Godot's Compatibility renderer and an arcade truck that follows the imported grade.
 - Adapted one 22 m *Night Shift* striping pass with clear start and finish cones, restart, a live FPS readout and a low graphics option. The native Linux export ran locally. Windows and web releases exported successfully. [Trial build instructions](docs/Godot_Station_Trial.md)
 - The engine test verified the station crossing height, westward grade, graphics toggle, full pass and clean restart. The 720p scene rendered on the workspace's CPU-backed OpenGL driver. Performance and handling on the intended device are the remaining engine decision inputs.
+
+## S1-12 · Station reference views
+
+- Added dormers to the east hip and reshaped the train shed around the parking-side view, including its brick connector, overhang, glazing and exposed steel trestle. Added individually modeled cream stone segments around the entrance arches and adjusted Godot's lighting to show the warm brick and recessed arcades.
+- Added a small parking-side apron and trees fitted to the pilot terrain. `C` cycles through both reference angles and back to driving. [Godot views](docs/Godot_Station_Trial.md)
+- Verified the six-mesh Blender/GLB round trip, surveyed approach checks, and the Godot camera and striping playthrough. The revised Windows executable exported and the Linux executable launched locally. The parking-side details are visual approximations. Target-device performance remains open.
 
 ### Next usage window prompt
 
