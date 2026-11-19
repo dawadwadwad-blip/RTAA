@@ -1,0 +1,66 @@
+{
+  "capture_sha256": "77b1a7b62b1114fdd1fbb7c4ec36cd5e32863e830dabade4093e2c9259777030",
+  "expected_lidar_source_crs": [
+    3748,
+    5703
+  ],
+  "export_sha256": "8192e3c839cffb32eb4d263f5e5d442867c671bda2a22883c6ee59125bc82b95",
+  "footprints": 311,
+  "height_sources": {
+    "lidar_class_6_minus_class_2": 270,
+    "osm_levels_estimate": 10,
+    "unresolved": 31
+  },
+  "input_point_counts": {
+    "2": 2336493,
+    "6": 5203695
+  },
+  "internal_roof_repeatability": {
+    "median_difference_m": 0.038,
+    "p95_difference_m": 0.237,
+    "sample_ids": [
+      "osm/way/225102316",
+      "osm/way/371544512",
+      "osm/way/365615603",
+      "osm/way/746447799",
+      "osm/way/746447729",
+      "osm/way/225274642",
+      "osm/way/225361980",
+      "osm/way/225361986",
+      "osm/way/225361974",
+      "osm/way/207696499",
+      "osm/way/207696503",
+      "osm/way/207703632",
+      "osm/way/207703644",
+      "osm/way/822799799",
+      "osm/way/207711425",
+      "osm/way/207710034",
+      "osm/way/207696509",
+      "osm/way/207696491",
+      "osm/way/207693031",
+      "osm/way/207693028",
+      "osm/way/207771805",
+      "osm/way/266954810",
+      "osm/relation/11269673",
+      "osm/way/371544511",
+      "osm/way/365615580",
+      "osm/way/371544518",
+      "osm/way/746447637",
+      "osm/way/746447709",
+      "osm/way/746447694",
+      "osm/way/746447595"
+    ],
+    "samples": 30,
+    "varied_ground_samples": 8
+  },
+  "invalid_footprint_ids_in_capture": [
+    "osm/relation/20806215"
+  ],
+  "lidar_files_verified": 12,
+  "lidar_source_lock_sha256": "5405ac419c51282b7e7093d00dcb582e3f10699ba0889ed7828e1d8ccbc26c72",
+  "quality_flags": {
+    "small_footprint": 1,
+    "sparse_class_6": 8,
+    "varied_nearby_ground": 36
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "index_provenance": {
+    "dem_vrt": {
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/VA_Richmond_DEM_2025_m14836_EPSG-2925.vrt",
+      "sha256": "2c0fb1cbea5790e138c7b4d3ca981836e7e14a0546dd8a744aa34e9d6eb2ce8c"
+    },
+    "laz_index": {
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/tileindex_va2025_richmond_m14835.gpkg",
+      "sha256": "06ed7db5ba1d61a99c03e0b945fe0ccc4d6c433c8bcccdc48396206b63329f50"
+    }
+  },
+  "selection": "All source tiles whose official DEM index intersects the first pair expanded by the locked 100 m halo. LiDAR files use the same native tile IDs.",
+  "source_reference": {
+    "dem": {
+      "horizontal_epsg": 2925,
+      "vertical_epsg": 6360
+    },
+    "laz": {
+      "horizontal_epsg": 3748,
+      "vertical_epsg": 5703
+    }
+  },
+  "assets": [
+    {
+      "native_tile": "7791_22SE",
+      "kind": "dem",
+      "file": "DO_S13_7791_22SE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_22SE.2025.tif",
+      "bytes": 2281465,
+      "sha256": "3b654fbd3e070eb04916e319b2a80e961a16c6027ca3def9817818f38fc2770d"
+    },
+    {
+      "native_tile": "7791_22SE",
+      "kind": "laz",
+      "file": "20250214_7791_22SE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7791_22SE.copc.laz",
+      "bytes": 23683983,
+      "sha256": "f429c36b2707a4b5b9adbdecdf8018a56b402ebfbb473b155f674564f0fa18c4"
+    },
+    {
+      "native_tile": "7791_22NE",
+      "kind": "dem",
+      "file": "DO_S13_7791_22NE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_22NE.2025.tif",
+      "bytes": 3320539,
+      "sha256": "cdf7b0fa66ffdd0a25975932f20a0e330f90eaf6389e88915c9ef633fce75ae4"
+    },
+    {
+      "native_tile": "7791_22NE",
+      "kind": "laz",
+      "file": "20250301_7791_22NE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250301_7791_22NE.copc.laz",
+      "bytes": 26565032,
+      "sha256": "91513c1df981810a588da5b78465304512d8fe8717b2619963cffafaa013babe"
+    },
+    {
+      "native_tile": "7791_23NW",
+      "kind": "dem",
+      "file": "DO_S13_7791_23NW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_23NW.2025.tif",
+      "bytes": 3322577,
+      "sha256": "a58bd69995318b3ffae202bb5f55395c19aa430a059e61437e4d5fa314113bb3"
+    },
+    {
+      "native_tile": "7791_23NW",
+      "kind": "laz",
+      "file": "20250301_7791_23NW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250301_7791_23NW.copc.laz",
+      "bytes": 24949359,
+      "sha256": "6752e7cede3d28fe8412d04a66de35238504ae24d6d6a30a1272b8542e3d4d74"
+    },
+    {
+      "native_tile": "7791_23NE",
+      "kind": "dem",
+      "file": "DO_S13_7791_23NE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_23NE.2025.tif",
+      "bytes": 3315163,
+      "sha256": "87464668a3d364da3f52bf35cb937d5109ee43cffb8f0088a0854837ae56c1ad"
+    },
+    {
+      "native_tile": "7791_23NE",
+      "kind": "laz",
+      "file": "20250301_7791_23NE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250301_7791_23NE.copc.laz",
+      "bytes": 27470599,
+      "sha256": "7e157b17a218151ce74f548bb5ffcd03798e28782c143b8d73e96062202be97f"
+    },
+    {
+      "native_tile": "7791_23SE",
+      "kind": "dem",
+      "file": "DO_S13_7791_23SE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_23SE.2025.tif",
+      "bytes": 3074661,
+      "sha256": "8a809e3c2ad81c2199fef4eee1394c72337a32d92c85228894bcb67ebcb2dc5f"
+    },
+    {
+      "native_tile": "7791_23SE",
+      "kind": "laz",
+      "file": "20250214_7791_23SE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7791_23SE.copc.laz",
+      "bytes": 26671686,
+      "sha256": "ae171175e07e2361066a62319e887140d60495959a0865686f04265c6af70a71"
+    },
+    {
+      "native_tile": "7791_23SW",
+      "kind": "dem",
+      "file": "DO_S13_7791_23SW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_23SW.2025.tif",
+      "bytes": 2263462,
+      "sha256": "b42ca8d727116fee2c17a688a5bb61c26345485c3ddb619e95c49e98c958f274"
+    },
+    {
+      "native_tile": "7791_23SW",
+      "kind": "laz",
+      "file": "20250214_7791_23SW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7791_23SW.copc.laz",
+      "bytes": 20027153,
+      "sha256": "9a1237fee1dfb3af4a90c0a745aacf84b26465dfb455e527707fe70aca407001"
+    },
+    {
+      "native_tile": "7791_32SW",
+      "kind": "dem",
+      "file": "DO_S13_7791_32SW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_32SW.2025.tif",
+      "bytes": 3442208,
+      "sha256": "5a6e453aa7324ae0c6193f313fc758d0ee74516cd2517a9f51af85281241bd00"
+    },
+    {
+      "native_tile": "7791_32SW",
+      "kind": "laz",
+      "file": "20250214_7791_32SW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7791_32SW.copc.laz",
+      "bytes": 30786223,
+      "sha256": "04876b4e9aa34823df3baff4987ad398935e7ade99f6cbd4ed5acfc212566205"
+    },
+    {
+      "native_tile": "7791_32NW",
+      "kind": "dem",
+      "file": "DO_S13_7791_32NW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7791_32NW.2025.tif",
+      "bytes": 3641022,
+      "sha256": "890c101eda30bb3289517a0f41ae5b6541939ef09f4556a7e9d7443fe41b0b25"
+    },
+    {
+      "native_tile": "7791_32NW",
+      "kind": "laz",
+      "file": "20250301_7791_32NW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250301_7791_32NW.copc.laz",
+      "bytes": 37866910,
+      "sha256": "6bb594dac045ed2e49c86f15591100fa6883b6b784591dfe2833d6ff5c20713f"
+    },
+    {
+      "native_tile": "7792_11SE",
+      "kind": "dem",
+      "file": "DO_S13_7792_11SE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7792_11SE.2025.tif",
+      "bytes": 3149871,
+      "sha256": "3cba50a875e46d36eeed83a770377841bac2dd2e1740d4c5b8079ae75d2c7c73"
+    },
+    {
+      "native_tile": "7792_11SE",
+      "kind": "laz",
+      "file": "20250301_7792_11SE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250301_7792_11SE.copc.laz",
+      "bytes": 29604853,
+      "sha256": "72ad51069a0a057a96788efa1d1ebb07b65158eea6f940c0641028f239a7d640"
+    },
+    {
+      "native_tile": "7792_14SW",
+      "kind": "dem",
+      "file": "DO_S13_7792_14SW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7792_14SW.2025.tif",
+      "bytes": 3399625,
+      "sha256": "2755b94c0d79fff21ba7ab8db1f782dbc620bf239f02ff75593edcacfe0e88e1"
+    },
+    {
+      "native_tile": "7792_14SW",
+      "kind": "laz",
+      "file": "20250214_7792_14SW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7792_14SW.copc.laz",
+      "bytes": 26066000,
+      "sha256": "2810ee0093f1cc1f25bc2b809501a1f06a227f1770b059f5b7fe649a0b19e0d3"
+    },
+    {
+      "native_tile": "7792_14SE",
+      "kind": "dem",
+      "file": "DO_S13_7792_14SE.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7792_14SE.2025.tif",
+      "bytes": 3500493,
+      "sha256": "f54e0682889da66f04c7996da0b5b9cd2ac1f1d2d1ce28801fa5c6ce7c70eba2"
+    },
+    {
+      "native_tile": "7792_14SE",
+      "kind": "laz",
+      "file": "20250214_7792_14SE.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7792_14SE.copc.laz",
+      "bytes": 28557243,
+      "sha256": "b472b81589a64e8d5127f10d7499187742a664c200c40e8fd3a3ad9c8a106bcb"
+    },
+    {
+      "native_tile": "7792_41SW",
+      "kind": "dem",
+      "file": "DO_S13_7792_41SW.2025.tif",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/DO_S13_7792_41SW.2025.tif",
+      "bytes": 3667699,
+      "sha256": "d928fc8fc180af63b6af88f1adcd379ccaf3c0cf70a98ed9097824c0cdc5eceb"
+    },
+    {
+      "native_tile": "7792_41SW",
+      "kind": "laz",
+      "file": "20250214_7792_41SW.copc.laz",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/20250214_7792_41SW.copc.laz",
+      "bytes": 34891572,
+      "sha256": "c297bbd40da1a45bc36e7a107a8e2bfd8645016b523a4346ffd7b649170fa9ba"
+    }
+  ]
+}

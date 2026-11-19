@@ -25,11 +25,14 @@
       "license": "CC0-1.0",
       "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
       "role": "Classified point cloud for ground (2), roofs (6) and bridge decks (17)",
-      "expected_horizontal_crs": "EPSG:6347",
+      "expected_horizontal_crs": "EPSG:3748",
       "expected_vertical_crs": "EPSG:5703",
       "expected_z_units": "meters",
-      "asset_status": "catalog_verified",
-      "acquisition": "Select intersecting LAZ tiles from this orthometric delivery. Hash each tile and inspect LAS header and CRS VLRs. Other NOAA delivery paths may be ellipsoidal."
+      "asset_status": "first_pair_assets_verified",
+      "acquisition": "Select intersecting LAZ tiles from this orthometric delivery. Hash each tile and inspect LAS header and CRS VLRs. Other NOAA delivery paths may be ellipsoidal.",
+      "locked_pilot_assets": "terrain/first_pair_sources.json",
+      "publisher_listing_horizontal_crs": "EPSG:6347",
+      "header_note": "The locked COPC/LAZ headers and the official tile index identify NAD83(HARN) / UTM 18N. Verify the headers for each new delivery."
     },
     {
       "id": "osm_control_capture",
