@@ -66,6 +66,21 @@ func verify() -> void:
 		push_error("Crosswalk or west grade is missing")
 		quit(1)
 		return
+	if trial.start_at < 519 or trial.center_offset(trial.start_at) < 4.0 or trial.parked_vehicles.is_empty():
+		push_error("The extended route or parked street details are missing")
+		quit(1)
+		return
+	for s in range(48, 532, 6):
+		var point: Vector3 = trial.route_position(s, -3.15)
+		var from := Vector3(point.x, 20, point.z)
+		var to := Vector3(point.x, 0, point.z)
+		var query := PhysicsRayQueryParameters3D.create(from, to, 1)
+		query.hit_back_faces = true
+		var hit: Dictionary = trial.get_world_3d().direct_space_state.intersect_ray(query)
+		if hit.is_empty() or hit.collider.get_parent().name != "Corridor_Road":
+			push_error("No drivable pavement at station offset %d" % s)
+			quit(1)
+			return
 	await tap("quality")
 	if trial.sun.shadow_enabled or not is_equal_approx(root.scaling_3d_scale, 0.75):
 		push_error("The low graphics preset did not apply")
@@ -73,7 +88,7 @@ func verify() -> void:
 		return
 	await tap("quality")
 	Input.action_press("gas")
-	await ticks(360)
+	await ticks(2900)
 	Input.action_release("gas")
 	if trial.pieces != 0 or trial.phase != trial.Shift.READY:
 		push_error("An unarmed crossing started painting")
@@ -82,7 +97,17 @@ func verify() -> void:
 	await tap("retry")
 	await tap("stripe")
 	Input.action_press("gas")
-	await ticks(445)
+	var elapsed := 0
+	while elapsed < 2900 and trial.truck.position.dot(trial.eastbound) > 141.0:
+		await ticks(1)
+		elapsed += 1
+	var approach := OS.get_environment("RVA_TRIAL_APPROACH_SCREENSHOT")
+	if DisplayServer.get_name() != "headless" and not approach.is_empty():
+		trial.speedometer.text = "%d mph" % roundi(trial.speed * 2.237)
+		if await capture(trial, approach) != OK:
+			quit(1)
+			return
+	await ticks(1100)
 	Input.action_release("gas")
 	if trial.phase != trial.Shift.COMPLETE or trial.pieces != 44 or trial.progress != 22.0:
 		push_error("The 22 m shift did not complete after passing both gates")
@@ -93,5 +118,5 @@ func verify() -> void:
 		push_error("Retry did not restore a fresh shift")
 		quit(1)
 		return
-	print("PASS: Crosswalk %.3f m, west grade %.3f m, graphics toggle, unarmed drive, full 22 m pass and clean retry." % [crosswalk_height, hill_height])
+	print("PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing %.3f m, west grade %.3f m." % [crosswalk_height, hill_height])
 	quit()

@@ -12,6 +12,10 @@ enum Shift { READY, ARMED, PAINTING, COMPLETE }
 var phase: Shift = Shift.READY
 var eastbound: Vector3
 var right_eastbound: Vector3
+var centerline: Array = []
+var parked_vehicles: Array = []
+var start_at := START_AT
+var end_at := 55.0
 var truck := Node3D.new()
 var camera := Camera3D.new()
 var sun := DirectionalLight3D.new()
@@ -36,6 +40,10 @@ func _ready() -> void:
 	var tangent: Array = route["eastbound_xz"]
 	eastbound = Vector3(tangent[0], 0.0, tangent[1]).normalized()
 	right_eastbound = Vector3(-eastbound.z, 0.0, eastbound.x)
+	centerline = route.get("east_main_centerline", [])
+	parked_vehicles = route.get("parking", [])
+	start_at = route.get("start_at", START_AT)
+	end_at = route.get("end_at", 55.0)
 	station_views = route.get("station_views", [])
 	register_keyboard()
 	var street := STREETS.instantiate()
@@ -51,7 +59,7 @@ func _ready() -> void:
 	add_child(camera)
 	camera.current = true
 	camera.fov = 67.0
-	camera.far = 245.0
+	camera.far = 780.0
 	add_lighting()
 	build_hud(route["attribution"])
 	paint = material(Color("93e2b1"))
@@ -75,15 +83,19 @@ func shade_street(street: Node3D) -> void:
 		"path": Color("877f70"),
 		"deck_asphalt": Color("4f4d4b"), "deck_green_steel": Color("3f5147"),
 		"deck_pier": Color("827e73"),
+		"corridor_road": Color("5e5b53"), "corridor_walk": Color("a4937e"),
+		"corridor_yellow": Color("dcb34e"), "corridor_white": Color("ded7c4"),
 	}
 	for node in street.find_children("*", "MeshInstance3D", true, false):
 		var instance := node as MeshInstance3D
 		for index in instance.mesh.get_surface_count():
 			var surface := instance.mesh.surface_get_material(index) as StandardMaterial3D
-			if surface and palette.has(surface.resource_name):
-				var adjusted := surface.duplicate() as StandardMaterial3D
-				adjusted.albedo_color = palette[surface.resource_name]
-				instance.set_surface_override_material(index, adjusted)
+			if surface:
+				var name := surface.resource_name.get_slice(".", 0)
+				if palette.has(name):
+					var adjusted := surface.duplicate() as StandardMaterial3D
+					adjusted.albedo_color = palette[name]
+					instance.set_surface_override_material(index, adjusted)
 
 
 func register_keyboard() -> void:
@@ -104,7 +116,7 @@ func register_keyboard() -> void:
 
 func reset_shift() -> void:
 	view_index = -1
-	truck.position = route_position(START_AT, STRIPE_LANE)
+	truck.position = route_position(start_at, STRIPE_LANE)
 	truck.position.y = 6.1
 	yaw = atan2(-eastbound.x, -eastbound.z)
 	truck.rotation.y = yaw
@@ -136,11 +148,13 @@ func _physics_process(delta: float) -> void:
 
 	var throttle := Input.get_action_strength("gas")
 	var brake := Input.get_action_strength("brake")
+	var old_along := truck.position.dot(eastbound)
 	if brake > 0.0:
 		var goal := 0.0 if speed > 0.1 else -4.0
 		speed = move_toward(speed, goal, 8.0 * brake * delta)
 	elif throttle > 0.0:
-		var limit := 7.0 if phase == Shift.ARMED or phase == Shift.PAINTING else 13.0
+		var striping_speed := phase == Shift.PAINTING or (phase == Shift.ARMED and old_along < ROAD_START + 22)
+		var limit := 7.0 if striping_speed else 13.0
 		speed = move_toward(speed, limit, 3.2 * throttle * delta)
 	else:
 		speed = move_toward(speed, 0.0, 2.1 * delta)
@@ -149,10 +163,13 @@ func _physics_process(delta: float) -> void:
 	var steering_factor := minf(absf(speed) / 3.0, 1.0)
 	yaw -= steering * signf(speed) * steering_factor * 0.76 * delta
 	var forward := heading()
-	var old_along := truck.position.dot(eastbound)
-	var next := truck.position + forward * speed * delta
-	var along := clampf(next.dot(eastbound), -74.0, 55.0)
-	var lateral := clampf(next.dot(right_eastbound), -6.2, 6.2)
+	var old_lateral := truck.position.dot(right_eastbound) - center_offset(old_along)
+	var along := clampf(old_along + forward.dot(eastbound) * speed * delta, -74.0, end_at)
+	var lateral := clampf(old_lateral + forward.dot(right_eastbound) * speed * delta, -6.2, 6.2)
+	if parked_overlap(along, lateral):
+		speed = 0.0
+		along = old_along
+		lateral = old_lateral
 	truck.position = route_position(along, lateral)
 	truck.position.y = surface_height(truck.position)
 	truck.rotation.y = yaw
@@ -166,7 +183,25 @@ func heading() -> Vector3:
 
 
 func route_position(along: float, lateral: float) -> Vector3:
-	return eastbound * along + right_eastbound * lateral
+	return eastbound * along + right_eastbound * (lateral + center_offset(along))
+
+
+func center_offset(along: float) -> float:
+	if centerline.is_empty() or along <= 0.0:
+		return 0.0
+	for i in range(1, centerline.size()):
+		var here: Array = centerline[i]
+		if along <= float(here[0]):
+			var last: Array = centerline[i - 1]
+			return lerpf(last[1], here[1], inverse_lerp(last[0], here[0], along))
+	return centerline.back()[1]
+
+
+func parked_overlap(along: float, lateral: float) -> bool:
+	for parked in parked_vehicles:
+		if absf(along - parked[0]) < parked[2] + 1.85 and absf(lateral - parked[1]) < parked[3] + 0.84:
+			return true
+	return false
 
 
 func surface_height(at: Vector3) -> float:
@@ -349,7 +384,7 @@ func build_hud(attribution: String) -> void:
 	var rows := VBoxContainer.new()
 	rows.add_theme_constant_override("separation", 5)
 	work_order.add_child(rows)
-	var place := make_label("SHOCKOE BOTTOM  /  EAST MAIN STREET", 14, Color("d6b583"))
+	var place := make_label("SHOCKOE BOTTOM  /  EAST MAIN WESTBOUND", 14, Color("d6b583"))
 	rows.add_child(place)
 	rows.add_child(make_label("Night Shift", 29, Color("f5f0e5")))
 	status = make_label("", 17, Color("f5f0e5"))
@@ -426,12 +461,13 @@ func update_hud() -> void:
 		return
 	match phase:
 		Shift.READY:
-			status.text = "Arm the striper before the amber gate."
+			status.text = "Drive west to Main Street Station."
 		Shift.ARMED:
 			if truck.position.dot(eastbound) < ROAD_START - 0.3:
 				status.text = "Reverse past amber to retry the pass."
 			else:
-				status.text = "Armed. Drive between the amber cones."
+				var distance := truck.position.dot(eastbound) - ROAD_START
+				status.text = "Amber cones in %d m" % roundi(distance) if distance > 12.0 else "Armed. Drive between the amber cones."
 		Shift.PAINTING:
 			status.text = "Stay in lane   ·   %d / %d m" % [int(progress), int(ROAD_START - ROAD_FINISH)]
 		Shift.COMPLETE:

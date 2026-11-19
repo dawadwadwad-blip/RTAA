@@ -24,13 +24,14 @@ def inside(points):
             and max(p.y for p in points) >= south and min(p.y for p in points) <= north)
 
 
-def crop_ground(obj):
+def crop_ground(obj, include=inside, exclude=None):
     mesh = obj.data
     points = [obj.matrix_world @ v.co for v in mesh.vertices]
     remap, vertices, faces, materials = {}, [], [], []
     for face in mesh.polygons:
         indices = list(face.vertices)
-        if not inside([points[i] for i in indices]):
+        face_points = [points[i] for i in indices]
+        if not include(face_points) or (exclude is not None and exclude(face_points)):
             continue
         for i in indices:
             if i not in remap:
@@ -118,21 +119,24 @@ def east_forecourt(frame):
     rng = Random(19)
     for x, y, height in ((40, 3, 6.4), (43, 11, 7.6), (45, 19, 6.1), (43, 28, 7.4), (43, 41, 6.3),
                          (44, 53, 6.0), (44, 69, 5.5)):
-        base = ground(x, y)
-        group.rod((x, y, base - 0.18), (x + 0.21, y, base + height * 0.78), 0.22, "bark", 7, 0.081)
-        for i in range(8):
-            angle = tau * i / 8
-            cx = x + cos(angle) * rng.uniform(0.45, 1.75)
-            cy = y + sin(angle) * rng.uniform(0.45, 1.75)
-            z = base + height * rng.uniform(0.61, 0.91)
-            radius = rng.uniform(1.18, 1.86)
-            profiles = []
-            for dz, width in ((-1.19, 0.12), (-0.67, 0.79), (0.26, 1.0), (0.96, 0.62), (1.37, 0.08)):
-                profiles.append([(cx + radius * width * cos(tau * t / 9) * rng.uniform(0.84, 1.18),
-                                  cy + radius * width * sin(tau * t / 9) * rng.uniform(0.84, 1.18),
-                                  z + dz + rng.uniform(-0.14, 0.14)) for t in range(9)])
-            group.loft(profiles, "leaf_light" if i % 3 == 0 else "leaf")
+        tree(group, rng, x, y, ground(x, y), height)
     group.object("MSS East forecourt setting", bpy.context.scene.collection, frame)
+
+
+def tree(group, rng, x, y, base, height, clusters=8):
+    group.rod((x, y, base - 0.18), (x + 0.21, y, base + height * 0.78), 0.22, "bark", 7, 0.081)
+    for i in range(clusters):
+        angle = tau * i / clusters
+        cx = x + cos(angle) * rng.uniform(0.45, 1.75)
+        cy = y + sin(angle) * rng.uniform(0.45, 1.75)
+        z = base + height * rng.uniform(0.61, 0.91)
+        radius = rng.uniform(1.18, 1.86)
+        profiles = []
+        for dz, width in ((-1.19, 0.12), (-0.67, 0.79), (0.26, 1.0), (0.96, 0.62), (1.37, 0.08)):
+            profiles.append([(cx + radius * width * cos(tau * t / 9) * rng.uniform(0.84, 1.18),
+                              cy + radius * width * sin(tau * t / 9) * rng.uniform(0.84, 1.18),
+                              z + dz + rng.uniform(-0.14, 0.14)) for t in range(9)])
+        group.loft(profiles, "leaf_light" if i % 3 == 0 else "leaf")
 
 
 def export():
@@ -145,14 +149,24 @@ def export():
     tangent = Vector((road_axis[0][0], -road_axis[1][0])).normalized()
     ASSETS.mkdir(parents=True, exist_ok=True)
     east_forecourt(frame)
+
+    sys.path.insert(0, str(ROOT / "tools"))
+    from godot_corridor_dressing import Corridor
+
+    corridor = Corridor(ROOT / "outputs/east-main-corridor")
     bpy.ops.object.select_all(action="DESELECT")
     selected = []
     for obj in bpy.context.scene.objects:
-        if obj.type != "MESH" or not inside([obj.matrix_world @ Vector(p) for p in obj.bound_box]):
+        if obj.type != "MESH":
+            continue
+        bounds = [obj.matrix_world @ Vector(p) for p in obj.bound_box]
+        if not (obj.name.startswith("Corridor_") or inside(bounds) or corridor.includes(bounds)):
             continue
         if obj.name in GROUND:
-            crop_ground(obj)
+            crop_ground(obj, lambda p: inside(p) or corridor.includes(p, terrain=True),
+                        corridor.overlaps_legacy_road if obj.name == "Roads_and_paths" else None)
         selected.append(obj)
+    selected.extend(corridor.dress(selected, tree))
     for obj in selected:
         transform = obj.matrix_world.copy()
         transform.translation -= origin
@@ -174,8 +188,9 @@ def export():
         )
     ]
     route = {"origin_en": [east, north], "eastbound_xz": list(tangent), "station_views": views,
-             "ground_meshes": ["Terrain", "Roads_and_paths", "East_Main_Approach_Road"],
+             "ground_meshes": ["Terrain", "Roads_and_paths", "East_Main_Approach_Road", "Corridor_Terrain", "Corridor_Road"],
              "attribution": report["attribution"]}
+    route.update(corridor.gameplay())
     (ASSETS / "route.json").write_text(json.dumps(route, indent=2) + "\n")
     print(f"PASS: Exported {len(selected)} Shockoe meshes in meters around the station crossing.")
 

@@ -1,0 +1,12 @@
+17:01:26 | INFO: Extracting primitive: MSS Restored train shed
+17:01:26 | INFO: Primitives created: 10
+17:01:26 | INFO: Extracting primitive: Main Street Station lettering
+17:01:26 | INFO: Primitives created: 1
+17:01:26 | INFO: Finished glTF 2.0 export in 0.9822933673858643 s
+
+PASS: Exported 145 Shockoe meshes in meters around the station crossing.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-reference-views/RVA_Station_Approach.blend"
+OBJ import of 'East_Main_Corridor.obj' took 8.83 ms
+
+Blender quit

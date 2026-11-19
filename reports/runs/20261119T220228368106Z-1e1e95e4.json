@@ -1,0 +1,29 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T220228368106Z-1e1e95e4.json",
+    "reports/runs/20261119T220228368106Z-1e1e95e4.log"
+  ],
+  "checks": [
+    "PASS: Created westbound Windows release.",
+    "PASS: Created westbound Linux release.",
+    "PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.",
+    "PASS: 1280 x 720 Compatibility render captured via Mesa software OpenGL.",
+    "PASS: Linux release launched and rendered at 1280 x 720."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "\nfor preset in Windows Linux; do\n  case \"$preset\" in\n    Windows) name=windows/RVA-Night-Shift.exe ;;\n    Linux) name=linux/RVA-Night-Shift.x86_64 ;;\n  esac\n  godot --headless --path godot/station_trial --export-release \"$preset\" \"$PWD/outputs/east-main-corridor/$name\" > \"outputs/east-main-corridor/export-$preset.log\" 2>&1 || { tail -20 \"outputs/east-main-corridor/export-$preset.log\"; exit 1; }\n  echo \"PASS: Created westbound $preset release.\"\ndone\nRVA_TRIAL_APPROACH_SCREENSHOT=\"$PWD/outputs/east-main-corridor/Near_17th.png\" python outputs/east-main-corridor/check_render.py\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T22:02:47+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T220228368106Z-1e1e95e4.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T220228368106Z-1e1e95e4",
+  "started_at": "2026-11-19T22:02:28+00:00",
+  "status": "PASS",
+  "task": "S1-13"
+}
