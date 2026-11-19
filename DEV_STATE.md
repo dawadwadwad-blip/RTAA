@@ -1,3 +1,13 @@
+## V2 story and gameplay pivot — design integration (Nov 18, 2026)
+
+- **Created** [current narrative/world contract](docs/RVA_V2_STORY.md), including the ghost Richmond Connector, Mara/Cal/Dell/Tate/Pike, Five faction wings and territories, Standing Committee, 30 ordered missions and conditional endings.
+- **Created** [gameplay and vertical-slice contract](docs/RVA_V2_GAMEPLAY.md): Work Orders (seven verbs), Kind/Pointed/Hard Method Dial, Hi-Vis zones, road-segment Line-Striper, Compliance ladder, Net Good ledger, capped Strain, and no firearms.
+- **Created** [campaign JSON](design/v2_campaign.json) and catalog checks. These are **design data only** and not UE-authored mission assets.
+- **Existing code status:** `RVACivic` faction tax/reputation and physical tools implement the **v1 graybox**, not the new v2 Method Dial, traffic repath or campaign. Do not treat legacy tax model/road traps as current production behavior.
+- **Open gates:** local UE5 build/UHT and PIE tests, DEM/LAZ vertical-offset reconciliation (~1.33 m previously observed), traffic rerouting feasibility, driving grade feel, Method Dial playtest, and historic research for Jackson Ward. No claim of full game integration yet.
+
+---
+
 # Richmond Open World · Development state
 
 <!-- richmond-run-history:begin -->
