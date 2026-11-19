@@ -103,12 +103,12 @@ public:
     UPROPERTY(BlueprintAssignable, Category = "Civic|Campaign")
     FCivicWorkOrderCompleted OnWorkOrderCompleted;
 
-    // These are DESIGN-TUNING inputs, not final creative approvals.
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Civic|Campaign|Tuning", meta = (ClampMin = "0"))
-    int64 ThirdAlignmentMaxCollateral = 2;
+    // -1 means unset. Restricted endings remain locked until the creator approves\n    // concrete Collateral thresholds; these are not invented defaults.
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Civic|Campaign|Tuning", meta = (ClampMin = "-1"))
+    int64 ThirdAlignmentMaxCollateral = -1;
 
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Civic|Campaign|Tuning", meta = (ClampMin = "0"))
-    int64 FixerMinCollateral = 8;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Civic|Campaign|Tuning", meta = (ClampMin = "-1"))
+    int64 FixerMinCollateral = -1;
 
     UFUNCTION(BlueprintCallable, Category = "Civic|WorkOrder")
     bool BeginWorkOrder(const FCivicWorkOrderDefinition& Definition);
