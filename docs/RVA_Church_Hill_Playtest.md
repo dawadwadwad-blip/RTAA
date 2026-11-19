@@ -16,6 +16,16 @@ Mara takes a forged striping job, hauls a cornice uphill, then chooses how to ha
 
 The editor-built level has a lower striping road, a 5.7% gentle route, a 16.5% direct route and an upper delivery pad. The fixture uses built-in meshes and a separate level package. Author placement on the streamed Richmond terrain after the [pilot data checks](Pilot_Data_Contract.md) and the vehicle test. [Unreal Editor Python](https://dev.epicgames.com/documentation/unreal-engine/scripting-the-unreal-editor-using-python)
 
+## Run the native smoke tests
+
+With the Development Editor build of the plugin available in the target project, close the editor and run this command from the repository root with the real project and editor paths.
+
+```powershell
+python tools/run_task.py S0-11 -- python tools/verify_church_hill.py --project "C:/RVA/RVA.uproject" --editor "C:/Program Files/Epic Games/UE_5.5/Engine/Binaries/Win64/UnrealEditor-Cmd.exe"
+```
+
+The runner requires successful reports for both `RVA.Graybox.NightShiftNativeFlow` and `RVA.Graybox.ChurchHillSliceNativeFlow`. It saves the Unreal report in a new directory under the project's `Saved/Automation/RVA` and records the result in `DEV_STATE.md`. You can also select both tests in the editor's Test Automation window. The combined test moves a possessed test pawn between native objectives and checks the alternate routes, expiry, and once-only ledger totals. Use the manual drive below to verify the generated level, keybindings, and vehicle physics. [Epic's automation test guide](https://dev.epicgames.com/documentation/unreal-engine/run-automation-tests-in-unreal-engine)
+
 ## Check the full drive
 
 | Job | What to do | What to verify |

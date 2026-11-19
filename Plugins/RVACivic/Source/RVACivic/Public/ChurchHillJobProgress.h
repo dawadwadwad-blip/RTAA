@@ -31,7 +31,7 @@ public:
 
     bool ReachWarning()
     {
-        if (bFinalWarning || Phase != HillPhase::Hauling)
+        if (bFinalWarning || (Phase != HillPhase::Hauling && Phase != HillPhase::StopToSecure))
         {
             return false;
         }

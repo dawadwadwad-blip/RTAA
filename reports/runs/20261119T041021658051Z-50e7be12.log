@@ -1,0 +1,34 @@
+test_child_launch_failure_still_writes_evidence (test_bootstrap.BootstrapTest.test_child_launch_failure_still_writes_evidence) ... ok
+test_corrupt_zip_preserves_last_good_inventory (test_bootstrap.BootstrapTest.test_corrupt_zip_preserves_last_good_inventory) ... ok
+test_interrupted_run_is_reconciled_once (test_bootstrap.BootstrapTest.test_interrupted_run_is_reconciled_once) ... ok
+test_metadata_mismatch_is_reported (test_bootstrap.BootstrapTest.test_metadata_mismatch_is_reported) ... ok
+test_missing_required_input_is_blocked (test_bootstrap.BootstrapTest.test_missing_required_input_is_blocked) ... ok
+test_retry_report_is_stable_and_preserves_input_and_notes (test_bootstrap.BootstrapTest.test_retry_report_is_stable_and_preserves_input_and_notes) ... ok
+test_failed_skipped_or_incomplete_test_does_not_pass (test_church_hill_engine_runner.ChurchHillEngineRunnerTest.test_failed_skipped_or_incomplete_test_does_not_pass) ... ok
+test_report_covers_each_expected_native_scenario (test_church_hill_engine_runner.ChurchHillEngineRunnerTest.test_report_covers_each_expected_native_scenario) ... ok
+test_build_refuses_existing_and_invalid_maps_before_loading_any_classes (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_build_refuses_existing_and_invalid_maps_before_loading_any_classes) ... ok
+test_missing_game_mode_never_creates_the_map (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_missing_game_mode_never_creates_the_map) ... ok
+test_ramp_top_surfaces_join_their_landings (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_ramp_top_surfaces_join_their_landings) ... ok
+test_route_gates_sit_on_distinct_drivable_grades (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_route_gates_sit_on_distinct_drivable_grades) ... ok
+test_compiled_campaign_math (test_civic_campaign_rules.CivicCampaignRulesTest.test_compiled_campaign_math) ... ok
+test_church_hill_jobs (test_civic_policy.CivicPolicyTest.test_church_hill_jobs) ... ok
+test_church_hill_slice_sequence (test_civic_policy.CivicPolicyTest.test_church_hill_slice_sequence) ... ok
+test_compiled_policy (test_civic_policy.CivicPolicyTest.test_compiled_policy) ... ok
+test_night_shift_progress (test_civic_policy.CivicPolicyTest.test_night_shift_progress) ... ok
+test_standing_committee_progress (test_civic_policy.CivicPolicyTest.test_standing_committee_progress) ... ok
+test_exports_match_inputs (test_pilot_contract.PilotContractTest.test_exports_match_inputs) ... ok
+test_landscape_height_quantization (test_pilot_contract.PilotContractTest.test_landscape_height_quantization) ... ok
+test_mismatching_raw_capture_is_rejected (test_pilot_contract.PilotContractTest.test_mismatching_raw_capture_is_rejected) ... ok
+test_origin_and_axes (test_pilot_contract.PilotContractTest.test_origin_and_axes) ... ok
+test_terrain_bounds_tile_seam_and_halo (test_pilot_contract.PilotContractTest.test_terrain_bounds_tile_seam_and_halo) ... ok
+test_versioned_controls_and_expected_offsets (test_pilot_contract.PilotContractTest.test_versioned_controls_and_expected_offsets) ... ok
+test_acts_and_mission_sequence (test_v2_campaign_catalog.V2CampaignCatalogTest.test_acts_and_mission_sequence) ... ok
+test_anchor_plot_beats (test_v2_campaign_catalog.V2CampaignCatalogTest.test_anchor_plot_beats) ... ok
+test_groups_wings_and_geography (test_v2_campaign_catalog.V2CampaignCatalogTest.test_groups_wings_and_geography) ... ok
+test_mechanics_and_endings (test_v2_campaign_catalog.V2CampaignCatalogTest.test_mechanics_and_endings) ... ok
+test_no_phantom_implementation_claim (test_v2_campaign_catalog.V2CampaignCatalogTest.test_no_phantom_implementation_claim) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 2.701s
+
+OK

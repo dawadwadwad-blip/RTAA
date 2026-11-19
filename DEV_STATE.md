@@ -12,6 +12,7 @@
 - **S0-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S0-11 · BLOCKED** — Review reports/runs/20261119T041024625270Z-e682a4ef.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
 
 ## Run history
 
@@ -29,6 +30,8 @@
 - `20261119T035103695033Z-f0b6adb4` · S0-08 · **PASS** · 2026-11-19T03:51:03+00:00 → 2026-11-19T03:51:05+00:00 · [run evidence](reports/runs/20261119T035103695033Z-f0b6adb4.json)
 - `20261119T040354900992Z-06bb3b26` · S0-09 · **PASS** · 2026-11-19T04:03:54+00:00 → 2026-11-19T04:03:57+00:00 · [run evidence](reports/runs/20261119T040354900992Z-06bb3b26.json)
 - `20261119T040357942393Z-5d128d58` · S0-10 · **PASS** · 2026-11-19T04:03:57+00:00 → 2026-11-19T04:03:58+00:00 · [run evidence](reports/runs/20261119T040357942393Z-5d128d58.json)
+- `20261119T041021658051Z-50e7be12` · S0-11 · **PASS** · 2026-11-19T04:10:21+00:00 → 2026-11-19T04:10:24+00:00 · [run evidence](reports/runs/20261119T041021658051Z-50e7be12.json)
+- `20261119T041024625270Z-e682a4ef` · S0-11 · **BLOCKED** · 2026-11-19T04:10:24+00:00 → 2026-11-19T04:10:24+00:00 · [run evidence](reports/runs/20261119T041024625270Z-e682a4ef.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -72,6 +75,13 @@
 - **Verification** 27 local tests passed, including the portable progression sequence and ramp placement checks. The UE5 build, editor map generation, native automation and driving remain open on the target PC.
 - **Editor checks** Measure clearance and vehicle contact at the ramp landings. Check cab readability, shared input behavior, and authored stake and strap timing with the actual pawn.
 
+## S0-11 · Native Church Hill verification
+
+- **Built** an Unreal automation scenario for the three connected jobs. It exercises both Night Shift exits, both Hill Climb route choices, Survey Stakes Kind and Hard, one expired attempt and the final ledger totals. The runner requires a successful report for both named native tests.
+- **Fixed** a Hill Climb path where a loose cargo strap could prevent the final warning from counting. Reaching the warning while the strap is loose now counts. Added this case to the portable regression.
+- **Verified locally** all 29 portable tests passed. The native attempt is **BLOCKED** in this workspace because Unreal Editor and a target `.uproject` are unavailable. The UE build, editor map generation and real-vehicle drive remain open.
+- **Watch in the editor** the native scenario's temporary game-world startup and pawn possession. In the driving map, verify suspension contact through both ramp seams and the time needed to reach both survey stakes.
+
 ### Next usage window prompt
 
-> Build RVACivic in the target UE5 project. Create the Church Hill test level using docs/RVA_Church_Hill_Playtest.md and an existing vehicle GameMode. Run RVA.Graybox.NightShiftNativeFlow and play the generated map from Night Shift through Survey Stakes. Record three single filings, both exit and grade routes across sessions, an expired Hard attempt, and the final Kind and Hard totals in DEV_STATE.md. Fix engine and playtest regressions before placing missions on the streamed terrain.
+> Build RVACivic in the target UE5 Development Editor project, then run S0-11 using the native smoke test command in docs/RVA_Church_Hill_Playtest.md. Use the same guide to generate the practice map and drive all three jobs with the target vehicle. Record ramp clearance, a checkpoint retry, both Survey outcomes and the two native test results in DEV_STATE.md before authoring missions on streamed terrain.

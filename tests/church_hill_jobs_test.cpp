@@ -25,8 +25,10 @@ int main()
     REQUIRE(!Hill.RecordDrive(0.19, 20, 0.25) && Hill.GetSlip() > 0.0);
     REQUIRE(!Hill.RecordDrive(0.19, 20, 0.25));
     REQUIRE(Hill.RecordDrive(0.19, 20, 0.25) && Hill.GetPhase() == HillPhase::StopToSecure);
-    REQUIRE(!Hill.Deliver(0.0) && !Hill.Secure(1.0) && Hill.Secure(0.3) && Hill.GetSlip() == 0.0);
-    REQUIRE(Hill.ReachWarning() && !Hill.ReachWarning() && Hill.Secure(0.0) && !Hill.ReachWarning());
+    REQUIRE(!Hill.Deliver(0.0) && !Hill.Secure(1.0));
+    // Cargo slips before the warning. Passing it still counts toward delivery.
+    REQUIRE(Hill.ReachWarning() && !Hill.ReachWarning() && Hill.GetPhase() == HillPhase::StopToSecure);
+    REQUIRE(Hill.Secure(0.3) && Hill.GetSlip() == 0.0 && !Hill.ReachWarning());
     REQUIRE(!Hill.Deliver(3.0) && Hill.Deliver(0.2) && !Hill.Deliver(0.2) && !Hill.ResetIfCargoLost());
 
     HillClimbProgress Lost;
