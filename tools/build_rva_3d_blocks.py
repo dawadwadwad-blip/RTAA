@@ -2,6 +2,7 @@
 
 import argparse
 from collections import Counter, defaultdict
+from itertools import product
 import json
 import math
 from pathlib import Path
@@ -35,6 +36,12 @@ DISTRICTS = {
     "union_hill": (-77.4169, 37.5430),
 }
 CHUNK_SCHEMA = "rva-gis-chunks/1"
+STATION_OSM_ID = "osm/way/113030476"
+STATION_ASSET = "authored/rva_main_street_station.glb"
+STATION_MESHES = {
+    "MSS Headhouse", "MSS Red clay hip and dormers", "MSS Clock tower",
+    "MSS Main Street forecourt", "MSS Restored train shed", "Main Street Station lettering",
+}
 FOUNDATION_BURY_M = 0.06
 MAX_FOUNDATION_SIMPLIFICATION_M = 0.015
 NUMBER = r"\d+(?:\.\d+)?"
@@ -294,7 +301,7 @@ def export_with_bpy(plan_path, export_dir):
             bpy.data.meshes.remove(mesh)
 
 
-def glb_info(path, chunk):
+def read_glb(path):
     size = path.stat().st_size
     with path.open("rb") as handle:
         header = handle.read(20)
@@ -303,7 +310,11 @@ def glb_info(path, chunk):
         magic, version, length, json_length, kind = struct.unpack("<4sIII4s", header)
         if (magic, version, length, kind) != (b"glTF", 2, size, b"JSON") or not 0 < json_length <= size - 20:
             raise ValueError(f"Invalid GLB header in {path}")
-        data = json.loads(handle.read(json_length))
+        return json.loads(handle.read(json_length))
+
+
+def glb_info(path, chunk):
+    data = read_glb(path)
     if not any(node.get("name") == chunk["id"] + "-col" and "mesh" in node for node in data["nodes"]):
         raise ValueError(f"No Godot collision node in {path}")
     material_names = [item.get("name") for item in data.get("materials", [])]
@@ -320,7 +331,73 @@ def glb_info(path, chunk):
     return triangles
 
 
-def prepare(data_dir, plan_dir, cell_size):
+def station_landmark(source, snapshot, features, terrain, project, np):
+    from fetch_rva_gis import ORIGIN_EN, load_json, sha256
+    from shapely.geometry import box, shape
+    from shapely.ops import transform
+
+    matching = [item for item in features if item.get("id") == STATION_OSM_ID]
+    if len(matching) != 1 or matching[0]["properties"]["tags"].get("wikidata") != "Q141093771":
+        raise ValueError("This GIS snapshot does not contain the mapped Main Street Station footprint.")
+    sidecar = load_json(source.with_suffix(".json"))
+    if sidecar.get("asset") != source.name or sidecar.get("objects") != len(STATION_MESHES):
+        raise ValueError("Use the authored station exterior GLB and its matching JSON sidecar.")
+    frame = np.asarray(sidecar["headhouse_xyz_m_to_pilot_east_north_up_m"], dtype=float)
+    if (frame.shape != (4, 4) or not np.isfinite(frame).all()
+            or not np.allclose(frame[3], [0, 0, 0, 1])
+            or not np.allclose(frame[:3, 2], [0, 0, 1], atol=0.0001)
+            or not np.allclose(frame[2, :2], [0, 0], atol=0.0001)
+            or not np.allclose(frame[:3, :3].T @ frame[:3, :3], np.eye(3), atol=0.01)
+            or not 0.99 < np.linalg.det(frame[:3, :3]) < 1.01):
+        raise ValueError("Unexpected Main Street Station placement matrix.")
+    gltf = read_glb(source)
+    nodes = gltf["nodes"]
+    if ({node.get("name") for node in nodes} != STATION_MESHES or len(nodes) != len(STATION_MESHES)
+            or any("mesh" not in node or {"matrix", "translation", "rotation", "scale", "children"} & node.keys()
+                   for node in nodes)
+            or any("uri" in item for item in [*gltf.get("buffers", []), *gltf.get("images", [])])):
+        raise ValueError("Expected six baked station meshes with self-contained textures.")
+    # The station source stores Blender (frontage, toward shed, up); glTF stores
+    # (frontage, up, toward street). The destination uses (east, up, south).
+    axis_change = np.asarray([[1, 0, 0], [0, 0, 1], [0, -1, 0]], dtype=float)
+    basis = axis_change @ frame[:3, :3] @ axis_change.T
+    dx, dn = np.asarray(ORIGIN_EN) - np.asarray(snapshot["origin_grid_m_en"])
+    world_zero = float(snapshot["origin_elevation_m"])
+    origin = axis_change @ frame[:3, 3] + [dx, -world_zero, -dn]
+    east, north = snapshot["origin_grid_m_en"]
+    contacts = []
+    for x in (6.15, 13.77, 21.17, 25.29):
+        point = basis @ [x, -2.58, 10.36] + origin
+        grade = terrain.sample(*terrain.pixels(east + point[0], north - point[2])) - world_zero
+        contacts.append((point, grade))
+    fit = float(np.median([grade + 0.16 - point[1] for point, grade in contacts]))
+    if abs(fit) > 0.35 or any(not 0.04 <= point[1] + fit - grade <= 0.28 for point, grade in contacts):
+        raise ValueError("Station stair contact differs too much from the GIS terrain; review the local grade.")
+    origin[1] += fit
+    bounds = []
+    for mesh in gltf["meshes"]:
+        for primitive in mesh["primitives"]:
+            position = gltf["accessors"][primitive["attributes"]["POSITION"]]
+            bounds.extend(basis @ corner + origin for corner in product(*zip(position["min"], position["max"])))
+    limits = np.asarray(bounds)
+    low, high = limits.min(axis=0), limits.max(axis=0)
+    footprint = transform(project.transform, shape(matching[0]["geometry"]))
+    envelope = box(east + low[0], north - high[2], east + high[0], north - low[2])
+    covered = footprint.intersection(envelope).area / footprint.area if footprint.area > 0 else 0.0
+    if covered < 0.9:
+        raise ValueError("The authored station is misaligned with its mapped footprint.")
+    return {
+        "id": "main_street_station", "glb": STATION_ASSET, "sha256": sha256(source),
+        "replaces_osm_id": STATION_OSM_ID, "neighborhood": "shockoe_bottom",
+        "basis_godot_columns": basis.T.tolist(), "origin_godot_m": origin.tolist(),
+        "world_bounds_godot_m": [low.tolist(), high.tolist()],
+        "osm_footprint_coverage_in_model_envelope": covered,
+        "terrain_adjustment_m": fit,
+        "first_step_heights_above_ground_m": [float(point[1] + fit - grade) for point, grade in contacts],
+    }
+
+
+def prepare(data_dir, plan_dir, cell_size, station=None):
     import numpy as np
     from PIL import Image
     from pyproj import Transformer
@@ -354,9 +431,12 @@ def prepare(data_dir, plan_dir, cell_size):
     project = Transformer.from_pipeline(PROJECTION)
     centers = {name: project.transform(*lonlat, errcheck=True) for name, lonlat in DISTRICTS.items()}
     data = load_json(data_dir / "rva_buildings.geojson")
+    landmark = station_landmark(station, src, data["features"], terrain, project, np) if station else None
     groups = defaultdict(list)
     rejected = []
     for item in data["features"]:
+        if landmark and item["id"] == landmark["replaces_osm_id"]:
+            continue
         try:
             geometry = shape(item["geometry"])
             projected = orient_polygons(transform(project.transform, geometry))
@@ -441,6 +521,8 @@ def prepare(data_dir, plan_dir, cell_size):
         "roof_height_reference": "highest decoded terrain sample inside or along each footprint shell",
         "collision": "Godot -col static trimesh on shells; separate signage without collision",
         "attributions": src["attributions"], "counts": dict(totals), "rejected": rejected, "chunks": chunks,
+        "landmarks": [landmark] if landmark else [],
+        "replaced_osm_ids": [landmark["replaces_osm_id"]] if landmark else [],
     }
 
 
@@ -451,14 +533,19 @@ def preserve_import_settings(target, stage, manifest):
     if not previous_manifest.is_file():
         return
     previous = load_json(previous_manifest)
-    files = {row["glb"]: row["sha256"] for row in previous["chunks"]}
+    files = {row["glb"]: row["sha256"] for row in [*previous["chunks"], *previous.get("landmarks", [])]}
     names = {row["glb"] for row in manifest["chunks"]}
-    for path in target.iterdir():
-        if path.name == "rva_chunks.json":
+    for path in target.rglob("*"):
+        relative = path.relative_to(target).as_posix()
+        if relative == "rva_chunks.json":
+            continue
+        if relative == "authored" and STATION_ASSET in files and path.is_dir() and not path.is_symlink():
             continue
         if path.is_symlink() or not path.is_file():
             raise ValueError(f"Unexpected file in generated mesh folder: {path}")
-        if path.name in files and sha256(path) == files[path.name]:
+        if relative == "authored/.gdignore" and STATION_ASSET in files and path.stat().st_size == 0:
+            continue
+        if relative in files and sha256(path) == files[relative]:
             continue
         if path.name.endswith(".glb.import") and path.name.removesuffix(".import") in files:
             if path.name.removesuffix(".import") in names:
@@ -474,6 +561,8 @@ def cli():
                         help="Directory containing the destination project.godot.")
     parser.add_argument("--blender", help="Blender executable path when Blender is outside PATH.")
     parser.add_argument("--chunk-meters", type=int, default=504)
+    parser.add_argument("--station-exterior", type=Path,
+                        help="Use the authored Main Street Station GLB and its adjacent placement JSON.")
     args = parser.parse_args()
     if not 126 <= args.chunk_meters <= 1008:
         parser.error("--chunk-meters must be between 126 and 1008.")
@@ -501,7 +590,7 @@ def run_build():
             stage.mkdir()
             plans.mkdir()
             with output_lock(data):
-                plan, manifest = prepare(data, plans, args.chunk_meters)
+                plan, manifest = prepare(data, plans, args.chunk_meters, args.station_exterior)
             print(f"Building {len(manifest['chunks'])} chunks with {manifest['counts']['buildings']} footprints.", flush=True)
             subprocess.run([
                 blender, "--background", "--factory-startup", "--python-exit-code", "1",
@@ -512,11 +601,19 @@ def run_build():
                 chunk["indexed_triangles"] = glb_info(path, chunk)
                 chunk["sha256"] = sha256(path)
                 del chunk["plan_file"]
+            if manifest["landmarks"]:
+                authored = stage / STATION_ASSET
+                authored.parent.mkdir()
+                (authored.parent / ".gdignore").touch()
+                shutil.copyfile(args.station_exterior, authored)
+                if sha256(authored) != manifest["landmarks"][0]["sha256"]:
+                    raise ValueError("Station asset changed during the build.")
             preserve_import_settings(target, stage, manifest)
             write_json(stage / "rva_chunks.json", manifest)
             publish_snapshot(stage, target)
     print(f"Wrote {target}: {len(manifest['chunks'])} GLB chunks, "
-          f"{manifest['counts']['buildings']} buildings and {len(manifest['rejected'])} rejected footprints.")
+          f"{manifest['counts']['buildings']} generic buildings, {len(manifest['landmarks'])} authored landmarks "
+          f"and {len(manifest['rejected'])} rejected footprints.")
 
 
 if __name__ == "__main__":

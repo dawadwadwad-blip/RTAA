@@ -25,7 +25,7 @@ func _verify() -> void:
 		originals[row.id] = row.properties.get("centerline_local_xz_m", [])
 	var seams := {}
 	var checks := {"seam_vertices": 0, "paths": 0, "bike_paths": 0, "east_main": 0, "east_franklin_bike": 0,
-		"grounded_buildings": 0, "foundation_vertices": 0}
+		"grounded_buildings": 0, "foundation_vertices": 0, "landmarks": 0}
 	var probes := PackedVector3Array()
 	for entry: Dictionary in stream.cells:
 		var layer := (load(entry.path) as PackedScene).instantiate() as Node3D
@@ -35,6 +35,9 @@ func _verify() -> void:
 				valid = _verify_terrain(layer, entry.bounds, seams, checks, builder)
 			"paths":
 				valid = _verify_paths(layer, originals, checks, probes, scene.get_meta("grade_separated"), builder)
+			"landmark":
+				valid = _verify_station_asset(layer)
+				checks.landmarks += 1
 			"buildings":
 				root.add_child(layer)
 				valid = _verify_buildings(layer, checks, builder)
@@ -46,7 +49,7 @@ func _verify() -> void:
 			return
 	if (checks.seam_vertices == 0 or checks.paths != result.road_paths or checks.east_main != result.east_main_paths
 			or checks.bike_paths != result.bike_paths or checks.east_main == 0 or checks.east_franklin_bike == 0
-			or checks.grounded_buildings != result.building_layers):
+			or checks.grounded_buildings != result.building_layers or checks.landmarks != result.landmarks):
 		scene.free()
 		_fail("Incomplete terrain, street or building verification.")
 		return
@@ -67,6 +70,9 @@ func _verify() -> void:
 	# Direct raycasts from just above the ground avoid roofs or elevated collision at the same XZ.
 	await physics_frame
 	await physics_frame
+	if checks.landmarks == 1 and not _verify_station_collision(stream, builder):
+		_fail("The authored station is missing stair collision or has a duplicate generic volume.")
+		return
 	var hits := 0
 	var space := root.world_3d.direct_space_state
 	for probe: Vector3 in probes:
@@ -200,6 +206,51 @@ func _verify_buildings(layer: Node3D, checks: Dictionary, builder: RefCounted) -
 		return false
 	checks.foundation_vertices += count
 	checks.grounded_buildings += 1
+	return true
+
+
+func _verify_station_asset(layer: Node3D) -> bool:
+	var exterior := layer.get_node_or_null("StationExterior")
+	if exterior == null or exterior.get_child_count() != 6:
+		return false
+	var textured := {}
+	var glazed := false
+	for mesh: MeshInstance3D in exterior.get_children():
+		for i: int in range(mesh.mesh.get_surface_count()):
+			var mat := mesh.mesh.surface_get_material(i) as StandardMaterial3D
+			if mat == null:
+				return false
+			for image: Texture2D in [mat.albedo_texture, mat.normal_texture]:
+				if image != null and image.get_width() > 1:
+					textured[image] = true
+			glazed = glazed or (mat.resource_name == "MSS Train shed glazing"
+					and mat.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED)
+	if textured.size() != 8 or not glazed:
+		return false
+	print("PASS: The saved landmark contains six authored meshes, eight textures and transparent glazing.")
+	return true
+
+
+func _verify_station_collision(stream: Node, builder: RefCounted) -> bool:
+	var station := stream.get_node_or_null("main_street_station") as Node3D
+	if station == null or station.get_meta("replaces_osm_id") != "osm/way/113030476":
+		return false
+	var alignment: Transform3D = station.get_meta("station_alignment")
+	var space := root.world_3d.direct_space_state
+	for i: int in range(15):
+		var step := alignment * Vector3(15.25, -2.58 + 0.2 * i, 10.36 - 0.283 * i - 0.14)
+		var probe := PhysicsRayQueryParameters3D.create(step + Vector3.UP * 0.09, step - Vector3.UP * 0.09)
+		var hit := space.intersect_ray(probe)
+		if hit.is_empty() or hit.collider.name != "ForecourtCollision" or absf(hit.position.y - step.y) > 0.007:
+			return false
+	# This point lies through the middle of the replaced shed footprint.
+	var ground := Vector2(-635.72, -400.63)
+	var y: float = builder.sample(ground)
+	var hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(
+		Vector3(ground.x, 60, ground.y), Vector3(ground.x, y - 0.1, ground.y)))
+	if hit.is_empty() or hit.collider.name != "TerrainCollision" or absf(hit.position.y - y) > 0.003:
+		return false
+	print("PASS: Jolt matched all 15 station treads and found no generic shed collision.")
 	return true
 
 

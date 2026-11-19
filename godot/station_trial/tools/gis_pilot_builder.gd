@@ -8,6 +8,8 @@ const OUTPUT := "res://assets/rva_gis/pilot"
 const CHUNKS := "res://assets/rva_gis/meshes"
 const GRID_FACES := 126
 const STATION := Vector2(-592, -348)
+const STATION_OSM_ID := "osm/way/113030476"
+const STATION_GLB := "authored/rva_main_street_station.glb"
 const LANE_TAGS := ["lane", "track", "opposite_lane", "opposite_track"]
 
 var _frame: Array
@@ -69,7 +71,7 @@ func build(data_dir: String) -> Dictionary:
 	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_generation)) != OK:
 		return _fail("Cannot make the GIS layer directory.")
 	var report := {"terrain_cells": 0, "building_layers": 0, "road_paths": 0, "bike_paths": 0,
-		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0}
+		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0, "landmarks": 0}
 	for row: int in range(0, _height - 1, GRID_FACES):
 		for col: int in range(0, _width - 1, GRID_FACES):
 			if not _terrain_cell(col, row, mini(_width - 1, col + GRID_FACES), mini(_height - 1, row + GRID_FACES)):
@@ -79,6 +81,14 @@ func build(data_dir: String) -> Dictionary:
 		if not _building_layer(chunk):
 			return {}
 		report.building_layers += 1
+	var landmarks: Array = c.get("landmarks", [])
+	var replaced: Array = c.get("replaced_osm_ids", [])
+	if landmarks.size() > 1 or replaced != ([] if landmarks.is_empty() else [STATION_OSM_ID]):
+		return _fail("The station replacement manifest is inconsistent.")
+	for landmark: Dictionary in landmarks:
+		if not _station_layer(landmark):
+			return {}
+		report.landmarks += 1
 	if not _road_layers(roads.features, float(c.streaming_cell_m), report):
 		return {}
 	var focus_xz := _extent.get_center()
@@ -90,6 +100,7 @@ func build(data_dir: String) -> Dictionary:
 	world.set_meta("source_manifest_sha256", c.source_manifest_sha256)
 	world.set_meta("gis_extent_xz", _extent)
 	world.set_meta("grade_separated", report.grade_separated)
+	world.set_meta("replaced_osm_ids", replaced)
 	var anchor := Node3D.new()
 	anchor.name = "RVA_GIS_Origin"
 	_own(world, anchor)
@@ -298,6 +309,75 @@ func _building_layer(chunk: Dictionary) -> bool:
 	part.set_meta("building_count", chunk.counts.buildings)
 	if not _add_layer("buildings_" + id, part, bounds, "buildings"):
 		return false
+	_set_terrain_dependencies(bounds)
+	return true
+
+
+func _station_layer(landmark: Dictionary) -> bool:
+	if landmark.get("id") != "main_street_station" or landmark.get("replaces_osm_id") != STATION_OSM_ID \
+			or landmark.get("glb") != STATION_GLB:
+		return _reject("Unexpected Main Street Station replacement.")
+	var path := CHUNKS.path_join(STATION_GLB)
+	if not FileAccess.file_exists(path) or FileAccess.get_sha256(path) != landmark.get("sha256"):
+		return _reject("The authored Main Street Station asset is missing or its checksum changed.")
+	var corners: Array = landmark.world_bounds_godot_m
+	var bounds := Rect2(Vector2(corners[0][0], corners[0][2]),
+			Vector2(corners[1][0] - corners[0][0], corners[1][2] - corners[0][2]))
+	if not _extent.grow(0.01).encloses(bounds):
+		return _reject("Main Street Station crosses the available GIS terrain boundary.")
+	var document := GLTFDocument.new()
+	var state := GLTFState.new()
+	if document.append_from_file(path, state) != OK:
+		return _reject("Could not read the authored station GLB.")
+	var asset := document.generate_scene(state) as Node3D
+	if asset == null:
+		return _reject("Could not instance the authored station GLB.")
+	var b: Array = landmark.basis_godot_columns
+	var o: Array = landmark.origin_godot_m
+	var alignment := Transform3D(Basis(Vector3(b[0][0], b[0][1], b[0][2]),
+			Vector3(b[1][0], b[1][1], b[1][2]), Vector3(b[2][0], b[2][1], b[2][2])),
+			Vector3(o[0], o[1], o[2]))
+	asset.name = "StationExterior"
+	asset.transform = alignment
+	var part := Node3D.new()
+	_own(part, asset)
+	var collision_count := 0
+	for child: Node in asset.get_children():
+		var mesh := child as MeshInstance3D
+		if mesh == null:
+			part.free()
+			return _reject("The station GLB must contain six direct mesh nodes.")
+		mesh.owner = part
+		var name := str(mesh.name).replace("_", "").replace(" ", "").to_lower()
+		if name not in ["mssheadhouse", "mssmainstreetforecourt"]:
+			continue
+		# Bake the small survey scale differences into the collision vertices.
+		var geometry_to_world := alignment * mesh.transform
+		var faces := mesh.mesh.get_faces()
+		for i: int in range(faces.size()):
+			faces[i] = geometry_to_world.basis * faces[i]
+		var shape := ConcavePolygonShape3D.new()
+		shape.set_faces(faces)
+		var body := StaticBody3D.new()
+		body.name = "ForecourtCollision" if name == "mssmainstreetforecourt" else "HeadhouseCollision"
+		body.position = geometry_to_world.origin
+		_own(part, body)
+		var collision := CollisionShape3D.new()
+		collision.shape = shape
+		_own(part, collision, body)
+		collision_count += 1
+	if asset.get_child_count() != 6 or collision_count != 2:
+		part.free()
+		return _reject("The authored station mesh or collision set is incomplete.")
+	part.set_meta("replaces_osm_id", STATION_OSM_ID)
+	part.set_meta("station_alignment", alignment)
+	if not _add_layer("main_street_station", part, bounds, "landmark"):
+		return false
+	_set_terrain_dependencies(bounds)
+	return true
+
+
+func _set_terrain_dependencies(bounds: Rect2) -> void:
 	var cell_step := _spacing * GRID_FACES
 	var first := Vector2i(((bounds.position - _northwest) / cell_step).floor())
 	var last := Vector2i(((bounds.end - _northwest) / cell_step).floor())
@@ -308,7 +388,6 @@ func _building_layer(chunk: Dictionary) -> bool:
 			if _terrain_paths.has(tile):
 				support.append(_terrain_paths[tile])
 	_entries[-1]["terrain_dependencies"] = support
-	return true
 
 
 static func _grade(tags: Dictionary) -> String:
