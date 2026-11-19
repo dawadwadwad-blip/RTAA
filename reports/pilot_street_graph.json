@@ -1,0 +1,68 @@
+{
+  "blocked_car_turns": 9,
+  "directed_arcs": {
+    "car": 3771,
+    "foot": 10412
+  },
+  "foot_only_bridge_edges": 6,
+  "graph_sha256": "9e944634984b68fe48f1862e00d5a62992b5d067982c7c82de87c7244f3b4cb5",
+  "mapped_bridge_edges": 121,
+  "nodes": 4330,
+  "source_capture_sha256": "77b1a7b62b1114fdd1fbb7c4ec36cd5e32863e830dabade4093e2c9259777030",
+  "street_edges": 5333,
+  "unresolved_turn_restrictions": [
+    {
+      "kind": "no_u_turn",
+      "osm_version": 1,
+      "reason": "unsupported_member_configuration",
+      "relation": 8147712
+    },
+    {
+      "kind": "no_left_turn",
+      "osm_version": 2,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 10080034
+    },
+    {
+      "kind": "no_left_turn",
+      "osm_version": 1,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 10080035
+    },
+    {
+      "kind": "no_right_turn",
+      "osm_version": 1,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 10080036
+    },
+    {
+      "kind": "no_right_turn",
+      "osm_version": 2,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 14525045
+    },
+    {
+      "kind": "no_left_turn",
+      "osm_version": 1,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 14571260
+    },
+    {
+      "kind": "no_left_turn",
+      "osm_version": 2,
+      "reason": "no_matching_directed_arcs_in_clip",
+      "relation": 14725450
+    }
+  ],
+  "verified_controls": 3,
+  "witnesses": {
+    "foot_bridge_edge_count": 6,
+    "foot_bridge_way": 113038411,
+    "one_way_edge_count": 4,
+    "one_way_way": 249793016,
+    "separated_edges": [
+      "osm/45088311/450601602-2592314742/1",
+      "osm/1366154365/11229049238-12101815230/1"
+    ]
+  }
+}

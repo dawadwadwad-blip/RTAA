@@ -13,6 +13,7 @@
 - **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-11 · BLOCKED** — Review reports/runs/20261119T041024625270Z-e682a4ef.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
+- **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -32,6 +33,8 @@
 - `20261119T040357942393Z-5d128d58` · S0-10 · **PASS** · 2026-11-19T04:03:57+00:00 → 2026-11-19T04:03:58+00:00 · [run evidence](reports/runs/20261119T040357942393Z-5d128d58.json)
 - `20261119T041021658051Z-50e7be12` · S0-11 · **PASS** · 2026-11-19T04:10:21+00:00 → 2026-11-19T04:10:24+00:00 · [run evidence](reports/runs/20261119T041021658051Z-50e7be12.json)
 - `20261119T041024625270Z-e682a4ef` · S0-11 · **BLOCKED** · 2026-11-19T04:10:24+00:00 → 2026-11-19T04:10:24+00:00 · [run evidence](reports/runs/20261119T041024625270Z-e682a4ef.json)
+- `20261119T042102909982Z-c5567259` · S1-03 · **PASS** · 2026-11-19T04:21:02+00:00 → 2026-11-19T04:21:05+00:00 · [run evidence](reports/runs/20261119T042102909982Z-c5567259.json)
+- `20261119T042105797511Z-33fc6023` · S1-03 · **PASS** · 2026-11-19T04:21:05+00:00 → 2026-11-19T04:21:06+00:00 · [run evidence](reports/runs/20261119T042105797511Z-33fc6023.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -81,6 +84,12 @@
 - **Fixed** a Hill Climb path where a loose cargo strap could prevent the final warning from counting. Reaching the warning while the strap is loose now counts. Added this case to the portable regression.
 - **Verified locally** all 29 portable tests passed. The native attempt is **BLOCKED** in this workspace because Unreal Editor and a target `.uproject` are unavailable. The UE build, editor map generation and real-vehicle drive remain open.
 - **Watch in the editor** the native scenario's temporary game-world startup and pawn possession. In the driving map, verify suspension contact through both ramp seams and the time needed to reach both survey stakes.
+
+## S1-03 · Pilot horizontal street graph
+
+- **Built** a deterministic export from the locked OpenStreetMap capture. It stores 4,330 nodes and 5,333 edges with forward and backward car and foot access. Nine resolved motor-vehicle turn pairs are blocked. Eight unmatched or unsupported relations are listed in the report.
+- **Evidence** three control intersections match the projected pilot coordinates. The export confirms the North 17th Street one-way segment, six foot-only edges on the Richmond Slave Trail bridge, and separate turnpike and East Main Street connections.
+- **Verification** all 32 local tests passed. Repeated exports produce the same graph hash. Bridge deck heights, multisegment turn restrictions, traffic integration and the unresolved DEM-to-LiDAR comparison are open.
 
 ### Next usage window prompt
 
