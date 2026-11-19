@@ -1,0 +1,2 @@
+PASS: dem_only_preview. 2 heightmaps, 505 equal exported seam samples, no missing heights.
+PASS: 130 independent reference checks. 2025 NOAA DEM median absolute difference 0.0700 m.

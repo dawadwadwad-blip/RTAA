@@ -13,8 +13,9 @@
       "expected_horizontal_crs": "EPSG:2925",
       "expected_vertical_crs": "EPSG:6360",
       "expected_z_units": "US survey feet",
-      "asset_status": "catalog_verified",
-      "acquisition": "Select native tiles intersecting the generated acquisition bounds. Hash every downloaded tile and inspect GeoTIFF CRS, units, no-data, spacing and extent."
+      "asset_status": "first_pair_assets_verified",
+      "acquisition": "Select native tiles intersecting the generated acquisition bounds. Hash every downloaded tile and inspect GeoTIFF CRS, units, no-data, spacing and extent.",
+      "locked_pilot_assets": "terrain/first_pair_sources.json"
     },
     {
       "id": "richmond_lidar_2025_geoid18",

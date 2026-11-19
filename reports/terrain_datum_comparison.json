@@ -1,0 +1,60 @@
+{
+  "ground_comparison": {
+    "count": 182,
+    "maximum_absolute_m": 1.5244,
+    "median_absolute_m": 1.3337,
+    "median_signed_m": -1.3337,
+    "outliers_over_one_m": 182,
+    "p95_absolute_m": 1.4072,
+    "within_0_30_m_median_and_1_m_max": false
+  },
+  "horizontal_operations": {
+    "EPSG:2925": "proj=pipeline step proj=unitconvert xy_in=us-ft xy_out=m step inv proj=lcc lat_0=36.3333333333333 lon_0=-78.5 lat_1=37.9666666666667 lat_2=36.7666666666667 x_0=3500000.0001016 y_0=999999.9998984 ellps=GRS80 step inv proj=gridshift grids=us_noaa_nadcon5_nad83_1986_nad83_harn_conus.tif step proj=utm zone=18 ellps=GRS80",
+    "EPSG:3748": "proj=pipeline step inv proj=utm zone=18 ellps=GRS80 step inv proj=gridshift grids=us_noaa_nadcon5_nad83_1986_nad83_harn_conus.tif step proj=utm zone=18 ellps=GRS80"
+  },
+  "lidar_dem_registration_verified": false,
+  "reference_comparison": {
+    "asset": "USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif",
+    "candidate_samples": 182,
+    "noaa_dem_minus_usgs_dem": {
+      "count": 130,
+      "maximum_absolute_m": 0.3594,
+      "median_absolute_m": 0.07,
+      "median_signed_m": -0.0695,
+      "outliers_over_one_m": 0,
+      "p95_absolute_m": 0.1565,
+      "within_0_30_m_median_and_1_m_max": true
+    },
+    "noaa_laz_minus_usgs_dem": {
+      "count": 130,
+      "maximum_absolute_m": 1.5739,
+      "median_absolute_m": 1.4015,
+      "median_signed_m": -1.4015,
+      "outliers_over_one_m": 129,
+      "p95_absolute_m": 1.5077,
+      "within_0_30_m_median_and_1_m_max": false
+    },
+    "retained_samples": 130,
+    "sample_span_en_m": [
+      952.6,
+      456.9
+    ],
+    "sha256": "57ea0e11d72b8fe7e48ba7d85df6d29711e7c47f45eda0e8a71868eaefd345f8",
+    "vertical_reference": "NAVD88 metres (USGS 3DEP product convention, absent from this TIFF header)"
+  },
+  "source_asset_counts": {
+    "dem": 12,
+    "laz": 12
+  },
+  "source_crs": {
+    "dem": {
+      "horizontal_epsg": 2925,
+      "vertical_epsg": 6360
+    },
+    "laz": {
+      "horizontal_epsg": 3748,
+      "vertical_epsg": 5703
+    }
+  },
+  "source_lock_sha256": "5405ac419c51282b7e7093d00dcb582e3f10699ba0889ed7828e1d8ccbc26c72"
+}

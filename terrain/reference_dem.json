@@ -1,0 +1,13 @@
+{
+  "asset": "USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif",
+  "title": "USGS 1 Meter 18 x28y416 VA_SouthamptonHenricoWMBG_2019_B19",
+  "url": "https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/1m/Projects/VA_SouthamptonHenricoWMBG_2019_B19/TIFF/USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif",
+  "metadata": "https://www.sciencebase.gov/catalog/item/60c44237d34e86b9389901b2",
+  "product_specification": "https://www.usgs.gov/faqs/what-projection-horizontal-datum-vertical-datum-and-resolution-a-usgs-digital-elevation-model",
+  "acquisition_project": "VA_SouthamptonHenricoWMBG_2019_B19",
+  "bytes": 171948131,
+  "sha256": "57ea0e11d72b8fe7e48ba7d85df6d29711e7c47f45eda0e8a71868eaefd345f8",
+  "horizontal_epsg": 26918,
+  "product_vertical_reference": "NAVD88 metres (USGS 3DEP product convention, absent from this TIFF header)",
+  "native_cell_metres": 1
+}

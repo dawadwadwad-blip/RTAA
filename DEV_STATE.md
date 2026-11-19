@@ -13,8 +13,10 @@
 - **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-11 · BLOCKED** — Review reports/runs/20261119T041024625270Z-e682a4ef.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_church_hill.py.
+- **S1-01 · FAILED** — Review reports/runs/20261119T043130111175Z-c9683b1a.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/terrain_first_pair.py --reference-dem ../architect/S1-01/reference/USGS_1M_18_x28y416_VA_SouthamptonHenricoWMBG_2019_B19.tif.
 - **S1-02 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -38,6 +40,9 @@
 - `20261119T042105797511Z-33fc6023` · S1-03 · **PASS** · 2026-11-19T04:21:05+00:00 → 2026-11-19T04:21:06+00:00 · [run evidence](reports/runs/20261119T042105797511Z-33fc6023.json)
 - `20261119T042638940061Z-4a06ccbf` · S1-02 · **PASS** · 2026-11-19T04:26:38+00:00 → 2026-11-19T04:26:42+00:00 · [run evidence](reports/runs/20261119T042638940061Z-4a06ccbf.json)
 - `20261119T042642119510Z-cce83362` · S1-02 · **PASS** · 2026-11-19T04:26:42+00:00 → 2026-11-19T04:27:01+00:00 · [run evidence](reports/runs/20261119T042642119510Z-cce83362.json)
+- `20261119T043126798942Z-ee24d9b2` · S1-04 · **PASS** · 2026-11-19T04:31:26+00:00 → 2026-11-19T04:31:30+00:00 · [run evidence](reports/runs/20261119T043126798942Z-ee24d9b2.json)
+- `20261119T043130111175Z-c9683b1a` · S1-01 · **FAILED** · 2026-11-19T04:31:30+00:00 → 2026-11-19T04:31:38+00:00 · [run evidence](reports/runs/20261119T043130111175Z-c9683b1a.json)
+- `20261119T043138929930Z-ecbb0caa` · S1-04 · **PASS** · 2026-11-19T04:31:38+00:00 → 2026-11-19T04:31:47+00:00 · [run evidence](reports/runs/20261119T043138929930Z-ecbb0caa.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -100,6 +105,12 @@
 - **Evidence** verified 12 LiDAR file hashes and CRS headers. The split sample across 30 roofs had a 0.038 m median difference. This comparison checks repeatability within the source.
 - **Verification** the 35-test local suite covers multipolygon holes, the shared vertical-offset cancellation, and fallbacks for sparse or uneven points. The export carries quality flags and omits foundation Z. Independent roof checks and in-engine import remain open.
 
+## S1-04 · Western terrain DEM-only preview
+
+- **Built** a two-tile terrain preview using the locked 2025 Richmond DEM and an independent 2019-project USGS DEM comparison. The export writes GeoTIFF and Unreal R16 pairs.
+- **Evidence** 130 near-level reference locations give a 0.0700 m NOAA DEM median absolute difference. At the same locations NOAA LAZ ground is 1.4015 m below the USGS reference at the median. The strict all-source gate remains open. The preview never applies a vertical shift to either source.
+- **Verification** both 505 × 505 heightmaps share 505 exact seam vertices and have no missing heights. The suite and source comparison are recorded in the run logs. Unreal import remains open.
+
 ### Next usage window prompt
 
-> Compare the first-pair NOAA DEM and LiDAR with an independent elevation reference. Check provenance, acquisition year and residuals before changing world Z. Preserve the Church Hill Unreal smoke and drive tasks for the target editor. For façades, start with stable IDs from docs/Pilot_Building_Heights.md and use reviewed roof and ground data for the first authored block.
+> Import the DEM-only preview using docs/Pilot_Terrain_Preview.md when the target Unreal project is ready. Verify north, known elevations, seam collision and the vehicle ride. Keep the grade-separated road graph and the relative building heights available to author the east-side preview. Find independent surveyed elevations or an alternate correctly referenced point-cloud delivery before mixing absolute LAZ locations into the terrain.
