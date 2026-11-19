@@ -1,0 +1,71 @@
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:27:10 | INFO: Starting glTF 2.0 export
+16:27:10 | INFO: Extracting primitive: Building_osm_way_207703634
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_207703635
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_207703636
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_207703639
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586218
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586219
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586220
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586222
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586223
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586224
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Building_osm_way_225586226
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: East_Main_Approach_East_Station_Walk
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: East_Main_Approach_North_Walk
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: East_Main_Approach_Road
+16:27:10 | INFO: Primitives created: 4
+16:27:10 | INFO: Extracting primitive: East_Main_Approach_South_Walk
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Roads_and_paths trial
+16:27:10 | INFO: Primitives created: 2
+16:27:10 | INFO: Extracting primitive: Terrain trial
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: Bellwood_Rail_Trestle_Illustrative_Supports
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: Bellwood_Rail_Trestle_Surface
+16:27:10 | INFO: Primitives created: 3
+16:27:10 | INFO: Extracting primitive: I95_East_Mainline_Illustrative_Supports
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: I95_East_Mainline_Surface
+16:27:10 | INFO: Primitives created: 5
+16:27:10 | INFO: Extracting primitive: I95_East_Ramp_Illustrative_Supports
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: I95_East_Ramp_Surface
+16:27:10 | INFO: Primitives created: 5
+16:27:10 | INFO: Extracting primitive: I95_West_Mainline_Illustrative_Supports
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Extracting primitive: I95_West_Mainline_Surface
+16:27:10 | INFO: Primitives created: 5
+16:27:10 | INFO: Extracting primitive: MSS Headhouse
+16:27:10 | INFO: Primitives created: 11
+16:27:10 | INFO: Extracting primitive: MSS Red clay hip and dormers
+16:27:10 | INFO: Primitives created: 9
+16:27:10 | INFO: Extracting primitive: MSS Clock tower
+16:27:10 | INFO: Primitives created: 11
+16:27:10 | INFO: Extracting primitive: MSS Main Street forecourt
+16:27:10 | INFO: Primitives created: 9
+16:27:10 | INFO: Extracting primitive: MSS Restored train shed
+16:27:10 | INFO: Primitives created: 5
+16:27:10 | INFO: Extracting primitive: Main Street Station lettering
+16:27:10 | INFO: Primitives created: 1
+16:27:10 | INFO: Finished glTF 2.0 export in 0.471484899520874 s
+
+PASS: Exported 31 Shockoe meshes in meters around the station crossing.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-approach/RVA_Station_Approach.blend"
+
+Blender quit

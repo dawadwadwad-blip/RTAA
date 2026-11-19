@@ -5,3 +5,8 @@ __pycache__/
 /Richmond_Unreal_First_Drive.zip
 /Richmond_Driving_Test.html
 /outputs/
+/godot/station_trial/.godot/
+/godot/station_trial/assets/*.glb
+/godot/station_trial/assets/*.import
+/godot/station_trial/assets/*.png
+/godot/station_trial/assets/route.json
