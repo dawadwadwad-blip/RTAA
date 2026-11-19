@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+RVA audit saved 10 renders, skipped 0.
+PASS: Godot rendered 10 audit fixture cameras.
+Scored 10 current pairs, skipped 0, and wrote 8 comparisons across two JPEGs.
+outputs/rva_audit_fixture/grids/audit_top_mismatches_1.jpg JPEG 1196x1508 1196x1508+0+0 8-bit sRGB 92802B 0.000u 0:00.000
+outputs/rva_audit_fixture/grids/audit_top_mismatches_2.jpg JPEG 1196x1508 1196x1508+0+0 8-bit sRGB 92407B 0.000u 0:00.000

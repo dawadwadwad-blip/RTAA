@@ -26,6 +26,8 @@
 - **S1-11 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-12 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-13 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-14 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-15 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -92,6 +94,13 @@
 - `20261119T220205958909Z-8ac330f4` · S1-13 · **PASS** · 2026-11-19T22:02:05+00:00 → 2026-11-19T22:02:08+00:00 · [run evidence](reports/runs/20261119T220205958909Z-8ac330f4.json)
 - `20261119T220228368106Z-1e1e95e4` · S1-13 · **PASS** · 2026-11-19T22:02:28+00:00 → 2026-11-19T22:02:47+00:00 · [run evidence](reports/runs/20261119T220228368106Z-1e1e95e4.json)
 - `20261119T220438380552Z-4dab293d` · S1-13 · **PASS** · 2026-11-19T22:04:38+00:00 → 2026-11-19T22:05:10+00:00 · [run evidence](reports/runs/20261119T220438380552Z-4dab293d.json)
+- `20261119T221942554150Z-621b67b0` · S1-14 · **INTERRUPTED** · 2026-11-19T22:19:42+00:00 → 2026-11-19T23:10:58+00:00 · [run evidence](reports/runs/20261119T221942554150Z-621b67b0.json)
+- `20261119T231058653278Z-ab2d0ceb` · S1-14 · **PASS** · 2026-11-19T23:10:58+00:00 → 2026-11-19T23:10:59+00:00 · [run evidence](reports/runs/20261119T231058653278Z-ab2d0ceb.json)
+- `20261119T231237282885Z-11c686ce` · S1-15 · **PASS** · 2026-11-19T23:12:37+00:00 → 2026-11-19T23:12:39+00:00 · [run evidence](reports/runs/20261119T231237282885Z-11c686ce.json)
+- `20261119T231338557866Z-a58da366` · S1-14 · **PASS** · 2026-11-19T23:13:38+00:00 → 2026-11-19T23:13:47+00:00 · [run evidence](reports/runs/20261119T231338557866Z-a58da366.json)
+- `20261119T231510299674Z-e41ad999` · S1-14 · **PASS** · 2026-11-19T23:15:10+00:00 → 2026-11-19T23:15:20+00:00 · [run evidence](reports/runs/20261119T231510299674Z-e41ad999.json)
+- `20261119T231603298026Z-f8c2b0b9` · S1-15 · **PASS** · 2026-11-19T23:16:03+00:00 → 2026-11-19T23:16:03+00:00 · [run evidence](reports/runs/20261119T231603298026Z-f8c2b0b9.json)
+- `20261119T231714711777Z-8b9dca35` · S1-15 · **PASS** · 2026-11-19T23:17:14+00:00 → 2026-11-19T23:17:15+00:00 · [run evidence](reports/runs/20261119T231714711777Z-8b9dca35.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -219,3 +228,20 @@
 ### Next usage window prompt
 
 > Play the expanded Godot East Main route from 21st Street to Main Street Station at 720p on the weakest intended device. Compare standard and Low FPS and note the steering and the station's visibility near 17th Street. If the trial meets the agreed visual and 30 FPS goal, complete the Night Shift work order on this corridor.
+
+## S1-14 · Richmond GIS and Godot building chunks
+
+- Added [the GIS fetcher](tools/fetch_rva_gis.py) and [the Blender batch builder](tools/build_rva_3d_blocks.py). It takes central Richmond's WGS84 bounding box, saves OSM building and road GeoJSON and downloads USGS 3DEP and NAIP into the pilot EPSG:26918 frame.
+- The GIS manifest records each raster's bounds, offsets, pixel size and checksums. The terrain has a 16-bit PNG and a matching little-endian R16 for Godot. The overview albedo is `rva_aerial_albedo.png` and native-scale RGB tiles are in `aerial/`. Road features retain OSM tags and node IDs where available and include projected `centerline_local_xz_m` coordinates.
+- The building builder samples the heightfield at the footprint boundary, including terrain triangle crossings. The wall mesh extends 6 cm below the surface, with profile simplification limited to 1.5 cm. Buildings are grouped by approximate neighborhood and 504 m cell. The GLBs expose named façade, roof and billboard materials and import static shell collision from `-col` nodes.
+- On the live Shockoe and Church Hill pilot, the pipeline fetched 1,434 buildings, 2,253 road segments and four aerial tiles. Blender 4.3.2 and Godot 4.7.2 verified 21 GLBs with static concave collision and preserved all four named materials across the export. Heights used 27 explicit OSM tags, 149 story-count estimates and 1,258 defaults. Roofs are flat extrusions and the original roof tags remain in the GeoJSON.
+
+## S1-15 · Street reference sampler and visual audit
+
+- Added [the street reference fetcher](tools/fetch_rva_street_refs.py), [the Godot audit camera](godot/station_trial/tools/visual_audit_cam.gd) and [the local comparison tool](tools/rank_visual_diffs.py). The collector combines named OSM landmarks and corridor anchors with Mapillary imagery and KartaView's public photo endpoint. The 1.5 GB disk cap and 2,500-photo ceiling apply to the local collection. The spacing is 25 m, with up to four headings separated by at least 45° within 8 m of the same spot.
+- A live KartaView pilot grew from three to five Richmond photos on resume without duplicating image IDs or exceeding its 10 MB test cap. Mapillary image and tile processing were checked with fixtures and need a live run with `MAPILLARY_TOKEN`. Reference coverage and image counts depend on the providers. The generated photo manifest and images remain local, and the prop manifest contains georeferenced detections ready for a placement review.
+- Godot rendered ten fixture cameras and changing the bearing changed the rendered pixels. The local ranker produced two 1196 × 1508 JPEGs with eight pairs. The score measures structural similarity and edge agreement. Camera height, pitch and unavailable field of view use documented estimates.
+
+### Next usage window prompt · S1-16
+
+> Write a Godot 4 EditorScript that validates `rva_gis_manifest.json` and `assets/rva_gis/meshes/rva_chunks.json` and saves a separate streamable Richmond scene. Decode the little-endian R16 at pixel centers using the recorded offset and scale, place each cell with +X east, +Y up and +Z south, and match the NW–SE terrain triangle split for visuals and Jolt collision. Apply the NAIP tiles with their projected bounds, place GLBs using `origin_godot_m`, and create `Path3D` splines from `centerline_local_xz_m` and OSM road and bicycle tags. Keep grade-separated splines out of the DEM drape until their deck heights are available. Use streamed neighborhoods and existing MultiMesh conventions. Prove common terrain edges, real-world axes, building ground contact and the East Main Street road and bike-lane alignment in a Shockoe pilot. Save a scene the audit camera can open, record the verification in `DEV_STATE.md`, and use $0 dependencies.
