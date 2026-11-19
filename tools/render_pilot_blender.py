@@ -12,7 +12,7 @@ import bpy
 from mathutils import Matrix, Vector
 
 
-def export_headhouse(objects, frame, output):
+def export_station(objects, frame, output):
     import station_headhouse
 
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -39,7 +39,7 @@ def export_headhouse(objects, frame, output):
         "material_images": sorted(img.name for img in bpy.data.images if img.name.startswith("MSS ")),
     }
     output.with_suffix(".json").write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
-    print(f'PASS: Exported the station headhouse and forecourt with {evidence["triangles"]:,} triangles.')
+    print(f'PASS: Exported the station exterior and train shed with {evidence["triangles"]:,} triangles.')
 
 
 def insert_station(scene, bundle, alignment, mesh_report):
@@ -98,11 +98,11 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
     plan, station = insert_station(scene, bundle, alignment, mesh_report) if bundle else (None, None)
     if station_view:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
-        from station_headhouse import replace_headhouse
+        from station_headhouse import replace_station
 
-        station_frame, detail_objects = replace_headhouse(scene, station)
+        station_frame, detail_objects = replace_station(scene, station)
         if station_glb:
-            export_headhouse(detail_objects, station_frame, station_glb)
+            export_station(detail_objects, station_frame, station_glb)
 
     objects = [obj for obj in scene.objects if obj.type == "MESH"]
     terrain = next(obj for obj in objects if obj.name == "Terrain")
@@ -114,12 +114,15 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
             (west, south, east, north), mesh_report["bounds_local_en_m"])):
         raise ValueError("The imported axes and terrain bounds differ from the mesh report.")
 
-    if station_view == "street":
-        eye = station_frame @ Vector((-15, -37, -0.84))
-        target = station_frame @ Vector((11.5, 0.1, 13.3))
-    elif station_view == "entrance":
-        eye = station_frame @ Vector((21.2, -21.6, -0.94))
-        target = station_frame @ Vector((15.4, 0, 4.65))
+    station_cameras = {
+        "street": ((26, -54, -0.87), (14.9, 0.25, 13.3), 38),
+        "entrance": ((25.3, -13.6, -0.88), (14.35, 0.4, 6.75), 25),
+        "rail": ((-67, 64, 1.20), (1.2, 31.4, 13.6), 32),
+    }
+    if station_view:
+        station_eye, station_target, lens = station_cameras[station_view]
+        eye = station_frame @ Vector(station_eye)
+        target = station_frame @ Vector(station_target)
     elif plan:
         eye = Vector((*plan["camera_eye_en_m"], plan["camera_eye_height_m"]))
         target = Vector((*plan["clock_anchor_en_m"], plan["clock_anchor_dem_m"] + 14))
@@ -129,7 +132,7 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
     camera = bpy.context.object
     camera.rotation_euler = (target - camera.location).to_track_quat("-Z", "Y").to_euler()
     if station_view:
-        camera.data.lens = 29 if station_view == "street" else 31
+        camera.data.lens = lens
     elif plan:
         camera.data.lens = 28
     else:
@@ -150,7 +153,8 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
     world.node_tree.nodes["Background"].inputs[0].default_value = (0.43, 0.54, 0.68, 1.0)
     world.node_tree.nodes["Background"].inputs[1].default_value = 0.35
     if station_view:
-        sun.rotation_euler = (station_frame.to_3x3() @ Vector((0.39, 0.53, -0.74))).to_track_quat("-Z", "Y").to_euler()
+        light_direction = (0.60, 0.34, -0.73) if station_view == "rail" else (-0.24, 0.58, -0.75)
+        sun.rotation_euler = (station_frame.to_3x3() @ Vector(light_direction)).to_track_quat("-Z", "Y").to_euler()
         sun.data.energy = 2.45
         sun.data.angle = 0.055
         sun.data.color = (1.0, 0.91, 0.79)
@@ -179,7 +183,7 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
     scene.cycles.samples = samples
     scene.cycles.use_denoising = False
     scene.render.resolution_x = 1600 if station_view else 1400
-    scene.render.resolution_y = 1000 if station_view else 820
+    scene.render.resolution_y = (1000 if station_view == "rail" else 1300) if station_view else 820
     scene.render.resolution_percentage = resolution
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(output)
@@ -197,7 +201,7 @@ def main():
     parser.add_argument("--station-bundle", type=Path)
     parser.add_argument("--station-alignment", type=Path)
     parser.add_argument("--save-blend", type=Path)
-    parser.add_argument("--station-view", choices=("street", "entrance"))
+    parser.add_argument("--station-view", choices=("street", "entrance", "rail"))
     parser.add_argument("--station-glb", type=Path)
     parser.add_argument("--samples", type=int, default=32)
     parser.add_argument("--resolution", type=int, default=100, help="Render resolution percentage.")

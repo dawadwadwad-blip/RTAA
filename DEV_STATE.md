@@ -54,6 +54,9 @@
 - `20261119T044428798792Z-3c3d9eee` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:39+00:00 · [run evidence](reports/runs/20261119T044428798792Z-3c3d9eee.json)
 - `20261119T115954413506Z-28323fc4` · S1-07 · **FAILED** · 2026-11-19T11:59:54+00:00 → 2026-11-19T12:00:02+00:00 · [run evidence](reports/runs/20261119T115954413506Z-28323fc4.json)
 - `20261119T120145502898Z-fdc284fd` · S1-07 · **PASS** · 2026-11-19T12:01:45+00:00 → 2026-11-19T12:01:51+00:00 · [run evidence](reports/runs/20261119T120145502898Z-fdc284fd.json)
+- `20261119T123054501148Z-5026db92` · S1-07 · **PASS** · 2026-11-19T12:30:54+00:00 → 2026-11-19T12:30:57+00:00 · [run evidence](reports/runs/20261119T123054501148Z-5026db92.json)
+- `20261119T123349317631Z-7fe591ca` · S1-07 · **PASS** · 2026-11-19T12:33:49+00:00 → 2026-11-19T12:33:58+00:00 · [run evidence](reports/runs/20261119T123349317631Z-7fe591ca.json)
+- `20261119T123533862509Z-d92bc39b` · S1-07 · **PASS** · 2026-11-19T12:35:33+00:00 → 2026-11-19T12:35:44+00:00 · [run evidence](reports/runs/20261119T123533862509Z-d92bc39b.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -136,10 +139,10 @@
 
 ## S1-07 · Main Street Station street detail
 
-- **Built** the two recessed five-bay arcades, clerestory, red tile hip roof with two dormer rows, a four-face clock tower, and a stepped forecourt. The original maps are packed in the Blender scene and embedded in the exterior GLB.
-- **Verification** rendered two street-level views and checked the recessed bays, saved placement, and GLB round trip with Blender. The headhouse and plaza use five assemblies. The adjacent buildings remain blockout geometry.
-- **Next** set up collision and distance LODs in the target Unreal project, dress the immediate approach and verify scale, visual clarity and frame rate during play.
+- **Built** the continuous coffered upper loggia and lowered the entrance vaults to flatter arches, widened the stairs, and revised the paired tower windows, corbels, blue clock dials, clay dome, dormers and chimney. The rebuilt shed has translucent panels over steel trusses and roof monitors.
+- **Verification** street, entrance and rail-side views cover the photo-visible elevations. Blender verifies the open passage and wide stair geometry, the clay dome, shared placement, embedded maps and translucent glazing in the GLB. The uploaded photos guide original geometry and surfaces. The road and neighboring buildings remain blockouts.
+- **Next** check the actual I-95 and rail deck heights, dress the immediate approach, and set up collision and distance LODs in the target Unreal project.
 
 ### Next usage window prompt
 
-> Import the detailed Main Street Station exterior and the DEM-only pair using docs/Pilot_Main_Street_Station.md. Test the station stairs on foot and the approach from a moving car. Check collision, material scale, LOD transitions and the terrain seam. Then run the RVACivic smoke test in docs/RVA_Church_Hill_Playtest.md before expanding map coverage.
+> Import the Main Street Station exterior and the DEM-only pair using docs/Pilot_Main_Street_Station.md. Use a reference survey to tie in the nearby freeway and rail decks, and test the station stairs on foot and the approach from a moving car. Check collision, material scale, LOD transitions and the terrain seam. Run the RVACivic smoke test in docs/RVA_Church_Hill_Playtest.md before expanding map coverage.
