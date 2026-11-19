@@ -1,0 +1,21 @@
+........................................../workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/transform.py:178: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(west, north) * Affine.scale(xsize, -ysize)
+/workspace/scratch/f65ef44e3cab/richmond-facades/tools/terrain_first_pair.py:85: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  col, row = (~transform) * (x, y)
+..../workspace/scratch/f65ef44e3cab/richmond-facades/tools/terrain_first_pair.py:198: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  cols, rows = (~dataset.transform) * (x, y)
+/workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/windows.py:360: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  x, y = transform * (window.col_off or 0.0, window.row_off or 0.0)
+/workspace/scratch/f65ef44e3cab/architect/S1-01/deps/rasterio/windows.py:361: PendingDeprecationWarning: Use `@` matmul instead of `*` mul operator for matrix multiplication
+  return Affine.translation(
+.........
+----------------------------------------------------------------------
+Ran 55 tests in 2.570s
+
+OK
+PASS: Packaged 16 station meshes and verified 46 source and converted heights.
+PASS: Road join height changes across 50 cm: west 1.95 cm, east 0.32 cm.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-approach/RVA_Station_Approach.blend"
+
+Blender quit

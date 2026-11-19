@@ -1,0 +1,725 @@
+{
+  "approach_mesh_sha256": "d47e5b45f097a1af15118d607918b14f258c476f9a6632886244263e6585fb55",
+  "attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
+  "axes": "centimeters: X east, Y south, Z up; RVA pilot origin",
+  "frame_sidecar_sha256": "961062dcfb1b92bea17dea65efaf0159585cb0785f6f00eaa7a259964ba11405",
+  "meshes": {
+    "Bellwood_Rail_Trestle": {
+      "bounds_cm": [
+        [
+          -79505.0293,
+          -34990.921,
+          1278.77
+        ],
+        [
+          -70501.8372,
+          -22825.2594,
+          1460.77
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "c45ce376f7b40fefe0b96888051a82b8147947e15ed7e064730ad6734e4dcf27",
+      "source": "Bellwood_Rail_Trestle_Surface",
+      "triangles": 1220
+    },
+    "ClockTower": {
+      "bounds_cm": [
+        [
+          -71069.6472,
+          -33739.8926,
+          829.7104
+        ],
+        [
+          -70025.9033,
+          -32696.2952,
+          4319.8856
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "1bad871a37ddca03f3c8b7ba41d9570c5441b1b5d4e088baace52498cbec202f",
+      "source": "MSS Clock tower",
+      "triangles": 13992
+    },
+    "ConnectingRoads": {
+      "bounds_cm": [
+        [
+          -84453.772,
+          -44660.6598,
+          463.99
+        ],
+        [
+          -59041.2476,
+          -22981.4896,
+          1294.2
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "b7c59e12a776f6e7fbbffb1aefe77a886af700e6b5183821ab04c9ebb07eae20",
+      "source": "Roads_and_paths",
+      "triangles": 3218
+    },
+    "EastMain": {
+      "bounds_cm": [
+        [
+          -78572.4792,
+          -36827.5513,
+          569.55
+        ],
+        [
+          -66919.8425,
+          -25466.2399,
+          849.49
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "43758b111eaf4e26859d6e10b4690033793a85cf3b43368469a16c14a5dccb12",
+      "source": "East_Main_Approach_Road",
+      "triangles": 4468
+    },
+    "EastWalk": {
+      "bounds_cm": [
+        [
+          -69304.5898,
+          -31088.1897,
+          596.75
+        ],
+        [
+          -65902.24,
+          -28387.4603,
+          830.88
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "c6edf4c5c39a11c19565795117dbcd3a2b66eb6018faab5399da707440c673e9",
+      "source": "East_Main_Approach_East_Station_Walk",
+      "triangles": 260
+    },
+    "Forecourt": {
+      "bounds_cm": [
+        [
+          -71767.3096,
+          -33510.0677,
+          578.7104
+        ],
+        [
+          -68287.9028,
+          -30548.3978,
+          1237.7104
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "a88e944a6deaf04fb14d87b2a1c4f142490efd7d3303537c619791ac82f2849d",
+      "source": "MSS Main Street forecourt",
+      "triangles": 6688
+    },
+    "Headhouse": {
+      "bounds_cm": [
+        [
+          -71006.5186,
+          -35092.6941,
+          829.7104
+        ],
+        [
+          -67028.9368,
+          -31174.4781,
+          2285.7103
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "c875256a2588687dbc6a441d83c12197d903b86a89852fd26e93a0c391bda7f6",
+      "source": "MSS Headhouse",
+      "triangles": 34140
+    },
+    "I95_East_Mainline": {
+      "bounds_cm": [
+        [
+          -73902.8992,
+          -44620.639,
+          2068.5101
+        ],
+        [
+          -70962.6587,
+          -24169.8502,
+          2932.77
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "15ba2a0c939c797c625a160e386e71b2ad0067ff7c59d940697d2835829752f0",
+      "source": "I95_East_Mainline_Surface",
+      "triangles": 1880
+    },
+    "I95_East_Ramp": {
+      "bounds_cm": [
+        [
+          -71999.3103,
+          -44545.3613,
+          2015.51
+        ],
+        [
+          -70408.5327,
+          -24177.0004,
+          2779.7701
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "6a4d4a4dd7e290855b283e840567d59b83e7d90e8ec58732b11c1d4693584649",
+      "source": "I95_East_Ramp_Surface",
+      "triangles": 1824
+    },
+    "I95_West_Mainline": {
+      "bounds_cm": [
+        [
+          -75355.5786,
+          -44632.1594,
+          2145.5099
+        ],
+        [
+          -72280.2673,
+          -24158.4305,
+          2934.77
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "ccf6a05fa0d82b4c9861d3e4c724df6580d535257e2d58c2f1aa889d34c15bb7",
+      "source": "I95_West_Mainline_Surface",
+      "triangles": 1880
+    },
+    "NorthWalk": {
+      "bounds_cm": [
+        [
+          -76824.2615,
+          -36557.2906,
+          574.32
+        ],
+        [
+          -66818.9575,
+          -28186.0199,
+          792.56
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "409b0676bf760c7fcacf11ecfdae8d4249b7d9ccc48bf694afec5b1d357f68b9",
+      "source": "East_Main_Approach_North_Walk",
+      "triangles": 2198
+    },
+    "Roof": {
+      "bounds_cm": [
+        [
+          -70967.7246,
+          -35006.5125,
+          1949.7105
+        ],
+        [
+          -67104.2603,
+          -31260.6598,
+          3511.7104
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "8f2d9e06521b74c6b44255558a7b74da087650f5be39e340ebbc0b7d83e71b05",
+      "source": "MSS Red clay hip and dormers",
+      "triangles": 6060
+    },
+    "SouthWalk": {
+      "bounds_cm": [
+        [
+          -77853.9673,
+          -35045.1111,
+          574.83
+        ],
+        [
+          -67793.4204,
+          -27230.8685,
+          796.62
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "4cd84d20219cc5a210d767da5c215a26389f62ad93fb3e2aab648bde788171b3",
+      "source": "East_Main_Approach_South_Walk",
+      "triangles": 1927
+    },
+    "StationSign": {
+      "bounds_cm": [
+        [
+          -69123.1323,
+          -31182.489,
+          943.6873
+        ],
+        [
+          -68937.9456,
+          -31036.3434,
+          1015.9723
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "b2ee00981ddbcfd9fe0d466561574c7bc1dd47621067e9674af2ac46c39bf1a3",
+      "source": "Main Street Station lettering",
+      "triangles": 2168
+    },
+    "Terrain": {
+      "bounds_cm": [
+        [
+          -84200.0,
+          -44400.0,
+          359.38
+        ],
+        [
+          -59400.0,
+          -23400.0,
+          1312.5
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "8748825a6a659790707b2f7d670fa259af40651616322991c43b05978c02557b",
+      "source": "Terrain",
+      "triangles": 26040
+    },
+    "TrainShed": {
+      "bounds_cm": [
+        [
+          -69994.7021,
+          -47416.5924,
+          599.7104
+        ],
+        [
+          -57184.1919,
+          -32665.0238,
+          2550.7103
+        ]
+      ],
+      "collapsed_faces_omitted": 0,
+      "sha256": "d3a1984281faa372117961d502c9baf0b9d4be28c3c52764c7d62e93febd9089",
+      "source": "MSS Restored train shed",
+      "triangles": 12676
+    }
+  },
+  "package_sha256": "fb45af2ee3c614669914a5e7e06304ad77d2fded1b8cccf9bcf0685280778631",
+  "probes": [
+    {
+      "mesh": "EastMain",
+      "name": "station_crosswalk",
+      "point_cm": [
+        -70540.3322,
+        -30227.3708,
+        599.8033
+      ]
+    },
+    {
+      "mesh": "EastMain",
+      "name": "fifteenth_crosswalk",
+      "point_cm": [
+        -77092.3224,
+        -35484.7723,
+        783.1653
+      ]
+    },
+    {
+      "mesh": "EastMain",
+      "name": "fifteenth_west_crosswalk",
+      "point_cm": [
+        -78150.1373,
+        -36366.0498,
+        836.7214
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "bottom_stair_6.15",
+      "point_cm": [
+        -71096.5083,
+        -31915.9911,
+        617.2161
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "bottom_stair_13.77",
+      "point_cm": [
+        -70497.1796,
+        -31444.1766,
+        617.204
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "bottom_stair_21.17",
+      "point_cm": [
+        -69915.1543,
+        -30985.984,
+        617.1969
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "bottom_stair_25.29",
+      "point_cm": [
+        -69591.1079,
+        -30730.8822,
+        617.196
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_-61.0",
+      "point_cm": [
+        -76487.8829,
+        -35934.1917,
+        763.7185
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_-61.0",
+      "point_cm": [
+        -77403.475,
+        -34771.1487,
+        782.004
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_-42.0",
+      "point_cm": [
+        -75004.7223,
+        -34743.488,
+        715.1102
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_-42.0",
+      "point_cm": [
+        -75920.3144,
+        -33580.445,
+        728.7682
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_0.0",
+      "point_cm": [
+        -71725.192,
+        -32112.6318,
+        628.821
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_0.0",
+      "point_cm": [
+        -72640.784,
+        -30949.5888,
+        628.7365
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_11.0",
+      "point_cm": [
+        -70866.2673,
+        -31423.5981,
+        608.8115
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_11.0",
+      "point_cm": [
+        -71781.8594,
+        -30260.5551,
+        616.7046
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_39.0",
+      "point_cm": [
+        -68676.8825,
+        -29673.5444,
+        599.9449
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_39.0",
+      "point_cm": [
+        -69592.4746,
+        -28510.5014,
+        602.4433
+      ]
+    },
+    {
+      "mesh": "NorthWalk",
+      "name": "north_curb_55.0",
+      "point_cm": [
+        -67482.9837,
+        -28600.8824,
+        604.3273
+      ]
+    },
+    {
+      "mesh": "SouthWalk",
+      "name": "south_curb_55.0",
+      "point_cm": [
+        -68272.5119,
+        -27597.9736,
+        599.3645
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_01",
+      "point_cm": [
+        -70313.3728,
+        -31316.7847,
+        616.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_02",
+      "point_cm": [
+        -70295.874,
+        -31339.0167,
+        636.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_03",
+      "point_cm": [
+        -70278.3691,
+        -31361.2488,
+        656.7103
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_04",
+      "point_cm": [
+        -70260.8704,
+        -31383.4808,
+        676.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_05",
+      "point_cm": [
+        -70243.3655,
+        -31405.7129,
+        696.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_06",
+      "point_cm": [
+        -70225.8667,
+        -31427.9419,
+        716.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_07",
+      "point_cm": [
+        -70208.3618,
+        -31450.174,
+        736.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_08",
+      "point_cm": [
+        -70190.863,
+        -31472.406,
+        756.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_09",
+      "point_cm": [
+        -70173.3582,
+        -31494.6381,
+        776.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_10",
+      "point_cm": [
+        -70155.8594,
+        -31516.8701,
+        796.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_11",
+      "point_cm": [
+        -70138.3545,
+        -31539.1022,
+        816.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_12",
+      "point_cm": [
+        -70120.8557,
+        -31561.3342,
+        836.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_13",
+      "point_cm": [
+        -70103.3508,
+        -31583.5663,
+        856.7103
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_14",
+      "point_cm": [
+        -70085.8521,
+        -31605.7983,
+        876.7104
+      ]
+    },
+    {
+      "mesh": "Forecourt",
+      "name": "stair_tread_15",
+      "point_cm": [
+        -70068.3472,
+        -31628.0304,
+        896.7104
+      ]
+    },
+    {
+      "mesh": "EastMain",
+      "name": "west_join_inside",
+      "point_cm": [
+        -78305.9507,
+        -36497.1916,
+        846.8178
+      ]
+    },
+    {
+      "mesh": "ConnectingRoads",
+      "name": "west_join_outside",
+      "point_cm": [
+        -78344.2634,
+        -36529.4378,
+        848.7667
+      ]
+    },
+    {
+      "mesh": "EastMain",
+      "name": "east_join_inside",
+      "point_cm": [
+        -67186.8219,
+        -27561.1018,
+        615.8904
+      ]
+    },
+    {
+      "mesh": "ConnectingRoads",
+      "name": "east_join_outside",
+      "point_cm": [
+        -67147.6078,
+        -27530.0006,
+        616.2075
+      ]
+    },
+    {
+      "mesh": "Terrain",
+      "name": "ground_below_I95_West_Mainline",
+      "point_cm": [
+        -74218.0,
+        -33177.61,
+        664.0727
+      ]
+    },
+    {
+      "mesh": "I95_West_Mainline",
+      "name": "crossing_I95_West_Mainline",
+      "point_cm": [
+        -74218.0,
+        -33177.61,
+        2674.0149
+      ]
+    },
+    {
+      "mesh": "Terrain",
+      "name": "ground_below_I95_East_Mainline",
+      "point_cm": [
+        -72931.24,
+        -32145.37,
+        631.5794
+      ]
+    },
+    {
+      "mesh": "I95_East_Mainline",
+      "name": "crossing_I95_East_Mainline",
+      "point_cm": [
+        -72931.24,
+        -32145.37,
+        2686.1271
+      ]
+    },
+    {
+      "mesh": "Terrain",
+      "name": "ground_below_I95_East_Ramp",
+      "point_cm": [
+        -71737.61,
+        -31187.84,
+        605.8638
+      ]
+    },
+    {
+      "mesh": "I95_East_Ramp",
+      "name": "crossing_I95_East_Ramp",
+      "point_cm": [
+        -71737.61,
+        -31187.84,
+        2675.9739
+      ]
+    },
+    {
+      "mesh": "Terrain",
+      "name": "ground_below_Bellwood_Rail_Trestle",
+      "point_cm": [
+        -72806.59,
+        -32045.37,
+        629.341
+      ]
+    },
+    {
+      "mesh": "Bellwood_Rail_Trestle",
+      "name": "crossing_Bellwood_Rail_Trestle",
+      "point_cm": [
+        -72806.59,
+        -32045.37,
+        1439.1829
+      ]
+    }
+  ],
+  "road_join_height_change_cm_across_50_cm": {
+    "east": 0.317,
+    "west": 1.949
+  },
+  "terrain_crop_local_en_m": [
+    -840,
+    236,
+    -596,
+    442
+  ],
+  "version": 1,
+  "viaduct_mesh_sha256": "38a4e703b79e41eb230d1f1de531a55dc7c37d2794d3c7e404965bc4fa1b8c7a"
+}

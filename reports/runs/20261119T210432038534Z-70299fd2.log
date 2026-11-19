@@ -1,0 +1,12 @@
+PASS: Combined 168251 vertices and 280 building volumes.
+PASS: Draped 2,624 road triangles and 1,659 sidewalk and curb triangles at East Main Street.
+PASS: Imported 4 elevated surfaces and checked their East Main Street crossing heights.
+FBX version: 7400
+PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment 12.70 m.
+PASS: Checked 19 imported approach heights, with 5.3 mm maximum deviation and 0.1 mm maximum height difference at the bottom stair.
+Info: Saved "RVA_Station_Approach.blend"
+Blender 4.3.2
+OBJ import of 'RVA_Pilot.obj' took 128.00 ms
+OBJ import of 'RVA_Station_Decks.obj' took 2.69 ms
+
+Blender quit

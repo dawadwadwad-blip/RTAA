@@ -1,0 +1,33 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T210605745957Z-0da65e11.json",
+    "reports/runs/20261119T210605745957Z-0da65e11.log",
+    "reports/station_smoke_package.json"
+  ],
+  "checks": [
+    "PASS: Combined 168251 vertices and 280 building volumes.",
+    "PASS: Draped 2,624 road triangles and 1,659 sidewalk and curb triangles at East Main Street.",
+    "PASS: Imported 4 elevated surfaces and checked their East Main Street crossing heights.",
+    "PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment 12.70 m.",
+    "PASS: Checked 19 imported approach heights, with 5.3 mm maximum deviation and 0.1 mm maximum height difference at the bottom stair.",
+    "PASS: Packaged 16 station meshes and verified 46 source and converted heights.",
+    "PASS: Road join height changes across 50 cm: west 1.95 cm, east 0.32 cm."
+  ],
+  "command": [
+    "bash",
+    "-e",
+    "-c",
+    "\npython tools/build_pilot_mesh_preview.py --terrain inputs/terrain-preview --streets inputs/pilot_street_graph.json --buildings inputs/pilot_building_heights.json --station-frame outputs/station-slender/RVA_Main_Street_Station_Exterior.json --output outputs/station-approach\nblender -b --factory-startup -t 12 --python-exit-code 1 --python tools/render_pilot_blender.py -- outputs/station-approach/RVA_Pilot.obj outputs/station-approach/East_Main.png --station-bundle inputs/Richmond_Unreal_First_Drive.zip --station-alignment reports/pilot_station_alignment.json --station-view approach --station-decks outputs/station-decks --save-blend outputs/station-approach/RVA_Station_Approach.blend --build-only\nblender -b outputs/station-approach/RVA_Station_Approach.blend -t 8 --python-exit-code 1 --python tools/export_station_smoke.py -- --frame outputs/station-slender/RVA_Main_Street_Station_Exterior.json\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T21:06:15+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T210605745957Z-0da65e11.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T210605745957Z-0da65e11",
+  "started_at": "2026-11-19T21:06:05+00:00",
+  "status": "PASS",
+  "task": "S1-10"
+}

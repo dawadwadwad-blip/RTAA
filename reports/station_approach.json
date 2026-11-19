@@ -2,13 +2,52 @@
   "attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
   "crosswalk_ways": [
     1306729451,
-    1306729447
+    1306729447,
+    1257934912
   ],
-  "max_road_interpolation_error_m": 0.006788,
+  "max_road_interpolation_error_m": 0.006465,
   "max_walk_interpolation_error_m": 0.067116,
-  "mesh_sha256": "1a027102babad1144f1a24da6d3ece74c5f340df54dcda5a9d88df67978227f6",
+  "mesh_sha256": "d47e5b45f097a1af15118d607918b14f258c476f9a6632886244263e6585fb55",
   "min_authored_vertex_clearance_m": 0.065,
-  "road_triangles": 2499,
+  "road_joins": [
+    {
+      "local_en_m": [
+        -783.0595070127932,
+        364.97191630476834
+      ],
+      "name": "west_join_inside",
+      "object": "East_Main_Approach_Road",
+      "z_m": 8.471614681598904
+    },
+    {
+      "local_en_m": [
+        -783.4426335732852,
+        365.294378416722
+      ],
+      "name": "west_join_outside",
+      "object": "Roads_and_paths",
+      "z_m": 8.487677975105143
+    },
+    {
+      "local_en_m": [
+        -671.8682193019341,
+        275.6110178306618
+      ],
+      "name": "east_join_inside",
+      "object": "East_Main_Approach_Road",
+      "z_m": 6.16234145865955
+    },
+    {
+      "local_en_m": [
+        -671.4760783337149,
+        275.3000063898015
+      ],
+      "name": "east_join_outside",
+      "object": "Roads_and_paths",
+      "z_m": 6.1620773068674275
+    }
+  ],
+  "road_triangles": 2624,
   "road_ways": [
     120374950,
     1366154365,
@@ -44,7 +83,7 @@
   ],
   "street_graph_sha256": "9e944634984b68fe48f1862e00d5a62992b5d067982c7c82de87c7244f3b4cb5",
   "terrain_report_sha256": "9b82f1f42dd5f21f5080fc268955f4d3876904ec769f2fd80a2d346204e5dece",
-  "walk_and_curb_triangles": 1657,
+  "walk_and_curb_triangles": 1659,
   "witnesses": [
     {
       "local_en_m": [
@@ -63,6 +102,15 @@
       "name": "fifteenth_crosswalk",
       "object": "East_Main_Approach_Road",
       "z_m": 7.831621832031252
+    },
+    {
+      "local_en_m": [
+        -781.501373,
+        363.66049799999996
+      ],
+      "name": "fifteenth_west_crosswalk",
+      "object": "East_Main_Approach_Road",
+      "z_m": 8.367181607815676
     },
     {
       "local_en_m": [
