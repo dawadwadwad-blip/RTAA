@@ -6,6 +6,10 @@ RVA is an original Richmond open-world civic sandbox. Competing groups agree on 
 
 The technical plan remains in [Richmond Open World Architecture](docs/Richmond_Open_World_Architecture.md). Spend **$0 beyond the existing subscription and hardware**. Use free Blender, QGIS, PDAL, Python, Git and civic code with built-in Unreal Engine 5 systems. Keep 2025 Richmond LiDAR and native DEM, OSM and Virginia Road Centerlines, measured building heights with source confidence, procedural Blender façades, World Partition, PCG, Nanite, Lumen, Substrate, Chaos and MassEntity. Existing GIS locks and the civic runtime have separate inputs and verification. The current project area still begins with Church Hill and Shockoe Bottom, then grows through The Fan, Monument Avenue and Belle Isle. Scott's Addition, Manchester, Oregon Hill and the county edges enter with connectivity and asset coverage.
 
+## Campaign and local stories
+
+The [campaign plan](docs/RVA_Campaign.md) places temporary city worker Mara Bell at the center of a 30-mission story. Her rented apartment sits in the path of the Connector's proposed transit plaza. The Standing Committee is a resident network marked by twenty-foot plastic yard skeletons. Small favors reveal it early. Its planning exhibits and witnesses matter at the Act 3 hearing.
+
 ## Factions and policy
 
 | Faction | Street identity | Practical trade-off |
