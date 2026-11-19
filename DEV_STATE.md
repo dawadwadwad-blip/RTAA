@@ -9,6 +9,7 @@
 - **S0-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S0-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -23,6 +24,7 @@
 - `20261119T023956740444Z-67cb4c93` · S0-05 · **PASS** · 2026-11-19T02:39:56+00:00 → 2026-11-19T02:39:58+00:00 · [run evidence](reports/runs/20261119T023956740444Z-67cb4c93.json)
 - `20261119T032037767315Z-4fb548a4` · S0-06 · **PASS** · 2026-11-19T03:20:37+00:00 → 2026-11-19T03:20:39+00:00 · [run evidence](reports/runs/20261119T032037767315Z-4fb548a4.json)
 - `20261119T033153008041Z-eab08a10` · S0-07 · **PASS** · 2026-11-19T03:31:53+00:00 → 2026-11-19T03:31:54+00:00 · [run evidence](reports/runs/20261119T033153008041Z-eab08a10.json)
+- `20261119T035103695033Z-f0b6adb4` · S0-08 · **PASS** · 2026-11-19T03:51:03+00:00 → 2026-11-19T03:51:05+00:00 · [run evidence](reports/runs/20261119T035103695033Z-f0b6adb4.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -52,6 +54,13 @@
 - **Verification** all 15 local tests passed. The C++20 Night Shift test covers both exit routes, duplicate transitions, incomplete and completed checkpoints, and invalid restore data. The full Unreal build and PIE remain unverified.
 - **Profile in the editor** check vehicle input and pose on retry, marker visibility from the cab, work-zone registration on a slope, and a missed detour. The flat rig is for objective verification. Author the real block and timing separately.
 
+## Church Hill slice jobs
+
+- **Night Shift verification** expanded the portable tests for a real authorized stripe pass and added `RVA.Graybox.NightShiftNativeFlow` for the native actor. It drives the work-order components with a possessed test pawn and checks closure, alternate exit, checkpoint retry and evidence. Running it in Unreal remains open.
+- **Hill Climb** added the placeable cornice delivery with a gentle and direct route, pitch-and-speed cargo slip, scheduled strap warning, stopped recovery and delivery.
+- **Survey Stakes** added the untimed occupied-home route and the timed stake swap. The Hard result raises a blocker at loading access. Expiry resets the moved props and leaves the approach open.
+- **Test status** all 16 local tests passed. The Unreal build, native automation and real vehicle PIE still need the target editor. Campaign ledger wiring and AI traffic repathing remain integration work.
+
 ### Next usage window prompt
 
-> Build RVACivic on the target UE5 PC and run the Night Shift setup in docs/RVA_Night_Shift_Graybox.md. Verify normal and alternate exits plus an in-session and disk checkpoint retry. Fix any build or in-editor issues, then use the same pilot block to stage the short Hill Climb and Survey Stakes jobs.
+> Build RVACivic in the target UE5 project. Run RVA.Graybox.NightShiftNativeFlow, then stage the three actors on the same Church Hill graybox following docs/RVA_Church_Hill_Slice.md. Record real-vehicle Night Shift retries, both Hill Climb routes, and a completed plus an expired Survey Stakes Hard run in DEV_STATE.md.

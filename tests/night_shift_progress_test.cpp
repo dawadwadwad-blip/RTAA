@@ -50,6 +50,20 @@ constexpr bool RejectImpossibleCheckpoints()
         && Order.GetCheckpoint().Current == Phase::Available;
 }
 
+constexpr bool StripeGeometry()
+{
+    StripePass Pass;
+    return !Pass.Arm(0.0) && !Pass.Arm(-1.2) && Pass.Arm(-0.9) && !Pass.Arm(0.9)
+        && Pass.Sample(0.0, true, true) == PassStatus::Painting
+        && Pass.Sample(0.9, true, false) == PassStatus::Cancelled
+        && Pass.Sample(0.9, true, true) == PassStatus::Idle
+        && Pass.Arm(0.85) && Pass.Sample(0.0, false, true) == PassStatus::Cancelled
+        && Pass.Arm(0.85) && Pass.Sample(-0.7, true, true) == PassStatus::Painting
+        && Pass.Sample(-0.9, true, true) == PassStatus::Finished && !Pass.IsActive()
+        && Pass.Arm(-0.9) && Pass.Sample(-1.3, true, true) == PassStatus::Cancelled;
+}
+
+static_assert(StripeGeometry());
 static_assert(FullRun(Exit::Detour, Segment::A, Segment::B));
 static_assert(FullRun(Exit::Recovery, Segment::B, Segment::A));
 static_assert(ResumeCompletedRun());
