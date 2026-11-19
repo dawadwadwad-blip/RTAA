@@ -1,0 +1,35 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T005710603518Z-28815309.json",
+    "reports/runs/20261119T005710603518Z-28815309.log"
+  ],
+  "checks": [
+    "PASS: frame uses centimeter scale and flips north",
+    "PASS: height encoding keeps one metre at 128 codes",
+    "PASS: 505 landscape samples cover 504 metre cells",
+    "PASS: first two terrain tiles are adjacent",
+    "PASS: three non-collinear OSM controls are within the core",
+    "PASS: source catalog has distinct IDs and explicit licenses",
+    "PASS: locked raw OSM bytes contain the versioned control nodes and ways",
+    "PASS: pinned NADCON5 grids reproduce both NOAA horizontal transforms offline"
+  ],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "tools/pilot_contract.py",
+    "--osm-capture",
+    "inputs/osm_pilot.osm",
+    "--proj-grid-dir",
+    "inputs/projection-grids"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T00:57:11+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T005710603518Z-28815309.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T005710603518Z-28815309",
+  "started_at": "2026-11-19T00:57:10+00:00",
+  "status": "PASS",
+  "task": "S0-02"
+}

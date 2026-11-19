@@ -1,0 +1,24 @@
+{
+  "checks": {
+    "505 landscape samples cover 504 metre cells": true,
+    "first two terrain tiles are adjacent": true,
+    "frame uses centimeter scale and flips north": true,
+    "height encoding keeps one metre at 128 codes": true,
+    "locked raw OSM bytes contain the versioned control nodes and ways": true,
+    "pinned NADCON5 grids reproduce both NOAA horizontal transforms offline": true,
+    "source catalog has distinct IDs and explicit licenses": true,
+    "three non-collinear OSM controls are within the core": true
+  },
+  "control_count": 3,
+  "landscape_tile_count": 12,
+  "proj": "9.5.1",
+  "pyproj": "3.7.2",
+  "source_asset_status": {
+    "osm_control_capture": "control_capture_verified",
+    "osm_virginia_snapshot": "catalog_verified",
+    "richmond_dem_2025": "catalog_verified",
+    "richmond_lidar_2025_geoid18": "catalog_verified",
+    "usgs_3dep_1m_fallback": "fallback_only",
+    "virginia_centerlines": "catalog_verified"
+  }
+}

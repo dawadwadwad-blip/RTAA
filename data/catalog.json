@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "richmond_dem_2025",
+      "publisher": "City of Richmond and NOAA Digital Coast",
+      "release": "2025 City of Richmond Lidar DEM, InPort 80311, Digital Coast 14836",
+      "metadata": "https://www.fisheries.noaa.gov/inport/item/80311",
+      "download": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/VA_Richmond_DEM_2025_14836/index.html",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "role": "Primary one-US-survey-foot hydro-flattened bare-earth raster",
+      "expected_horizontal_crs": "EPSG:2925",
+      "expected_vertical_crs": "EPSG:6360",
+      "expected_z_units": "US survey feet",
+      "asset_status": "catalog_verified",
+      "acquisition": "Select native tiles intersecting the generated acquisition bounds. Hash every downloaded tile and inspect GeoTIFF CRS, units, no-data, spacing and extent."
+    },
+    {
+      "id": "richmond_lidar_2025_geoid18",
+      "publisher": "City of Richmond and NOAA Digital Coast",
+      "release": "2025 City of Richmond Lidar, InPort 80312, Digital Coast 14835, geoid18 delivery",
+      "metadata": "https://www.fisheries.noaa.gov/inport/item/80312",
+      "download": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/laz/geoid18/14835/index.html",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "role": "Classified point cloud for ground (2), roofs (6) and bridge decks (17)",
+      "expected_horizontal_crs": "EPSG:6347",
+      "expected_vertical_crs": "EPSG:5703",
+      "expected_z_units": "meters",
+      "asset_status": "catalog_verified",
+      "acquisition": "Select intersecting LAZ tiles from this orthometric delivery. Hash each tile and inspect LAS header and CRS VLRs. Other NOAA delivery paths may be ellipsoidal."
+    },
+    {
+      "id": "osm_control_capture",
+      "publisher": "OpenStreetMap contributors",
+      "release": "Versioned node and way references extracted from the pilot API response",
+      "metadata": "https://wiki.openstreetmap.org/wiki/API_v0.6",
+      "download": "https://api.openstreetmap.org/api/0.6/map?bbox=-77.4334,37.5265,-77.4139,37.5360",
+      "license": "ODbL-1.0",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "role": "Control intersections; capture provenance and immutable element versions in pilot/controls.json",
+      "expected_horizontal_crs": "EPSG:4326",
+      "asset_status": "control_capture_verified"
+    },
+    {
+      "id": "osm_virginia_snapshot",
+      "publisher": "OpenStreetMap contributors via Geofabrik",
+      "release": "virginia-261117.osm.pbf",
+      "metadata": "https://download.geofabrik.de/north-america/us/virginia.html",
+      "download": "https://download.geofabrik.de/north-america/us/virginia-261117.osm.pbf",
+      "publisher_checksum": "https://download.geofabrik.de/north-america/us/virginia-261117.osm.pbf.md5",
+      "license": "ODbL-1.0",
+      "license_url": "https://www.openstreetmap.org/copyright",
+      "role": "Primary road and footprint data, paths, water and OSM IDs",
+      "expected_horizontal_crs": "EPSG:4326",
+      "asset_status": "catalog_verified",
+      "acquisition": "Verify publisher MD5 for transfer integrity, record SHA-256, and clip to acquisition bounds with complete-way and multipolygon dependencies. If the dated file disappears, explicitly revise the source lock."
+    },
+    {
+      "id": "virginia_centerlines",
+      "publisher": "Virginia Geographic Information Network",
+      "release": "VGIN Road Centerlines, item cd9bed71346d4476a0a08d3685cb36ae, feature layer 4",
+      "metadata": "https://www.arcgis.com/sharing/rest/content/items/cd9bed71346d4476a0a08d3685cb36ae/info/metadata/metadata.xml?format=default&output=html",
+      "download": "https://services8.arcgis.com/javH2x6lNvVqxMm3/ArcGIS/rest/services/VGIN_Road_Centerlines/FeatureServer/4",
+      "license": "CC0-1.0",
+      "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "role": "Independent centerline topology comparison and reviewed gap filling",
+      "asset_status": "catalog_verified",
+      "acquisition": "Query the acquisition envelope, request output SR and verify the returned CRS, retain RCL_ID and STREET_NAME_FULL, and archive the query and paginated response with date and SHA-256."
+    },
+    {
+      "id": "usgs_3dep_1m_fallback",
+      "publisher": "U.S. Geological Survey",
+      "release": "3DEP Seamless 1 meter Digital Elevation Models",
+      "metadata": "https://data.usgs.gov/datacatalog/data/USGS%3A4f34caac-f28f-4ea0-8d82-eafb2b8f9a5d",
+      "download": "https://apps.nationalmap.gov/downloader/",
+      "license": "US-PD",
+      "license_url": "https://www.usa.gov/publicdomain/label/1.0/",
+      "role": "Fallback terrain only for a documented gap in the local DEM",
+      "asset_status": "fallback_only"
+    }
+  ]
+}
