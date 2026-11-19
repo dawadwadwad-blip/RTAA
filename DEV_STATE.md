@@ -8,6 +8,7 @@
 - **S0-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S0-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -21,6 +22,7 @@
 - `20261119T022243319852Z-f77703cf` · S0-04 · **PASS** · 2026-11-19T02:22:43+00:00 → 2026-11-19T02:22:44+00:00 · [run evidence](reports/runs/20261119T022243319852Z-f77703cf.json)
 - `20261119T023956740444Z-67cb4c93` · S0-05 · **PASS** · 2026-11-19T02:39:56+00:00 → 2026-11-19T02:39:58+00:00 · [run evidence](reports/runs/20261119T023956740444Z-67cb4c93.json)
 - `20261119T032037767315Z-4fb548a4` · S0-06 · **PASS** · 2026-11-19T03:20:37+00:00 → 2026-11-19T03:20:39+00:00 · [run evidence](reports/runs/20261119T032037767315Z-4fb548a4.json)
+- `20261119T033153008041Z-eab08a10` · S0-07 · **PASS** · 2026-11-19T03:31:53+00:00 → 2026-11-19T03:31:54+00:00 · [run evidence](reports/runs/20261119T033153008041Z-eab08a10.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -43,6 +45,13 @@
 - **Ready for graybox** Night Shift has a four-beat build card and checkpoint acceptance cases. Keep the short Hill Climb and Survey Stakes method variants on the same slice budget.
 - **Verification boundary** mission order, ending routes and local links were reviewed. The existing 14-test suite passed. Assembling and playing the first slice in Unreal remain open.
 
+## Night Shift graybox
+
+- **Built** a placeable work-order actor with a briefing, tagged city truck, two end-to-end striping passes, a physical closure with two clearance routes, and yard debrief. The dispatch stub and first truck log record are exposed to the next mission.
+- **Checkpoint behavior** in-session retry is available. An optional versioned save slot restores the serialized route and evidence. Authored closure and debrief delegates fire when their milestones are earned.
+- **Verification** all 15 local tests passed. The C++20 Night Shift test covers both exit routes, duplicate transitions, incomplete and completed checkpoints, and invalid restore data. The full Unreal build and PIE remain unverified.
+- **Profile in the editor** check vehicle input and pose on retry, marker visibility from the cab, work-zone registration on a slope, and a missed detour. The flat rig is for objective verification. Author the real block and timing separately.
+
 ### Next usage window prompt
 
-> Assemble the Night Shift graybox in RVACivic using one Church Hill block. Wire the briefing, both striping segments, the offscreen closure and detour, and the yard debrief from the build card. Verify one normal completion and one checkpoint retry in PIE. Capture the work order, Night Shift Log and status in DEV_STATE.md.
+> Build RVACivic on the target UE5 PC and run the Night Shift setup in docs/RVA_Night_Shift_Graybox.md. Verify normal and alternate exits plus an in-session and disk checkpoint retry. Fix any build or in-editor issues, then use the same pilot block to stage the short Hill Climb and Survey Stakes jobs.

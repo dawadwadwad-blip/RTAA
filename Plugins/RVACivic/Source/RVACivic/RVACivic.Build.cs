@@ -7,6 +7,6 @@ public class RVACivic : ModuleRules
         CppStandard = CppStandardVersion.Cpp20;
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
         PublicDependencyModuleNames.AddRange(new[] { "Core", "CoreUObject", "Engine" });
-        PrivateDependencyModuleNames.Add("PhysicsCore");
+        PrivateDependencyModuleNames.AddRange(new[] { "PhysicsCore", "InputCore" });
     }
 }
