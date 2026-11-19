@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/f65ef44e3cab/richmond-facades/tools/verify_station_detail.py", line 76, in <module>
+    verify(Path(sys.argv[sys.argv.index("--") + 1]).resolve())
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f65ef44e3cab/richmond-facades/tools/verify_station_detail.py", line 52, in verify
+    require(record["headhouse_xyz_m_to_pilot_east_north_up_m"] == [list(row) for row in frame],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "GLB placement metadata and the Blender scene disagree.")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/f65ef44e3cab/richmond-facades/tools/verify_station_detail.py", line 18, in require
+    raise ValueError(message)
+ValueError: GLB placement metadata and the Blender scene disagree.
+
+Error: script failed, file: 'tools/verify_station_detail.py', exiting.
+PASS: Both five-bay arcades have real recesses and solid jambs.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-detail/RVA_Main_Street_Station.blend"
+
+Blender quit

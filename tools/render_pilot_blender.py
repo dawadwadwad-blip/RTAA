@@ -12,6 +12,36 @@ import bpy
 from mathutils import Matrix, Vector
 
 
+def export_headhouse(objects, frame, output):
+    import station_headhouse
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    bpy.ops.object.select_all(action="DESELECT")
+    for obj in objects:
+        obj.matrix_world = Matrix.Identity(4)
+        obj.select_set(True)
+    try:
+        if "FINISHED" not in bpy.ops.export_scene.gltf(
+                filepath=str(output), export_format="GLB", use_selection=True, export_tangents=True):
+            raise RuntimeError("Cannot export the station GLB.")
+    finally:
+        for obj in objects:
+            obj.matrix_world = frame
+    for obj in objects:
+        obj.data.calc_loop_triangles()
+    evidence = {
+        "asset": output.name,
+        "gltf_axis": "standard glTF Y-up; Blender source Z-up with X along the frontage",
+        "headhouse_xyz_m_to_pilot_east_north_up_m": [list(row) for row in frame],
+        "reference_headhouse_width_m": station_headhouse.WIDTH,
+        "objects": len(objects),
+        "triangles": sum(len(obj.data.loop_triangles) for obj in objects),
+        "material_images": sorted(img.name for img in bpy.data.images if img.name.startswith("MSS ")),
+    }
+    output.with_suffix(".json").write_text(json.dumps(evidence, indent=2) + "\n", encoding="utf-8")
+    print(f'PASS: Exported the station headhouse and forecourt with {evidence["triangles"]:,} triangles.')
+
+
 def insert_station(scene, bundle, alignment, mesh_report):
     plan = json.loads(alignment.read_text(encoding="utf-8"))
     if plan.get("schema_version") != 1:
@@ -51,10 +81,11 @@ def insert_station(scene, bundle, alignment, mesh_report):
     station.name = "Main Street Station — landmark"
     bpy.data.objects.remove(placeholder, do_unlink=True)
     print(f"PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment {ground_offset:.2f} m.")
-    return plan
+    return plan, station
 
 
-def make_view(mesh_path, output, bundle=None, alignment=None, blend=None):
+def make_view(mesh_path, output, bundle=None, alignment=None, blend=None, *,
+              station_view=None, station_glb=None, samples=32, resolution=100, build_only=False):
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
     scene.unit_settings.system = "METRIC"
@@ -64,7 +95,15 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None):
             raise ValueError("The preview OBJ differs from its report.")
     bpy.ops.wm.obj_import(filepath=str(mesh_path), forward_axis="Y", up_axis="Z")
 
-    plan = insert_station(scene, bundle, alignment, mesh_report) if bundle else None
+    plan, station = insert_station(scene, bundle, alignment, mesh_report) if bundle else (None, None)
+    if station_view:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from station_headhouse import replace_headhouse
+
+        station_frame, detail_objects = replace_headhouse(scene, station)
+        if station_glb:
+            export_headhouse(detail_objects, station_frame, station_glb)
+
     objects = [obj for obj in scene.objects if obj.type == "MESH"]
     terrain = next(obj for obj in objects if obj.name == "Terrain")
     points = [terrain.matrix_world @ Vector(corner) for corner in terrain.bound_box]
@@ -75,7 +114,13 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None):
             (west, south, east, north), mesh_report["bounds_local_en_m"])):
         raise ValueError("The imported axes and terrain bounds differ from the mesh report.")
 
-    if plan:
+    if station_view == "street":
+        eye = station_frame @ Vector((-15, -37, -0.84))
+        target = station_frame @ Vector((11.5, 0.1, 13.3))
+    elif station_view == "entrance":
+        eye = station_frame @ Vector((21.2, -21.6, -0.94))
+        target = station_frame @ Vector((15.4, 0, 4.65))
+    elif plan:
         eye = Vector((*plan["camera_eye_en_m"], plan["camera_eye_height_m"]))
         target = Vector((*plan["clock_anchor_en_m"], plan["clock_anchor_dem_m"] + 14))
     else:
@@ -83,7 +128,9 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None):
     bpy.ops.object.camera_add(location=eye)
     camera = bpy.context.object
     camera.rotation_euler = (target - camera.location).to_track_quat("-Z", "Y").to_euler()
-    if plan:
+    if station_view:
+        camera.data.lens = 29 if station_view == "street" else 31
+    elif plan:
         camera.data.lens = 28
     else:
         camera.data.type = "ORTHO"
@@ -102,20 +149,45 @@ def make_view(mesh_path, output, bundle=None, alignment=None, blend=None):
     world.use_nodes = True
     world.node_tree.nodes["Background"].inputs[0].default_value = (0.43, 0.54, 0.68, 1.0)
     world.node_tree.nodes["Background"].inputs[1].default_value = 0.35
+    if station_view:
+        sun.rotation_euler = (station_frame.to_3x3() @ Vector((0.39, 0.53, -0.74))).to_track_quat("-Z", "Y").to_euler()
+        sun.data.energy = 2.45
+        sun.data.angle = 0.055
+        sun.data.color = (1.0, 0.91, 0.79)
+        # Light with a quiet overcast fill and show a gradient sky to the camera.
+        nodes = world.node_tree.nodes
+        links = world.node_tree.links
+        background = nodes["Background"]
+        rays = nodes.new("ShaderNodeLightPath")
+        mix = nodes.new("ShaderNodeMixShader")
+        sky = nodes.new("ShaderNodeTexSky")
+        sky.sky_type = "NISHITA"
+        sky.sun_disc = False
+        sky.sun_elevation = 0.85
+        sky.air_density = 1.12
+        visible = nodes.new("ShaderNodeBackground")
+        visible.inputs["Strength"].default_value = 0.31
+        links.new(sky.outputs["Color"], visible.inputs["Color"])
+        links.new(rays.outputs["Is Camera Ray"], mix.inputs[0])
+        links.new(background.outputs[0], mix.inputs[1])
+        links.new(visible.outputs[0], mix.inputs[2])
+        links.new(mix.outputs[0], nodes["World Output"].inputs["Surface"])
+        background.inputs["Strength"].default_value = 0.51
 
     scene.render.engine = "CYCLES"
     scene.cycles.device = "CPU"
-    scene.cycles.samples = 32
+    scene.cycles.samples = samples
     scene.cycles.use_denoising = False
-    scene.render.resolution_x = 1400
-    scene.render.resolution_y = 820
-    scene.render.resolution_percentage = 100
+    scene.render.resolution_x = 1600 if station_view else 1400
+    scene.render.resolution_y = 1000 if station_view else 820
+    scene.render.resolution_percentage = resolution
     scene.render.image_settings.file_format = "PNG"
     scene.render.filepath = str(output)
     if blend:
         bpy.ops.wm.save_as_mainfile(filepath=str(blend))
-    bpy.ops.render.render(write_still=True)
-    print(f"PASS: Rendered {len(objects)} mesh objects from {mesh_path.name}.")
+    if not build_only:
+        bpy.ops.render.render(write_still=True)
+        print(f"PASS: Rendered {len(objects)} mesh objects from {mesh_path.name}.")
 
 
 def main():
@@ -125,6 +197,11 @@ def main():
     parser.add_argument("--station-bundle", type=Path)
     parser.add_argument("--station-alignment", type=Path)
     parser.add_argument("--save-blend", type=Path)
+    parser.add_argument("--station-view", choices=("street", "entrance"))
+    parser.add_argument("--station-glb", type=Path)
+    parser.add_argument("--samples", type=int, default=32)
+    parser.add_argument("--resolution", type=int, default=100, help="Render resolution percentage.")
+    parser.add_argument("--build-only", action="store_true", help="Build the requested scene or GLB without rendering.")
     arguments = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
     options = parser.parse_args(arguments)
     if options.output.suffix.lower() != ".png":
@@ -133,9 +210,19 @@ def main():
         parser.error("Supply both --station-bundle and --station-alignment.")
     if options.save_blend and options.save_blend.suffix.lower() != ".blend":
         parser.error("Use a .blend path with --save-blend.")
+    if options.station_view and not options.station_bundle:
+        parser.error("--station-view requires --station-bundle and --station-alignment.")
+    if options.station_glb and (not options.station_view or options.station_glb.suffix.lower() != ".glb"):
+        parser.error("--station-glb requires a .glb path and --station-view.")
+    if options.samples < 1 or not 1 <= options.resolution <= 100:
+        parser.error("Use positive samples and a resolution from 1 to 100 percent.")
+    if options.build_only and not (options.save_blend or options.station_glb):
+        parser.error("--build-only requires --save-blend or --station-glb.")
     options.output.parent.mkdir(parents=True, exist_ok=True)
     make_view(options.mesh.resolve(), options.output.resolve(), options.station_bundle, options.station_alignment,
-              options.save_blend.resolve() if options.save_blend else None)
+              options.save_blend.resolve() if options.save_blend else None, station_view=options.station_view,
+              station_glb=options.station_glb.resolve() if options.station_glb else None,
+              samples=options.samples, resolution=options.resolution, build_only=options.build_only)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+PASS: Both five-bay arcades have real recesses and solid jambs.
+PASS: glTF embeds eight original maps and textured surfaces have UVs and tangents.
+07:01:50 | INFO: Data are loaded, start creating Blender stuff
+07:01:50 | INFO: Blender create Mesh node MSS Headhouse
+07:01:50 | INFO: Blender create Mesh node MSS Red clay hip and dormers
+07:01:50 | INFO: Blender create Mesh node MSS Clock tower
+07:01:50 | INFO: Blender create Mesh node MSS Main Street forecourt
+07:01:50 | INFO: Blender create Mesh node Main Street Station lettering
+07:01:50 | INFO: glTF import finished in 0.34s
+PASS: GLB round-tripped through Blender with 5 meshes and 58,860 triangles.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-detail/RVA_Main_Street_Station.blend"
+
+Blender quit

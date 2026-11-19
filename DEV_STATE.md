@@ -19,6 +19,7 @@
 - **S1-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -51,6 +52,8 @@
 - `20261119T044424844345Z-7be003f1` · S1-06 · **PASS** · 2026-11-19T04:44:24+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044424844345Z-7be003f1.json)
 - `20261119T044428484695Z-089c4659` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044428484695Z-089c4659.json)
 - `20261119T044428798792Z-3c3d9eee` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:39+00:00 · [run evidence](reports/runs/20261119T044428798792Z-3c3d9eee.json)
+- `20261119T115954413506Z-28323fc4` · S1-07 · **FAILED** · 2026-11-19T11:59:54+00:00 → 2026-11-19T12:00:02+00:00 · [run evidence](reports/runs/20261119T115954413506Z-28323fc4.json)
+- `20261119T120145502898Z-fdc284fd` · S1-07 · **PASS** · 2026-11-19T12:01:45+00:00 → 2026-11-19T12:01:51+00:00 · [run evidence](reports/runs/20261119T120145502898Z-fdc284fd.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -131,6 +134,12 @@
 - **Evidence** the two outlines overlap at 99.8462% intersection over union. The affine approximation has a 2.3 mm maximum residual against the direct reprojection at the archived outline vertices. An assembled Blender scene and a street view were generated.
 - **Fixed** the OBJ import used a forward-axis setting that rotated the scene by 180°. The corrected importer validates all four terrain bounds before framing the render.
 
+## S1-07 · Main Street Station street detail
+
+- **Built** the two recessed five-bay arcades, clerestory, red tile hip roof with two dormer rows, a four-face clock tower, and a stepped forecourt. The original maps are packed in the Blender scene and embedded in the exterior GLB.
+- **Verification** rendered two street-level views and checked the recessed bays, saved placement, and GLB round trip with Blender. The headhouse and plaza use five assemblies. The adjacent buildings remain blockout geometry.
+- **Next** set up collision and distance LODs in the target Unreal project, dress the immediate approach and verify scale, visual clarity and frame rate during play.
+
 ### Next usage window prompt
 
-> Build and test RVACivic in the target Unreal project using docs/RVA_Church_Hill_Playtest.md. Import the DEM-only pair and the verified station placement from docs/Pilot_Main_Street_Station.md. Check height and collision from a moving vehicle and confirm the clock tower, lane turns and terrain seam line up. Use that drive before expanding map coverage.
+> Import the detailed Main Street Station exterior and the DEM-only pair using docs/Pilot_Main_Street_Station.md. Test the station stairs on foot and the approach from a moving car. Check collision, material scale, LOD transitions and the terrain seam. Then run the RVACivic smoke test in docs/RVA_Church_Hill_Playtest.md before expanding map coverage.
