@@ -8,23 +8,19 @@ The technical plan remains in [Richmond Open World Architecture](docs/Richmond_O
 
 ## Campaign and local stories
 
-The [campaign plan](docs/RVA_Campaign.md) places temporary city worker Mara Bell at the center of a 30-mission story. Her rented apartment sits in the path of the Connector's proposed transit plaza. The Standing Committee is a resident network marked by twenty-foot plastic yard skeletons. Small favors reveal it early. Its planning exhibits and witnesses matter at the Act 3 hearing.
+The [campaign plan](docs/RVA_Campaign.md) follows Mara Bell, a temporary city maintenance worker who shares her late mother's Church Hill rowhouse with her brother Cal. A forged overnight job puts her truck at a scaffold fire. The threatened parcel and the truck's movement log tie her to the ghost Connector project and to Winslow Tate's housing fund. The [mission outline](docs/RVA_Mission_Beats.md) sets out 30 main jobs, four acts and four conditional outcomes.
+
+The Standing Committee uses giant yard skeletons as an early clue. The hand-truck favor remains an optional street encounter. The campaign reveals a long-unadjourned council committee whose records and procedural leverage matter in Acts III and IV.
 
 ## Factions and policy
 
-| Faction | Street identity | Practical trade-off |
-|---|---|---|
-| **The Albanico Association** · Church Hill and The Fan | Costume aristocrats in vintage sedans heckle vinyl siding and lob theatrical masonry at renovations. | Historic fabric survives while compliance costs and rents can squeeze working-class tenants. |
-| **The YIMBY Cult of “The Pod”** · Scott’s Addition and Manchester | Container-apartment developers treat cold brew, demolition and luxury rent as the same solution. | More units and construction jobs can arrive alongside demolition and displacement. |
-| **Radical Transit & Cargo-Bike Militia** | Lycra organizers have a cargo bike, a street audit clipboard and a cartoon physics prop for every occasion. | Safer crossings, cleaner air and bus reliability compete for loading space and travel lanes. |
-| **Asphalt & Truck-Nutz Coalition** | SUV devotees and highway contractors promise that I‑95 needs one more lane. | Brisk car trips and freight access compete with wider crossings, noise and induced traffic. |
-| **Small Local Independents** | Shopkeepers pool favors and protect affordable storefronts. | A stronger local identity needs lower fixed costs and enough foot traffic to remain viable. |
-| **Outside Corporate Capital** | Recruiters offer a ribbon-cutting and a reflective office façade for every subsidy. | Offices, employment and tax receipts can also raise costs and standardize the retail mix. |
-| **Urban Core Focus** | Density advocates pick existing street grids and infrastructure. | Reuse saves new infrastructure per household while adding pressure to core blocks. |
-| **County Annexation** | Map lobbyists keep drawing borders farther into Henrico and Chesterfield. | Regional reach can spread tax capacity while adding roads, services and governance costs. |
-| **Municipal Red-Tape & Blue-Ribbon Commission** | Consultants cart mobile podiums, tax thermometers and new logos from study to study. | Higher taxes open official permit routes while the commission takes 95% for overhead by default. Unpermitted projects build enforcement heat. |
+The playable roster is The Albanico Association, The Pod, Transit & Cargo-Bike Militia, Asphalt & Truck-Nutz Coalition, and Small Independents. The [campaign territory map](docs/RVA_Campaign.md#playable-factions-and-territories) lists their bases and opposing wings. Outside Capital acts through Tate's patronage, Compliance runs permits and enforcement, and the city–county boundary changes who responds. The Standing Committee runs across neighborhoods and factions.
 
-`UCivicFactionSubsystem` owns one active game or PIE world. Reputation spans −100 to +100. Four opposing pairs react by half of the actual change after clamping. Permit eligibility uses tax rate, heat and Commission reputation. A tax hike above the baseline raises resident and business pressure. The fiscal calculation conserves integer cents, with published administration and public-works amounts for each supplied tax base. Civic actions and scripted ordinances change this state through the subsystem. Enforcement at heat 60 can activate an authored Runtime Data Layer of municipal sedans, wheel boots and barricades. Permit and favor rules can activate alternate storefronts, campaign props or preserved façades. One rule owns one dedicated asset. Civil infrastructure and the base tile layout live in other layers.
+The campaign's Work Orders, Method Dial, Hi-Vis rules, Net Good ledger and district Strain swaps extend the civic runtime. The first slice prototypes the work-zone boundary and authored lane-state changes. Longer-lived visual changes can continue using World Partition Runtime Data Layers.
+
+### Current civic prototype
+
+`UCivicFactionSubsystem` owns one active game or PIE world. The existing prototype keeps its broader reputation keys, fiscal calculations, permit eligibility, heat and Layer overrides. These keys support the tested prototypes. Campaign wing contacts and jurisdiction are future integrations. Enforcement at heat 60 currently drives a prototype override. The campaign ladder needs the ordered response behaviors in the mission outline.
 
 ### In-game actions
 
@@ -38,9 +34,9 @@ Use by-player swept routes and short-lived physics props, with bounded use range
 
 ### Council and street-audit loops
 
-- **Council hearing.** A raised 3D map uses the same projected layout as the street world. Move proposed ordinances across the floor while bureaucrats steer them into a “180-Day Subcommittee Vortex.” Players get the slippery City Clerk to stamp the ordinance before the gavel timer. Cardboard boards, scale models and thermoses are bounce-safe game props. Approved ordinances call explicit fiscal and reputation changes.
-- **Live street audit.** Get ahead of a moving council convoy on Church Hill grades, Oregon Hill slopes and James River approaches. Place bollards, parklets or preservation scaffolding inside authored zones. The convoy observes street state at checkpoints and resolves policy changes, civic reputation and per-site scores.
-- **Implementation boundary.** The council timer, inspection convoy, boots, destructible red-tape barriers, authored factions, audio, saving and Mass traffic behavior need map or systems work. The first implementation provides the callable state and physical tool behavior for that work.
+- **Public Comment.** Reuse the floor map for witnesses, exhibits and points of order. Physical props and the hearing clock create pressure. The hearing puts a workable alternative on record before the procedural freeze in Act IV.
+- **The Listening Tour.** Scout a moving inspector's route and mark or repair an approach before the visit. Reuse the same work zones and street state as regular jobs.
+- **Implementation status.** The council timer, convoy checks, campaign AI, authored faction contacts, arrival routes, audio and saving need map or systems work. Existing tools supply callable state and physical interactions.
 
 ## Engine integration
 
