@@ -1,0 +1,5 @@
+PASS: Created revised Windows release.
+PASS: Created revised Linux release.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+outputs/station-reference-views/windows/RVA-Night-Shift.exe: PE32+ executable for MS Windows 5.02 (GUI), x86-64 (stripped to external PDB), 12 sections

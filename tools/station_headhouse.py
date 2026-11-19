@@ -240,7 +240,7 @@ def return_walls(group):
             for dx in (-0.55, 0.55):
                 group.box(x + dx - 0.027, x + dx + 0.027, -0.17, -0.08, 4.75, 7.77, "wood")
             group.box(x - 1.28, x + 1.28, -0.39, 0.03, 4.64, 4.77, "trim")
-            if (side, position) == (-1, 10.25):
+            if (side == 1 and position < 20) or (side, position) == (-1, 10.25):
                 pediment(group, x, -0.32, 8.20, 1.94, 0.55)
         for position in range(3, 23, 2):
             x = side * position
@@ -248,6 +248,28 @@ def return_walls(group):
             column(group, x - 0.97, -0.11, 9.74, 12.17, 0.169)
         transform = Matrix.Translation((WIDTH if side == 1 else 0, 0, 0)) @ Matrix.Rotation(side * pi / 2, 4, "Z")
         group.transform(transform, start)
+
+
+def entrance_masonry(group):
+    palette = ("limestone", "limestone_light", "limestone_dark", "limestone")
+    for column_index in range(6):
+        center = ARCADE_LEFT + column_index * BAY
+        for row in range(6):
+            bottom = 0.23 + row * 0.451
+            half = 0.405 - (row % 3) * 0.012
+            projection = -0.153 - (row % 3) * 0.016
+            group.box(center - half, center + half, projection, -0.061,
+                      bottom + 0.015, bottom + 0.437, palette[(column_index + row) % len(palette)])
+    for center in ARCADE:
+        inner = arch_points(center, 2.76, 2.94, 0.38, 12)
+        outer = arch_points(center, 3.14, 2.94, 0.66, 12)
+        for i in range(len(inner) - 1):
+            polygon = []
+            for ring in (inner, outer):
+                a, b = Vector(ring[i]), Vector(ring[i + 1])
+                polygon.extend((a.lerp(b, 0.045), a.lerp(b, 0.955)))
+            group.section((polygon[0], polygon[1], polygon[3], polygon[2]), -0.228, -0.119,
+                          palette[i % len(palette)])
 
 
 def headhouse(group):
@@ -269,6 +291,7 @@ def headhouse(group):
     for x in (ARCADE_LEFT + index * BAY for index in range(6)):
         group.box(x - 0.34, x + 0.34, -0.17, 0.16, 0.20, 0.67, "highlight")
         group.box(x - 0.39, x + 0.39, -0.20, 0.13, 0.61, 0.73, "highlight")
+    entrance_masonry(group)
     loggia(group)
     tower_bay = TOWER_WEST + (2.72 - TOWER_WEST) * TOWER_PLAN_SCALE
     for x in (tower_bay, 27.72):
@@ -356,6 +379,12 @@ def tiled_roof(group):
                 dormer(group, x, y, z, ornate)
         if reverse:
             group.transform(Matrix.Translation((WIDTH, DEPTH, 0)) @ Matrix.Rotation(pi, 4, "Z"), start)
+    start = len(group.vertices)
+    # The end facing the parking lot has its own dormers in the east hip.
+    for center, inset, ornate in ((8.6, 0.68, True), (16.05, 0.68, True), (12.25, 2.73, False)):
+        z = EAVE + (inset + 0.49) * (ridge_z - EAVE) / (WIDTH + 0.49 - 23.87)
+        dormer(group, center, inset, z, ornate)
+    group.transform(Matrix.Translation((WIDTH, 0, 0)) @ Matrix.Rotation(pi / 2, 4, "Z"), start)
     group.box(28.73, 29.64, 3.50, 5.02, 10.75, 20.82, "brick")
     group.box(28.61, 29.77, 3.35, 5.16, 18.30, 18.53, "trim")
     group.box(28.56, 29.82, 3.29, 5.22, 20.70, 20.96, "trim_dark")

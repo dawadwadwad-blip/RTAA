@@ -1,0 +1,127 @@
+FBX version: 7400
+PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment 12.70 m.
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:46:25 | INFO: Starting glTF 2.0 export
+16:46:25 | INFO: Extracting primitive: MSS Headhouse
+16:46:25 | INFO: Primitives created: 14
+16:46:25 | INFO: Extracting primitive: MSS Red clay hip and dormers
+16:46:25 | INFO: Primitives created: 9
+16:46:25 | INFO: Extracting primitive: MSS Clock tower
+16:46:25 | INFO: Primitives created: 11
+16:46:25 | INFO: Extracting primitive: MSS Main Street forecourt
+16:46:25 | INFO: Primitives created: 9
+16:46:25 | INFO: Extracting primitive: MSS Restored train shed
+16:46:25 | INFO: Primitives created: 10
+16:46:25 | INFO: Extracting primitive: Main Street Station lettering
+16:46:25 | INFO: Primitives created: 1
+16:46:25 | INFO: Finished glTF 2.0 export in 0.21467161178588867 s
+
+PASS: Exported the station exterior and train shed with 80,836 triangles.
+Info: Saved "RVA_Main_Street_Station.blend"
+Blender 4.3.2
+OBJ import of 'RVA_Pilot.obj' took 241.25 ms
+
+Blender quit
+PASS: Recessed arcades, continuous 3 m loggia, wide stairs, and an unobstructed clay dome.
+PASS: Tower shaft is 6.51 m wide and the finial reaches 34.45 m above local zero.
+PASS: The resized tower retains a circular clock dial.
+PASS: glTF embeds eight original maps and textured surfaces have UVs and tangents.
+16:46:27 | INFO: Data are loaded, start creating Blender stuff
+16:46:27 | INFO: Blender create Mesh node MSS Headhouse
+16:46:27 | INFO: Blender create Mesh node MSS Red clay hip and dormers
+16:46:27 | INFO: Blender create Mesh node MSS Clock tower
+16:46:27 | INFO: Blender create Mesh node MSS Main Street forecourt
+16:46:27 | INFO: Blender create Mesh node MSS Restored train shed
+16:46:27 | INFO: Blender create Mesh node Main Street Station lettering
+16:46:27 | INFO: glTF import finished in 0.15s
+PASS: GLB round-tripped through Blender with 6 meshes and 80,836 triangles.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-reference-views/standalone/RVA_Main_Street_Station.blend"
+
+Blender quit
+PASS: Imported 4 elevated surfaces and checked their East Main Street crossing heights.
+FBX version: 7400
+PASS: Placed Main Street Station and replaced its duplicate volume. Z adjustment 12.70 m.
+PASS: Checked 19 imported approach heights, with 5.3 mm maximum deviation and 0.1 mm maximum height difference at the bottom stair.
+Info: Saved "RVA_Station_Approach.blend"
+Blender 4.3.2
+OBJ import of 'RVA_Pilot.obj' took 139.79 ms
+OBJ import of 'RVA_Station_Decks.obj' took 2.56 ms
+
+Blender quit
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+16:46:32 | INFO: Starting glTF 2.0 export
+16:46:32 | INFO: Extracting primitive: Building_osm_way_207703634
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_207703635
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_207703636
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_207703639
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586218
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586219
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586220
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586222
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586223
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586224
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Building_osm_way_225586226
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: East_Main_Approach_East_Station_Walk
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: East_Main_Approach_North_Walk
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: East_Main_Approach_Road
+16:46:32 | INFO: Primitives created: 4
+16:46:32 | INFO: Extracting primitive: East_Main_Approach_South_Walk
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Roads_and_paths trial
+16:46:32 | INFO: Primitives created: 2
+16:46:32 | INFO: Extracting primitive: Terrain trial
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: Bellwood_Rail_Trestle_Illustrative_Supports
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: Bellwood_Rail_Trestle_Surface
+16:46:32 | INFO: Primitives created: 3
+16:46:32 | INFO: Extracting primitive: I95_East_Mainline_Illustrative_Supports
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: I95_East_Mainline_Surface
+16:46:32 | INFO: Primitives created: 5
+16:46:32 | INFO: Extracting primitive: I95_East_Ramp_Illustrative_Supports
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: I95_East_Ramp_Surface
+16:46:32 | INFO: Primitives created: 5
+16:46:32 | INFO: Extracting primitive: I95_West_Mainline_Illustrative_Supports
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Extracting primitive: I95_West_Mainline_Surface
+16:46:32 | INFO: Primitives created: 5
+16:46:32 | INFO: Extracting primitive: MSS East forecourt setting
+16:46:32 | INFO: Primitives created: 6
+16:46:32 | INFO: Extracting primitive: MSS Headhouse
+16:46:32 | INFO: Primitives created: 14
+16:46:32 | INFO: Extracting primitive: MSS Red clay hip and dormers
+16:46:32 | INFO: Primitives created: 9
+16:46:32 | INFO: Extracting primitive: MSS Clock tower
+16:46:32 | INFO: Primitives created: 11
+16:46:32 | INFO: Extracting primitive: MSS Main Street forecourt
+16:46:32 | INFO: Primitives created: 9
+16:46:32 | INFO: Extracting primitive: MSS Restored train shed
+16:46:32 | INFO: Primitives created: 10
+16:46:32 | INFO: Extracting primitive: Main Street Station lettering
+16:46:32 | INFO: Primitives created: 1
+16:46:32 | INFO: Finished glTF 2.0 export in 0.41578054428100586 s
+
+PASS: Exported 32 Shockoe meshes in meters around the station crossing.
+Blender 4.3.2
+Read blend: "/workspace/scratch/f65ef44e3cab/richmond-facades/outputs/station-reference-views/RVA_Station_Approach.blend"
+
+Blender quit
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Crosswalk 5.998 m, west grade 7.238 m, graphics toggle, unarmed drive, full 22 m pass and clean retry.

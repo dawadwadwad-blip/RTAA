@@ -19,9 +19,13 @@ var speed := 0.0
 var yaw := 0.0
 var progress := 0.0
 var laid := Node3D.new()
+var work_order := PanelContainer.new()
 var status: Label
 var speedometer: Label
 var controls: Label
+var view_label: Label
+var station_views: Array = []
+var view_index := -1
 var paint: StandardMaterial3D
 var pieces := 0
 var initialized := false
@@ -32,6 +36,7 @@ func _ready() -> void:
 	var tangent: Array = route["eastbound_xz"]
 	eastbound = Vector3(tangent[0], 0.0, tangent[1]).normalized()
 	right_eastbound = Vector3(-eastbound.z, 0.0, eastbound.x)
+	station_views = route.get("station_views", [])
 	register_keyboard()
 	var street := STREETS.instantiate()
 	add_child(street)
@@ -85,7 +90,7 @@ func register_keyboard() -> void:
 	var bindings := {
 		"gas": [KEY_W, KEY_UP], "brake": [KEY_S, KEY_DOWN],
 		"left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT],
-		"stripe": [KEY_E], "retry": [KEY_R], "quality": [KEY_F2],
+		"stripe": [KEY_E], "retry": [KEY_R], "quality": [KEY_F2], "station_view": [KEY_C],
 	}
 	for action in bindings:
 		if InputMap.has_action(action):
@@ -98,6 +103,7 @@ func register_keyboard() -> void:
 
 
 func reset_shift() -> void:
+	view_index = -1
 	truck.position = route_position(START_AT, STRIPE_LANE)
 	truck.position.y = 6.1
 	yaw = atan2(-eastbound.x, -eastbound.z)
@@ -121,6 +127,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quality"):
 		sun.shadow_enabled = not sun.shadow_enabled
 		get_viewport().scaling_3d_scale = 1.0 if sun.shadow_enabled else 0.75
+	if Input.is_action_just_pressed("station_view") and not station_views.is_empty():
+		view_index = ((view_index + 2) % (station_views.size() + 1)) - 1
+		update_camera(1.0)
+	if view_index >= 0:
+		update_hud()
+		return
 
 	var throttle := Input.get_action_strength("gas")
 	var brake := Input.get_action_strength("brake")
@@ -215,6 +227,15 @@ func add_gate(along: float, tint: Color) -> void:
 
 
 func update_camera(amount: float) -> void:
+	if view_index >= 0:
+		var view: Dictionary = station_views[view_index]
+		var eye: Array = view["eye"]
+		var target: Array = view["target"]
+		camera.fov = view["fov"]
+		camera.position = Vector3(eye[0], eye[1], eye[2])
+		camera.look_at(Vector3(target[0], target[1], target[2]))
+		return
+	camera.fov = 67.0
 	var forward := heading()
 	var right := Vector3(-forward.z, 0.0, forward.x)
 	var eye := truck.position - forward * 8.7 + Vector3.UP * 4.15 + right * 0.55
@@ -236,13 +257,14 @@ func add_lighting() -> void:
 	atmosphere.background_mode = Environment.BG_SKY
 	atmosphere.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	atmosphere.ambient_light_color = Color("c1d1e2")
-	atmosphere.ambient_light_energy = 0.66
+	atmosphere.ambient_light_energy = 0.53
 	atmosphere.fog_enabled = true
 	atmosphere.fog_light_color = Color("cdd8d8")
-	atmosphere.fog_density = 0.0035
+	atmosphere.fog_density = 0.0017
+	atmosphere.fog_sky_affect = 0.0
 	world.environment = atmosphere
 	add_child(world)
-	sun.rotation_degrees = Vector3(-36.0, 144.0, 0.0)
+	sun.rotation_degrees = Vector3(-44.0, 24.0, 0.0)
 	sun.light_color = Color("ffe1bd")
 	sun.light_energy = 0.87
 	sun.shadow_enabled = true
@@ -312,7 +334,6 @@ func build_hud(attribution: String) -> void:
 	layer.add_child(hud)
 	hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hud.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	var board := PanelContainer.new()
 	var panel := StyleBoxFlat.new()
 	panel.bg_color = Color(0.06, 0.11, 0.13, 0.94)
 	panel.border_color = Color("dcad6e")
@@ -322,12 +343,12 @@ func build_hud(attribution: String) -> void:
 	panel.content_margin_right = 19
 	panel.content_margin_top = 13
 	panel.content_margin_bottom = 15
-	board.add_theme_stylebox_override("panel", panel)
-	board.position = Vector2(24, 22)
-	hud.add_child(board)
+	work_order.add_theme_stylebox_override("panel", panel)
+	work_order.position = Vector2(24, 22)
+	hud.add_child(work_order)
 	var rows := VBoxContainer.new()
 	rows.add_theme_constant_override("separation", 5)
-	board.add_child(rows)
+	work_order.add_child(rows)
 	var place := make_label("SHOCKOE BOTTOM  /  EAST MAIN STREET", 14, Color("d6b583"))
 	rows.add_child(place)
 	rows.add_child(make_label("Night Shift", 29, Color("f5f0e5")))
@@ -341,7 +362,7 @@ func build_hud(attribution: String) -> void:
 	speedometer.offset_left = -230
 	speedometer.offset_right = -24
 	speedometer.offset_top = 24
-	controls = make_label("WASD or arrows  Drive     E  Arm striper     R  Restart     F2  Graphics", 16, Color("f5f0e5"))
+	controls = make_label("WASD or arrows  Drive    E  Arm    R  Restart    C  Station views    F2  Graphics", 16, Color("f5f0e5"))
 	hud.add_child(controls)
 	controls.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	controls.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
@@ -353,6 +374,13 @@ func build_hud(attribution: String) -> void:
 	credit.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
 	credit.offset_left = 23
 	credit.offset_top = -24
+	view_label = make_label("", 19, Color("f5f0e5"))
+	hud.add_child(view_label)
+	view_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	view_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	view_label.offset_left = -350
+	view_label.offset_right = 350
+	view_label.offset_top = -41
 	if DisplayServer.is_touchscreen_available() or OS.has_feature("web"):
 		add_touch_controls(hud)
 	update_hud()
@@ -388,6 +416,14 @@ func add_touch_controls(hud: Control) -> void:
 
 
 func update_hud() -> void:
+	var inspecting := view_index >= 0
+	work_order.visible = not inspecting
+	speedometer.visible = not inspecting
+	controls.visible = not inspecting
+	view_label.visible = inspecting
+	if inspecting:
+		view_label.text = "%s    ·    C  Change view" % station_views[view_index]["name"]
+		return
 	match phase:
 		Shift.READY:
 			status.text = "Arm the striper before the amber gate."

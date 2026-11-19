@@ -1,0 +1,31 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T214805612012Z-e214eedf.json",
+    "reports/runs/20261119T214805612012Z-e214eedf.log"
+  ],
+  "checks": [
+    "PASS: Exported 32 Shockoe meshes in meters around the station crossing.",
+    "PASS: Crosswalk 5.998 m, west grade 7.238 m, graphics toggle, unarmed drive, full 22 m pass and clean retry.",
+    "PASS: Created revised Windows release.",
+    "PASS: Created revised Linux release.",
+    "PASS: Crosswalk 5.998 m, west grade 7.238 m, graphics toggle, unarmed drive, full 22 m pass and clean retry.",
+    "PASS: 1280 x 720 Compatibility render captured via Mesa software OpenGL.",
+    "PASS: Linux release launched and rendered at 1280 x 720."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "\nblender -b outputs/station-reference-views/RVA_Station_Approach.blend -t 8 --python-exit-code 1 --python tools/export_godot_station.py > outputs/station-reference-views/scene-export.log 2>&1\ntail -6 outputs/station-reference-views/scene-export.log\ngodot --headless --path godot/station_trial --editor --import > outputs/station-reference-views/import.log 2>&1\ngodot --headless --path godot/station_trial --fixed-fps 60 --script res://verify_trial.gd\nfor preset in Windows Linux; do\n  case \"$preset\" in\n    Windows) name=windows/RVA-Night-Shift.exe ;;\n    Linux) name=linux/RVA-Night-Shift.x86_64 ;;\n  esac\n  godot --headless --path godot/station_trial --export-release \"$preset\" \"$PWD/outputs/station-reference-views/$name\" > \"outputs/station-reference-views/export-$preset.log\" 2>&1 || { tail -20 \"outputs/station-reference-views/export-$preset.log\"; exit 1; }\n  echo \"PASS: Created revised $preset release.\"\ndone\noutputs/station-reference-views/linux/RVA-Night-Shift.x86_64 --headless --audio-driver Dummy --quit-after 30\nRVA_TRIAL_STATION_VIEWS=\"$PWD/outputs/station-reference-views/Godot_Station_\" python outputs/station-reference-views/check_render.py\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T21:48:34+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T214805612012Z-e214eedf.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T214805612012Z-e214eedf",
+  "started_at": "2026-11-19T21:48:05+00:00",
+  "status": "PASS",
+  "task": "S1-12"
+}
