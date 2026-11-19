@@ -102,7 +102,7 @@ func _wanted(entry: Dictionary, support: Dictionary) -> bool:
 func _terrain_support() -> Dictionary:
 	var paths := {}
 	for entry: Dictionary in cells:
-		if entry.kind != "buildings":
+		if not entry.has("terrain_dependencies"):
 			continue
 		var margin := unload_margin_m if _resident.has(entry.path) else 0.0
 		if _distance(entry) <= load_radius_m + margin:

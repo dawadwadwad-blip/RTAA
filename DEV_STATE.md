@@ -29,6 +29,7 @@
 - **S1-14 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-15 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-16 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-17 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -106,6 +107,7 @@
 - `20261119T233345297351Z-4f68d34c` · S1-16 · **PASS** · 2026-11-19T23:33:45+00:00 → 2026-11-19T23:33:59+00:00 · [run evidence](reports/runs/20261119T233345297351Z-4f68d34c.json)
 - `20261119T233532431569Z-c85c8a80` · S1-16 · **PASS** · 2026-11-19T23:35:32+00:00 → 2026-11-19T23:35:46+00:00 · [run evidence](reports/runs/20261119T233532431569Z-c85c8a80.json)
 - `20261119T233644065174Z-535a88bf` · S1-16 · **PASS** · 2026-11-19T23:36:44+00:00 → 2026-11-19T23:36:56+00:00 · [run evidence](reports/runs/20261119T233644065174Z-535a88bf.json)
+- `20261119T234945066892Z-495f9977` · S1-17 · **PASS** · 2026-11-19T23:49:45+00:00 → 2026-11-19T23:50:15+00:00 · [run evidence](reports/runs/20261119T234945066892Z-495f9977.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -257,3 +259,9 @@
 - Verified 9,674 shared edge vertices and normals, sampled 50,775 grounded façade vertices across 21 building layers and checked 117 East Main Street ground raycasts under Jolt. The scene contains 2,148 ground paths and 14 bike paths. Four of those are tagged East Franklin Street bike-lane offsets. Held out 88 grade-separated ways pending deck or tunnel heights.
 - The streaming test loaded 44 of 81 layers at the starting camera, then added 10 and retired 33 at the opposite side of the map. The audit tool rendered two saved KartaView viewpoints from the scene. The existing 21st Street drive and 22 m striping pass also passed, and its export preset excludes the GIS resources.
 - The survey uses simple building volumes and estimated offsets for tagged bike lanes. It is ready for work on visual road surfaces, the authored Main Street Station placement and grade-separated spans.
+
+## S1-17 · Main Street Station in the streamed survey
+
+- Replaced the single OpenStreetMap station footprint with the authored clock tower, headhouse, front stairs and train shed. The optional `--station-exterior` build packages the source GLB and replacement record together. The surveyed east/north placement covers 98.21% of the mapped footprint in the model's bounds, and the first-step fit moved the station down 4.6 mm onto this pilot's 3DEP terrain. [Station in Godot](reports/RVA_GIS_Station.webp) · [Build notes](docs/Godot_Station_Trial.md)
+- Godot reloaded six meshes and eight embedded material textures, including transparent train shed glazing. Jolt probes passed across all 15 stair treads and through the old shed volume where only terrain should collide. The scene streamed with supporting terrain and rebuilt successfully after import.
+- The GIS build without the optional landmark passed its original verification. The authored East Main drive and striping job also passed again. Platform and rail-deck collision and visual road surfaces are open.

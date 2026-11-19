@@ -48,3 +48,14 @@ From the Godot editor, run `res://tools/assemble_gis_pilot.gd` after importing t
 Terrain and collision use the same R16 samples and NW–SE diagonal. Aerial textures take a small collar around each tile to preserve filtering at cell edges. Each building layer brings in the terrain it overlaps. The survey loads and retires layers as the camera moves. Road and bike splines are scene data for future routing. Tagged bridges, tunnels and nonzero-layer ways are recorded for later elevation work. Side offsets for tagged bike lanes use road-width estimates.
 
 The audit camera accepts this scene. Point `RVA_AUDIT_GIS_DIR` at the GIS snapshot used to generate it and run `res://tools/visual_audit_cam.gd` from the editor. The camera brings the appropriate layers in for each viewpoint. The Night Shift exports exclude the generated GIS resources to keep their download size independent of map coverage.
+
+### Authored Main Street Station
+
+Use the standalone station GLB and its adjacent placement JSON from the [station export](Pilot_Main_Street_Station.md). Pass the GLB to the same building command before assembling the survey. For example, with the default GIS folder and a station export in `outputs/station-detail`:
+
+```sh
+python tools/build_rva_3d_blocks.py --station-exterior outputs/station-detail/RVA_Main_Street_Station_Exterior.glb
+godot --headless --path godot/station_trial --import
+```
+
+Run the GIS assembly script again. The chunk manifest pairs exactly one mapped footprint replacement with the authored asset, its checksum and its surveyed transform. The station streams with the terrain underneath it. The stair and headhouse collision uses the actual authored mesh. The train shed exterior is visual pending the separate rail-deck integration. [Station in the GIS scene](../reports/RVA_GIS_Station.webp)

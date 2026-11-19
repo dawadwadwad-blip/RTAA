@@ -1,0 +1,33 @@
+Blender 4.3.2
+
+Blender quit
+Wrote /workspace/scratch/f65ef44e3cab/richmond-facades/outputs/rva_gis_station/assets/rva_gis/meshes: 21 GLB chunks, 1433 generic buildings, 1 authored landmarks and 0 rejected footprints.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: The saved landmark contains six authored meshes, eight textures and transparent glazing.
+PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.
+PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.
+PASS: Sampled 50597 grounded wall vertices across all 21 building layers.
+PASS: Jolt matched all 15 station treads and found no generic shed collision.
+PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.
+PASS: Stream loaded 45/82 layers at startup, then added 10 and unloaded 34 at a distant focus with building support intact.
+PILOT: res://assets/rva_gis/pilot/richmond_gis_pilot.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS: Captured both sides of the station in the streamed Godot GIS scene.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.
+PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.
+PASS: Sampled 50775 grounded wall vertices across all 21 building layers.
+PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.
+PASS: Stream loaded 44/81 layers at startup, then added 10 and unloaded 33 at a distant focus with building support intact.
+PILOT: res://assets/rva_gis/pilot/richmond_gis_pilot.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.
+PASS: Rebuilt the generated chunks after Godot import with exactly one footprint replacement.
+FIT: stair datum adjust -0.0046 m and mapped footprint coverage within the model envelope 98.21%.
