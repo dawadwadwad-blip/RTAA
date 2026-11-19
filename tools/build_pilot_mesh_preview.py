@@ -14,7 +14,7 @@ try:
     import numpy as np
     import shapely
     from shapely.affinity import scale
-    from shapely.geometry import LineString, box, shape
+    from shapely.geometry import LineString, Polygon, box, shape
 except ImportError:
     shapely = None
 
@@ -126,11 +126,16 @@ def landscape(obj, surface):
             obj.face((nw, sw + 1, nw + 1))
 
 
-def transport(obj, surface, graph):
+def transport(obj, surface, graph, approach=None):
     nodes = {row["id"]: row["local_en_m"] for row in graph["nodes"]}
     counts = {"ordinary_road_edges": 0, "foot_only_edges": 0, "grade_separated_edges_omitted": 0}
     clip = surface.footprint
     obj.group("Roads_and_paths")
+    if approach is not None:
+        from station_approach import Drape
+
+        drape = Drape(obj, surface)
+        counts["partially_or_fully_replaced_ground_edges"] = 0
     for edge in graph["edges"]:
         line = LineString((nodes[edge["a"]], nodes[edge["b"]])).intersection(clip)
         if line.geom_type != "LineString" or line.length <= 0:
@@ -141,19 +146,30 @@ def transport(obj, surface, graph):
         car = "car" in edge["forward"] + edge["backward"]
         width = ROAD_WIDTH_M.get(edge["highway"], 5.7) if car else 1.55
         key = "ordinary_road_edges" if car else "foot_only_edges"
-        obj.material("asphalt" if car else "path")
+        material = "asphalt" if car else "path"
         (ax, ay), (bx, by) = line.coords
         length = math.hypot(bx - ax, by - ay)
         ox, oy = -(by - ay) * width / (2 * length), (bx - ax) * width / (2 * length)
+        w, s, e, n = surface.bounds
+        offset = 0.12 if car else 0.18
+        if approach is not None:
+            footprint = Polygon(((ax + ox, ay + oy), (ax - ox, ay - oy),
+                                 (bx - ox, by - oy), (bx + ox, by + oy)))
+            mask = approach.legacy_mask(edge.get("way"))
+            if footprint.intersects(mask):
+                drape.add(footprint.difference(mask).intersection(clip), material, lambda _x, _y: offset)
+                counts["partially_or_fully_replaced_ground_edges"] += 1
+                counts[key] += 1
+                continue
+        obj.material(material)
         divisions = math.ceil(length / surface.step)
         a, b = None, None
-        w, s, e, n = surface.bounds
         for i in range(divisions + 1):
             d = i / divisions
             x, y = ax + d * (bx - ax), ay + d * (by - ay)
             sides = [(min(e, max(w, x + ox)), min(n, max(s, y + oy))),
                      (min(e, max(w, x - ox)), min(n, max(s, y - oy)))]
-            c, h = (obj.vertex((px, py, surface.height(px, py) + (0.12 if car else 0.18))) for px, py in sides)
+            c, h = (obj.vertex((px, py, surface.height(px, py) + offset)) for px, py in sides)
             if i:
                 obj.face((a, b, h, c))
             a, b = c, h
@@ -208,14 +224,23 @@ def export(args):
             args.terrain.resolve()):
         raise ValueError("Use a separate destination for the scene preview.")
     obj = Obj()
+    approach = None
+    materials_by_name = MATERIALS
+    if getattr(args, "station_frame", None):
+        from station_approach import MATERIALS as approach_materials, StationApproach
+
+        frame = load_json(args.station_frame)["headhouse_xyz_m_to_pilot_east_north_up_m"]
+        approach = StationApproach(street_graph, frame, surface)
+        materials_by_name = {**MATERIALS, **approach_materials}
     landscape(obj, surface)
-    road_counts = transport(obj, surface, street_graph)
+    road_counts = transport(obj, surface, street_graph, approach)
+    approach_report = approach.add(obj) if approach else None
     building_counts = massing(obj, surface, building_data["footprints"])
     if not (road_counts["ordinary_road_edges"] and building_counts["extruded_buildings"]):
         raise ValueError("Expected populated road and building layers in the first pair.")
     mesh = args.output / "RVA_Pilot.obj"
     materials = "\n\n".join(f"newmtl {name}\nKd {r} {g} {b}\nKs 0.10 0.10 0.10\nNs 18"
-                              for name, (r, g, b) in MATERIALS.items())
+                              for name, (r, g, b) in materials_by_name.items())
     write_text(args.output / "RVA_Pilot.mtl", materials + "\n")
     write_text(mesh, "\n".join(obj.lines) + "\n")
     report = {"bounds_local_en_m": surface.bounds, "terrain_sample_spacing_m": surface.step,
@@ -224,8 +249,14 @@ def export(args):
               "building_export_sha256": digest(args.buildings),
               "terrain_report_sha256": digest(args.terrain / "terrain_first_pair.json"),
               "attribution": street_graph["attribution"]}
+    if approach_report:
+        approach_report.update({key: report[key] for key in ("mesh_sha256", "street_graph_sha256",
+                                                              "terrain_report_sha256", "attribution")})
+        report["station_approach"] = approach_report
+        write_json(ROOT / "reports/station_approach.json", approach_report)
+    else:
+        write_json(ROOT / "reports/pilot_mesh_preview.json", report)
     write_json(args.output / "pilot_mesh_preview.json", report)
-    write_json(ROOT / "reports/pilot_mesh_preview.json", report)
     return report
 
 
@@ -235,6 +266,7 @@ def main():
     parser.add_argument("--streets", type=Path, default=ROOT / "outputs/pilot_street_graph.json")
     parser.add_argument("--buildings", type=Path, default=ROOT / "outputs/pilot_building_heights.json")
     parser.add_argument("--output", type=Path, default=ROOT / "outputs/pilot-mesh-preview")
+    parser.add_argument("--station-frame", type=Path, help="Use the station GLB sidecar to dress East Main Street.")
     args = parser.parse_args()
     if shapely is None:
         print("BLOCKED: Install requirements-gis.txt before building the preview.", file=sys.stderr)
@@ -248,6 +280,10 @@ def main():
         print(f"FAIL: {error}", file=sys.stderr)
         return 1
     print(f'PASS: Combined {report["vertices"]} vertices and {report["extruded_buildings"]} building volumes.')
+    if "station_approach" in report:
+        detail = report["station_approach"]
+        print(f'PASS: Draped {detail["road_triangles"]:,} road triangles and '
+              f'{detail["walk_and_curb_triangles"]:,} sidewalk and curb triangles at East Main Street.')
     return 0
 
 

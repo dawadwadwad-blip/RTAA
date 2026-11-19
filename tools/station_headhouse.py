@@ -445,7 +445,7 @@ def clock_tower(group):
                              pz)
 
 
-def forecourt(group):
+def forecourt(group, apron=True):
     group.box(-5.3, 33.0, -6.12, 0.9, -0.38, 0.22, "pavers")
     for left, right in ((-5.3, STAIR_LEFT), (STAIR_RIGHT, 33.0)):
         group.box(left, right, -6.42, -5.96, -2.96, 0.34, "stone")
@@ -464,11 +464,12 @@ def forecourt(group):
         for index in range(5):
             group.rod((x, -10.08 + index * 0.90, -2.41 + index * 0.64),
                       (x, -10.08 + index * 0.90, -1.73 + index * 0.66), 0.019, "metal")
-    # The sidewalk apron slopes along Main Street (west end higher, east lower).
-    left, right = -6.1, 33.9
-    for near, far, surface in ((-11.26, -10.28, "pavers"), (-11.47, -11.24, "pavement")):
-        top = [(left, near, -2.48), (right, near, -2.76), (right, far, -2.76), (left, far, -2.48)]
-        group.prism([(x, y, z - 0.21) for x, y, z in top], top, surface)
+    if apron:
+        # The standalone asset supplies its own sidewalk apron.
+        left, right = -6.1, 33.9
+        for near, far, surface in ((-11.26, -10.28, "pavers"), (-11.47, -11.24, "pavement")):
+            top = [(left, near, -2.48), (right, near, -2.76), (right, far, -2.76), (left, far, -2.48)]
+            group.prism([(x, y, z - 0.21) for x, y, z in top], top, surface)
     for x in (5.4, 26.1):
         y = -4.36
         group.rod((x, y, 0.17), (x, y, 0.60), 0.16, "metal", 10, 0.10)
@@ -517,7 +518,7 @@ def scene_sign(collection, frame, material):
     return obj
 
 
-def replace_station(scene, legacy):
+def replace_station(scene, legacy, *, approach=False):
     from station_train_shed import train_shed
 
     archived_frame = station_frame(legacy)
@@ -529,7 +530,7 @@ def replace_station(scene, legacy):
     materials = station_materials()
     objects = []
     for name, builder in (("Headhouse", headhouse), ("Red clay hip and dormers", tiled_roof),
-                          ("Clock tower", clock_tower), ("Main Street forecourt", forecourt),
+                          ("Clock tower", clock_tower), ("Main Street forecourt", lambda group: forecourt(group, not approach)),
                           ("Restored train shed", train_shed)):
         group = MeshGroup(materials)
         builder(group)

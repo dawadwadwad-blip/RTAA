@@ -1,0 +1,212 @@
+{
+  "attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
+  "crosswalk_ways": [
+    1306729451,
+    1306729447
+  ],
+  "max_road_interpolation_error_m": 0.006788,
+  "max_walk_interpolation_error_m": 0.067116,
+  "mesh_sha256": "1a027102babad1144f1a24da6d3ece74c5f340df54dcda5a9d88df67978227f6",
+  "min_authored_vertex_clearance_m": 0.065,
+  "road_triangles": 2499,
+  "road_ways": [
+    120374950,
+    1366154365,
+    699605461
+  ],
+  "schema_version": 1,
+  "station_crossing_span_m": 14.625,
+  "station_frame": [
+    [
+      0.7865206003189087,
+      0.6184408664703369,
+      0.0,
+      -709.3908081054688
+    ],
+    [
+      -0.6191791892051697,
+      0.7855827212333679,
+      -0.0,
+      331.11199951171875
+    ],
+    [
+      -0.0,
+      0.0,
+      1.0,
+      8.747103691101074
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "street_graph_sha256": "9e944634984b68fe48f1862e00d5a62992b5d067982c7c82de87c7244f3b4cb5",
+  "terrain_report_sha256": "9b82f1f42dd5f21f5080fc268955f4d3876904ec769f2fd80a2d346204e5dece",
+  "walk_and_curb_triangles": 1657,
+  "witnesses": [
+    {
+      "local_en_m": [
+        -705.4033220000001,
+        302.273708
+      ],
+      "name": "station_crosswalk",
+      "object": "East_Main_Approach_Road",
+      "z_m": 5.998008140624998
+    },
+    {
+      "local_en_m": [
+        -770.9232240000001,
+        354.847723
+      ],
+      "name": "fifteenth_crosswalk",
+      "object": "East_Main_Approach_Road",
+      "z_m": 7.831621832031252
+    },
+    {
+      "local_en_m": [
+        -710.9650828762054,
+        319.1599114270806
+      ],
+      "name": "bottom_stair_6.15",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.172167917488948
+    },
+    {
+      "local_en_m": [
+        -704.9717959017754,
+        314.44176600533723
+      ],
+      "name": "bottom_stair_13.77",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.172083293848084
+    },
+    {
+      "local_en_m": [
+        -699.1515434594154,
+        309.859840005219
+      ],
+      "name": "bottom_stair_21.17",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.17199047806879
+    },
+    {
+      "local_en_m": [
+        -695.9110785861016,
+        307.3088217456937
+      ],
+      "name": "bottom_stair_25.29",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.171983269187643
+    },
+    {
+      "local_en_m": [
+        -764.8788290979181,
+        359.34191702499874
+      ],
+      "name": "north_curb_-61.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 7.631913000800765
+    },
+    {
+      "local_en_m": [
+        -774.0347497429109,
+        347.71148726905193
+      ],
+      "name": "south_curb_-61.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 7.820009902764746
+    },
+    {
+      "local_en_m": [
+        -750.0472232982877,
+        347.43488014779814
+      ],
+      "name": "north_curb_-42.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 7.15114002066109
+    },
+    {
+      "local_en_m": [
+        -759.2031439432805,
+        335.80445039185133
+      ],
+      "name": "south_curb_-42.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 7.287690064169568
+    },
+    {
+      "local_en_m": [
+        -717.2519196805678,
+        321.1263181670633
+      ],
+      "name": "north_curb_0.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.2882368659387415
+    },
+    {
+      "local_en_m": [
+        -726.4078403255604,
+        309.49588841111654
+      ],
+      "name": "south_curb_0.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 6.287371002413253
+    },
+    {
+      "local_en_m": [
+        -708.6626734949743,
+        314.2359805054423
+      ],
+      "name": "north_curb_11.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.088120286849284
+    },
+    {
+      "local_en_m": [
+        -717.8185941399671,
+        302.6055507494955
+      ],
+      "name": "south_curb_11.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 6.167064421926702
+    },
+    {
+      "local_en_m": [
+        -686.768825100512,
+        296.7354442301852
+      ],
+      "name": "north_curb_39.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 5.999473154026927
+    },
+    {
+      "local_en_m": [
+        -695.9247457455048,
+        285.1050144742384
+      ],
+      "name": "south_curb_39.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 6.024449523515204
+    },
+    {
+      "local_en_m": [
+        -674.829836881931,
+        286.008823738935
+      ],
+      "name": "north_curb_55.0",
+      "object": "East_Main_Approach_North_Walk",
+      "z_m": 6.04326784457884
+    },
+    {
+      "local_en_m": [
+        -682.7251192631497,
+        275.9797364741445
+      ],
+      "name": "south_curb_55.0",
+      "object": "East_Main_Approach_South_Walk",
+      "z_m": 5.993662176765741
+    }
+  ]
+}

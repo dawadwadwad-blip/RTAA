@@ -1,0 +1,34 @@
+{
+  "blocker": "FAIL: TopologyException: side location conflict at -768.51401737011929 353.1838531902448. This can occur if the input geometry is invalid.",
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T180816076090Z-d2d1919e.json",
+    "reports/runs/20261119T180816076090Z-d2d1919e.log"
+  ],
+  "checks": [
+    "FAIL: TopologyException: side location conflict at -768.51401737011929 353.1838531902448. This can occur if the input geometry is invalid."
+  ],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "tools/build_pilot_mesh_preview.py",
+    "--terrain",
+    "inputs/terrain-preview",
+    "--streets",
+    "inputs/pilot_street_graph.json",
+    "--buildings",
+    "inputs/pilot_building_heights.json",
+    "--station-frame",
+    "outputs/station-slender/RVA_Main_Street_Station_Exterior.json",
+    "--output",
+    "outputs/station-approach"
+  ],
+  "exit_code": 1,
+  "finished_at": "2026-11-19T18:08:17+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T180816076090Z-d2d1919e.log",
+  "next_action": "Review reports/runs/20261119T180816076090Z-d2d1919e.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/build_pilot_mesh_preview.py --terrain inputs/terrain-preview --streets inputs/pilot_street_graph.json --buildings inputs/pilot_building_heights.json --station-frame outputs/station-slender/RVA_Main_Street_Station_Exterior.json --output outputs/station-approach.",
+  "run_id": "20261119T180816076090Z-d2d1919e",
+  "started_at": "2026-11-19T18:08:16+00:00",
+  "status": "FAILED",
+  "task": "S1-09"
+}
