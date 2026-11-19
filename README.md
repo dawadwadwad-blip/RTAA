@@ -1,6 +1,6 @@
 # Richmond Open World
 
-RVA: Aggressive Altruism is an offline Unreal civic sandbox set in Richmond. The [architecture manifest](ARCHITECTURE_MANIFEST.md) defines its factions, civic tools and street gameplay. The [architecture](docs/Richmond_Open_World_Architecture.md) tracks scope, GIS sources, façade rules and the five-sprint plan. [DEV_STATE.md](DEV_STATE.md) records the work completed and links to the checks from each run.
+RVA: Aggressive Altruism is an offline Unreal civic sandbox set in Richmond. The [architecture manifest](ARCHITECTURE_MANIFEST.md) defines its civic tools and street gameplay. The [campaign plan](docs/RVA_Campaign.md) and [mission beats](docs/RVA_Mission_Beats.md) cover the story and first playable slice. The [architecture](docs/Richmond_Open_World_Architecture.md) tracks scope, GIS sources, façade rules and the five-sprint plan. [DEV_STATE.md](DEV_STATE.md) records the work completed and links to the checks from each run.
 
 ## Run the first-drive audit
 
