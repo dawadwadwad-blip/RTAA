@@ -200,7 +200,7 @@ private:
     FVector TruckExitLocation = FVector::ZeroVector;
     double TruckExitSeconds = 0.0;
     uint8 PaintingBit = 0;
-    int32 PaintDirection = 0;
+    RVA::NightShift::StripePass ActivePass;
     bool bInsideWorkZone = false;
     bool bKeysBound = false;
 

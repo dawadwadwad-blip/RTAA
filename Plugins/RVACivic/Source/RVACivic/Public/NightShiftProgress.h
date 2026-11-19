@@ -17,6 +17,49 @@ enum class Phase : std::uint8_t
 enum class Segment : std::uint8_t { A = 1, B = 2 };
 enum class Exit : std::uint8_t { None, Detour, Recovery };
 
+enum class PassStatus { Idle, Painting, Cancelled, Finished };
+
+class StripePass
+{
+public:
+    constexpr bool IsActive() const { return Direction != 0; }
+
+    constexpr bool Arm(double Along)
+    {
+        if (IsActive() || !(Along >= -1.0 && Along <= 1.0) || (Along > -0.72 && Along < 0.72))
+        {
+            return false;
+        }
+        Direction = Along < 0.0 ? 1 : -1;
+        return true;
+    }
+
+    constexpr PassStatus Sample(double Along, bool InsideLane, bool Authorized)
+    {
+        if (!IsActive())
+        {
+            return PassStatus::Idle;
+        }
+        const double Advance = Along * Direction;
+        if (!InsideLane || !Authorized || !(Advance >= -1.14))
+        {
+            Reset();
+            return PassStatus::Cancelled;
+        }
+        if (Advance >= 0.82)
+        {
+            Reset();
+            return PassStatus::Finished;
+        }
+        return PassStatus::Painting;
+    }
+
+    constexpr void Reset() { Direction = 0; }
+
+private:
+    int Direction = 0;
+};
+
 struct Checkpoint
 {
     Phase Current = Phase::Available;

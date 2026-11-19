@@ -273,11 +273,9 @@ bool ANightShiftWorkOrder::StartStripe(const APawn& Pawn)
             continue;
         }
         const FVector Local = Zone.GetComponentTransform().InverseTransformPosition(Pawn.GetActorLocation());
-        const double EndBand = Zone.GetUnscaledBoxExtent().X * 0.72;
-        if (FMath::Abs(Local.X) >= EndBand)
+        if (ActivePass.Arm(Local.X / FMath::Max(1.0, Zone.GetUnscaledBoxExtent().X)))
         {
             PaintingBit = static_cast<uint8>(Candidate);
-            PaintDirection = Local.X < 0 ? 1 : -1;
             RefreshWorld();
             return true;
         }
@@ -288,7 +286,7 @@ bool ANightShiftWorkOrder::StartStripe(const APawn& Pawn)
 void ANightShiftWorkOrder::CancelStripe()
 {
     PaintingBit = 0;
-    PaintDirection = 0;
+    ActivePass.Reset();
 }
 
 void ANightShiftWorkOrder::UpdateStripe(const APawn& Pawn)
@@ -297,15 +295,15 @@ void ANightShiftWorkOrder::UpdateStripe(const APawn& Pawn)
     const UBoxComponent& Zone = *(Target == Segment::A ? StripeA : StripeB);
     const FVector Local = Zone.GetComponentTransform().InverseTransformPosition(Pawn.GetActorLocation());
     const FVector Extent = Zone.GetUnscaledBoxExtent();
-    const double Advance = Local.X * PaintDirection;
-    if (!bInsideWorkZone || FMath::Abs(Local.Y) > Extent.Y || FMath::Abs(Local.Z) > Extent.Z
-        || Advance < -Extent.X - 65.0)
+    const bool bInsideLane = FMath::Abs(Local.Y) <= Extent.Y && FMath::Abs(Local.Z) <= Extent.Z;
+    const PassStatus Result = ActivePass.Sample(Local.X / FMath::Max(1.0, Extent.X), bInsideLane, bInsideWorkZone);
+    if (Result == PassStatus::Cancelled)
     {
         CancelStripe();
         RefreshWorld();
         return;
     }
-    if (Advance >= Extent.X * 0.82)
+    if (Result == PassStatus::Finished)
     {
         CancelStripe();
         if (Order.Paint(Target))
