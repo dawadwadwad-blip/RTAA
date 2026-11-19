@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "task_id": "S0-02",
+  "sprint": 0,
+  "title": "Lock the east-side pilot coverage, sources and coordinate frame",
+  "owner": "ChatGPT Sol",
+  "depends_on": [
+    "S0-01"
+  ],
+  "goal": "Establish a reproducible spatial and source contract for the first adjacent Richmond terrain tiles.",
+  "inputs": [
+    {
+      "ref": "reports/baseline.json",
+      "required": true,
+      "rights": "Read-only starter inventory and source notices."
+    },
+    {
+      "ref": "OpenStreetMap API pilot capture",
+      "required": true,
+      "rights": "© OpenStreetMap contributors, ODbL 1.0."
+    },
+    {
+      "ref": "NOAA Richmond InPort 80311 and 80312, VGIN road centerlines, Geofabrik 261117 and USGS 3DEP",
+      "required": true,
+      "rights": "Preserve publisher terms and attribution in the catalog. Validate product metadata at this stage."
+    },
+    {
+      "ref": "NOAA NADCON5 grids from PROJ CDN",
+      "required": true,
+      "rights": "Open geodetic grids with original provenance in the asset lock."
+    }
+  ],
+  "deliverables": [
+    {
+      "path": "data/catalog.json",
+      "purpose": "Lock publisher, product and license for each input."
+    },
+    {
+      "path": "data/projection_lock.json",
+      "purpose": "Lock the horizontal operations, fixture samples and grid SHA-256 values."
+    },
+    {
+      "path": "pilot/grid.json",
+      "purpose": "Lock the CRS, world origin and coverage rules."
+    },
+    {
+      "path": "pilot/controls.json",
+      "purpose": "Pin versioned OSM nodes and incident ways for three street controls."
+    },
+    {
+      "path": "pilot/coverage.geojson",
+      "purpose": "QGIS overlay for the core, tiled terrain, acquisition halo and three controls."
+    },
+    {
+      "path": "pilot/tile_manifest.json",
+      "purpose": "List terrain tiles and exact local/engine coordinates."
+    },
+    {
+      "path": "docs/Pilot_Data_Contract.md",
+      "purpose": "Explain reproduction and next asset intake."
+    }
+  ],
+  "out_of_scope": [
+    "Cooking DEM or LAZ tiles, deriving building heights, engine import and playtesting."
+  ],
+  "steps": [
+    "Verify catalog metadata and datum choices.",
+    "Pin three non-collinear control intersections with versioned provenance.",
+    "Generate the pilot manifest and overlay, then check axes, seams and the NOAA horizontal transforms."
+  ],
+  "acceptance": [
+    {
+      "id": "A1",
+      "method": "automated",
+      "procedure": "Run the contract against the original OSM capture and pinned NADCON5 grids.",
+      "pass_if": "All capture hashes, node/way versions and horizontal projection checks pass.",
+      "evidence": "reports/pilot_contract.json and DEV_STATE.md"
+    },
+    {
+      "id": "A2",
+      "method": "automated",
+      "procedure": "Run the Python test suite with requirements-gis.txt available.",
+      "pass_if": "Frame, height codes, neighboring tiles, control coordinates and deterministic exports match fixtures.",
+      "evidence": "tests/test_pilot_contract.py and DEV_STATE.md"
+    }
+  ],
+  "on_blocked": "Report the missing control capture, dependency or incompatible CRS before changing the lock.",
+  "retry": "Identical input bytes reproduce the geometry exports. The wrapper adds the run record.",
+  "constraints": {
+    "max_new_spend_usd": 0,
+    "paid_services": false,
+    "placeholder_stubs": false
+  },
+  "state": {
+    "path": "DEV_STATE.md",
+    "entrypoint": "tools/run_task.py",
+    "on_every_run": true,
+    "atomic": true,
+    "recover_interrupted": true
+  }
+}

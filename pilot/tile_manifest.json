@@ -1,0 +1,257 @@
+{
+  "acquisition_grid_bounds_m": [
+    284928.805939,
+    4155483.390745,
+    286640.805939,
+    4157699.390745
+  ],
+  "acquisition_local_bounds_m": [
+    -1108,
+    -1108,
+    604,
+    1108
+  ],
+  "controls": [
+    {
+      "grid_metres_en": [
+        285261.36,
+        4156949.853
+      ],
+      "label": "East Main Street at South 15th Street",
+      "local_metres_en": [
+        -775.446,
+        358.463
+      ],
+      "osm_node": 49615901,
+      "unreal_centimeters_xy_only": [
+        -77544.6,
+        -35846.3
+      ]
+    },
+    {
+      "grid_metres_en": [
+        286276.022,
+        4156601.31
+      ],
+      "label": "East Broad Street at North 25th Street",
+      "local_metres_en": [
+        239.216,
+        9.92
+      ],
+      "osm_node": 49628898,
+      "unreal_centimeters_xy_only": [
+        23921.6,
+        -992.0
+      ]
+    },
+    {
+      "grid_metres_en": [
+        286437.119,
+        4156161.448
+      ],
+      "label": "East Franklin Street at North 29th Street",
+      "local_metres_en": [
+        400.313,
+        -429.943
+      ],
+      "osm_node": 9785880016,
+      "unreal_centimeters_xy_only": [
+        40031.3,
+        42994.3
+      ]
+    }
+  ],
+  "core_local_bounds_m": [
+    -850,
+    -650,
+    480,
+    605
+  ],
+  "crs": {
+    "horizontal": "EPSG:26918",
+    "vertical": "EPSG:5703"
+  },
+  "first_adjacent_tiles_en": [
+    [
+      -2,
+      0
+    ],
+    [
+      -1,
+      0
+    ]
+  ],
+  "origin_grid_m_en": [
+    286036.805939,
+    4156591.390745
+  ],
+  "origin_navd88_m": 0,
+  "plan_view_control_triangle_area_m2": 195081.5,
+  "sample_spacing_m": 1,
+  "tile_span_m": 504,
+  "tile_union_local_bounds_m": [
+    -1008,
+    -1008,
+    504,
+    1008
+  ],
+  "tiles": [
+    {
+      "id": "e-2_n-2",
+      "index_en": [
+        -2,
+        -2
+      ],
+      "local_bounds_m": [
+        -1008,
+        -1008,
+        -504,
+        -504
+      ]
+    },
+    {
+      "id": "e-1_n-2",
+      "index_en": [
+        -1,
+        -2
+      ],
+      "local_bounds_m": [
+        -504,
+        -1008,
+        0,
+        -504
+      ]
+    },
+    {
+      "id": "e+0_n-2",
+      "index_en": [
+        0,
+        -2
+      ],
+      "local_bounds_m": [
+        0,
+        -1008,
+        504,
+        -504
+      ]
+    },
+    {
+      "id": "e-2_n-1",
+      "index_en": [
+        -2,
+        -1
+      ],
+      "local_bounds_m": [
+        -1008,
+        -504,
+        -504,
+        0
+      ]
+    },
+    {
+      "id": "e-1_n-1",
+      "index_en": [
+        -1,
+        -1
+      ],
+      "local_bounds_m": [
+        -504,
+        -504,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "e+0_n-1",
+      "index_en": [
+        0,
+        -1
+      ],
+      "local_bounds_m": [
+        0,
+        -504,
+        504,
+        0
+      ]
+    },
+    {
+      "id": "e-2_n+0",
+      "index_en": [
+        -2,
+        0
+      ],
+      "local_bounds_m": [
+        -1008,
+        0,
+        -504,
+        504
+      ]
+    },
+    {
+      "id": "e-1_n+0",
+      "index_en": [
+        -1,
+        0
+      ],
+      "local_bounds_m": [
+        -504,
+        0,
+        0,
+        504
+      ]
+    },
+    {
+      "id": "e+0_n+0",
+      "index_en": [
+        0,
+        0
+      ],
+      "local_bounds_m": [
+        0,
+        0,
+        504,
+        504
+      ]
+    },
+    {
+      "id": "e-2_n+1",
+      "index_en": [
+        -2,
+        1
+      ],
+      "local_bounds_m": [
+        -1008,
+        504,
+        -504,
+        1008
+      ]
+    },
+    {
+      "id": "e-1_n+1",
+      "index_en": [
+        -1,
+        1
+      ],
+      "local_bounds_m": [
+        -504,
+        504,
+        0,
+        1008
+      ]
+    },
+    {
+      "id": "e+0_n+1",
+      "index_en": [
+        0,
+        1
+      ],
+      "local_bounds_m": [
+        0,
+        504,
+        504,
+        1008
+      ]
+    }
+  ],
+  "vertices_per_axis": 505
+}

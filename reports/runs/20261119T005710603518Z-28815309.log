@@ -1,0 +1,9 @@
+PASS: frame uses centimeter scale and flips north
+PASS: height encoding keeps one metre at 128 codes
+PASS: 505 landscape samples cover 504 metre cells
+PASS: first two terrain tiles are adjacent
+PASS: three non-collinear OSM controls are within the core
+PASS: source catalog has distinct IDs and explicit licenses
+PASS: locked raw OSM bytes contain the versioned control nodes and ways
+PASS: pinned NADCON5 grids reproduce both NOAA horizontal transforms offline
+12 landscape tiles, 3 control intersections

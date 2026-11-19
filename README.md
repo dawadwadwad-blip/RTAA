@@ -13,4 +13,4 @@ python tools/run_task.py S0-01 -- python tools/baseline_inventory.py --bundle in
 
 `reports/baseline.json` gives the exact bundle hash, member list, route length and data counts. Repeating the audit gives the same inventory for the same input bytes. Attempts and their logs accumulate in `reports/runs/` and the runner refreshes `DEV_STATE.md` automatically.
 
-The next card, **S0-02**, locks the east-side pilot coverage, coordinate transform, inputs and licenses. **S0-03** is the separate Unreal smoke test on the target PC.
+The [pilot data contract](docs/Pilot_Data_Contract.md) records east-side coverage, source licenses, projection grids and three street controls. **S1-01** begins with two adjacent terrain tiles. **S0-03** is the separate Unreal smoke test on the target PC.

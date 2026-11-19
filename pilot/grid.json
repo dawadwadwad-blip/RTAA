@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "horizontal_crs": "EPSG:26918",
+  "vertical_crs": "EPSG:5703",
+  "osm_crs": "EPSG:4326",
+  "osm_to_grid_pipeline": "+proj=pipeline +step +proj=unitconvert +xy_in=deg +xy_out=rad +step +proj=utm +zone=18 +ellps=GRS80",
+  "osm_geographic_operation": "Inverse of EPSG:1188, zero-parameter NAD83 to WGS 84 (1)",
+  "origin_wgs84_lon_lat": [-77.4215, 37.5315],
+  "origin_navd88_m": 0,
+  "core_bounds_local_m": [-850, -650, 480, 605],
+  "tile_span_m": 504,
+  "sample_spacing_m": 1,
+  "acquisition_halo_m": 100,
+  "centimeters_per_m": 100,
+  "height_code_zero": 32768,
+  "height_codes_per_m": 128,
+  "landscape_z_scale": 100,
+  "first_adjacent_tiles_en": [[-2, 0], [-1, 0]]
+}

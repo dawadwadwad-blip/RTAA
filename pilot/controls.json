@@ -1,0 +1,102 @@
+{
+  "attribution": "© OpenStreetMap contributors, ODbL 1.0",
+  "license_url": "https://www.openstreetmap.org/copyright",
+  "capture": {
+    "url": "https://api.openstreetmap.org/api/0.6/map?bbox=-77.4334,37.5265,-77.4139,37.5360",
+    "sha256": "77b1a7b62b1114fdd1fbb7c4ec36cd5e32863e830dabade4093e2c9259777030",
+    "bytes": 6959209,
+    "retrieved_utc": "2026-11-19T00:51:10+00:00"
+  },
+  "intersections": [
+    {
+      "label": "East Main Street at South 15th Street",
+      "osm_node": 49615901,
+      "node_version": 13,
+      "node_timestamp": "2023-09-30T14:27:32Z",
+      "lon_lat": [
+        -77.4303736,
+        37.5345479
+      ],
+      "incident_ways": [
+        {
+          "id": 120374950,
+          "version": 15,
+          "name": "East Main Street",
+          "highway": "primary"
+        },
+        {
+          "id": 1366154365,
+          "version": 4,
+          "name": "East Main Street",
+          "highway": "primary"
+        },
+        {
+          "id": 6040380,
+          "version": 11,
+          "name": "South 15th Street",
+          "highway": "residential"
+        }
+      ]
+    },
+    {
+      "label": "East Broad Street at North 25th Street",
+      "osm_node": 49628898,
+      "node_version": 13,
+      "node_timestamp": "2019-12-01T04:27:42Z",
+      "lon_lat": [
+        -77.4187978,
+        37.5316448
+      ],
+      "incident_ways": [
+        {
+          "id": 47969578,
+          "version": 14,
+          "name": "East Broad Street",
+          "highway": "secondary"
+        },
+        {
+          "id": 204588078,
+          "version": 14,
+          "name": "East Broad Street",
+          "highway": "secondary"
+        },
+        {
+          "id": 6039408,
+          "version": 29,
+          "name": "North 25th Street",
+          "highway": "secondary"
+        }
+      ]
+    },
+    {
+      "label": "East Franklin Street at North 29th Street",
+      "osm_node": 9785880016,
+      "node_version": 1,
+      "node_timestamp": "2022-05-31T15:52:57Z",
+      "lon_lat": [
+        -77.4168482,
+        37.5277209
+      ],
+      "incident_ways": [
+        {
+          "id": 266956503,
+          "version": 16,
+          "name": "East Franklin Street",
+          "highway": "residential"
+        },
+        {
+          "id": 1453510221,
+          "version": 5,
+          "name": "East Franklin Street",
+          "highway": "residential"
+        },
+        {
+          "id": 6035295,
+          "version": 27,
+          "name": "North 29th Street",
+          "highway": "residential"
+        }
+      ]
+    }
+  ]
+}
