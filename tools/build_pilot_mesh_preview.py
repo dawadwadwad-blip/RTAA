@@ -221,7 +221,9 @@ def export(args):
     report = {"bounds_local_en_m": surface.bounds, "terrain_sample_spacing_m": surface.step,
               "vertices": obj.vertices, "faces": obj.faces, **road_counts, **building_counts,
               "mesh_sha256": digest(mesh), "street_graph_sha256": digest(args.streets),
-              "building_export_sha256": digest(args.buildings), "attribution": street_graph["attribution"]}
+              "building_export_sha256": digest(args.buildings),
+              "terrain_report_sha256": digest(args.terrain / "terrain_first_pair.json"),
+              "attribution": street_graph["attribution"]}
     write_json(args.output / "pilot_mesh_preview.json", report)
     write_json(ROOT / "reports/pilot_mesh_preview.json", report)
     return report

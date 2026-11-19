@@ -14,6 +14,7 @@
   "mesh_sha256": "7a044a3da65abf6c82b6f9d9fa3644c77ddd0da7a41c2c6f704e6c9a3fe18d29",
   "ordinary_road_edges": 720,
   "street_graph_sha256": "9e944634984b68fe48f1862e00d5a62992b5d067982c7c82de87c7244f3b4cb5",
+  "terrain_report_sha256": "9b82f1f42dd5f21f5080fc268955f4d3876904ec769f2fd80a2d346204e5dece",
   "terrain_sample_spacing_m": 2,
   "unresolved_or_invalid_buildings_omitted": 31,
   "vertices": 162471

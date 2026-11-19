@@ -1,0 +1,40 @@
+{
+  "archive_sha256": "cbb7f8614cca769ceedab61c218d71941b9493de3fe0e3009be4ebe8516d71bc",
+  "asset_member": "Richmond_Unreal_First_Drive/Meshes/RVA_Main_Street_Station.fbx",
+  "asset_sha256": "ae2ff4c95347358b9bdfd601a19846330b17416db0e2d6fc1078191813731f67",
+  "camera_eye_en_m": [
+    -750.0,
+    338.0
+  ],
+  "camera_eye_height_m": 8.7765625,
+  "clock_anchor_dem_m": 8.845403692088894,
+  "clock_anchor_en_m": [
+    -697.5766548252432,
+    326.578880389221
+  ],
+  "footprint_export_sha256": "8192e3c839cffb32eb4d263f5e5d442867c671bda2a22883c6ee59125bc82b95",
+  "footprint_id": "osm/way/113030476",
+  "height_reference": "preview_dem",
+  "legacy_clock_xy_m": [
+    -344.89236882324525,
+    -163.65355511885332
+  ],
+  "legacy_mesh_xy_to_pilot_en": [
+    [
+      1.002161570941098,
+      0.02579625672660768,
+      -347.71712755767516
+    ],
+    [
+      -0.02590455301105976,
+      0.9979695132933557,
+      480.96585648861867
+    ]
+  ],
+  "maximum_affine_residual_m": 0.002291,
+  "osm_attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
+  "replacement_object": "Building_osm_way_113030476",
+  "schema_version": 1,
+  "terrain_report_sha256": "9b82f1f42dd5f21f5080fc268955f4d3876904ec769f2fd80a2d346204e5dece",
+  "xy_intersection_over_union": 0.998462
+}

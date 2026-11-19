@@ -18,6 +18,7 @@
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -47,6 +48,9 @@
 - `20261119T043711604223Z-85fdf6e0` · S1-05 · **PASS** · 2026-11-19T04:37:11+00:00 → 2026-11-19T04:37:15+00:00 · [run evidence](reports/runs/20261119T043711604223Z-85fdf6e0.json)
 - `20261119T043715547788Z-43a8323d` · S1-05 · **PASS** · 2026-11-19T04:37:15+00:00 → 2026-11-19T04:37:16+00:00 · [run evidence](reports/runs/20261119T043715547788Z-43a8323d.json)
 - `20261119T043716420090Z-e5f937a1` · S1-05 · **PASS** · 2026-11-19T04:37:16+00:00 → 2026-11-19T04:37:22+00:00 · [run evidence](reports/runs/20261119T043716420090Z-e5f937a1.json)
+- `20261119T044424844345Z-7be003f1` · S1-06 · **PASS** · 2026-11-19T04:44:24+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044424844345Z-7be003f1.json)
+- `20261119T044428484695Z-089c4659` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:28+00:00 · [run evidence](reports/runs/20261119T044428484695Z-089c4659.json)
+- `20261119T044428798792Z-3c3d9eee` · S1-06 · **PASS** · 2026-11-19T04:44:28+00:00 → 2026-11-19T04:44:39+00:00 · [run evidence](reports/runs/20261119T044428798792Z-3c3d9eee.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -121,6 +125,12 @@
 - **Verification** the geometry references the same source frame and OSM snapshot. The two-meter terrain lattice shares one continuous mesh edge. Blender 4.3.2 imported and rendered 282 mesh objects. Confirm the prepared Unreal Landscape, collision and actual drives in the editor.
 - **Authoring scope** the preview is for placement and scale. It uses class-based road widths and simple building massing.
 
+## S1-06 · Main Street Station landmark
+
+- **Built** a reproducible fit for the audited drive bundle's existing station FBX. A Blender run validates the east/north frame, reprojects the old placement, anchors the clock tower to the current DEM and replaces the generic mass.
+- **Evidence** the two outlines overlap at 99.8462% intersection over union. The affine approximation has a 2.3 mm maximum residual against the direct reprojection at the archived outline vertices. An assembled Blender scene and a street view were generated.
+- **Fixed** the OBJ import used a forward-axis setting that rotated the scene by 180°. The corrected importer validates all four terrain bounds before framing the render.
+
 ### Next usage window prompt
 
-> Use docs/Pilot_Mesh_Preview.md and the locked terrain and footprint guides to author the first recognizable Shockoe Bottom block. Add reviewed façades and Main Street Station silhouette details. Verify the pilot terrain import, routing and Church Hill vehicle slice in the target Unreal project when the editor is available.
+> Build and test RVACivic in the target Unreal project using docs/RVA_Church_Hill_Playtest.md. Import the DEM-only pair and the verified station placement from docs/Pilot_Main_Street_Station.md. Check height and collision from a moving vehicle and confirm the clock tower, lane turns and terrain seam line up. Use that drive before expanding map coverage.
