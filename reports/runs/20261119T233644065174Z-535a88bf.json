@@ -1,0 +1,30 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T233644065174Z-535a88bf.json",
+    "reports/runs/20261119T233644065174Z-535a88bf.log"
+  ],
+  "checks": [
+    "PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.",
+    "PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.",
+    "PASS: Sampled 50775 grounded wall vertices across all 21 building layers.",
+    "PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.",
+    "PASS: Stream loaded 44/81 layers at startup, then added 10 and unloaded 33 at a distant focus with building support intact.",
+    "PASS: The Night Shift export preset omits streamed GIS packs and source GLBs."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "\ncp godot/station_trial/tools/verify_gis_pilot.gd outputs/rva_gis_native/tools/\ngodot --headless --path outputs/rva_gis_native --script res://tools/verify_gis_pilot.gd\ncp godot/station_trial/export_presets.cfg outputs/rva_gis_native/\ngodot --headless --path outputs/rva_gis_native --export-pack Linux \"$PWD/outputs/rva_gis_native/night-shift-filter-test.pck\" > outputs/rva_gis_native/export-filter.log 2>&1\npython3 - <<\"PY\"\nfrom pathlib import Path\ndata = Path(\"outputs/rva_gis_native/night-shift-filter-test.pck\").read_bytes()\nassert b\"terrain_0_0.scn\" not in data\nassert b\"rva_shockoe_bottom_em002_np000.glb\" not in data\nprint(\"PASS: The Night Shift export preset omits streamed GIS packs and source GLBs.\")\nPY\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T23:36:56+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T233644065174Z-535a88bf.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T233644065174Z-535a88bf",
+  "started_at": "2026-11-19T23:36:44+00:00",
+  "status": "PASS",
+  "task": "S1-16"
+}

@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.
+PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.
+PASS: Sampled 50775 grounded wall vertices across all 21 building layers.
+PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.
+PASS: Stream loaded 44/81 layers at startup, then added 10 and unloaded 33 at a distant focus with building support intact.
+PILOT: res://assets/rva_gis/pilot/richmond_gis_pilot.tscn
+PASS: The Night Shift export preset omits streamed GIS packs and source GLBs.

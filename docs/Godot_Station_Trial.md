@@ -38,3 +38,13 @@ godot --headless --path godot/station_trial --export-release Windows \
 The export requires Godot 4.7.2 with matching export templates. Use the existing `Linux` and `Web` presets for those targets. Blender assets use the same data as the station preview, including © OpenStreetMap contributors (ODbL 1.0) and the local NOAA/USGS terrain evidence. [Pilot data sources](Pilot_Data_Contract.md) · [Godot license](https://godotengine.org/license/)
 
 The engine test raycasts the westbound pavement every six meters on the new segment, drives from 21st Street to the station, and completes the stripe. It also checks the inspection cameras, graphics toggle and restart. Use the weakest intended device to validate the 720p and 30 FPS trial goal.
+
+## Streamed GIS survey
+
+The separate Richmond GIS pilot covers the saved Shockoe and Church Hill snapshot. It shows NAIP aerial imagery, generated building volumes and a survey camera with pan, orbit and zoom. The GIS coverage is suitable for checking placement, scale and height alongside the authored drive. [In-engine survey](../reports/RVA_GIS_Pilot.webp)
+
+From the Godot editor, run `res://tools/assemble_gis_pilot.gd` after importing the building GLBs in `res://assets/rva_gis/meshes/`. The assembler uses the existing GIS folder at `outputs/rva_gis`; set the `RVA_GIS_DATA_DIR` environment variable before opening Godot to use a smaller saved snapshot. The chunk manifest must match that snapshot. Open or run `res://assets/rva_gis/pilot/richmond_gis_pilot.tscn`. Pan with WASD or the arrow keys, drag with the right mouse button to orbit and scroll to zoom.
+
+Terrain and collision use the same R16 samples and NW–SE diagonal. Aerial textures take a small collar around each tile to preserve filtering at cell edges. Each building layer brings in the terrain it overlaps. The survey loads and retires layers as the camera moves. Road and bike splines are scene data for future routing. Tagged bridges, tunnels and nonzero-layer ways are recorded for later elevation work. Side offsets for tagged bike lanes use road-width estimates.
+
+The audit camera accepts this scene. Point `RVA_AUDIT_GIS_DIR` at the GIS snapshot used to generate it and run `res://tools/visual_audit_cam.gd` from the editor. The camera brings the appropriate layers in for each viewpoint. The Night Shift exports exclude the generated GIS resources to keep their download size independent of map coverage.

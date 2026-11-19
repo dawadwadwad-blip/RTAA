@@ -28,6 +28,7 @@
 - **S1-13 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-14 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-15 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-16 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -102,6 +103,9 @@
 - `20261119T231603298026Z-f8c2b0b9` · S1-15 · **PASS** · 2026-11-19T23:16:03+00:00 → 2026-11-19T23:16:03+00:00 · [run evidence](reports/runs/20261119T231603298026Z-f8c2b0b9.json)
 - `20261119T231714711777Z-8b9dca35` · S1-15 · **PASS** · 2026-11-19T23:17:14+00:00 → 2026-11-19T23:17:15+00:00 · [run evidence](reports/runs/20261119T231714711777Z-8b9dca35.json)
 - `20261119T232025012709Z-f27b62f6` · S1-15 · **PASS** · 2026-11-19T23:20:25+00:00 → 2026-11-19T23:20:27+00:00 · [run evidence](reports/runs/20261119T232025012709Z-f27b62f6.json)
+- `20261119T233345297351Z-4f68d34c` · S1-16 · **PASS** · 2026-11-19T23:33:45+00:00 → 2026-11-19T23:33:59+00:00 · [run evidence](reports/runs/20261119T233345297351Z-4f68d34c.json)
+- `20261119T233532431569Z-c85c8a80` · S1-16 · **PASS** · 2026-11-19T23:35:32+00:00 → 2026-11-19T23:35:46+00:00 · [run evidence](reports/runs/20261119T233532431569Z-c85c8a80.json)
+- `20261119T233644065174Z-535a88bf` · S1-16 · **PASS** · 2026-11-19T23:36:44+00:00 → 2026-11-19T23:36:56+00:00 · [run evidence](reports/runs/20261119T233644065174Z-535a88bf.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -246,3 +250,10 @@
 ### Next usage window prompt · S1-16
 
 > Write a Godot 4 EditorScript that validates `rva_gis_manifest.json` and `assets/rva_gis/meshes/rva_chunks.json` and saves a separate streamable Richmond scene. Decode the little-endian R16 at pixel centers using the recorded offset and scale, place each cell with +X east, +Y up and +Z south, and match the NW–SE terrain triangle split for visuals and Jolt collision. Apply the NAIP tiles with their projected bounds, place GLBs using `origin_godot_m`, and create `Path3D` splines from `centerline_local_xz_m` and OSM road and bicycle tags. Keep grade-separated splines out of the DEM drape until their deck heights are available. Use streamed neighborhoods and existing MultiMesh conventions. Prove common terrain edges, real-world axes, building ground contact and the East Main Street road and bike-lane alignment in a Shockoe pilot. Save a scene the audit camera can open, record the verification in `DEV_STATE.md`, and use $0 dependencies.
+
+## S1-16 · Streamed Shockoe and Church Hill GIS pilot
+
+- Assembled a separate Godot survey scene using the saved GIS snapshot and existing Blender GLBs. The scene packs 48 textured terrain cells, 21 building layers and 12 route layers. The survey camera loads nearby layers and retains terrain underneath resident buildings. [Build notes](docs/Godot_Station_Trial.md) · [In-engine survey](reports/RVA_GIS_Pilot.webp)
+- Verified 9,674 shared edge vertices and normals, sampled 50,775 grounded façade vertices across 21 building layers and checked 117 East Main Street ground raycasts under Jolt. The scene contains 2,148 ground paths and 14 bike paths. Four of those are tagged East Franklin Street bike-lane offsets. Held out 88 grade-separated ways pending deck or tunnel heights.
+- The streaming test loaded 44 of 81 layers at the starting camera, then added 10 and retired 33 at the opposite side of the map. The audit tool rendered two saved KartaView viewpoints from the scene. The existing 21st Street drive and 22 m striping pass also passed, and its export preset excludes the GIS resources.
+- The survey uses simple building volumes and estimated offsets for tagged bike lanes. It is ready for work on visual road surfaces, the authored Main Street Station placement and grade-separated spans.

@@ -1,0 +1,21 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.
+PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.
+PASS: Sampled 50775 grounded wall vertices across all 21 building layers.
+PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.
+PASS: Stream loaded 29/81 layers at startup, then added 12 and unloaded 27 at a distant focus.
+PILOT: res://assets/rva_gis/pilot/richmond_gis_pilot.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS: Rendered the packed GIS survey at (1280, 720)
+RVA audit saved 2 renders, skipped 1.
+PASS: Completed the Godot audit camera run with 2 live KartaView viewpoints.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.
