@@ -17,6 +17,7 @@
 - **S1-02 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-03 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-04 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-05 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -43,6 +44,9 @@
 - `20261119T043126798942Z-ee24d9b2` · S1-04 · **PASS** · 2026-11-19T04:31:26+00:00 → 2026-11-19T04:31:30+00:00 · [run evidence](reports/runs/20261119T043126798942Z-ee24d9b2.json)
 - `20261119T043130111175Z-c9683b1a` · S1-01 · **FAILED** · 2026-11-19T04:31:30+00:00 → 2026-11-19T04:31:38+00:00 · [run evidence](reports/runs/20261119T043130111175Z-c9683b1a.json)
 - `20261119T043138929930Z-ecbb0caa` · S1-04 · **PASS** · 2026-11-19T04:31:38+00:00 → 2026-11-19T04:31:47+00:00 · [run evidence](reports/runs/20261119T043138929930Z-ecbb0caa.json)
+- `20261119T043711604223Z-85fdf6e0` · S1-05 · **PASS** · 2026-11-19T04:37:11+00:00 → 2026-11-19T04:37:15+00:00 · [run evidence](reports/runs/20261119T043711604223Z-85fdf6e0.json)
+- `20261119T043715547788Z-43a8323d` · S1-05 · **PASS** · 2026-11-19T04:37:15+00:00 → 2026-11-19T04:37:16+00:00 · [run evidence](reports/runs/20261119T043715547788Z-43a8323d.json)
+- `20261119T043716420090Z-e5f937a1` · S1-05 · **PASS** · 2026-11-19T04:37:16+00:00 → 2026-11-19T04:37:22+00:00 · [run evidence](reports/runs/20261119T043716420090Z-e5f937a1.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -111,6 +115,12 @@
 - **Evidence** 130 near-level reference locations give a 0.0700 m NOAA DEM median absolute difference. At the same locations NOAA LAZ ground is 1.4015 m below the USGS reference at the median. The strict all-source gate remains open. The preview never applies a vertical shift to either source.
 - **Verification** both 505 × 505 heightmaps share 505 exact seam vertices and have no missing heights. The suite and source comparison are recorded in the run logs. Unreal import remains open.
 
+## S1-05 · Combined west-pair mesh
+
+- **Built** a Blender-readable preview combining DEM terrain, 720 ground street edges, 822 foot-only edges and 280 building volumes. Omits 119 grade-separated street edges and 31 buildings whose height is unresolved.
+- **Verification** the geometry references the same source frame and OSM snapshot. The two-meter terrain lattice shares one continuous mesh edge. Blender 4.3.2 imported and rendered 282 mesh objects. Confirm the prepared Unreal Landscape, collision and actual drives in the editor.
+- **Authoring scope** the preview is for placement and scale. It uses class-based road widths and simple building massing.
+
 ### Next usage window prompt
 
-> Import the DEM-only preview using docs/Pilot_Terrain_Preview.md when the target Unreal project is ready. Verify north, known elevations, seam collision and the vehicle ride. Keep the grade-separated road graph and the relative building heights available to author the east-side preview. Find independent surveyed elevations or an alternate correctly referenced point-cloud delivery before mixing absolute LAZ locations into the terrain.
+> Use docs/Pilot_Mesh_Preview.md and the locked terrain and footprint guides to author the first recognizable Shockoe Bottom block. Add reviewed façades and Main Street Station silhouette details. Verify the pilot terrain import, routing and Church Hill vehicle slice in the target Unreal project when the editor is available.

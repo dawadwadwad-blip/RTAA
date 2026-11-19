@@ -1,0 +1,20 @@
+{
+  "attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
+  "bounds_local_en_m": [
+    -1008.0,
+    0.0,
+    0.0,
+    504.0
+  ],
+  "building_export_sha256": "8192e3c839cffb32eb4d263f5e5d442867c671bda2a22883c6ee59125bc82b95",
+  "extruded_buildings": 280,
+  "faces": 270854,
+  "foot_only_edges": 822,
+  "grade_separated_edges_omitted": 119,
+  "mesh_sha256": "7a044a3da65abf6c82b6f9d9fa3644c77ddd0da7a41c2c6f704e6c9a3fe18d29",
+  "ordinary_road_edges": 720,
+  "street_graph_sha256": "9e944634984b68fe48f1862e00d5a62992b5d067982c7c82de87c7244f3b4cb5",
+  "terrain_sample_spacing_m": 2,
+  "unresolved_or_invalid_buildings_omitted": 31,
+  "vertices": 162471
+}
