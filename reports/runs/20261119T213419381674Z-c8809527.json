@@ -1,0 +1,31 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T213419381674Z-c8809527.json",
+    "reports/runs/20261119T213419381674Z-c8809527.log"
+  ],
+  "checks": [
+    "PASS: Crosswalk 5.998 m, west grade 7.238 m, graphics toggle, unarmed drive, full 22 m pass and clean retry.",
+    "PASS: Created Windows release.",
+    "PASS: Created Linux release.",
+    "PASS: Created Web release.",
+    "PASS: Crosswalk 5.998 m, west grade 7.238 m, graphics toggle, unarmed drive, full 22 m pass and clean retry.",
+    "PASS: 1280 x 720 Compatibility render captured via Mesa software OpenGL.",
+    "PASS: Linux release launched and rendered at 1280 x 720."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "\ngodot --headless --path godot/station_trial --fixed-fps 60 --script res://verify_trial.gd\nfor preset in Windows Linux Web; do\n  case \"$preset\" in\n    Windows) name=windows/RVA-Night-Shift.exe ;;\n    Linux) name=linux/RVA-Night-Shift.x86_64 ;;\n    Web) name=web/index.html ;;\n  esac\n  godot --headless --path godot/station_trial --export-release \"$preset\" \"$PWD/outputs/godot-trial/$name\" > \"outputs/export-godot-$preset.log\" 2>&1 || { tail -20 \"outputs/export-godot-$preset.log\"; exit 1; }\n  echo \"PASS: Created $preset release.\"\ndone\npython outputs/check_godot_render.py\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T21:34:44+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T213419381674Z-c8809527.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T213419381674Z-c8809527",
+  "started_at": "2026-11-19T21:34:19+00:00",
+  "status": "PASS",
+  "task": "S1-11"
+}

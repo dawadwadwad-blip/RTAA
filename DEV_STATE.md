@@ -23,6 +23,7 @@
 - **S1-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-10 · BLOCKED** — Review reports/runs/20261119T211053107724Z-31a37c40.log and retry /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python tools/verify_station_smoke.py.
+- **S1-11 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -76,6 +77,9 @@
 - `20261119T211029797627Z-b69f6287` · S1-10 · **PASS** · 2026-11-19T21:10:29+00:00 → 2026-11-19T21:10:36+00:00 · [run evidence](reports/runs/20261119T211029797627Z-b69f6287.json)
 - `20261119T211053107724Z-31a37c40` · S1-10 · **BLOCKED** · 2026-11-19T21:10:53+00:00 → 2026-11-19T21:10:53+00:00 · [run evidence](reports/runs/20261119T211053107724Z-31a37c40.json)
 - `20261119T211053248769Z-669a560b` · S0-11 · **BLOCKED** · 2026-11-19T21:10:53+00:00 → 2026-11-19T21:10:53+00:00 · [run evidence](reports/runs/20261119T211053248769Z-669a560b.json)
+- `20261119T212707842072Z-5980b9b0` · S1-11 · **PASS** · 2026-11-19T21:27:07+00:00 → 2026-11-19T21:27:10+00:00 · [run evidence](reports/runs/20261119T212707842072Z-5980b9b0.json)
+- `20261119T213231186382Z-edc431c4` · S1-11 · **PASS** · 2026-11-19T21:32:31+00:00 → 2026-11-19T21:32:44+00:00 · [run evidence](reports/runs/20261119T213231186382Z-edc431c4.json)
+- `20261119T213419381674Z-c8809527` · S1-11 · **PASS** · 2026-11-19T21:34:19+00:00 → 2026-11-19T21:34:44+00:00 · [run evidence](reports/runs/20261119T213419381674Z-c8809527.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -182,6 +186,12 @@
 - **Verified locally** 55 tests passed. Blender checked the saved station frame against the GLB sidecar and reproduced 46 collision points after conversion, including all 15 stair treads and the four elevated crossings. A second export matched the package byte for byte. [Build and playtest instructions](docs/Station_Unreal_Smoke.md) · [Package evidence](reports/station_smoke_package.json)
 - **Native gates** the station import and RVACivic Church Hill suites both reported blocked because the editor and `.uproject` are unavailable. Vehicle and pedestrian play checks, material transfer, LOD transitions, and World Partition streaming still need the target project.
 
+## S1-11 · Playable Godot trial at Main Street Station
+
+- Exported the textured station, a cropped terrain patch, East Main Street and the elevated spans from the assembled Blender scene. The trial uses Godot's Compatibility renderer and an arcade truck that follows the imported grade.
+- Adapted one 22 m *Night Shift* striping pass with clear start and finish cones, restart, a live FPS readout and a low graphics option. The native Linux export ran locally. Windows and web releases exported successfully. [Trial build instructions](docs/Godot_Station_Trial.md)
+- The engine test verified the station crossing height, westward grade, graphics toggle, full pass and clean restart. The 720p scene rendered on the workspace's CPU-backed OpenGL driver. Performance and handling on the intended device are the remaining engine decision inputs.
+
 ### Next usage window prompt
 
-> When the UE 5.6 editor and built pilot .uproject are available, run tools/verify_station_smoke.py against the package described in docs/Station_Unreal_Smoke.md. Validate both road joins with the vehicle and all stair treads with a pedestrian pawn. Run tools/verify_church_hill.py and record the evidence. Then verify materials, LOD behavior and streaming in the pilot's World Partition map before advancing the drive toward Church Hill.
+> Play the Godot East Main trial at 720p on the weakest intended device. Record FPS in standard and Low modes plus a short assessment of steering and the station from the driver camera. If the trial meets the agreed visual and 30 FPS goal, complete Night Shift on this block. If it misses, compare the existing browser prototype for the first mission before expanding the map.
