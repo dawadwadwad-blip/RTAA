@@ -101,6 +101,7 @@
 - `20261119T231510299674Z-e41ad999` · S1-14 · **PASS** · 2026-11-19T23:15:10+00:00 → 2026-11-19T23:15:20+00:00 · [run evidence](reports/runs/20261119T231510299674Z-e41ad999.json)
 - `20261119T231603298026Z-f8c2b0b9` · S1-15 · **PASS** · 2026-11-19T23:16:03+00:00 → 2026-11-19T23:16:03+00:00 · [run evidence](reports/runs/20261119T231603298026Z-f8c2b0b9.json)
 - `20261119T231714711777Z-8b9dca35` · S1-15 · **PASS** · 2026-11-19T23:17:14+00:00 → 2026-11-19T23:17:15+00:00 · [run evidence](reports/runs/20261119T231714711777Z-8b9dca35.json)
+- `20261119T232025012709Z-f27b62f6` · S1-15 · **PASS** · 2026-11-19T23:20:25+00:00 → 2026-11-19T23:20:27+00:00 · [run evidence](reports/runs/20261119T232025012709Z-f27b62f6.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -240,7 +241,7 @@
 
 - Added [the street reference fetcher](tools/fetch_rva_street_refs.py), [the Godot audit camera](godot/station_trial/tools/visual_audit_cam.gd) and [the local comparison tool](tools/rank_visual_diffs.py). The collector combines named OSM landmarks and corridor anchors with Mapillary imagery and KartaView's public photo endpoint. The 1.5 GB disk cap and 2,500-photo ceiling apply to the local collection. The spacing is 25 m, with up to four headings separated by at least 45° within 8 m of the same spot.
 - A live KartaView pilot grew from three to five Richmond photos on resume without duplicating image IDs or exceeding its 10 MB test cap. Mapillary image and tile processing were checked with fixtures and need a live run with `MAPILLARY_TOKEN`. Reference coverage and image counts depend on the providers. The generated photo manifest and images remain local, and the prop manifest contains georeferenced detections ready for a placement review.
-- Godot rendered ten fixture cameras and changing the bearing changed the rendered pixels. The local ranker produced two 1196 × 1508 JPEGs with eight pairs. The score measures structural similarity and edge agreement. Camera height, pitch and unavailable field of view use documented estimates.
+- Godot rendered ten fixture cameras and changing the bearing changed the rendered pixels. The local ranker produced two 1196 × 1508 JPEGs with eight pairs. Each new audit publishes its manifest after the render batch completes. A repeat run verified that it retires the previous batch. The score measures structural similarity and edge agreement. Camera height, pitch and unavailable field of view use documented estimates.
 
 ### Next usage window prompt · S1-16
 

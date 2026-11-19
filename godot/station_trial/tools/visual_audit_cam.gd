@@ -71,6 +71,18 @@ static func ground(x: float, z: float, grid: Dictionary, data: PackedByteArray) 
 	return float(grid.z_offset_m) + code * float(grid.z_scale_per_code_m)
 
 
+static func cleanup_run(target: String, name: String) -> void:
+	var generated := RegEx.create_from_string("^capture_[0-9]+_[0-9]+$")
+	if generated.search(name) == null:
+		return
+	var directory := target.path_join(name)
+	var renders := RegEx.create_from_string("^(mapillary|kartaview)_[0-9]+\\.(tmp\\.)?png$")
+	for file: String in DirAccess.get_files_at(directory):
+		if renders.search(file) != null:
+			DirAccess.remove_absolute(directory.path_join(file))
+	DirAccess.remove_absolute(directory)
+
+
 static func capture(host: Node, world: World3D, world_from_gis: Transform3D, refs_path: String,
 		gis_path: String, output: String, scene_path: String, limit: int = 0) -> int:
 	var refs := read_object(refs_path)
@@ -94,6 +106,20 @@ static func capture(host: Node, world: World3D, world_from_gis: Transform3D, ref
 	if DirAccess.make_dir_recursive_absolute(target) != OK:
 		push_error("Could not create the audit render directory.")
 		return -1
+	var ignore := target.path_join(".gdignore")
+	if not FileAccess.file_exists(ignore):
+		var marker := FileAccess.open(ignore, FileAccess.WRITE)
+		if marker == null:
+			push_error("Could not exclude audit screenshots from Godot asset import.")
+			return -1
+		marker.close()
+	var run_name := "capture_%d_%d" % [int(Time.get_unix_time_from_system()), Time.get_ticks_usec()]
+	var run_dir := target.path_join(run_name)
+	if DirAccess.make_dir_absolute(run_dir) != OK:
+		push_error("Could not start a new render generation.")
+		return -1
+	var manifest_path := target.path_join("render_manifest.json")
+	var previous := read_object(manifest_path) if FileAccess.file_exists(manifest_path) else {}
 	var viewport := SubViewport.new()
 	viewport.world_3d = world
 	viewport.world_2d = World2D.new()
@@ -107,7 +133,6 @@ static func capture(host: Node, world: World3D, world_from_gis: Transform3D, ref
 	viewport.add_child(camera)
 	camera.make_current()
 	var safe_id := RegEx.create_from_string("^(mapillary|kartaview)_[0-9]+$")
-	# Drop successful prefixes on a changed scene or dataset via the fresh manifest.
 	var rendered: Array[Dictionary] = []
 	var skipped := 0
 	for row: Dictionary in refs.cameras:
@@ -141,28 +166,34 @@ static func capture(host: Node, world: World3D, world_from_gis: Transform3D, ref
 			skipped += 1
 			continue
 		var filename := id + ".png"
-		var pending := target.path_join(id + ".tmp.png")
-		if image.save_png(pending) != OK or DirAccess.rename_absolute(pending, target.path_join(filename)) != OK:
+		var pending := run_dir.path_join(id + ".tmp.png")
+		if image.save_png(pending) != OK or DirAccess.rename_absolute(pending, run_dir.path_join(filename)) != OK:
 			DirAccess.remove_absolute(pending)
 			push_error("Could not write audit view " + id)
 			skipped += 1
 			continue
-		rendered.append({"id": id, "file": filename, "source_sha256": row.sha256})
+		rendered.append({"id": id, "file": run_name.path_join(filename), "source_sha256": row.sha256})
 	camera.queue_free()
 	viewport.queue_free()
 	if rendered.is_empty():
+		cleanup_run(target, run_name)
 		push_error("No reference cameras rendered inside the loaded terrain.")
 		return -1
 	var pending_manifest := target.path_join(".render_manifest.tmp")
 	var output_file := FileAccess.open(pending_manifest, FileAccess.WRITE)
 	if output_file == null:
+		cleanup_run(target, run_name)
 		push_error("Could not write the audit render manifest.")
 		return -1
-	output_file.store_string(JSON.stringify({"schema": "rva-audit-renders/1", "scene": scene_path,
+	output_file.store_string(JSON.stringify({"schema": "rva-audit-renders/1", "scene": scene_path, "run": run_name,
 			"render_count": rendered.size(), "skipped": skipped, "renders": rendered}, "\t"))
+	var written := output_file.get_error()
 	output_file.close()
-	if DirAccess.rename_absolute(pending_manifest, target.path_join("render_manifest.json")) != OK:
+	if written != OK or DirAccess.rename_absolute(pending_manifest, manifest_path) != OK:
+		cleanup_run(target, run_name)
+		DirAccess.remove_absolute(pending_manifest)
 		push_error("Could not publish the audit render manifest.")
 		return -1
+	cleanup_run(target, str(previous.get("run", "")))
 	print("RVA audit saved %d renders, skipped %d." % [rendered.size(), skipped])
 	return rendered.size()
