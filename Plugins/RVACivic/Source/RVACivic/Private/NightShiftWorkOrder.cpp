@@ -208,7 +208,7 @@ bool ANightShiftWorkOrder::GetEvidence(FNightShiftEvidence& OutEvidence) const
 
 bool ANightShiftWorkOrder::IsPlayerPawn(const APawn* Pawn) const
 {
-    if (!HasAuthority() || !IsValid(Pawn) || Pawn->GetWorld() != GetWorld())
+    if (!bSliceEnabled || !HasAuthority() || !IsValid(Pawn) || Pawn->GetWorld() != GetWorld())
     {
         return false;
     }
@@ -316,7 +316,7 @@ void ANightShiftWorkOrder::UpdateStripe(const APawn& Pawn)
 void ANightShiftWorkOrder::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (!HasAuthority())
+    if (!HasAuthority() || !bSliceEnabled)
     {
         return;
     }

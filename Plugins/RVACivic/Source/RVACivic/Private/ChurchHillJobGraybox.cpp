@@ -89,7 +89,7 @@ bool AChurchHillJobGraybox::IsLocalPawn(const APawn* Pawn) const
 
 bool AChurchHillJobGraybox::PerformObjective(APawn* Pawn)
 {
-    return !bCompleted && IsLocalPawn(Pawn) && Advance(*Pawn);
+    return bSliceEnabled && !bCompleted && IsLocalPawn(Pawn) && Advance(*Pawn);
 }
 
 void AChurchHillJobGraybox::BindTestKey(APlayerController* Controller)
@@ -121,7 +121,7 @@ void AChurchHillJobGraybox::HandleTestKey()
 void AChurchHillJobGraybox::Tick(float DeltaSeconds)
 {
     Super::Tick(DeltaSeconds);
-    if (!HasAuthority() || bCompleted)
+    if (!HasAuthority() || !bSliceEnabled || bCompleted)
     {
         return;
     }

@@ -10,6 +10,8 @@
 - **S0-06 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-07 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S0-08 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S0-09 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S0-10 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -25,6 +27,8 @@
 - `20261119T032037767315Z-4fb548a4` · S0-06 · **PASS** · 2026-11-19T03:20:37+00:00 → 2026-11-19T03:20:39+00:00 · [run evidence](reports/runs/20261119T032037767315Z-4fb548a4.json)
 - `20261119T033153008041Z-eab08a10` · S0-07 · **PASS** · 2026-11-19T03:31:53+00:00 → 2026-11-19T03:31:54+00:00 · [run evidence](reports/runs/20261119T033153008041Z-eab08a10.json)
 - `20261119T035103695033Z-f0b6adb4` · S0-08 · **PASS** · 2026-11-19T03:51:03+00:00 → 2026-11-19T03:51:05+00:00 · [run evidence](reports/runs/20261119T035103695033Z-f0b6adb4.json)
+- `20261119T040354900992Z-06bb3b26` · S0-09 · **PASS** · 2026-11-19T04:03:54+00:00 → 2026-11-19T04:03:57+00:00 · [run evidence](reports/runs/20261119T040354900992Z-06bb3b26.json)
+- `20261119T040357942393Z-5d128d58` · S0-10 · **PASS** · 2026-11-19T04:03:57+00:00 → 2026-11-19T04:03:58+00:00 · [run evidence](reports/runs/20261119T040357942393Z-5d128d58.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -61,6 +65,13 @@
 - **Survey Stakes** added the untimed occupied-home route and the timed stake swap. The Hard result raises a blocker at loading access. Expiry resets the moved props and leaves the approach open.
 - **Test status** all 16 local tests passed. The Unreal build, native automation and real vehicle PIE still need the target editor. Campaign ledger wiring and AI traffic repathing remain integration work.
 
+## Combined Church Hill playtest
+
+- **S0-09 · Progression** The slice director connects the Night Shift debrief, Hill Climb delivery and Survey Stakes result to the shared v2 Work Order ledger. Only the current job accepts objectives. Each result files once before advancing. Progress is session-scoped and the fixture outcome values are illustrative.
+- **S0-10 · Level setup** The editor script builds an isolated test map from an existing vehicle GameMode. It places the jobs, two physical grades, entries and handoff anchors, and refuses to overwrite an existing map.
+- **Verification** 27 local tests passed, including the portable progression sequence and ramp placement checks. The UE5 build, editor map generation, native automation and driving remain open on the target PC.
+- **Editor checks** Measure clearance and vehicle contact at the ramp landings. Check cab readability, shared input behavior, and authored stake and strap timing with the actual pawn.
+
 ### Next usage window prompt
 
-> Build RVACivic in the target UE5 project. Run RVA.Graybox.NightShiftNativeFlow, then stage the three actors on the same Church Hill graybox following docs/RVA_Church_Hill_Slice.md. Record real-vehicle Night Shift retries, both Hill Climb routes, and a completed plus an expired Survey Stakes Hard run in DEV_STATE.md.
+> Build RVACivic in the target UE5 project. Create the Church Hill test level using docs/RVA_Church_Hill_Playtest.md and an existing vehicle GameMode. Run RVA.Graybox.NightShiftNativeFlow and play the generated map from Night Shift through Survey Stakes. Record three single filings, both exit and grade routes across sessions, an expired Hard attempt, and the final Kind and Hard totals in DEV_STATE.md. Fix engine and playtest regressions before placing missions on the streamed terrain.

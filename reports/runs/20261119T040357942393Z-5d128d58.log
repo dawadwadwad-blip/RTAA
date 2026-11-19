@@ -1,0 +1,9 @@
+test_build_refuses_existing_and_invalid_maps_before_loading_any_classes (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_build_refuses_existing_and_invalid_maps_before_loading_any_classes) ... ok
+test_missing_game_mode_never_creates_the_map (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_missing_game_mode_never_creates_the_map) ... ok
+test_ramp_top_surfaces_join_their_landings (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_ramp_top_surfaces_join_their_landings) ... ok
+test_route_gates_sit_on_distinct_drivable_grades (test_church_hill_playtest_layout.ChurchHillPlaytestLayoutTest.test_route_gates_sit_on_distinct_drivable_grades) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

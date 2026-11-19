@@ -16,7 +16,7 @@ The Standing Committee uses giant yard skeletons as an early clue. The hand-truc
 
 The playable roster is The Albanico Association, The Pod, Transit & Cargo-Bike Militia, Asphalt & Truck-Nutz Coalition, and Small Independents. The [campaign territory map](docs/RVA_Campaign.md#playable-factions-and-territories) lists their bases and opposing wings. Outside Capital acts through Tate's patronage, Compliance runs permits and enforcement, and the city–county boundary changes who responds. The Standing Committee runs across neighborhoods and factions.
 
-The campaign's Work Orders, Method Dial, Hi-Vis rules, Net Good ledger and district Strain swaps extend the civic runtime. The first slice prototypes the work-zone boundary and authored lane-state changes. Longer-lived visual changes can continue using World Partition Runtime Data Layers.
+The [creator's v2 handoff](docs/RVA_Project_Plan_and_Design_Handoff_v2.md) defines the Work Order and faction direction. The [gameplay contract](docs/RVA_V2_GAMEPLAY.md) describes the intended Method Dial, Hi-Vis rules, Net Good ledger and district Strain swaps. The [Church Hill driving playtest](docs/RVA_Church_Hill_Playtest.md) connects three native jobs to one session ledger. A successful job records its authored outcome before access to the next job. The first slice prototypes the work-zone boundary and authored lane-state changes. Longer-lived visual changes can use World Partition Runtime Data Layers.
 
 ### Current civic prototype
 
