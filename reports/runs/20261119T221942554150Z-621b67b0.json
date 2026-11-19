@@ -1,0 +1,18 @@
+{
+  "blocker": "Previous runner ended without a terminal record.",
+  "changed_files": [],
+  "checks": [],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "tools/fetch_rva_gis.py"
+  ],
+  "exit_code": null,
+  "finished_at": "2026-11-19T23:10:58+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T221942554150Z-621b67b0.log",
+  "next_action": "Review the previous run output and retry the task.",
+  "run_id": "20261119T221942554150Z-621b67b0",
+  "started_at": "2026-11-19T22:19:42+00:00",
+  "status": "INTERRUPTED",
+  "task": "S1-14"
+}

@@ -1,0 +1,25 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261119T231603298026Z-f8c2b0b9.json",
+    "reports/runs/20261119T231603298026Z-f8c2b0b9.log"
+  ],
+  "checks": [
+    "PASS: Verified KartaView reference files, unique IDs, resume state and byte cap."
+  ],
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-c",
+    "\nimport json, sqlite3\nfrom pathlib import Path\nroot=Path(\"outputs/rva_street_live_karta\")\nm=json.loads((root/\"reference_cameras.json\").read_text())\nassert m[\"image_count\"] >= 3\nassert all(row[\"provider\"]==\"kartaview\" and (root/row[\"file\"]).is_file() for row in m[\"cameras\"])\nassert len({row[\"id\"] for row in m[\"cameras\"]})==m[\"image_count\"]\nassert sum(path.stat().st_size for path in root.rglob(\"*\") if path.is_file())<=m[\"dataset_limit_bytes\"]\ndb=sqlite3.connect(root/\"reference_state.sqlite3\")\nassert db.execute(\"select count(*) from photos where status=\\x27ready\\x27\").fetchone()[0]==m[\"image_count\"]\nprint(\"PASS: Verified KartaView reference files, unique IDs, resume state and byte cap.\")\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-19T23:16:03+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261119T231603298026Z-f8c2b0b9.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261119T231603298026Z-f8c2b0b9",
+  "started_at": "2026-11-19T23:16:03+00:00",
+  "status": "PASS",
+  "task": "S1-15"
+}

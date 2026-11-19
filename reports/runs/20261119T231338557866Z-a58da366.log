@@ -1,0 +1,7 @@
+Blender 4.3.2
+
+Blender quit
+Wrote /workspace/scratch/f65ef44e3cab/richmond-facades/outputs/rva_gis_godot_smoke/assets/rva_gis/meshes: 21 GLB chunks, 1434 buildings and 0 rejected footprints.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Godot imported 31 mesh nodes and 21 static concave shapes. Materials ["M_Facade_Brick", "M_Roof_Slate", "M_Parody_Billboard"]

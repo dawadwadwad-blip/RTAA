@@ -10,3 +10,5 @@ __pycache__/
 /godot/station_trial/assets/*.import
 /godot/station_trial/assets/*.png
 /godot/station_trial/assets/route.json
+/godot/station_trial/assets/rva_gis/
+/godot/station_trial/audit_renders/
