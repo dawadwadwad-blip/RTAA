@@ -32,3 +32,6 @@ class CivicPolicyTest(unittest.TestCase):
 
     def test_church_hill_jobs(self):
         self.compile_and_run("church_hill_jobs_test", "Public")
+
+    def test_church_hill_slice_sequence(self):
+        self.compile_and_run("church_hill_slice_sequence_test", "Public")

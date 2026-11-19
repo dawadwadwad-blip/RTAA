@@ -30,9 +30,9 @@ The defaults retain checkpoints in the session. Enable `Persist Checkpoint` for 
 
 ## Campaign ledger handoff
 
-The shared `UCivicWorkOrderSubsystem` is in [draft PR #5](https://github.com/dawadwadwad-blip/RTAA/pull/5). When the branches are brought together, map the local order NS-01 to campaign mission `M01`, verb `Stripe`. Begin the campaign order at briefing and resolve it through `OnDebriefCompleted` with the authored outcome. Check the subsystem's completion flag for `M01` before recording the result. The actor continues to own vehicle placement, route progress and evidence.
+In the [combined playtest](RVA_Church_Hill_Playtest.md), `ChurchHillSliceDirector` starts campaign mission `M01` (verb `Stripe`) when the session begins. `OnDebriefCompleted` files its authored outcome and activates Hill Climb. NS-01 still owns vehicle placement, route progress and evidence.
 
-For a combined test, leave disk persistence off until the shared campaign ledger can be restored with the mission checkpoint. Treat `OnProgressChanged` as a UI update, since retry and restore can emit it. Keep lasting rewards and saved campaign totals tied to the shared completion flag.
+The combined session uses in-memory retries while Night Shift is active, with a fresh ledger at each Play In Editor start. Test Night Shift's optional disk checkpoints with the standalone actor setup above.
 
 See the [Church Hill slice checks](RVA_Church_Hill_Slice.md#night-shift-verification) for the native Unreal automation test and related jobs.
 

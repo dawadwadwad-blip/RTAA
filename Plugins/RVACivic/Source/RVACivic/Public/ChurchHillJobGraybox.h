@@ -19,6 +19,7 @@ class RVACIVIC_API AChurchHillJobGraybox : public AActor
 public:
     AChurchHillJobGraybox();
     virtual void Tick(float DeltaSeconds) override;
+    void SetSliceEnabled(bool bEnabled) { bSliceEnabled = bEnabled; }
 
     UPROPERTY(EditInstanceOnly, Category = "Church Hill|Input")
     bool bBindTestKey = true;
@@ -46,6 +47,7 @@ private:
     TWeakObjectPtr<APlayerController> TestController;
     bool bBound = false;
     bool bCompleted = false;
+    bool bSliceEnabled = true;
 
     bool IsLocalPawn(const APawn* Pawn) const;
     void BindTestKey(APlayerController* Controller);

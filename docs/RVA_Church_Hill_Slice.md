@@ -1,12 +1,12 @@
 # Church Hill vertical slice checks
 
-The slice tests three jobs from the [v2 mission outline](RVA_Mission_Beats.md). The shortened missions can share one test level. Place their start and interaction zones apart so a single input reaches only the intended job. Hill Climb and Survey Stakes need a walkable or drivable surface supplied by the level.
+The slice tests three jobs from the [v2 mission outline](RVA_Mission_Beats.md). The [driving playtest](RVA_Church_Hill_Playtest.md) gives all three jobs one repeatable level. For manual placement, keep their start and interaction zones apart and provide a walkable or drivable surface.
 
 ## Night Shift verification
 
 Build `RVACivic` in the target Unreal project and run `RVA.Graybox.NightShiftNativeFlow` in the editor's Automation panel. The test spawns the native work order and a possessed test pawn, then moves the pawn between the actor's actual components. It exercises the briefing, the authorized striping zone, an invalid midfield start, one checkpoint retry, the physical closure, the alternate exit and the yard debrief. It compares the evidence before and after a completed retry. [Unreal C++ automation tests](https://dev.epicgames.com/documentation/unreal-engine/write-cplusplus-tests-in-unreal-engine)
 
-For driving acceptance, use the actual vehicle and run the [Night Shift playthrough](RVA_Night_Shift_Graybox.md). Check both exits and the disk save. The portable stripe tests verify that arming works from either end, crossing a side or losing authorization cancels the pass, and a completed pass cannot be credited again.
+For driving acceptance, use the actual vehicle and run the [Night Shift playthrough](RVA_Night_Shift_Graybox.md). Check both exits. Use the standalone setup for the disk save. The portable stripe tests verify that arming works from either end, crossing a side or losing authorization cancels the pass, and a completed pass cannot be credited again.
 
 ## Hill Climb · M13 slice
 
@@ -32,7 +32,7 @@ Let one Hard run expire after the first site. Confirm the moved stake returns, t
 
 ## Shared campaign integration
 
-The placeable jobs own their local interaction and presentation. When the shared Work Order subsystem from [PR #5](https://github.com/dawadwadwad-blip/RTAA/pull/5) is combined with the slice, map `OnDelivered` to `M13` and `OnResolved` to `M04`. Record the authored outcome through the shared completion flag. The grayboxes are session-scoped. Durable rewards need the shared campaign ledger and save flow.
+The placeable jobs own their local interaction and presentation. `ChurchHillSliceDirector` listens for `OnDebriefCompleted` (`M01`), `OnDelivered` (`M13`) and `OnResolved` (`M04`). Each resolves the active Work Order once, then unlocks the next job. The shared campaign ledger runs for the life of the play session. Persistent rewards need a campaign save flow.
 
 ## Evidence
 

@@ -91,6 +91,7 @@ public:
     ANightShiftWorkOrder();
     virtual void OnConstruction(const FTransform& Transform) override;
     virtual void Tick(float DeltaSeconds) override;
+    void SetSliceEnabled(bool bEnabled) { bSliceEnabled = bEnabled; }
 
     UPROPERTY(EditInstanceOnly, Category = "Night Shift")
     FName TruckTag{TEXT("NightShiftTruck")};
@@ -203,6 +204,7 @@ private:
     RVA::NightShift::StripePass ActivePass;
     bool bInsideWorkZone = false;
     bool bKeysBound = false;
+    bool bSliceEnabled = true;
 
     bool IsPlayerPawn(const APawn* Pawn) const;
     bool IsWorkTruck(const APawn& Pawn) const;
