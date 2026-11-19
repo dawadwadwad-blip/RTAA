@@ -27,9 +27,17 @@ func _run() -> void:
 		refs_path = repo.path_join("outputs/rva_street_refs/reference_cameras.json")
 	if gis_path.is_empty():
 		gis_path = repo.path_join("outputs/rva_gis")
+	if (scene.has_meta("source_manifest_sha256")
+			and FileAccess.get_sha256(gis_path.path_join("rva_gis_manifest.json")) != scene.get_meta("source_manifest_sha256")):
+		push_error("The audit DEM is from a different GIS snapshot than the open scene.")
+		_running = false
+		return
 	var limit := maxi(0, OS.get_environment("RVA_AUDIT_LIMIT").to_int())
+	var streamer := scene.get_node_or_null("GISLayers")
 	await capture(EditorInterface.get_base_control(), view.find_world_3d(), world_from_gis,
-			refs_path, gis_path, OUTPUT, scene.scene_file_path, limit)
+			refs_path, gis_path, OUTPUT, scene.scene_file_path, limit, streamer)
+	if is_instance_valid(streamer) and streamer.has_method("load_now"):
+		streamer.load_now(streamer.preview_focus)
 	_running = false
 
 
@@ -84,7 +92,7 @@ static func cleanup_run(target: String, name: String) -> void:
 
 
 static func capture(host: Node, world: World3D, world_from_gis: Transform3D, refs_path: String,
-		gis_path: String, output: String, scene_path: String, limit: int = 0) -> int:
+		gis_path: String, output: String, scene_path: String, limit: int = 0, streamer: Node = null) -> int:
 	var refs := read_object(refs_path)
 	var gis := read_object(gis_path.path_join("rva_gis_manifest.json"))
 	if refs.get("schema") != "rva-street-refs/1" or gis.get("schema") != "rva-gis/1":
@@ -149,6 +157,8 @@ static func capture(host: Node, world: World3D, world_from_gis: Transform3D, ref
 		if not is_finite(y):
 			skipped += 1
 			continue
+		if is_instance_valid(streamer) and streamer.has_method("load_now"):
+			streamer.load_now(Vector3(e, y, south))
 		var aspect := clampf(float(row.width) / maxf(1.0, float(row.height)), 0.5, 3.0)
 		var pixels := Vector2i(960, roundi(960.0 / aspect)) if aspect >= 1.0 else Vector2i(roundi(960.0 * aspect), 960)
 		viewport.size = pixels
