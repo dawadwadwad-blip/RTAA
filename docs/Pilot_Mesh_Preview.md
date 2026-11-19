@@ -17,4 +17,4 @@ Open the OBJ with its adjacent MTL to inspect individual buildings in Blender. U
 
 The terrain surface uses a two-meter mesh for inspection. The one-meter R16 tiles remain the source for Unreal Landscape. Road widths are initial class-based assumptions and the roads follow the visible terrain triangles. Production work still needs bridge decks, collision checks, and the first authored façades and landmarks.
 
-The [Main Street Station view](Pilot_Main_Street_Station.md) reuses the detailed first-drive landmark in the same frame.
+The [Main Street Station view](Pilot_Main_Street_Station.md) adds the detailed landmark in the same frame. The separate [station viaduct overlay](Station_Viaduct_Preview.md) places the local elevated approaches without changing the base mesh.

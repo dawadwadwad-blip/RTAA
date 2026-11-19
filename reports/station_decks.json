@@ -1,0 +1,173 @@
+{
+  "attribution": "\u00a9 OpenStreetMap contributors, ODbL 1.0",
+  "capture_sha256": "77b1a7b62b1114fdd1fbb7c4ec36cd5e32863e830dabade4093e2c9259777030",
+  "geometry": {
+    "faces": 3467,
+    "illustrative_support_counts": {
+      "Bellwood_Rail_Trestle": 5,
+      "I95_East_Mainline": 3,
+      "I95_East_Ramp": 4,
+      "I95_West_Mainline": 1
+    },
+    "material": "RVA_Station_Decks.mtl",
+    "material_sha256": "d926447cf32a4016b764d7d017e70110b62460b6a1cc1af00f4a8e45d156f3b8",
+    "mesh": "RVA_Station_Decks.obj",
+    "scope": "visual profile mesh; widths, railheads, girders, barriers, stripes and supports are illustrative",
+    "sha256": "38a4e703b79e41eb230d1f1de531a55dc7c37d2794d3c7e404965bc4fa1b8c7a",
+    "vertices": 4084
+  },
+  "horizontal_crs": "EPSG:26918",
+  "lidar_source_lock_sha256": "5405ac419c51282b7e7093d00dcb582e3f10699ba0889ed7828e1d8ccbc26c72",
+  "lidar_tiles_used": [
+    "20250301_7791_23NW.copc.laz",
+    "20250214_7792_14SW.copc.laz"
+  ],
+  "local_preview_alignment": {
+    "fit_witnesses": 212,
+    "holdout_median_signed_m": 0.0007,
+    "holdout_p95_abs_m": 0.08,
+    "holdout_witnesses": 210,
+    "method": "8 m checkerboard grid, ground class 2, slope <= 8%, nearest return <= 1.8 m",
+    "preview_dem_minus_raw_lidar_m": 1.34772,
+    "scope": "station preview only; native LAZ Z, DEM tiles and regional registration gate remain unchanged"
+  },
+  "mode": "local_lidar_to_dem_visual_preview",
+  "profiles": [
+    {
+      "east_main": {
+        "deck_surface_minus_ground_m": 20.099,
+        "deck_z_m_in_preview": 26.74,
+        "ground_z_m_in_preview": 6.641,
+        "local_en_m": [
+          -742.18,
+          331.7761
+        ],
+        "support": "bracketed_by_observed_returns"
+      },
+      "illustrative_width_m": 11.5,
+      "interpolation_gaps": [],
+      "kind": "road",
+      "layer": 3,
+      "length_m": 204.24,
+      "max_absolute_grade": 0.0412,
+      "name": "I95_West_Mainline",
+      "observed_stations": 42,
+      "osm_ways": [
+        {
+          "id": 601107599,
+          "version": 10
+        },
+        {
+          "id": 38232910,
+          "version": 24
+        }
+      ],
+      "raw_lidar_z_band_m": [
+        18,
+        33
+      ],
+      "samples": 42
+    },
+    {
+      "east_main": {
+        "deck_surface_minus_ground_m": 20.545,
+        "deck_z_m_in_preview": 26.861,
+        "ground_z_m_in_preview": 6.316,
+        "local_en_m": [
+          -729.3124,
+          321.4537
+        ],
+        "support": "bracketed_by_observed_returns"
+      },
+      "illustrative_width_m": 10.5,
+      "interpolation_gaps": [],
+      "kind": "road",
+      "layer": 3,
+      "length_m": 204.25,
+      "max_absolute_grade": 0.0502,
+      "name": "I95_East_Mainline",
+      "observed_stations": 42,
+      "osm_ways": [
+        {
+          "id": 45088311,
+          "version": 21
+        }
+      ],
+      "raw_lidar_z_band_m": [
+        18,
+        33
+      ],
+      "samples": 42
+    },
+    {
+      "east_main": {
+        "deck_surface_minus_ground_m": 20.701,
+        "deck_z_m_in_preview": 26.76,
+        "ground_z_m_in_preview": 6.059,
+        "local_en_m": [
+          -717.3761,
+          311.8784
+        ],
+        "support": "bracketed_by_observed_returns"
+      },
+      "illustrative_width_m": 5.0,
+      "interpolation_gaps": [],
+      "kind": "ramp",
+      "layer": 3,
+      "length_m": 203.86,
+      "max_absolute_grade": 0.0483,
+      "name": "I95_East_Ramp",
+      "observed_stations": 42,
+      "osm_ways": [
+        {
+          "id": 175298408,
+          "version": 6
+        }
+      ],
+      "raw_lidar_z_band_m": [
+        18,
+        32
+      ],
+      "samples": 42
+    },
+    {
+      "east_main": {
+        "deck_surface_minus_ground_m": 8.098,
+        "deck_z_m_in_preview": 14.392,
+        "ground_z_m_in_preview": 6.293,
+        "local_en_m": [
+          -728.0659,
+          320.4537
+        ],
+        "support": "interpolation_across_unseen_span"
+      },
+      "illustrative_width_m": 6.4,
+      "interpolation_gaps": [
+        {
+          "from_chainage_m": 62.99,
+          "span_m": 67.83,
+          "to_chainage_m": 130.82
+        }
+      ],
+      "kind": "rail",
+      "layer": 1,
+      "length_m": 145.35,
+      "max_absolute_grade": 0.0124,
+      "name": "Bellwood_Rail_Trestle",
+      "observed_stations": 18,
+      "osm_ways": [
+        {
+          "id": 38232584,
+          "version": 19
+        }
+      ],
+      "raw_lidar_z_band_m": [
+        10.5,
+        16.2
+      ],
+      "samples": 31
+    }
+  ],
+  "schema_version": 1,
+  "terrain_report_sha256": "9b82f1f42dd5f21f5080fc268955f4d3876904ec769f2fd80a2d346204e5dece"
+}
