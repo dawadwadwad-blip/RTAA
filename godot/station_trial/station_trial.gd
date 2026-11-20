@@ -1,6 +1,7 @@
 extends Node3D
 
-const STREETS = preload("res://assets/shockoe.glb")
+const STREETS := "res://assets/shockoe.glb"
+const SURVEY_ROAD_LAYER := preload("res://tools/gis_east_main.gd").ROAD_LAYER
 const ROAD_START := 27.0
 const ROAD_FINISH := 5.0
 const STRIPE_LANE := -3.15
@@ -9,6 +10,8 @@ const STRIPE_WIDTH := 0.15
 
 enum Shift { READY, ARMED, PAINTING, COMPLETE }
 
+@export var survey_route: Dictionary = {}
+
 var phase: Shift = Shift.READY
 var eastbound: Vector3
 var right_eastbound: Vector3
@@ -16,14 +19,14 @@ var centerline: Array = []
 var parked_vehicles: Array = []
 var start_at := START_AT
 var end_at := 55.0
-var truck := Node3D.new()
-var camera := Camera3D.new()
-var sun := DirectionalLight3D.new()
+var truck: Node3D
+var camera: Camera3D
+var sun: DirectionalLight3D
 var speed := 0.0
 var yaw := 0.0
 var progress := 0.0
-var laid := Node3D.new()
-var work_order := PanelContainer.new()
+var laid: Node3D
+var work_order: PanelContainer
 var status: Label
 var speedometer: Label
 var controls: Label
@@ -33,10 +36,23 @@ var view_index := -1
 var paint: StandardMaterial3D
 var pieces := 0
 var initialized := false
+var survey_stream: Node
+var gates_ready := false
 
 
 func _ready() -> void:
-	var route: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://assets/route.json"))
+	truck = Node3D.new()
+	camera = Camera3D.new()
+	sun = DirectionalLight3D.new()
+	laid = Node3D.new()
+	work_order = PanelContainer.new()
+	var route: Dictionary = survey_route
+	if route.is_empty():
+		route = JSON.parse_string(FileAccess.get_file_as_string("res://assets/route.json"))
+	else:
+		var origin: Array = route.origin_en
+		position = Vector3(origin[0], 0, -float(origin[1]))
+		survey_stream = get_parent().get_node("GISLayers")
 	var tangent: Array = route["eastbound_xz"]
 	eastbound = Vector3(tangent[0], 0.0, tangent[1]).normalized()
 	right_eastbound = Vector3(-eastbound.z, 0.0, eastbound.x)
@@ -46,13 +62,14 @@ func _ready() -> void:
 	end_at = route.get("end_at", 55.0)
 	station_views = route.get("station_views", [])
 	register_keyboard()
-	var street := STREETS.instantiate()
-	add_child(street)
-	shade_street(street)
-	for name in route["ground_meshes"]:
-		var mesh := street.find_child(name, true, false) as MeshInstance3D
-		assert(mesh != null, "Missing driving surface " + name)
-		mesh.create_trimesh_collision()
+	if survey_stream == null:
+		var street := (load(STREETS) as PackedScene).instantiate()
+		add_child(street)
+		shade_street(street)
+		for name in route["ground_meshes"]:
+			var mesh := street.find_child(name, true, false) as MeshInstance3D
+			assert(mesh != null, "Missing driving surface " + name)
+			mesh.create_trimesh_collision()
 	add_child(laid)
 	add_child(truck)
 	build_truck()
@@ -67,9 +84,13 @@ func _ready() -> void:
 	reset_shift()
 	await get_tree().physics_frame
 	await get_tree().physics_frame
-	truck.position.y = surface_height(truck.position)
-	add_gate(ROAD_START, Color("f5bd61"))
-	add_gate(ROAD_FINISH, Color("93e2b1"))
+	var grade := surface_height(truck.position)
+	if not is_finite(grade):
+		status.text = "The starting road has not loaded."
+		push_error("Night Shift requires collision at its starting point.")
+		return
+	truck.position.y = grade
+	place_gates()
 	update_camera(1.0)
 	initialized = true
 
@@ -124,7 +145,9 @@ func reset_shift() -> void:
 	phase = Shift.READY
 	clear_stripe()
 	if initialized:
-		truck.position.y = surface_height(truck.position)
+		var grade := surface_height(truck.position)
+		if is_finite(grade):
+			truck.position.y = grade
 		update_camera(1.0)
 
 
@@ -132,6 +155,12 @@ func _physics_process(delta: float) -> void:
 	if not initialized:
 		return
 	if Input.is_action_just_pressed("retry"):
+		if survey_stream != null:
+			initialized = false
+			survey_stream.load_now(to_global(route_position(start_at, STRIPE_LANE)))
+			await get_tree().physics_frame
+			await get_tree().physics_frame
+			initialized = true
 		reset_shift()
 		return
 	if Input.is_action_just_pressed("stripe") and phase == Shift.READY:
@@ -142,6 +171,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("station_view") and not station_views.is_empty():
 		view_index = ((view_index + 2) % (station_views.size() + 1)) - 1
 		update_camera(1.0)
+		if survey_stream != null:
+			survey_stream.load_now(camera.global_position)
 	if view_index >= 0:
 		update_hud()
 		return
@@ -166,13 +197,20 @@ func _physics_process(delta: float) -> void:
 	var old_lateral := truck.position.dot(right_eastbound) - center_offset(old_along)
 	var along := clampf(old_along + forward.dot(eastbound) * speed * delta, -74.0, end_at)
 	var lateral := clampf(old_lateral + forward.dot(right_eastbound) * speed * delta, -6.2, 6.2)
-	if parked_overlap(along, lateral):
+	var destination := route_position(along, lateral)
+	var grade := surface_height(destination)
+	if parked_overlap(along, lateral) or not is_finite(grade):
 		speed = 0.0
 		along = old_along
 		lateral = old_lateral
-	truck.position = route_position(along, lateral)
-	truck.position.y = surface_height(truck.position)
+	else:
+		destination.y = grade
+		truck.position = destination
 	truck.rotation.y = yaw
+	if survey_stream != null:
+		survey_stream.set_focus(truck.global_position)
+	if not gates_ready and along < ROAD_START + 180.0:
+		place_gates()
 	advance_shift(old_along, along, lateral, forward)
 	update_camera(1.0 - exp(-7.0 * delta))
 	update_hud()
@@ -205,12 +243,15 @@ func parked_overlap(along: float, lateral: float) -> bool:
 
 
 func surface_height(at: Vector3) -> float:
-	var start := Vector3(at.x, 20.0, at.z)
-	var finish := Vector3(at.x, 0.0, at.z)
-	var query := PhysicsRayQueryParameters3D.create(start, finish, 1)
+	var position_world := to_global(at)
+	var start := Vector3(position_world.x, 100.0 if survey_stream != null else 20.0, position_world.z)
+	var finish := Vector3(position_world.x, -20.0 if survey_stream != null else 0.0, position_world.z)
+	var query := PhysicsRayQueryParameters3D.create(start, finish, SURVEY_ROAD_LAYER if survey_stream != null else 1)
 	query.hit_back_faces = true
 	var hit := get_world_3d().direct_space_state.intersect_ray(query)
-	return hit.position.y if not hit.is_empty() else 6.0
+	if not hit.is_empty():
+		return to_local(hit.position).y
+	return NAN if survey_stream != null else 6.0
 
 
 func advance_shift(old_along: float, along: float, lateral: float, forward: Vector3) -> void:
@@ -226,7 +267,12 @@ func advance_shift(old_along: float, along: float, lateral: float, forward: Vect
 	var distance := clampf(ROAD_START - along, 0.0, ROAD_START - ROAD_FINISH)
 	while progress + 0.5 <= distance:
 		var marker := route_position(ROAD_START - progress - 0.25, STRIPE_LANE)
-		marker.y = surface_height(marker) + 0.026
+		var grade := surface_height(marker)
+		if not is_finite(grade):
+			clear_stripe()
+			phase = Shift.ARMED
+			return
+		marker.y = grade + 0.026
 		var stroke := box(laid, marker, Vector3(STRIPE_WIDTH, 0.025, 0.505), paint)
 		stroke.rotation.y = atan2(eastbound.x, eastbound.z)
 		progress += 0.5
@@ -243,22 +289,34 @@ func clear_stripe() -> void:
 	pieces = 0
 
 
-func add_gate(along: float, tint: Color) -> void:
-	var marker := route_position(along, STRIPE_LANE)
-	marker.y = surface_height(marker) + 0.035
+func place_gates() -> void:
+	if gates_ready:
+		return
+	var positions: Array[Vector3] = []
+	for along: float in [ROAD_START, ROAD_FINISH]:
+		for lateral: float in [STRIPE_LANE, STRIPE_LANE - 1.10, STRIPE_LANE + 1.10]:
+			var point := route_position(along, lateral)
+			point.y = surface_height(point)
+			if not is_finite(point.y):
+				return
+			positions.append(point)
+	add_gate(positions.slice(0, 3), Color("f5bd61"))
+	add_gate(positions.slice(3, 6), Color("93e2b1"))
+	gates_ready = true
+
+
+func add_gate(points: Array[Vector3], tint: Color) -> void:
 	var mark := material(tint)
 	mark.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	var bar := box(self, marker, Vector3(1.55, 0.042, 0.29), mark)
+	var bar := box(self, points[0] + Vector3.UP * 0.035, Vector3(1.55, 0.042, 0.29), mark)
 	bar.rotation.y = atan2(eastbound.x, eastbound.z)
 	var cone := CylinderMesh.new()
 	cone.top_radius = 0.035
 	cone.bottom_radius = 0.16
 	cone.height = 0.62
 	cone.radial_segments = 8
-	for side in [-1.10, 1.10]:
-		var base := route_position(along, STRIPE_LANE + float(side))
-		base.y = surface_height(base) + 0.32
-		mesh_instance(self, cone, base, mark)
+	for index in [1, 2]:
+		mesh_instance(self, cone, points[index] + Vector3.UP * 0.32, mark)
 
 
 func update_camera(amount: float) -> void:
@@ -268,14 +326,14 @@ func update_camera(amount: float) -> void:
 		var target: Array = view["target"]
 		camera.fov = view["fov"]
 		camera.position = Vector3(eye[0], eye[1], eye[2])
-		camera.look_at(Vector3(target[0], target[1], target[2]))
+		camera.look_at(to_global(Vector3(target[0], target[1], target[2])))
 		return
 	camera.fov = 67.0
 	var forward := heading()
 	var right := Vector3(-forward.z, 0.0, forward.x)
 	var eye := truck.position - forward * 8.7 + Vector3.UP * 4.15 + right * 0.55
 	camera.position = camera.position.lerp(eye, amount)
-	camera.look_at(truck.position + forward * 12.0 + Vector3.UP * 3.6)
+	camera.look_at(to_global(truck.position + forward * 12.0 + Vector3.UP * 3.6))
 
 
 func add_lighting() -> void:

@@ -48,14 +48,14 @@ class Drape:
         self.obj.material(material)
         vertices, edges = {}, {}
         west, _, _, north = self.surface.bounds
-        step = self.surface.step
+        step_e, step_n = self.surface.spacing
         rows, cols = self.surface.elevations.shape
         xmin, ymin, xmax, ymax = polygon.bounds
-        for r in range(max(0, math.floor((north - ymax) / step)), min(rows - 1, math.ceil((north - ymin) / step))):
-            y = north - r * step
-            for c in range(max(0, math.floor((xmin - west) / step)), min(cols - 1, math.ceil((xmax - west) / step))):
-                x = west + c * step
-                nw, sw, se, ne = (x, y), (x, y - step), (x + step, y - step), (x + step, y)
+        for r in range(max(0, math.floor((north - ymax) / step_n)), min(rows - 1, math.ceil((north - ymin) / step_n))):
+            y = north - r * step_n
+            for c in range(max(0, math.floor((xmin - west) / step_e)), min(cols - 1, math.ceil((xmax - west) / step_e))):
+                x = west + c * step_e
+                nw, sw, se, ne = (x, y), (x, y - step_n), (x + step_e, y - step_n), (x + step_e, y)
                 for corners in ((nw, sw, se), (nw, se, ne)):
                     piece = shapely.intersection(polygon, Polygon(corners), grid_size=0.0001)
                     if piece.area < 1e-8:

@@ -69,3 +69,28 @@ $env:RVA_GIS_STATION_DECKS_DIR = (Resolve-Path outputs/station-decks).Path
 ```
 
 Launch Godot from that shell and run the GIS assembler. The three I‑95 spans and the Bellwood trestle stream above the at-grade East Main Street surface. The assembler keeps the source deck heights in the shared pilot frame and fits the visual support bases to the current terrain. Jolt collision follows the observed deck triangles. The rail crossing contains a 67.83 m interpolation gap, which is displayed as geometry with collision held out. Routing remains disabled on these clipped spans until verified end connections are built. [In-engine view](../reports/RVA_GIS_Viaducts.webp)
+
+### Playable East Main Street
+
+Build the street package from the same saved GIS folder and chunk manifest used by the survey. The recommended build uses the authored station and viaducts. Set all three variables before launching the editor and run `res://tools/assemble_gis_pilot.gd` again.
+
+```powershell
+python tools/prepare_gis_east_main.py
+$env:RVA_GIS_DATA_DIR = (Resolve-Path outputs/rva_gis).Path
+$env:RVA_GIS_STATION_DECKS_DIR = (Resolve-Path outputs/station-decks).Path
+$env:RVA_GIS_EAST_MAIN = (Resolve-Path outputs/rva_gis_east_main/east_main.json).Path
+```
+
+Open `res://assets/rva_gis/pilot/east_main_night_shift.tscn` and run it with F6. The truck starts near 21st Street. Press E to arm and drive west in the starting lane through the amber and green cones. R resets the job, C cycles the two station views, and F2 switches graphics quality. The generated roadway shares the survey's terrain triangles and adds an independent road collision layer below the viaducts. Cross streets are short stubs. Surrounding building façades are still massing, and traffic has yet to be ported from the standalone trial. [In-engine drive](../reports/RVA_GIS_East_Main_Drive.webp)
+
+Run the automated playthrough from the repository root after assembling the scene:
+
+```sh
+godot --headless --fixed-fps 60 --path godot/station_trial --script res://tools/verify_streamed_shift.gd
+```
+
+To export a standalone Windows ZIP, use matching Godot export templates and place the corresponding Godot MIT license and third-party notices in the directory passed to `--godot-notices`. The two filenames are `Godot-LICENSE.txt` and `Godot-COPYRIGHT.txt`. The packager takes one generation from the playable scene's index and keeps previous build outputs intact. It verifies the ZIP before publishing it.
+
+```sh
+python tools/package_gis_night_shift.py --godot-notices outputs/godot-trial/licenses --output outputs/RVA_Streaming_Night_Shift_Windows.zip
+```

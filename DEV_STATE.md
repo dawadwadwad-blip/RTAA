@@ -31,6 +31,9 @@
 - **S1-16 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-17 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-18 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-19 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-20 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-21 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -110,6 +113,9 @@
 - `20261119T233644065174Z-535a88bf` · S1-16 · **PASS** · 2026-11-19T23:36:44+00:00 → 2026-11-19T23:36:56+00:00 · [run evidence](reports/runs/20261119T233644065174Z-535a88bf.json)
 - `20261119T234945066892Z-495f9977` · S1-17 · **PASS** · 2026-11-19T23:49:45+00:00 → 2026-11-19T23:50:15+00:00 · [run evidence](reports/runs/20261119T234945066892Z-495f9977.json)
 - `20261120T000323381176Z-17837763` · S1-18 · **PASS** · 2026-11-20T00:03:23+00:00 → 2026-11-20T00:03:46+00:00 · [run evidence](reports/runs/20261120T000323381176Z-17837763.json)
+- `20261120T001947422053Z-888cd342` · S1-19 · **PASS** · 2026-11-20T00:19:47+00:00 → 2026-11-20T00:20:00+00:00 · [run evidence](reports/runs/20261120T001947422053Z-888cd342.json)
+- `20261120T002037869724Z-aed3ac9b` · S1-20 · **PASS** · 2026-11-20T00:20:37+00:00 → 2026-11-20T00:20:49+00:00 · [run evidence](reports/runs/20261120T002037869724Z-aed3ac9b.json)
+- `20261120T002221964050Z-d698016c` · S1-21 · **PASS** · 2026-11-20T00:22:21+00:00 → 2026-11-20T00:22:41+00:00 · [run evidence](reports/runs/20261120T002221964050Z-d698016c.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -273,3 +279,21 @@
 - Streamed the two I‑95 carriageways, eastern ramp and Bellwood rail trestle alongside the authored station using the saved viaduct package. Godot checks the package hashes, uses the archived deck elevations and seats the visual piers on the survey terrain. [In-engine view](reports/RVA_GIS_Viaducts.webp) · [Build notes](docs/Godot_Station_Trial.md)
 - Jolt matched all 123 highway intervals and 16 observed rail intervals. The remaining 14 rail intervals in the 67.83 m observation gap are visual only. The four East Main crossing probes also hit independent terrain below. The upper surfaces sit 19.29–20.61 m above the current road grade for I‑95 and 8.00 m for the rail preview.
 - Verified camera-driven streaming, the survey with decks disabled, all four deck-profile unit tests and the existing Night Shift striping pass. The deck ends still need verified routing connections. The next ground-level task is modeling the East Main asphalt, curbs and markings in the survey.
+
+## S1-19 · East Main street surfaces in Godot
+
+- Rebuilt the East Main asphalt, brick crossing, sidewalk, curbs and markings as nine layers that follow the saved 3DEP terrain triangles. The package checks both the GIS snapshot and the station alignment before importing. The mapped route agreed with the saved OpenStreetMap centerline within 1 mm at the sampled points.
+- The road widths and placement of individual markings use the authored corridor layout. Side streets are short stubs. Both the road and the elevated decks keep separate collision surfaces. [Build notes](docs/Godot_Station_Trial.md)
+
+## S1-20 · Night Shift in the streamed survey
+
+- Ported the original work-order controls to the streamed world. Reused the game logic for driving, arm and stripe, reset, two station views and the Low graphics toggle. The truck and inspection cameras now control cell streaming.
+- The 134 road collision probes passed. The playthrough drove 525 m, painted all 44 segments of the 22 m pass and retired 17 of the starting layers. It also checked both camera targets, Low, and reset. The old standalone route still passes its own playthrough. [In-engine drive](reports/RVA_GIS_East_Main_Drive.webp)
+
+## S1-21 · Streamed Night Shift playtest package
+
+- Added an isolated Windows x86-64 packager that stages the playable scene's 92 streamed layers and generates a self-contained ZIP. Verified the Windows export and archive integrity, and launched the corresponding exported Linux game locally. Windows launch and target-hardware frame rate remain open.
+
+### Next usage window prompt · S1-22
+
+> Bring the existing East Main façade geometry and street-level props from the standalone trial into the streamed route. Prioritize the first view of the station near 17th, the crosswalk and storefront cluster near 19th, and the bus stop and rail underpass on the final approach. Remove the matching blockout volumes only where the authored replacements align to the GIS footprints. Check the westbound drive, the two station views, streaming and Low mode before exporting another Windows build. Use the saved GIS inputs and original project assets.
