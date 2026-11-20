@@ -30,6 +30,7 @@
 - **S1-15 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-16 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-17 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-18 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -108,6 +109,7 @@
 - `20261119T233532431569Z-c85c8a80` · S1-16 · **PASS** · 2026-11-19T23:35:32+00:00 → 2026-11-19T23:35:46+00:00 · [run evidence](reports/runs/20261119T233532431569Z-c85c8a80.json)
 - `20261119T233644065174Z-535a88bf` · S1-16 · **PASS** · 2026-11-19T23:36:44+00:00 → 2026-11-19T23:36:56+00:00 · [run evidence](reports/runs/20261119T233644065174Z-535a88bf.json)
 - `20261119T234945066892Z-495f9977` · S1-17 · **PASS** · 2026-11-19T23:49:45+00:00 → 2026-11-19T23:50:15+00:00 · [run evidence](reports/runs/20261119T234945066892Z-495f9977.json)
+- `20261120T000323381176Z-17837763` · S1-18 · **PASS** · 2026-11-20T00:03:23+00:00 → 2026-11-20T00:03:46+00:00 · [run evidence](reports/runs/20261120T000323381176Z-17837763.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -265,3 +267,9 @@
 - Replaced the single OpenStreetMap station footprint with the authored clock tower, headhouse, front stairs and train shed. The optional `--station-exterior` build packages the source GLB and replacement record together. The surveyed east/north placement covers 98.21% of the mapped footprint in the model's bounds, and the first-step fit moved the station down 4.6 mm onto this pilot's 3DEP terrain. [Station in Godot](reports/RVA_GIS_Station.webp) · [Build notes](docs/Godot_Station_Trial.md)
 - Godot reloaded six meshes and eight embedded material textures, including transparent train shed glazing. Jolt probes passed across all 15 stair treads and through the old shed volume where only terrain should collide. The scene streamed with supporting terrain and rebuilt successfully after import.
 - The GIS build without the optional landmark passed its original verification. The authored East Main drive and striping job also passed again. Platform and rail-deck collision and visual road surfaces are open.
+
+## S1-18 · Elevated station spans in Godot
+
+- Streamed the two I‑95 carriageways, eastern ramp and Bellwood rail trestle alongside the authored station using the saved viaduct package. Godot checks the package hashes, uses the archived deck elevations and seats the visual piers on the survey terrain. [In-engine view](reports/RVA_GIS_Viaducts.webp) · [Build notes](docs/Godot_Station_Trial.md)
+- Jolt matched all 123 highway intervals and 16 observed rail intervals. The remaining 14 rail intervals in the 67.83 m observation gap are visual only. The four East Main crossing probes also hit independent terrain below. The upper surfaces sit 19.29–20.61 m above the current road grade for I‑95 and 8.00 m for the rail preview.
+- Verified camera-driven streaming, the survey with decks disabled, all four deck-profile unit tests and the existing Night Shift striping pass. The deck ends still need verified routing connections. The next ground-level task is modeling the East Main asphalt, curbs and markings in the survey.

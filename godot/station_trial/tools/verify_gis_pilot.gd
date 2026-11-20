@@ -12,7 +12,7 @@ func _initialize() -> void:
 func _verify() -> void:
 	var data := OS.get_environment("RVA_GIS_DATA_DIR")
 	var builder := Builder.new()
-	var result := builder.build(data)
+	var result := builder.build(data, OS.get_environment("RVA_GIS_STATION_DECKS_DIR"))
 	if result.is_empty():
 		_fail("Could not assemble the GIS scene.")
 		return
@@ -72,6 +72,9 @@ func _verify() -> void:
 	await physics_frame
 	if checks.landmarks == 1 and not _verify_station_collision(stream, builder):
 		_fail("The authored station is missing stair collision or has a duplicate generic volume.")
+		return
+	if not result.station_decks.is_empty() and not _verify_deck_collision(stream, builder):
+		_fail("The station viaduct collision and grade separation checks failed.")
 		return
 	var hits := 0
 	var space := root.world_3d.direct_space_state
@@ -251,6 +254,51 @@ func _verify_station_collision(stream: Node, builder: RefCounted) -> bool:
 	if hit.is_empty() or hit.collider.name != "TerrainCollision" or absf(hit.position.y - y) > 0.003:
 		return false
 	print("PASS: Jolt matched all 15 station treads and found no generic shed collision.")
+	return true
+
+
+func _verify_deck_collision(stream: Node, builder: RefCounted) -> bool:
+	var viaducts := stream.get_node_or_null("station_viaducts")
+	if viaducts == null or viaducts.get_meta("profiles", {}).size() != 4:
+		return false
+	var space := root.world_3d.direct_space_state
+	var counts := {"highway": 0, "rail": 0, "held": 0}
+	for row: Dictionary in viaducts.get_meta("collision_probes"):
+		var p: Vector3 = row.point
+		var ray := PhysicsRayQueryParameters3D.create(p + Vector3.UP * 0.2, p - Vector3.UP * 0.2)
+		var hit := space.intersect_ray(ray)
+		if row.collidable:
+			if hit.is_empty() or hit.collider.name != row.body or absf(hit.position.y - p.y) > 0.008:
+				push_error(str(row.body) + " failed a collision interval at " + str(p))
+				return false
+			var key := "rail" if row.kind == "rail" else "highway"
+			counts[key] += 1
+		else:
+			if not hit.is_empty() or row.kind != "rail":
+				return false
+			counts.held += 1
+	var crossings: Array = viaducts.get_meta("east_main_crossings")
+	if crossings.size() != 4 or counts.highway == 0 or counts.rail == 0 or counts.held == 0:
+		return false
+	for row: Dictionary in crossings:
+		var p: Vector2 = row.xz
+		var deck := Vector3(p.x, row.deck_y, p.y)
+		var ground := Vector3(p.x, builder.sample(p), p.y)
+		var deck_hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(
+			deck + Vector3.UP * 0.2, deck - Vector3.UP * 0.2))
+		var ground_hit := space.intersect_ray(PhysicsRayQueryParameters3D.create(
+			ground + Vector3.UP * 0.2, ground - Vector3.UP * 0.2))
+		if (ground_hit.is_empty() or ground_hit.collider.name != "TerrainCollision"
+				or absf(ground_hit.position.y - ground.y) > 0.004 or deck.y - ground.y < 7.0):
+			return false
+		if row.collidable:
+			if deck_hit.is_empty() or deck_hit.collider.name != row.body or absf(deck_hit.position.y - deck.y) > 0.07:
+				return false
+		elif not deck_hit.is_empty():
+			return false
+		print("SPACING: ", row.body, " top is ", "%.3f" % (deck.y - ground.y), " m above the GIS ground.")
+	print("PASS: ", counts.highway, " supported highway intervals and ", counts.rail, " observed rail intervals",
+		" have deck collision. ", counts.held, " rail intervals remain visual only. East Main stays at grade.")
 	return true
 
 

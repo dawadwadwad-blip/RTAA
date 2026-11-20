@@ -10,9 +10,10 @@ func _run() -> void:
 	if data.is_empty():
 		data = ProjectSettings.globalize_path("res://").path_join("../../outputs/rva_gis").simplify_path()
 	var builder := Builder.new()
-	var result := builder.build(data)
+	var result := builder.build(data, OS.get_environment("RVA_GIS_STATION_DECKS_DIR"))
 	if not result.is_empty():
 		print("Built ", result.scene, " with ", result.terrain_cells, " terrain cells, ",
-				result.building_layers, " building layers and ", result.road_paths, " road paths.")
+				result.building_layers, " building layers, ", result.road_paths, " road paths and ",
+				result.station_decks.size(), " station deck profiles.")
 		EditorInterface.get_resource_filesystem().scan()
 		EditorInterface.open_scene_from_path(result.scene)
