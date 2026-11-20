@@ -41,6 +41,11 @@ class Surface:
     elevations: object
     bounds: tuple
     step: float
+    north_step: float | None = None
+
+    @property
+    def spacing(self):
+        return self.step, self.step if self.north_step is None else self.north_step
 
     @property
     def footprint(self):
@@ -48,8 +53,9 @@ class Surface:
 
     def height(self, east, north):
         west, _, _, north_edge = self.bounds
-        row = min(max(0.0, (north_edge - north) / self.step), self.elevations.shape[0] - 1)
-        col = min(max(0.0, (east - west) / self.step), self.elevations.shape[1] - 1)
+        step_e, step_n = self.spacing
+        row = min(max(0.0, (north_edge - north) / step_n), self.elevations.shape[0] - 1)
+        col = min(max(0.0, (east - west) / step_e), self.elevations.shape[1] - 1)
         r = min(int(row), self.elevations.shape[0] - 2)
         c = min(int(col), self.elevations.shape[1] - 2)
         v, u = row - r, col - c

@@ -1,0 +1,30 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261120T002037869724Z-aed3ac9b.json",
+    "reports/runs/20261120T002037869724Z-aed3ac9b.log"
+  ],
+  "checks": [
+    "PASS: 134 westbound lane checks cover the road transitions and underpass.",
+    "PASS: Drove 525 m from 21st Street, completed the 22 m Night Shift pass, and reset. 17 starting layers retired during the drive.",
+    "PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.",
+    "Ran 4 tests in 0.016s",
+    "OK",
+    "PASS: Captured two game views of the streamed East Main approach."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "godot --headless --fixed-fps 60 --path outputs/rva_gis_station --script res://tools/verify_streamed_shift.gd && godot --headless --fixed-fps 60 --path godot/station_trial --script res://verify_trial.gd && python3 -m unittest discover -s tests -p test_pilot_mesh_preview.py && python3 outputs/rva_gis_station/render_east_main.py"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-20T00:20:49+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261120T002037869724Z-aed3ac9b.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261120T002037869724Z-aed3ac9b",
+  "started_at": "2026-11-20T00:20:37+00:00",
+  "status": "PASS",
+  "task": "S1-20"
+}

@@ -5,6 +5,8 @@ extends RefCounted
 const Stream = preload("res://tools/gis_pilot_stream.gd")
 const SurveyCamera = preload("res://tools/gis_pilot_camera.gd")
 const StationDecks = preload("res://tools/gis_station_decks.gd")
+const EastMain = preload("res://tools/gis_east_main.gd")
+const Shift = preload("res://station_trial.gd")
 const OUTPUT := "res://assets/rva_gis/pilot"
 const CHUNKS := "res://assets/rva_gis/meshes"
 const GRID_FACES := 126
@@ -41,7 +43,7 @@ static func read_object(path: String) -> Dictionary:
 	return parsed if parsed is Dictionary else {}
 
 
-func build(data_dir: String, station_decks_dir: String = "") -> Dictionary:
+func build(data_dir: String, station_decks_dir: String = "", east_main_path: String = "") -> Dictionary:
 	# A builder instance owns only one generation.
 	if not _generation.is_empty():
 		return _fail("Create a new builder for a new GIS generation.")
@@ -73,7 +75,7 @@ func build(data_dir: String, station_decks_dir: String = "") -> Dictionary:
 		return _fail("Cannot make the GIS layer directory.")
 	var report := {"terrain_cells": 0, "building_layers": 0, "road_paths": 0, "bike_paths": 0,
 		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0,
-		"landmarks": 0, "station_decks": {}}
+		"landmarks": 0, "station_decks": {}, "street_layers": 0}
 	for row: int in range(0, _height - 1, GRID_FACES):
 		for col: int in range(0, _width - 1, GRID_FACES):
 			if not _terrain_cell(col, row, mini(_width - 1, col + GRID_FACES), mini(_height - 1, row + GRID_FACES)):
@@ -99,13 +101,62 @@ func build(data_dir: String, station_decks_dir: String = "") -> Dictionary:
 		report.station_decks = decks.profiles
 	if not _road_layers(roads.features, float(c.streaming_cell_m), report):
 		return {}
+	var streets := {}
+	if not east_main_path.is_empty():
+		var station_y: Variant = null if landmarks.is_empty() else landmarks[0].origin_godot_m[1]
+		streets = EastMain.read_package(east_main_path, c.source_manifest_sha256, station_y)
+		if streets.is_empty():
+			return {}
+		var points := EastMain.vertices(streets)
+		var finishes := EastMain.materials(streets.palette)
+		for id: String in streets.parts:
+			var street := EastMain.layer(id, streets.parts[id], points, finishes, _extent)
+			if street.is_empty():
+				return _fail("East Main surface geometry is invalid in layer " + id)
+			if not _add_layer("EastMain_" + id, street.root, street.bounds, "street"):
+				return {}
+			_set_terrain_dependencies(street.bounds)
+			report.street_layers += 1
 	var focus_xz := _extent.get_center()
 	if _extent.has_point(STATION):
 		focus_xz = STATION
 	var focus := Vector3(focus_xz.x, sample(focus_xz) + 4, focus_xz.y)
+	var world := _scene_root(c.source_manifest_sha256, report, replaced, focus)
+	_add_preview(world, focus, m.attributions)
+	# Capture scene and layers share one finished generation. Prior scenes stay usable on failure.
+	var scene := OUTPUT.path_join("richmond_gis_pilot.tscn")
+	var temporary := _generation.path_join("preview.tscn")
+	if not _save_scene(world, temporary):
+		return {}
+	if not streets.is_empty():
+		var route: Dictionary = streets.route
+		var route_origin := Vector3(route.origin_en[0], 0, -float(route.origin_en[1]))
+		var heading := Vector3(route.eastbound_xz[0], 0, route.eastbound_xz[1])
+		var start := route_origin + heading * float(route.start_at)
+		var playable := _scene_root(c.source_manifest_sha256, report, replaced, start)
+		playable.name = "EastMainNightShift"
+		var driver := Node3D.new()
+		driver.name = "NightShift"
+		driver.set_script(Shift)
+		driver.set("survey_route", route)
+		_own(playable, driver)
+		var playable_temp := _generation.path_join("night_shift.tscn")
+		var playable_scene := OUTPUT.path_join("east_main_night_shift.tscn")
+		if not _save_scene(playable, playable_temp) or DirAccess.rename_absolute(
+				ProjectSettings.globalize_path(playable_temp), ProjectSettings.globalize_path(playable_scene)) != OK:
+			return _fail("Cannot publish the streamed Night Shift scene.")
+		report.playable_scene = playable_scene
+	if DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(scene)) != OK:
+		return _fail("Cannot publish the assembled GIS scene.")
+	report.scene = scene
+	report.layer_paths = _entries.size()
+	return report
+
+
+func _scene_root(snapshot: String, report: Dictionary, replaced: Array, focus: Vector3) -> Node3D:
 	var world := Node3D.new()
 	world.name = "RichmondGISPilot"
-	world.set_meta("source_manifest_sha256", c.source_manifest_sha256)
+	world.set_meta("source_manifest_sha256", snapshot)
 	world.set_meta("gis_extent_xz", _extent)
 	world.set_meta("grade_separated", report.grade_separated)
 	world.set_meta("replaced_osm_ids", replaced)
@@ -118,17 +169,7 @@ func build(data_dir: String, station_decks_dir: String = "") -> Dictionary:
 	stream.cells = _entries
 	stream.preview_focus = focus
 	_own(world, stream)
-	_add_preview(world, focus, m.attributions)
-	# Capture scene and layers share one finished generation. Prior scenes stay usable on failure.
-	var scene := OUTPUT.path_join("richmond_gis_pilot.tscn")
-	var temporary := _generation.path_join("preview.tscn")
-	if not _save_scene(world, temporary):
-		return {}
-	if DirAccess.rename_absolute(ProjectSettings.globalize_path(temporary), ProjectSettings.globalize_path(scene)) != OK:
-		return _fail("Cannot publish the assembled GIS scene.")
-	report.scene = scene
-	report.layer_paths = _entries.size()
-	return report
+	return world
 
 
 func sample(point: Vector2) -> float:

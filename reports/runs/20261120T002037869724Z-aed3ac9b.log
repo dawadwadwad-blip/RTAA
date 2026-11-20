@@ -1,0 +1,18 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: 134 westbound lane checks cover the road transitions and underpass.
+PASS: Drove 525 m from 21st Street, completed the 22 m Night Shift pass, and reset. 17 starting layers retired during the drive.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.016s
+
+OK
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS: Captured two game views of the streamed East Main approach.

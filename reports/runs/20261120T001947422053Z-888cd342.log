@@ -1,0 +1,4 @@
+PASS: Built East Main roadway, curb, sidewalk and marking geometry in 9 groups. Route differs from the saved OSM centerline by at most 0.000 m.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+STREET 9 TRIAL res://assets/rva_gis/pilot/east_main_night_shift.tscn
