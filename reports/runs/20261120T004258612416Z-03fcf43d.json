@@ -1,0 +1,33 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "reports/runs/20261120T004258612416Z-03fcf43d.json",
+    "reports/runs/20261120T004258612416Z-03fcf43d.log"
+  ],
+  "checks": [
+    "PASS: 65 wall faces across 49 mapped buildings, 6 streamed batches and 35 parked vehicles.",
+    "PASS: 65 dressed wall faces match the original shell and 35 parked vehicles clear the shift lane.",
+    "PASS: 134 westbound lane checks cover the road transitions and underpass.",
+    "PASS: Drove 525 m from 21st Street, completed the 22 m Night Shift pass, and reset. 18 starting layers retired during the drive.",
+    "PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.",
+    "PASS: Captured two game views of the streamed East Main approach.",
+    "PASS: 98 layers, Windows x86-64 export, and ZIP integrity (109,131,388 bytes)."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "python3 tools/prepare_east_main_dressing.py --data-dir outputs/rva_gis_pilot --chunks-manifest outputs/rva_gis_station/assets/rva_gis/meshes/rva_chunks.json --output outputs/rva_east_main_dressing_verified && cp godot/station_trial/tools/{gis_pilot_stream,gis_pilot_builder,verify_streamed_shift}.gd outputs/rva_gis_station/tools/ && ( cd outputs/rva_gis_station && RVA_GIS_DATA_DIR=../rva_gis_pilot RVA_GIS_STATION_DECKS_DIR=../station-decks RVA_GIS_EAST_MAIN=../rva_gis_east_main/east_main.json RVA_GIS_EAST_MAIN_DRESSING=../rva_east_main_dressing_verified godot --headless --path . --script res://build_street.gd ) && godot --headless --fixed-fps 60 --path outputs/rva_gis_station --script res://tools/verify_streamed_shift.gd && godot --headless --fixed-fps 60 --path godot/station_trial --script res://verify_trial.gd && python3 outputs/rva_gis_station/render_east_main_detail.py && python3 tools/package_gis_night_shift.py --project outputs/rva_gis_station --godot-notices outputs/godot-trial/licenses --output \"$1/RVA_East_Main_Dressed_Windows.zip\"",
+    "S1-22",
+    "/workspace/scratch/f65ef44e3cab/rva-dressed-release-B7VbSq"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-20T00:43:36+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261120T004258612416Z-03fcf43d.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261120T004258612416Z-03fcf43d",
+  "started_at": "2026-11-20T00:42:58+00:00",
+  "status": "PASS",
+  "task": "S1-22"
+}

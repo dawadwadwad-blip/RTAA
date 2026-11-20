@@ -14,8 +14,8 @@ from station_surfaces import material, tiled_surface
 
 
 class Corridor:
-    def __init__(self, path):
-        self.report = json.loads((path / "corridor.json").read_text())
+    def __init__(self, report, sample_floor):
+        self.report = report
         e, n = self.report["origin_en"]
         tx, tn = self.report["east_axis_en"]
         self.frame = Matrix(((tx, -tn, 0, e), (tn, tx, 0, n), (0, 0, 1, 0), (0, 0, 0, 1)))
@@ -23,13 +23,28 @@ class Corridor:
         self.stations, self.offsets = zip(*self.report["centerline"])
         self.start, self.end = self.report["extent"]
         self.parking = []
+        self.sample_floor = sample_floor
+        self.collection = bpy.context.scene.collection
+
+    @classmethod
+    def from_legacy(cls, path):
+        report = json.loads((path / "corridor.json").read_text())
         bpy.ops.wm.obj_import(filepath=str(path / "East_Main_Corridor.obj"), forward_axis="Y", up_axis="Z")
-        self.terrain = []
+        terrain = []
         deps = bpy.context.evaluated_depsgraph_get()
         for name in ("Terrain", "Corridor_Terrain"):
             obj = bpy.context.scene.objects[name]
-            self.terrain.append((obj.matrix_world.copy(), obj.matrix_world.inverted(), BVHTree.FromObject(obj, deps)))
-        self.collection = bpy.context.scene.collection
+            terrain.append((obj.matrix_world.copy(), obj.matrix_world.inverted(), BVHTree.FromObject(obj, deps)))
+
+        def floor(east, north):
+            start = Vector((east, north, 40))
+            for frame, inverse, tree in terrain:
+                hit = tree.ray_cast(inverse @ start, inverse.to_3x3() @ Vector((0, 0, -1)), 50)[0]
+                if hit is not None:
+                    return (frame @ hit).z
+            raise ValueError(f"Street detail lies outside the DEM at {east:.2f}, {north:.2f}.")
+
+        return cls(report, floor)
 
     def offset(self, along):
         index = max(0, min(len(self.stations) - 2, bisect_right(self.stations, along) - 1))
@@ -49,14 +64,11 @@ class Corridor:
         return start < center.x < end and abs(center.y + self.offset(center.x)) < 9.4
 
     def floor(self, along, left):
-        start = self.frame @ Vector((along, left, 40))
-        for frame, inverse, tree in self.terrain:
-            hit = tree.ray_cast(inverse @ start, inverse.to_3x3() @ Vector((0, 0, -1)), 50)[0]
-            if hit is not None:
-                return (frame @ hit).z
-        raise ValueError(f"Street detail lies outside the DEM at {along:.2f}, {left:.2f}.")
+        point = self.frame @ Vector((along, left, 0))
+        return self.sample_floor(point.x, point.y)
 
-    def dress(self, selected, tree):
+    @staticmethod
+    def materials():
         colors = {
             "brick": (0.31, 0.134, 0.088), "painted": (0.59, 0.53, 0.43),
             "rose": (0.47, 0.204, 0.182), "trim": (0.67, 0.57, 0.43),
@@ -78,11 +90,26 @@ class Corridor:
             name = "East Main " + key + " masonry"
             maps = tiled_surface(name, 7, 28, palette, mortar, (0.027, 0.048), 0.72, 223)
             materials[key] = material(name, colors[key], maps=maps)
+        return materials
+
+    def dress(self, selected, tree):
+        materials = self.materials()
         facades = MeshGroup(materials)
         for obj in selected:
             if obj.name.startswith("Building_"):
                 self.facades(facades, obj)
-        street = MeshGroup(materials)
+        props = self.street_details(materials, tree)
+        return props + [facades.object("Corridor_Facade_Details", self.collection, Matrix.Identity(4))]
+
+    def street_details(self, materials, tree, split=False):
+        groups = {}
+
+        def batch(along):
+            key = int(along // 108) if split else 0
+            if key not in groups:
+                groups[key] = MeshGroup(materials)
+            return groups[key]
+
         rng = Random(42)
         junctions = [s for s, _ in self.report["intersections"].values()]
         for side in (-1, 1):
@@ -92,10 +119,12 @@ class Corridor:
                     continue
                 y = side * 8.7 - self.offset(x)
                 z = self.floor(x, y)
+                street = batch(x)
                 street.rod((x, y, z + 0.21), (x, y, z + 9.6), 0.15, "wood", 7, 0.082)
                 street.rod((x, y - 0.72, z + 9.35), (x, y + 0.72, z + 9.35), 0.071, "wood", 4)
                 poles.append((x, y, z + 9.48))
             for a, b in zip(poles[:-1], poles[1:]):
+                street = batch((a[0] + b[0]) * 0.5)
                 for delta in (-0.61, 0.0, 0.61):
                     prior = Vector(a) + Vector((0, delta, 0))
                     for t in range(1, 7):
@@ -106,29 +135,33 @@ class Corridor:
             for x in range(94 + side * 5, 541, 20 + (side < 0) * 16):
                 if min(abs(x - s) for s in junctions) > 11:
                     y = side * 8.65 - self.offset(x)
-                    tree(street, rng, x, y, self.floor(x, y) + 0.17, rng.uniform(5.8, 8.1), 6)
+                    tree(batch(x), rng, x, y, self.floor(x, y) + 0.17, rng.uniform(5.8, 8.1), 6)
             for x in range(77 + 5 * (side > 0), 532, 19):
                 if min(abs(x - s) for s in junctions) > 15:
                     y = side * 6.10 - self.offset(x)
-                    self.park(street, x, y, 4.25, 1.48, 1.72, rng.choice(("red", "white", "bus_blue", "metal")))
+                    self.park(batch(x), x, y, 4.25, 1.48, 1.72, rng.choice(("red", "white", "bus_blue", "metal")))
         signs = []
         for name, (x, d) in self.report["intersections"].items():
             if name == "20th":
                 continue
             y = -d
             z = max(self.floor(x + 4, y + 8), self.floor(x + 4, y - 5))
-            self.signal(street, x + 4, y, z)
+            self.signal(batch(x), x + 4, y, z)
             signs.append(self.sign(name + " ST", (x + 4.16, y + 6.25, z + 6.22), materials["white"]))
         # An illustrative bus stop on the south curb opposite the station.
         x, y = 59, -6.0 - self.offset(59)
+        street = batch(x)
         self.park(street, x, y, 10.2, 3.03, 2.08, "bus_blue", bus=True)
         base = self.floor(x, y - 3.0)
         street.box(x - 3.7, x + 3.7, y - 4.05, y - 2.60, base + 0.08, base + 0.46, "brick")
         street.box(x - 3.8, x + 3.8, y - 4.1, y - 2.40, base + 2.56, base + 2.74, "metal")
         for s in (x - 3.3, x + 3.3):
             street.rod((s, y - 3.9, base + 0.43), (s, y - 3.9, base + 2.58), 0.082, "metal", 6)
-        return signs + [facades.object("Corridor_Facade_Details", self.collection, Matrix.Identity(4)),
-                        street.object("Corridor_Street_Details", self.collection, self.frame)]
+        street.box(x - 1.35, x + 1.35, y - 3.58, y - 3.11, base + 0.77, base + 0.87, "wood")
+        for s in (x - 0.98, x + 0.98):
+            street.box(s - 0.04, s + 0.04, y - 3.47, y - 3.22, base + 0.43, base + 0.78, "metal")
+        return signs + [group.object(f"Corridor_Street_Details_{key}" if split else "Corridor_Street_Details",
+                                     self.collection, self.frame) for key, group in sorted(groups.items())]
 
     def facades(self, details, obj):
         coordinates = [obj.matrix_world @ v.co for v in obj.data.vertices]
@@ -163,38 +196,39 @@ class Corridor:
             direction = Vector((-normal.y, normal.x, 0))
             lo, hi = sorted(points, key=direction.dot)[::len(points) - 1]
             length = (hi - lo).dot(direction)
-            if length < 3.6 or top - base < 3.5:
-                continue
-            floors = min(5, max(1, round((top - base) / 3.22)))
-            bays = min(18, floor(length / 2.32))
-            if bays < 1:
-                continue
-            # The thin shell is confined to the source face so footprint dimensions stay intact.
-            transform = Matrix((direction, normal, Vector((0, 0, 1)))).transposed().to_4x4()
-            transform.translation = Vector((lo.x, lo.y, base))
-            height = top - base
-            start = len(details.vertices)
-            details.box(0, length, 0.013, 0.048, 0.15, height - 0.065, tint)
-            band = height / floors
-            details.box(0, length, 0.037, 0.23, height - 0.27, height - 0.075, "trim")
-            if not corner and 120 < center.x < 390 and floors >= 2 and int(center.x) % 3 == 0:
-                x0, x1 = 0.22, length - 0.22
-                details.prism([(x0, 0.10, band + 0.18), (x1, 0.10, band + 0.18),
-                               (x1, 0.93, band - 0.16), (x0, 0.93, band - 0.16)],
-                              [(x0, 0.10, band + 0.24), (x1, 0.10, band + 0.24),
-                               (x1, 0.93, band - 0.085), (x0, 0.93, band - 0.085)], "sign")
-            for level in range(floors):
-                for i in range(bays):
-                    x = (i + 0.5) * length / bays
-                    z = band * level + (0.22 if level == 0 else 0.73)
-                    half = length / bays * (0.38 if level == 0 else 0.255)
-                    high = z + min(band - 0.89, 2.28 if level == 0 else 1.65)
-                    details.box(x - half - 0.095, x + half + 0.095, 0.045, 0.087, z - 0.075, high + 0.09, "trim")
-                    details.box(x - half, x + half, 0.084, 0.101, z, high, "shop" if level == 0 else "glass")
-                    details.box(x - 0.024, x + 0.024, 0.099, 0.127, z, high, "metal")
-                    if level:
-                        details.box(x - half - 0.085, x + half + 0.085, 0.086, 0.202, z - 0.099, z + 0.012, "trim")
-            details.transform(transform, start)
+            self.facade_row(details, Vector((lo.x, lo.y, base)), normal, length, top - base, center.x, corner, tint)
+
+    @staticmethod
+    def facade_row(details, origin, normal, length, height, station, corner, tint):
+        if length < 3.6 or height < 3.5:
+            return
+        floors = min(5, max(1, round(height / 3.22)))
+        bays = min(18, floor(length / 2.32))
+        direction = Vector((-normal.y, normal.x, 0))
+        transform = Matrix((direction, normal, Vector((0, 0, 1)))).transposed().to_4x4()
+        transform.translation = origin
+        start = len(details.vertices)
+        details.box(0, length, 0.013, 0.048, 0.15, height - 0.065, tint)
+        band = height / floors
+        details.box(0, length, 0.037, 0.23, height - 0.27, height - 0.075, "trim")
+        if not corner and 120 < station < 390 and floors >= 2 and int(station) % 3 == 0:
+            x0, x1 = 0.22, length - 0.22
+            details.prism([(x0, 0.10, band + 0.18), (x1, 0.10, band + 0.18),
+                           (x1, 0.93, band - 0.16), (x0, 0.93, band - 0.16)],
+                          [(x0, 0.10, band + 0.24), (x1, 0.10, band + 0.24),
+                           (x1, 0.93, band - 0.085), (x0, 0.93, band - 0.085)], "sign")
+        for level in range(floors):
+            for i in range(bays):
+                x = (i + 0.5) * length / bays
+                z = band * level + (0.22 if level == 0 else 0.73)
+                half = length / bays * (0.38 if level == 0 else 0.255)
+                high = z + min(band - 0.89, 2.28 if level == 0 else 1.65)
+                details.box(x - half - 0.095, x + half + 0.095, 0.045, 0.087, z - 0.075, high + 0.09, "trim")
+                details.box(x - half, x + half, 0.084, 0.101, z, high, "shop" if level == 0 else "glass")
+                details.box(x - 0.024, x + 0.024, 0.099, 0.127, z, high, "metal")
+                if level:
+                    details.box(x - half - 0.085, x + half + 0.085, 0.086, 0.202, z - 0.099, z + 0.012, "trim")
+        details.transform(transform, start)
 
     def park(self, group, x, y, length, height, width, tint, bus=False):
         base = self.floor(x, y) + 0.14
@@ -203,7 +237,19 @@ class Corridor:
         group.box(lo, hi, y - hw, y + hw, base + 0.34, base + (height - 0.9 if bus else 0.94), tint)
         if bus:
             group.box(lo + 0.12, hi - 0.12, y - hw, y + hw, base + height - 0.9, base + height - 0.28, "glass")
-            group.box(lo, hi, y - hw, y + hw, base + height - 0.28, base + height, "bus_green")
+            group.box(lo, hi, y - hw, y + hw, base + height - 0.28, base + height, "white")
+            group.box(hi - 0.11, hi + 0.015, y - hw, y + hw, base + 0.35, base + 1.26, "bus_green")
+            group.box(hi - 0.115, hi + 0.007, y - hw + 0.12, y + hw - 0.12,
+                      base + 1.23, base + 2.70, "glass")
+            for side in (-1, 1):
+                edge = y + side * hw
+                near, far = sorted((edge - side * 0.014, edge + side * 0.023))
+                for index in range(1, 7):
+                    s = lo + index * length / 7
+                    group.box(s - 0.039, s + 0.039, near, far, base + 2.18, base + 2.76, "white")
+                lamp = y + side * (hw - 0.24)
+                group.box(hi + 0.013, hi + 0.041, lamp - 0.15, lamp + 0.15,
+                          base + 0.68, base + 0.87, "white")
         else:
             lower = [(x - 1.33, y - 0.75, base + 0.92), (x + 1.12, y - 0.75, base + 0.92),
                      (x + 1.12, y + 0.75, base + 0.92), (x - 1.33, y + 0.75, base + 0.92)]

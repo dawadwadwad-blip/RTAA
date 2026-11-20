@@ -34,6 +34,7 @@
 - **S1-19 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-20 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 - **S1-21 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
+- **S1-22 · PASS** — Review the evidence and advance to the tasks whose prerequisites are met.
 
 ## Run history
 
@@ -116,6 +117,8 @@
 - `20261120T001947422053Z-888cd342` · S1-19 · **PASS** · 2026-11-20T00:19:47+00:00 → 2026-11-20T00:20:00+00:00 · [run evidence](reports/runs/20261120T001947422053Z-888cd342.json)
 - `20261120T002037869724Z-aed3ac9b` · S1-20 · **PASS** · 2026-11-20T00:20:37+00:00 → 2026-11-20T00:20:49+00:00 · [run evidence](reports/runs/20261120T002037869724Z-aed3ac9b.json)
 - `20261120T002221964050Z-d698016c` · S1-21 · **PASS** · 2026-11-20T00:22:21+00:00 → 2026-11-20T00:22:41+00:00 · [run evidence](reports/runs/20261120T002221964050Z-d698016c.json)
+- `20261120T004258612416Z-03fcf43d` · S1-22 · **PASS** · 2026-11-20T00:42:58+00:00 → 2026-11-20T00:43:36+00:00 · [run evidence](reports/runs/20261120T004258612416Z-03fcf43d.json)
+- `20261120T004354266315Z-3e03e09d` · S1-22 · **PASS** · 2026-11-20T00:43:54+00:00 → 2026-11-20T00:44:03+00:00 · [run evidence](reports/runs/20261120T004354266315Z-3e03e09d.json)
 <!-- richmond-run-history:end -->
 
 ## Civic pivot
@@ -297,3 +300,13 @@
 ### Next usage window prompt · S1-22
 
 > Bring the existing East Main façade geometry and street-level props from the standalone trial into the streamed route. Prioritize the first view of the station near 17th, the crosswalk and storefront cluster near 19th, and the bus stop and rail underpass on the final approach. Remove the matching blockout volumes only where the authored replacements align to the GIS footprints. Check the westbound drive, the two station views, streaming and Low mode before exporting another Windows build. Use the saved GIS inputs and original project assets.
+
+## S1-22 · East Main storefronts and street props
+
+- Ported the existing street kit to six streamed batches. Brick storefronts, windows, trim and awnings follow 65 wall faces on 49 mapped buildings. The batches bring in the supporting terrain and original building shells. The street adds utility poles and lines, signs, trees, a bus and shelter, and 35 parked vehicles. [In-game views](reports/RVA_GIS_East_Main_Dressed.webp) · [Build notes](docs/Godot_Station_Trial.md)
+- Godot verified every storefront face against the original shell collision and checked the parked-vehicle clearances. The 525 m drive, 22 m striping pass, two station cameras, restart and Low graphics passed. The standalone route also passed. The Windows x86-64 export contains 98 streamed layers and passed ZIP integrity checks.
+- The façade pattern and placements are illustrative. Windows launch and device frame rate remain open. Clipped side streets, untextured distant massing and the large open parking-side station foreground are still visible.
+
+### Next usage window prompt · S1-23
+
+> Bring the authored southeast station forecourt into the streamed route. Fit the parking surface, retaining edge and tree line to the saved 3DEP terrain and keep clear of the truck lane, station stairs and rail piers. Concentrate on the approach from 17th Street and the southeast station camera. Check that the geometry streams and the full Night Shift playthrough still passes. Use existing local GIS and Blender assets.

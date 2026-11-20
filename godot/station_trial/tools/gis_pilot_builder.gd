@@ -43,7 +43,8 @@ static func read_object(path: String) -> Dictionary:
 	return parsed if parsed is Dictionary else {}
 
 
-func build(data_dir: String, station_decks_dir: String = "", east_main_path: String = "") -> Dictionary:
+func build(data_dir: String, station_decks_dir: String = "", east_main_path: String = "",
+		dressing_dir: String = "") -> Dictionary:
 	# A builder instance owns only one generation.
 	if not _generation.is_empty():
 		return _fail("Create a new builder for a new GIS generation.")
@@ -75,7 +76,7 @@ func build(data_dir: String, station_decks_dir: String = "", east_main_path: Str
 		return _fail("Cannot make the GIS layer directory.")
 	var report := {"terrain_cells": 0, "building_layers": 0, "road_paths": 0, "bike_paths": 0,
 		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0,
-		"landmarks": 0, "station_decks": {}, "street_layers": 0}
+		"landmarks": 0, "station_decks": {}, "street_layers": 0, "dressing_layers": 0}
 	for row: int in range(0, _height - 1, GRID_FACES):
 		for col: int in range(0, _width - 1, GRID_FACES):
 			if not _terrain_cell(col, row, mini(_width - 1, col + GRID_FACES), mini(_height - 1, row + GRID_FACES)):
@@ -102,6 +103,7 @@ func build(data_dir: String, station_decks_dir: String = "", east_main_path: Str
 	if not _road_layers(roads.features, float(c.streaming_cell_m), report):
 		return {}
 	var streets := {}
+	var dressing := {}
 	if not east_main_path.is_empty():
 		var station_y: Variant = null if landmarks.is_empty() else landmarks[0].origin_godot_m[1]
 		streets = EastMain.read_package(east_main_path, c.source_manifest_sha256, station_y)
@@ -117,6 +119,22 @@ func build(data_dir: String, station_decks_dir: String = "", east_main_path: Str
 				return {}
 			_set_terrain_dependencies(street.bounds)
 			report.street_layers += 1
+	if not dressing_dir.is_empty():
+		dressing = read_object(dressing_dir.path_join("east_main_dressing.json"))
+		if (streets.is_empty() or dressing.get("schema") != "rva-east-main-dressing/1"
+				or dressing.get("source_manifest_sha256") != c.source_manifest_sha256
+				or dressing.get("streets_sha256") != FileAccess.get_sha256(east_main_path)
+				or dressing.get("chunks_sha256") != FileAccess.get_sha256(CHUNKS.path_join("rva_chunks.json"))
+				or not dressing.get("layers") is Array or dressing.layers.is_empty()
+				or not dressing.get("parking") is Array):
+			return _fail("East Main storefronts and props must match the GIS, streets, and building chunks.")
+		var loaded := {}
+		for layer: Dictionary in dressing.layers:
+			var id: String = layer.id
+			if loaded.has(id) or not _east_main_dressing_layer(dressing_dir, layer):
+				return _fail("Cannot add East Main dressing layer " + id)
+			loaded[id] = true
+			report.dressing_layers += 1
 	var focus_xz := _extent.get_center()
 	if _extent.has_point(STATION):
 		focus_xz = STATION
@@ -130,6 +148,7 @@ func build(data_dir: String, station_decks_dir: String = "", east_main_path: Str
 		return {}
 	if not streets.is_empty():
 		var route: Dictionary = streets.route
+		route["parking"] = dressing.get("parking", [])
 		var route_origin := Vector3(route.origin_en[0], 0, -float(route.origin_en[1]))
 		var heading := Vector3(route.eastbound_xz[0], 0, route.eastbound_xz[1])
 		var start := route_origin + heading * float(route.start_at)
@@ -161,6 +180,7 @@ func _scene_root(snapshot: String, report: Dictionary, replaced: Array, focus: V
 	world.set_meta("grade_separated", report.grade_separated)
 	world.set_meta("replaced_osm_ids", replaced)
 	world.set_meta("station_decks", report.station_decks)
+	world.set_meta("east_main_dressing_layers", report.dressing_layers)
 	var anchor := Node3D.new()
 	anchor.name = "RVA_GIS_Origin"
 	_own(world, anchor)
@@ -424,6 +444,61 @@ func _station_layer(landmark: Dictionary) -> bool:
 	if not _add_layer("main_street_station", part, bounds, "landmark"):
 		return false
 	_set_terrain_dependencies(bounds)
+	return true
+
+
+func _east_main_dressing_layer(folder: String, layer: Dictionary) -> bool:
+	var id: String = layer.id
+	if not id.is_valid_identifier() or not id.begins_with("east_main_detail_"):
+		return false
+	var path := folder.path_join(id + ".glb")
+	if not FileAccess.file_exists(path) or FileAccess.get_sha256(path) != layer.sha256:
+		return false
+	var corners: Array = layer.bounds_xz
+	var bounds := Rect2(Vector2(corners[0], corners[1]),
+			Vector2(corners[2] - corners[0], corners[3] - corners[1]))
+	if not bounds.has_area() or not _extent.encloses(bounds):
+		return false
+	var document := GLTFDocument.new()
+	var state := GLTFState.new()
+	if document.append_from_file(path, state) != OK:
+		return false
+	var model := document.generate_scene(state) as Node3D
+	if model == null:
+		return false
+	var part := Node3D.new()
+	model.name = "Dressing"
+	_own(part, model)
+	var count := 0
+	for mesh: MeshInstance3D in model.find_children("*", "MeshInstance3D", true, false):
+		mesh.owner = part
+		count += 1
+	if count != int(layer.mesh_count):
+		part.free()
+		return false
+	part.set_meta("frontages", layer.frontages)
+	var support := {}
+	var chunks: Array = layer.building_chunks
+	for chunk: String in chunks:
+		var dependency := _generation.path_join("buildings_" + chunk + ".scn")
+		var selected := false
+		for entry: Dictionary in _entries:
+			if entry.path == dependency:
+				support[dependency] = true
+				for tile: String in entry.terrain_dependencies:
+					support[tile] = true
+				selected = true
+				break
+		if not selected:
+			part.free()
+			return false
+	if not _add_layer(id, part, bounds, "dressing"):
+		return false
+	_set_terrain_dependencies(bounds)
+	for tile: String in _entries[-1].terrain_dependencies:
+		support[tile] = true
+	_entries[-1]["dependencies"] = PackedStringArray(support.keys())
+	_entries[-1].erase("terrain_dependencies")
 	return true
 
 

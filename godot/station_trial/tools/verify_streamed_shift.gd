@@ -32,6 +32,8 @@ func verify() -> void:
 	var initial: Array = stream.loaded_paths()
 	var checked := 0
 	shift.set_physics_process(false)
+	if world.get_meta("east_main_dressing_layers", 0) > 0 and not await verify_dressing(shift, stream):
+		return
 	for chainage: int in range(0, 533, 4):
 		var model: Vector3 = shift.route_position(chainage, -3.15)
 		if chainage % 108 == 0:
@@ -90,6 +92,42 @@ func verify() -> void:
 	print("PASS: Drove 525 m from 21st Street, completed the 22 m Night Shift pass, and reset. ",
 		retired, " starting layers retired during the drive.")
 	quit()
+
+
+func verify_dressing(shift: Node, stream: Node) -> bool:
+	# The original shell collision is the independent reference for the baked storefronts.
+	var physics: PhysicsDirectSpaceState3D = shift.get_world_3d().direct_space_state
+	var checked := 0
+	var checked_layers := {}
+	for along: float in [40.0, 530.0]:
+		stream.load_now(shift.to_global(shift.route_position(along, -3.15)))
+		await ticks(3)
+		for layer: Node in stream.get_children():
+			if not layer.has_meta("frontages") or checked_layers.has(layer.name):
+				continue
+			checked_layers[layer.name] = true
+			for probe: Dictionary in layer.get_meta("frontages"):
+				var p := Vector3(probe.point[0], probe.point[1], probe.point[2])
+				var n := Vector3(probe.normal[0], 0, probe.normal[2])
+				var query := PhysicsRayQueryParameters3D.create(p + n * 0.33, p - n * 0.05, 1)
+				var hit := physics.intersect_ray(query)
+				if hit.is_empty() or hit.position.distance_to(p) > 0.035:
+					fail("Dressing face missed the GIS building shell at " + str(probe.osm_id))
+					return false
+				checked += 1
+	if checked == 0 or checked_layers.size() != stream.get_parent().get_meta("east_main_dressing_layers"):
+		fail("The baked storefront layers were not all streamed.")
+		return false
+	if shift.parked_vehicles.is_empty():
+		fail("The streamed route lost its parked-vehicle clearance data.")
+		return false
+	for car: Array in shift.parked_vehicles:
+		if not shift.parked_overlap(car[0], car[1]) or shift.parked_overlap(car[0], -3.15):
+			fail("Incorrect parked-vehicle clearance on the Night Shift lane.")
+			return false
+	print("PASS: ", checked, " dressed wall faces match the original shell and ",
+		shift.parked_vehicles.size(), " parked vehicles clear the shift lane.")
+	return true
 
 
 func aimed_at(camera: Camera3D, point: Vector3) -> bool:
