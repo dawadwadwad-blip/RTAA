@@ -1,0 +1,43 @@
+{
+  "blocker": null,
+  "changed_files": [
+    "DEV_STATE.md",
+    "docs/Godot_Station_Trial.md",
+    "reports/RVA_GIS_Viaducts.webp",
+    "reports/runs/20261120T000323381176Z-17837763.json",
+    "reports/runs/20261120T000323381176Z-17837763.log"
+  ],
+  "checks": [
+    "PASS: The saved landmark contains six authored meshes, eight textures and transparent glazing.",
+    "PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.",
+    "PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.",
+    "PASS: Sampled 50597 grounded wall vertices across all 21 building layers.",
+    "PASS: Jolt matched all 15 station treads and found no generic shed collision.",
+    "PASS: 123 supported highway intervals and 16 observed rail intervals have deck collision. 14 rail intervals remain visual only. East Main stays at grade.",
+    "PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.",
+    "PASS: Stream loaded 46/83 layers at startup, then added 10 and unloaded 35 at a distant focus with building support intact.",
+    "PASS: Rendered the authored station and four viaducts in the streamed Godot scene.",
+    "PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.",
+    "PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.",
+    "PASS: Sampled 50775 grounded wall vertices across all 21 building layers.",
+    "PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.",
+    "PASS: Stream loaded 44/81 layers at startup, then added 10 and unloaded 33 at a distant focus with building support intact.",
+    "Ran 4 tests in 0.007s",
+    "OK",
+    "PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m."
+  ],
+  "command": [
+    "bash",
+    "-ec",
+    "\nfor project in rva_gis_station rva_gis_native; do\n  cp godot/station_trial/tools/{assemble_gis_pilot,gis_pilot_builder,gis_station_decks,verify_gis_pilot}.gd \"outputs/$project/tools/\"\ndone\ngodot --headless --path outputs/rva_gis_station --check-only --script res://tools/assemble_gis_pilot.gd\ngodot --headless --path outputs/rva_gis_station --script res://tools/verify_gis_pilot.gd\npython3 outputs/rva_gis_station/render_viaducts.py\nmagick outputs/rva_gis_station/RVA_GIS_Viaducts0.png -quality 84 reports/RVA_GIS_Viaducts.webp\nRVA_GIS_STATION_DECKS_DIR= godot --headless --path outputs/rva_gis_native --script res://tools/verify_gis_pilot.gd\npython3 -m unittest discover -s tests -p test_station_deck_profile.py\ngodot --headless --path godot/station_trial --fixed-fps 60 --script res://verify_trial.gd\n"
+  ],
+  "exit_code": 0,
+  "finished_at": "2026-11-20T00:03:46+00:00",
+  "inputs": {},
+  "log": "reports/runs/20261120T000323381176Z-17837763.log",
+  "next_action": "Review the evidence and advance to the tasks whose prerequisites are met.",
+  "run_id": "20261120T000323381176Z-17837763",
+  "started_at": "2026-11-20T00:03:23+00:00",
+  "status": "PASS",
+  "task": "S1-18"
+}

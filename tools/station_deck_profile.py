@@ -278,6 +278,7 @@ def build(args):
     profiles = extract_profiles(ways, points[17], bias, surface)
     geom = assemble(args.output, profiles, roads, surface)
     project = {"schema_version": 1, "mode": MODE, "horizontal_crs": grid["horizontal_crs"],
+               "origin_grid_m_en": origin, "origin_navd88_m": grid["origin_navd88_m"],
                "capture_sha256": controls["capture"]["sha256"], "attribution": controls["attribution"],
                "lidar_source_lock_sha256": digest(source_path), "lidar_tiles_used": source_tiles,
                "terrain_report_sha256": digest(args.terrain / "terrain_first_pair.json"),

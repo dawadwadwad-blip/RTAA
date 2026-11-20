@@ -4,6 +4,7 @@ extends RefCounted
 
 const Stream = preload("res://tools/gis_pilot_stream.gd")
 const SurveyCamera = preload("res://tools/gis_pilot_camera.gd")
+const StationDecks = preload("res://tools/gis_station_decks.gd")
 const OUTPUT := "res://assets/rva_gis/pilot"
 const CHUNKS := "res://assets/rva_gis/meshes"
 const GRID_FACES := 126
@@ -40,7 +41,7 @@ static func read_object(path: String) -> Dictionary:
 	return parsed if parsed is Dictionary else {}
 
 
-func build(data_dir: String) -> Dictionary:
+func build(data_dir: String, station_decks_dir: String = "") -> Dictionary:
 	# A builder instance owns only one generation.
 	if not _generation.is_empty():
 		return _fail("Create a new builder for a new GIS generation.")
@@ -71,7 +72,8 @@ func build(data_dir: String) -> Dictionary:
 	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(_generation)) != OK:
 		return _fail("Cannot make the GIS layer directory.")
 	var report := {"terrain_cells": 0, "building_layers": 0, "road_paths": 0, "bike_paths": 0,
-		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0, "landmarks": 0}
+		"east_main_paths": 0, "grade_separated": {}, "outside_or_degenerate": 0,
+		"landmarks": 0, "station_decks": {}}
 	for row: int in range(0, _height - 1, GRID_FACES):
 		for col: int in range(0, _width - 1, GRID_FACES):
 			if not _terrain_cell(col, row, mini(_width - 1, col + GRID_FACES), mini(_height - 1, row + GRID_FACES)):
@@ -89,6 +91,12 @@ func build(data_dir: String) -> Dictionary:
 		if not _station_layer(landmark):
 			return {}
 		report.landmarks += 1
+	if not station_decks_dir.is_empty():
+		var decks := StationDecks.build(station_decks_dir, _frame, _base_y, _extent, sample)
+		if decks.is_empty() or not _add_layer("station_viaducts", decks.root, decks.bounds, "viaducts"):
+			return {}
+		_set_terrain_dependencies(decks.bounds)
+		report.station_decks = decks.profiles
 	if not _road_layers(roads.features, float(c.streaming_cell_m), report):
 		return {}
 	var focus_xz := _extent.get_center()
@@ -101,6 +109,7 @@ func build(data_dir: String) -> Dictionary:
 	world.set_meta("gis_extent_xz", _extent)
 	world.set_meta("grade_separated", report.grade_separated)
 	world.set_meta("replaced_osm_ids", replaced)
+	world.set_meta("station_decks", report.station_decks)
 	var anchor := Node3D.new()
 	anchor.name = "RVA_GIS_Origin"
 	_own(world, anchor)

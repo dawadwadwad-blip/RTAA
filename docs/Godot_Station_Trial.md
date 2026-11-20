@@ -59,3 +59,13 @@ godot --headless --path godot/station_trial --import
 ```
 
 Run the GIS assembly script again. The chunk manifest pairs exactly one mapped footprint replacement with the authored asset, its checksum and its surveyed transform. The station streams with the terrain underneath it. The stair and headhouse collision uses the actual authored mesh. The train shed exterior is visual pending the separate rail-deck integration. [Station in the GIS scene](../reports/RVA_GIS_Station.webp)
+
+### Elevated station spans
+
+Point `RVA_GIS_STATION_DECKS_DIR` at the [saved viaduct preview package](Station_Viaduct_Preview.md), containing its JSON, OBJ and MTL files. For a Windows shell at the repository root:
+
+```powershell
+$env:RVA_GIS_STATION_DECKS_DIR = (Resolve-Path outputs/station-decks).Path
+```
+
+Launch Godot from that shell and run the GIS assembler. The three I‑95 spans and the Bellwood trestle stream above the at-grade East Main Street surface. The assembler keeps the source deck heights in the shared pilot frame and fits the visual support bases to the current terrain. Jolt collision follows the observed deck triangles. The rail crossing contains a 67.83 m interpolation gap, which is displayed as geometry with collision held out. Routing remains disabled on these clipped spans until verified end connections are built. [In-engine view](../reports/RVA_GIS_Viaducts.webp)
