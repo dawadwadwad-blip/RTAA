@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: The saved landmark contains six authored meshes, eight textures and transparent glazing.
+PASS: 9674 shared terrain border vertices match; ground imagery has mipmaps.
+PASS: 2148 ground paths, 15 East Main paths, 14 bike paths (4 East Franklin lane paths), and 88 grade-separated source ways held out.
+PASS: Sampled 50597 grounded wall vertices across all 21 building layers.
+PASS: Jolt matched all 15 station treads and found no generic shed collision.
+SPACING: I95_West_MainlineCollision top is 19.288 m above the GIS ground.
+SPACING: I95_East_MainlineCollision top is 20.423 m above the GIS ground.
+SPACING: I95_East_RampCollision top is 20.614 m above the GIS ground.
+SPACING: Bellwood_Rail_TrestleCollision top is 7.995 m above the GIS ground.
+PASS: 123 supported highway intervals and 16 observed rail intervals have deck collision. 14 rail intervals remain visual only. East Main stays at grade.
+PASS: 117 East Main raycasts align with rendered terrain under Jolt Physics.
+PASS: Stream loaded 46/83 layers at startup, then added 10 and unloaded 35 at a distant focus with building support intact.
+PILOT: res://assets/rva_gis/pilot/richmond_gis_pilot.tscn

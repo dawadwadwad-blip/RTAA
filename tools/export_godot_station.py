@@ -153,7 +153,7 @@ def export():
     sys.path.insert(0, str(ROOT / "tools"))
     from godot_corridor_dressing import Corridor
 
-    corridor = Corridor(ROOT / "outputs/east-main-corridor")
+    corridor = Corridor.from_legacy(ROOT / "outputs/east-main-corridor")
     bpy.ops.object.select_all(action="DESELECT")
     selected = []
     for obj in bpy.context.scene.objects:

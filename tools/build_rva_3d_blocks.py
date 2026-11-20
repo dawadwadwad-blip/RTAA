@@ -397,6 +397,19 @@ def station_landmark(source, snapshot, features, terrain, project, np):
     }
 
 
+def footprint_profile(polygon, terrain, intersects_xy):
+    profiles = []
+    for ring in [polygon.exterior, *polygon.interiors]:
+        points = list(ring.coords)
+        profiles.append([(a, b, terrain.edge(a, b)) for a, b in zip(points, points[1:]) if a != b])
+    perimeter = max(z for ring in profiles for _, _, nodes in ring for _, z in nodes)
+    return max(perimeter, terrain.interior_peak(polygon, intersects_xy)), profiles
+
+
+def chunk_id(neighborhood, cx, cy):
+    return f"rva_{neighborhood}_e{cx:+04d}_n{cy:+04d}".replace("+", "p").replace("-", "m")
+
+
 def prepare(data_dir, plan_dir, cell_size, station=None):
     import numpy as np
     from PIL import Image
@@ -453,7 +466,7 @@ def prepare(data_dir, plan_dir, cell_size, station=None):
     chunks = []
     totals = Counter()
     for (neighborhood, cx, cy), group in sorted(groups.items()):
-        name = f"rva_{neighborhood}_e{cx:+04d}_n{cy:+04d}".replace("+", "p").replace("-", "m")
+        name = chunk_id(neighborhood, cx, cy)
         offset_e, offset_n = cx * cell_size, cy * cell_size
         origin = origin_e + offset_e, origin_n + offset_n, origin_z
         shell, signs = Mesh(origin), Mesh(origin)
@@ -468,12 +481,7 @@ def prepare(data_dir, plan_dir, cell_size, station=None):
                     triangles = list(parts_of(constrained_delaunay_triangles(polygon), "Polygon"))
                     if not triangles or not math.isclose(sum(t.area for t in triangles), polygon.area, rel_tol=1e-8):
                         raise ValueError("roof triangulation does not cover the footprint")
-                    profiles = []
-                    for ring in [polygon.exterior, *polygon.interiors]:
-                        points = list(ring.coords)
-                        profiles.append([(a, b, terrain.edge(a, b)) for a, b in zip(points, points[1:]) if a != b])
-                    perimeter = max(z for ring in profiles for _, _, nodes in ring for _, z in nodes)
-                    grade = max(perimeter, terrain.interior_peak(polygon, intersects_xy))
+                    grade, profiles = footprint_profile(polygon, terrain, intersects_xy)
                     ready.append((grade, profiles, triangles))
             except (ValueError, GEOSException) as exc:
                 rejected.append({"id": item["id"], "reason": str(exc)})

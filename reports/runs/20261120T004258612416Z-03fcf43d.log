@@ -1,0 +1,459 @@
+ERROR Draco mesh compression is not available because library could not be found at /usr/bin/4.3/python/lib/python3.13/site-packages/libextern_draco.so
+19:43:01 | INFO: Starting glTF 2.0 export
+19:43:01 | INFO: Extracting primitive: East Main Storefronts.002
+19:43:01 | INFO: Primitives created: 6
+19:43:01 | INFO: Extracting primitive: Corridor_Street_Details_0
+19:43:01 | INFO: Primitives created: 12
+19:43:02 | INFO: Finished glTF 2.0 export in 0.06514382362365723 s
+
+19:43:02 | INFO: Starting glTF 2.0 export
+19:43:02 | INFO: Extracting primitive: East Main Storefronts
+19:43:02 | INFO: Primitives created: 7
+19:43:02 | INFO: Extracting primitive: 17th ST
+19:43:02 | INFO: Primitives created: 1
+19:43:02 | INFO: Extracting primitive: 18th ST
+19:43:02 | INFO: Primitives created: 1
+19:43:02 | INFO: Extracting primitive: Corridor_Street_Details_1
+19:43:02 | INFO: Primitives created: 14
+19:43:02 | INFO: Finished glTF 2.0 export in 0.07930564880371094 s
+
+19:43:02 | INFO: Starting glTF 2.0 export
+19:43:02 | INFO: Extracting primitive: East Main Storefronts.001
+19:43:02 | INFO: Primitives created: 6
+19:43:02 | INFO: Extracting primitive: 19th ST
+19:43:02 | INFO: Primitives created: 1
+19:43:02 | INFO: Extracting primitive: Corridor_Street_Details_2
+19:43:02 | INFO: Primitives created: 14
+19:43:02 | INFO: Finished glTF 2.0 export in 0.06363677978515625 s
+
+19:43:02 | INFO: Starting glTF 2.0 export
+19:43:02 | INFO: Extracting primitive: East Main Storefronts.003
+19:43:02 | INFO: Primitives created: 7
+19:43:02 | INFO: Extracting primitive: Corridor_Street_Details_3
+19:43:02 | INFO: Primitives created: 11
+19:43:02 | INFO: Finished glTF 2.0 export in 0.0968923568725586 s
+
+19:43:02 | INFO: Starting glTF 2.0 export
+19:43:02 | INFO: Extracting primitive: East Main Storefronts.004
+19:43:02 | INFO: Primitives created: 6
+19:43:02 | INFO: Extracting primitive: 21st ST
+19:43:02 | INFO: Primitives created: 1
+19:43:02 | INFO: Extracting primitive: Corridor_Street_Details_4
+19:43:02 | INFO: Primitives created: 13
+19:43:02 | INFO: Finished glTF 2.0 export in 0.08780407905578613 s
+
+19:43:02 | INFO: Starting glTF 2.0 export
+19:43:02 | INFO: Extracting primitive: East Main Storefronts.005
+19:43:02 | INFO: Primitives created: 6
+19:43:02 | INFO: Finished glTF 2.0 export in 0.026204347610473633 s
+
+Blender 4.3.2
+
+Blender quit
+PASS: 65 wall faces across 49 mapped buildings, 6 streamed batches and 35 parked vehicles.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+STREET 9 TRIAL res://assets/rva_gis/pilot/east_main_night_shift.tscn
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: 65 dressed wall faces match the original shell and 35 parked vehicles clear the shift lane.
+PASS: 134 westbound lane checks cover the road transitions and underpass.
+PASS: Drove 525 m from 21st Street, completed the 22 m Night Shift pass, and reset. 18 starting layers retired during the drive.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Drove west from 21st Street, sampled the full road, and completed the 22 m pass. Station crossing 5.998 m, west grade 7.238 m.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WARNING: Could not set V-Sync mode, as changing V-Sync mode is not supported by the graphics driver.
+     at: set_use_vsync (platform/linuxbsd/x11/gl_manager_x11.cpp:372)
+OpenGL API 4.5 (Core Profile) Mesa 25.0.7-2+deb13u1 - Compatibility - Using Device: Mesa - llvmpipe (LLVM 19.1.7, 256 bits)
+
+PASS: Captured two game views of the streamed East Main approach.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (3 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1m_update_scan_actions[22m | Started Scanning actions... (21 steps)[39m[0m
+[   0% ] [90m[1m_update_scan_actions[22m | rva_church_hill_em001_nm001.glb[39m[0m
+[   4% ] [90m[1m_update_scan_actions[22m | rva_church_hill_em001_np000.glb[39m[0m
+[   9% ] [90m[1m_update_scan_actions[22m | rva_church_hill_em001_np001.glb[39m[0m
+[  13% ] [90m[1m_update_scan_actions[22m | rva_church_hill_ep000_nm001.glb[39m[0m
+[  18% ] [90m[1m_update_scan_actions[22m | rva_church_hill_ep000_np000.glb[39m[0m
+[  22% ] [90m[1m_update_scan_actions[22m | rva_church_hill_ep000_np001.glb[39m[0m
+[  27% ] [90m[1m_update_scan_actions[22m | rva_downtown_em003_np001.glb[39m[0m
+[  31% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em001_nm001.glb[39m[0m
+[  36% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em001_np000.glb[39m[0m
+[  40% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em001_np001.glb[39m[0m
+[  45% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em002_nm001.glb[39m[0m
+[  50% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em002_np000.glb[39m[0m
+[  54% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em002_np001.glb[39m[0m
+[  59% ] [90m[1m_update_scan_actions[22m | rva_shockoe_bottom_em003_nm001.glb[39m[0m
+[  63% ] [90m[1m_update_scan_actions[22m | rva_shockoe_slip_em002_np000.glb[39m[0m
+[  68% ] [90m[1m_update_scan_actions[22m | rva_shockoe_slip_em002_np001.glb[39m[0m
+[  72% ] [90m[1m_update_scan_actions[22m | rva_shockoe_slip_em003_nm001.glb[39m[0m
+[  77% ] [90m[1m_update_scan_actions[22m | rva_shockoe_slip_em003_np000.glb[39m[0m
+[  81% ] [90m[1m_update_scan_actions[22m | rva_shockoe_slip_em003_np001.glb[39m[0m
+[  86% ] [90m[1m_update_scan_actions[22m | rva_union_hill_em001_np001.glb[39m[0m
+[  90% ] [90m[1m_update_scan_actions[22m | rva_union_hill_ep000_np001.glb[39m[0m
+[92m[ DONE ][39m [1m_update_scan_actions[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (21 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   4% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   9% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  13% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  18% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  22% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  27% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  31% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  36% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  40% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  45% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  50% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  54% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  59% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  63% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  68% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  72% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  77% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  81% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  86% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[  90% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | rva_union_hill_ep000_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[   4% ] [90m[1mreimport[22m | rva_union_hill_em001_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[   9% ] [90m[1mreimport[22m | rva_shockoe_slip_em003_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  13% ] [90m[1mreimport[22m | rva_shockoe_slip_em003_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  18% ] [90m[1mreimport[22m | rva_shockoe_slip_em003_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  22% ] [90m[1mreimport[22m | rva_shockoe_slip_em002_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  27% ] [90m[1mreimport[22m | rva_shockoe_slip_em002_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  31% ] [90m[1mreimport[22m | rva_shockoe_bottom_em003_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  36% ] [90m[1mreimport[22m | rva_shockoe_bottom_em002_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  40% ] [90m[1mreimport[22m | rva_shockoe_bottom_em002_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  45% ] [90m[1mreimport[22m | rva_shockoe_bottom_em002_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  50% ] [90m[1mreimport[22m | rva_shockoe_bottom_em001_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  54% ] [90m[1mreimport[22m | rva_shockoe_bottom_em001_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  59% ] [90m[1mreimport[22m | rva_shockoe_bottom_em001_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  63% ] [90m[1mreimport[22m | rva_downtown_em003_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  68% ] [90m[1mreimport[22m | rva_church_hill_ep000_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  72% ] [90m[1mreimport[22m | rva_church_hill_ep000_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  77% ] [90m[1mreimport[22m | rva_church_hill_ep000_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  81% ] [90m[1mreimport[22m | rva_church_hill_em001_np001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  86% ] [90m[1mreimport[22m | rva_church_hill_em001_np000.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  90% ] [90m[1mreimport[22m | rva_church_hill_em001_nm001.glb[39m[0m
+[   0% ] [90m[1mimport[22m | Started Import Scene (104 steps)[39m[0m
+[   0% ] [90m[1mimport[22m | Importing Scene...[39m[0m
+[   1% ] [90m[1mimport[22m | Running Custom Script...[39m[0m
+[  99% ] [90m[1mimport[22m | Saving...[39m[0m
+[92m[ DONE ][39m [1mimport[22m
+[0m
+[  95% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (21 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1msavepack[22m | Started Packing (102 steps)[39m[0m
+[   1% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_em001_nm001.glb-45c5ebb179d044909b487dcec1a72e5b.scn[39m[0m
+[   1% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_em001_nm001.glb.import[39m[0m
+[   1% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_em001_np000.glb-98299637e31b8761df9df894d7f2eec1.scn[39m[0m
+[   1% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_em001_np000.glb.import[39m[0m
+[   2% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_em001_np001.glb-a5ce8f960214a10f147630331a5c20ef.scn[39m[0m
+[   2% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_em001_np001.glb.import[39m[0m
+[   3% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_ep000_nm001.glb-a35472648edb9c1e3ff9650406d1ba99.scn[39m[0m
+[   3% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_ep000_nm001.glb.import[39m[0m
+[   4% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_ep000_np000.glb-85c2165ca0246075594c6a3121bc3332.scn[39m[0m
+[   4% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_ep000_np000.glb.import[39m[0m
+[   5% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_church_hill_ep000_np001.glb-8c83838062bb48070094570316602b76.scn[39m[0m
+[   5% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_church_hill_ep000_np001.glb.import[39m[0m
+[   5% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_downtown_em003_np001.glb-ce79a2ee71f1c657c38d926008884fef.scn[39m[0m
+[   5% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_downtown_em003_np001.glb.import[39m[0m
+[   6% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em001_nm001.glb-d5f70bfb8be798f15b239823fcb9e5f9.scn[39m[0m
+[   6% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em001_nm001.glb.import[39m[0m
+[   7% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em001_np000.glb-2948362ead2e04dc29ea24cdc8239840.scn[39m[0m
+[   7% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em001_np000.glb.import[39m[0m
+[   8% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em001_np001.glb-62b22fb81c66b14752028907fb0fad06.scn[39m[0m
+[   8% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em001_np001.glb.import[39m[0m
+[   9% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em002_nm001.glb-e0f762dea6ea9e071b41028c4f9b8721.scn[39m[0m
+[   9% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em002_nm001.glb.import[39m[0m
+[   9% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em002_np000.glb-c8c0b0568dd8a208b691d3851e0a323c.scn[39m[0m
+[   9% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em002_np000.glb.import[39m[0m
+[  10% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em002_np001.glb-a2f246dc758c9649be55ec3e07c26e1a.scn[39m[0m
+[  10% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em002_np001.glb.import[39m[0m
+[  11% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_bottom_em003_nm001.glb-84ff4a0e5ad163a9254efa6a96921b47.scn[39m[0m
+[  11% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_bottom_em003_nm001.glb.import[39m[0m
+[  12% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_slip_em002_np000.glb-9653dc5fe2e81bd27613700641c55221.scn[39m[0m
+[  12% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_slip_em002_np000.glb.import[39m[0m
+[  13% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_slip_em002_np001.glb-a2cdd116df2914ec30fb00c2c29ca1dc.scn[39m[0m
+[  13% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_slip_em002_np001.glb.import[39m[0m
+[  14% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_slip_em003_nm001.glb-d4bfd79824595fb6ce59adb71331d778.scn[39m[0m
+[  14% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_slip_em003_nm001.glb.import[39m[0m
+[  14% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_slip_em003_np000.glb-3f1a92688366698044a3112ea330155b.scn[39m[0m
+[  14% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_slip_em003_np000.glb.import[39m[0m
+[  15% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_shockoe_slip_em003_np001.glb-7fe290b57d414043aca14058b95971d1.scn[39m[0m
+[  15% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_shockoe_slip_em003_np001.glb.import[39m[0m
+[  16% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_union_hill_em001_np001.glb-dfdd9afe57a4ff9c9613f6370616b805.scn[39m[0m
+[  16% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_union_hill_em001_np001.glb.import[39m[0m
+[  17% ] [90m[1msavepack[22m | Storing File: res://.godot/imported/rva_union_hill_ep000_np001.glb-4227aaa71438fd6e5a6046e9835d9652.scn[39m[0m
+[  17% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/meshes/rva_union_hill_ep000_np001.glb.import[39m[0m
+[  18% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_em001_nm001.scn[39m[0m
+[  18% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_em001_np000.scn[39m[0m
+[  19% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_em001_np001.scn[39m[0m
+[  20% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_ep000_nm001.scn[39m[0m
+[  21% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_ep000_np000.scn[39m[0m
+[  22% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_church_hill_ep000_np001.scn[39m[0m
+[  22% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_downtown_em003_np001.scn[39m[0m
+[  23% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em001_nm001.scn[39m[0m
+[  24% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em001_np000.scn[39m[0m
+[  25% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em001_np001.scn[39m[0m
+[  26% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em002_nm001.scn[39m[0m
+[  27% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em002_np000.scn[39m[0m
+[  27% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em002_np001.scn[39m[0m
+[  28% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_bottom_em003_nm001.scn[39m[0m
+[  29% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_slip_em002_np000.scn[39m[0m
+[  30% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_slip_em002_np001.scn[39m[0m
+[  31% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_slip_em003_nm001.scn[39m[0m
+[  31% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_slip_em003_np000.scn[39m[0m
+[  32% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_shockoe_slip_em003_np001.scn[39m[0m
+[  33% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_union_hill_em001_np001.scn[39m[0m
+[  33% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/buildings_rva_union_hill_ep000_np001.scn[39m[0m
+[  34% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_corridor_0.scn[39m[0m
+[  34% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_corridor_1.scn[39m[0m
+[  35% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_corridor_2.scn[39m[0m
+[  36% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_corridor_3.scn[39m[0m
+[  37% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_corridor_4.scn[39m[0m
+[  38% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_East_Main_Approach_East_Station_Walk.scn[39m[0m
+[  39% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_East_Main_Approach_North_Walk.scn[39m[0m
+[  39% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_East_Main_Approach_Road.scn[39m[0m
+[  40% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/EastMain_East_Main_Approach_South_Walk.scn[39m[0m
+[  41% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_0.scn[39m[0m
+[  42% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_1.scn[39m[0m
+[  43% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_2.scn[39m[0m
+[  43% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_3.scn[39m[0m
+[  44% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_4.scn[39m[0m
+[  45% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/east_main_detail_5.scn[39m[0m
+[  46% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/main_street_station.scn[39m[0m
+[  47% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_0_0.scn[39m[0m
+[  47% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_0_-1.scn[39m[0m
+[  48% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_0_-2.scn[39m[0m
+[  49% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-1_0.scn[39m[0m
+[  50% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-1_-1.scn[39m[0m
+[  51% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-1_-2.scn[39m[0m
+[  52% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-2_0.scn[39m[0m
+[  52% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-2_-1.scn[39m[0m
+[  53% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-2_-2.scn[39m[0m
+[  54% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-3_0.scn[39m[0m
+[  55% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-3_-1.scn[39m[0m
+[  56% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/routes_-3_-2.scn[39m[0m
+[  56% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/station_viaducts.scn[39m[0m
+[  57% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_0.scn[39m[0m
+[  58% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_126.scn[39m[0m
+[  59% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_252.scn[39m[0m
+[  60% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_378.scn[39m[0m
+[  60% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_504.scn[39m[0m
+[  61% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_0_630.scn[39m[0m
+[  62% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_0.scn[39m[0m
+[  63% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_126.scn[39m[0m
+[  64% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_252.scn[39m[0m
+[  65% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_378.scn[39m[0m
+[  65% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_504.scn[39m[0m
+[  66% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_126_630.scn[39m[0m
+[  66% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_0.scn[39m[0m
+[  67% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_126.scn[39m[0m
+[  68% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_252.scn[39m[0m
+[  68% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_378.scn[39m[0m
+[  69% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_504.scn[39m[0m
+[  70% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_252_630.scn[39m[0m
+[  71% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_0.scn[39m[0m
+[  72% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_126.scn[39m[0m
+[  72% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_252.scn[39m[0m
+[  73% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_378.scn[39m[0m
+[  74% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_504.scn[39m[0m
+[  75% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_378_630.scn[39m[0m
+[  76% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_0.scn[39m[0m
+[  77% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_126.scn[39m[0m
+[  77% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_252.scn[39m[0m
+[  78% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_378.scn[39m[0m
+[  79% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_504.scn[39m[0m
+[  80% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_504_630.scn[39m[0m
+[  81% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_0.scn[39m[0m
+[  81% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_126.scn[39m[0m
+[  82% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_252.scn[39m[0m
+[  83% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_378.scn[39m[0m
+[  84% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_504.scn[39m[0m
+[  85% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_630_630.scn[39m[0m
+[  85% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_0.scn[39m[0m
+[  86% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_126.scn[39m[0m
+[  87% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_252.scn[39m[0m
+[  88% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_378.scn[39m[0m
+[  89% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_504.scn[39m[0m
+[  90% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_756_630.scn[39m[0m
+[  90% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_0.scn[39m[0m
+[  91% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_126.scn[39m[0m
+[  92% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_252.scn[39m[0m
+[  93% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_378.scn[39m[0m
+[  94% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_504.scn[39m[0m
+[  94% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/cells_1795135382_294526/terrain_882_630.scn[39m[0m
+[  95% ] [90m[1msavepack[22m | Storing File: res://.godot/exported/133200997/export-80f8faf24bf611e3018c9213d36effa8-east_main_night_shift.scn[39m[0m
+[  96% ] [90m[1msavepack[22m | Storing File: res://tools/gis_east_main.gdc[39m[0m
+[  97% ] [90m[1msavepack[22m | Storing File: res://tools/gis_pilot_stream.gdc[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://station_trial.gdc[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://assets/rva_gis/pilot/east_main_night_shift.tscn.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://tools/gis_east_main.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://tools/gis_pilot_stream.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://station_trial.gd.remap[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://.godot/global_script_class_cache.cfg[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://.godot/uid_cache.bin[39m[0m
+[  98% ] [90m[1msavepack[22m | Storing File: res://project.binary[39m[0m
+[92m[ DONE ][39m [1msavepack[22m
+[0m
+PASS: 98 layers, Windows x86-64 export, and ZIP integrity (109,131,388 bytes).

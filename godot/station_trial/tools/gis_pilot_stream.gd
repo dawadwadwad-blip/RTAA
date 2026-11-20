@@ -33,7 +33,7 @@ func pending_count() -> int:
 
 func load_now(at: Vector3) -> void:
 	_focus = at
-	var support := _terrain_support()
+	var support := _support_paths()
 	_cull(support)
 	for entry: Dictionary in cells:
 		var path: String = entry.path
@@ -53,7 +53,7 @@ func _process(delta: float) -> void:
 	if _pending.is_empty() and _timer > delta:
 		_timer -= delta
 		return
-	var support := _terrain_support()
+	var support := _support_paths()
 	for path: String in _pending.keys():
 		var status := ResourceLoader.load_threaded_get_status(path)
 		if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS:
@@ -99,23 +99,25 @@ func _wanted(entry: Dictionary, support: Dictionary) -> bool:
 	return support.has(entry.path) or _distance(entry) <= radius
 
 
-func _terrain_support() -> Dictionary:
+func _support_paths() -> Dictionary:
 	var paths := {}
 	for entry: Dictionary in cells:
-		if not entry.has("terrain_dependencies"):
-			continue
 		var margin := unload_margin_m if _resident.has(entry.path) else 0.0
 		if _distance(entry) <= load_radius_m + margin:
-			for path: String in entry.terrain_dependencies:
+			for path: String in _dependencies(entry):
 				paths[path] = true
 	return paths
 
 
 func _has_support(entry: Dictionary) -> bool:
-	for path: String in entry.get("terrain_dependencies", []):
+	for path: String in _dependencies(entry):
 		if not _resident.has(path):
 			return false
 	return true
+
+
+static func _dependencies(entry: Dictionary) -> Variant:
+	return entry.get("dependencies", entry.get("terrain_dependencies", []))
 
 
 func _cull(support: Dictionary) -> void:

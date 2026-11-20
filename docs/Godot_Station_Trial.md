@@ -94,3 +94,14 @@ To export a standalone Windows ZIP, use matching Godot export templates and plac
 ```sh
 python tools/package_gis_night_shift.py --godot-notices outputs/godot-trial/licenses --output outputs/RVA_Streaming_Night_Shift_Windows.zip
 ```
+
+### East Main storefronts and street props
+
+After preparing the street surfaces, bake the existing Blender kit against the same GIS snapshot and building chunks. Use a fresh output directory for each bake. Set the additional variable before running the same Godot assembler.
+
+```powershell
+python tools/prepare_east_main_dressing.py
+$env:RVA_GIS_EAST_MAIN_DRESSING = (Resolve-Path outputs/rva_east_main_dressing).Path
+```
+
+The storefronts use the projected GIS wall segments and the building generator's roof heights. The wall skins and trim sit over the existing shells and stream with their terrain and building dependencies. Street details include utility lines, trees, parked vehicles, marked intersections, and a bus and shelter opposite the station. The props use the saved DEM and authored placements. The bus and curbside traffic are stationary. `verify_streamed_shift.gd` checks the wall fit and parked-vehicle clearance when the dressing is enabled. [In-game views](../reports/RVA_GIS_East_Main_Dressed.webp)
